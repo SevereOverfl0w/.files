@@ -11,6 +11,7 @@ zstyle :compinstall filename '/home/overfl0w/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+autoload -U colors && colors
 eval $(dircolors ~/.dircolors)
 
 # Aliases
