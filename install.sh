@@ -34,7 +34,7 @@ for dotfile in **/*(D); do
   fullPath=$HOME/$dotfile;
   srcPath=$DIR/dotfiles/$dotfile;
   mkdir -p $(dirname $fullPath);
-  if [[ -a $fullPath ]]; then;
+  if [[ -f $fullPath ]]; then;
     if [[ -h $fullPath ]]; then;
       print "$fg_bold[yellow]Symlink already exists $dotfile$reset_color"
     else;
@@ -43,11 +43,15 @@ for dotfile in **/*(D); do
       read -q replace
       print ""
       if [[ $replace == 'y' ]]; then;
-        print "your ded. bang bang."
+        rm $fullPath
+        ln -s $srcPath $fullPath
+        print "$fg_bold[yellow] Replaced with symlink."
       fi;
     fi;
   else;
-    ln -s $DIR/dotfiles/$dotfile $fullPath;
+    if [[ ! -a $fullPath ]]; then;
+      ln -s $srcPath $fullPath;
+    fi;
   fi;
 done;
 ending 'symlinking of dotfiles'
