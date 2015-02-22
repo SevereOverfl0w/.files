@@ -25,7 +25,7 @@ if [[ ! -a /usr/bin/apacman ]]; then;
   makepkg -s
   sudo pacman -U apacman*.tar.xz
 fi;
-apacman --needed --noedit -S scrot-patched neovim-git
+apacman --needed --noedit -S scrot-patched neovim-git python2-neovim
 ending 'package install.'
 
 start 'symlinking of dotfiles'
@@ -61,7 +61,7 @@ if [[ ! -a ~/.nvim/autoload/plug.vim ]]; then;
   curl -fLo ~/.nvim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-  nvim +PlugInstall +qall
+  nvim +PlugInstall
 fi;
 
 cd $OLDDIR
