@@ -17,6 +17,7 @@ eval $(dircolors ~/.dircolors)
 # Aliases
 alias ls='ls --color=auto'
 alias vim='echo You mean nvim && sleep 5 && nvim'
+alias npm="npm --python=$(type python2 | awk '{print $3}')"
 
 alias zshrc='nvim ~/.zshrc'
 alias reloadzsh='. ~/.zshrc'
