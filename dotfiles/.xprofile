@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 ./wallpaper.sh &
 stalonetray &
+nm-applet &
