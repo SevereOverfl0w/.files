@@ -4,13 +4,15 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
+import XMonad.Hooks.EwmhDesktops
 
 main = do
     xmproc <- spawnPipe "xmobar"
 
-    xmonad $ defaultConfig
+    xmonad $ ewmh defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = avoidStruts  $  layoutHook defaultConfig
+        , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
