@@ -1,5 +1,5 @@
 call plug#begin('~/.nvim/plugged')
-Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
+Plug 'marijnh/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
 Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
@@ -11,9 +11,10 @@ Plug 'othree/html5.vim', {'for': ['html', 'jade']}
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'nanotech/jellybeans.vim'
+Plug 'jnurmine/Zenburn'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
