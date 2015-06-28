@@ -8,6 +8,9 @@ Plug 'groenewege/vim-less', {'for': 'less'}
 Plug 'wavded/vim-stylus', {'for': 'stylus'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'othree/html5.vim', {'for': ['html', 'jade']}
+Plug 'mattn/emmet-vim/', {'for': 'html'}
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+Plug 'xuhdev/vim-latex-live-preview'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'nanotech/jellybeans.vim'
@@ -19,6 +22,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/unite.vim'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 " Plug 'Raimondi/delimitMate'
 call plug#end()
 
@@ -67,3 +71,5 @@ nmap ga <Plug>(EasyAlign)
 " Ignores for Unite.vim
 call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules')
 nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+nnoremap <leader>nt :NERDTreeToggle<cr>
