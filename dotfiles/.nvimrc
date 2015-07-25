@@ -9,6 +9,9 @@ Plug 'wavded/vim-stylus', {'for': 'stylus'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'othree/html5.vim', {'for': ['html', 'jade']}
 Plug 'mattn/emmet-vim/', {'for': 'html'}
+Plug 'tpope/vim-salve', {'for': 'clojure'}
+Plug 'tpope/vim-projectionist', {'for': 'clojure'}
+Plug 'tpope/vim-dispatch', {'for': 'clojure'}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'xuhdev/vim-latex-live-preview'
 Plug 'bling/vim-airline'
@@ -42,6 +45,9 @@ vnoremap L $
 nnoremap H ^
 vnoremap H ^
 
+" fugitive bindings
+nnoremap <leader>gw :Gwrite<enter>:Gcommit<enter>Go
+
 syntax on
 set autoindent
 set background=dark
@@ -70,6 +76,11 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " Ignores for Unite.vim
 call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules')
+call unite#custom#profile('default', 'context', {
+      \   'start_insert': 1,
+      \   'prompt': '» '
+      \ })
 nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <space>s :Unite -quick-match buffer<cr>
 nnoremap <space>/ :Unite grep:.<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
