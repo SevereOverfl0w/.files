@@ -50,6 +50,7 @@ alias vim='echo You mean nvim && sleep 5 && nvim'
 
 alias tsy='task sync'
 alias inbox='task +in +PENDING'
+alias p.files='git -C ~/.files/ add . && git -C ~/.files/ commit && git -C ~/.files/ push'
 # alias npm="npm --python=$(type python2 | awk '{print $3}')"
 
 alias zshrc='nvim ~/.zshrc'
@@ -67,13 +68,13 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_THEME.sh"
 
 setopt promptsubst
 local inbox='%F{blue}[Inbox: $(inbox count)]%f'
-local dotfiles='%F{red}[Dotfiles: $(git -C ~/.files/ status --porcelain | wc -l)]%f'
+local dotfiles='%F{red}[.files: $(git -C ~/.files/ status --porcelain | wc -l)]%f'
 local timep='%F{016}%T%f%b'
 local username='%F{010}%n%f'
 local currdir='%F{011}%25<…<%~%<<%f'
 
 # Prompt
-PROMPT="╭─[${timep}] ${username} ${currdir} 
+PROMPT="╭─[${timep}] ${username} ${currdir}
 ╰─➤ "
 
 RPROMPT="${inbox} ${dotfiles}"
