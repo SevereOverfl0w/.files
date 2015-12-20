@@ -69,7 +69,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_THEME.sh"
 setopt promptsubst
 local sep='' #  █
 local inbox='%K{blue}Inbox: $(inbox count)%F{blue}%K{011}${sep}%f%k'
-local task_changes='%F{black}%K{011}Changes: $(wc -l < ~/.config/task/backlog.data)%F{011}%K{red}${sep}%f%k'
+local task_changes='%F{black}%K{011}Changes: $(cat ~/.config/task/backlog.data | tail -n +2 | wc -l)%F{011}%K{red}${sep}%f%k'
 local dotfiles='%F{black}%K{red}.files: $(git -C ~/.files/ status --porcelain | wc -l)%k%F{red}${sep}%k'
 local timep='%F{016}%T%f%b'
 local username='%F{010}%n%f'
