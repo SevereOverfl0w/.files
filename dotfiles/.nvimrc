@@ -84,17 +84,27 @@ autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesToggle
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
+function! ParinferToggle()
+  if g:parinfer_mode =~ "paren"
+    let g:parinfer_mode = "indent"
+  elseif g:parinfer_mode =~ "indent"
+    let g:parinfer_mode = "paren"
+  endif
+endfunction
+
+nnoremap <leader>( :call ParinferToggle()<CR>
+
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Ignores for Unite.vim
-call unite#custom#source('file_rec,file_rec/async,grep', 'ignore_pattern', 'node_modules')
+call unite#custom#source('file_rec,file_rec/async,grep,file_rec/git', 'ignore_pattern', 'node_modules')
 call unite#custom#profile('default', 'context', {
       \   'start_insert': 1,
       \   'prompt': '» '
       \ })
-nnoremap <C-p> :Unite file_rec/git<cr>
+nnoremap <C-p> :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
 nnoremap <space>s :Unite -quick-match buffer<cr>
 nnoremap <space>/ :Unite grep:.<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
