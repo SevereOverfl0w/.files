@@ -67,8 +67,10 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_THEME.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 setopt promptsubst
-local inbox='%F{blue}[Inbox: $(inbox count)]%f'
-local dotfiles='%F{red}[.files: $(git -C ~/.files/ status --porcelain | wc -l)]%f'
+local sep='' #  █
+local inbox='%K{blue}Inbox: $(inbox count)%F{blue}%K{011}${sep}%f%k'
+local task_changes='%F{black}%K{011}Changes: $(wc -l < ~/.config/task/backlog.data)%F{011}%K{red}${sep}%f%k'
+local dotfiles='%F{black}%K{red}.files: $(git -C ~/.files/ status --porcelain | wc -l)%k%F{red}${sep}%k'
 local timep='%F{016}%T%f%b'
 local username='%F{010}%n%f'
 local currdir='%F{011}%25<…<%~%<<%f'
@@ -77,7 +79,7 @@ local currdir='%F{011}%25<…<%~%<<%f'
 PROMPT="╭─[${timep}] ${username} ${currdir}
 ╰─➤ "
 
-RPROMPT="${inbox} ${dotfiles}"
+RPROMPT="%F{white}${inbox}${task_changes}${dotfiles}"
 
 wd() {
   . /home/overfl0w/bin/wd/wd.sh
