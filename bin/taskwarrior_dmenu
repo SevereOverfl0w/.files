@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# ACTION=$(echo "inbox\nactionable" | dmenu)
+#
+# [[ $ACTION = inbox ]] && {
+#   $
+# }
+
+
+TASK=$(dmenu -p 'To inbox: ')
+task add +in $TASK

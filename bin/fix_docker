@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo systemctl stop openvpn@client && sudo systemctl restart docker && sudo systemctl start openvpn@client
