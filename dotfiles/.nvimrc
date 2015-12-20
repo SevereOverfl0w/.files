@@ -1,5 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'neovim/node-host', {'do': 'npm install'}
+Plug 'neovim/node-host', {'commit': 'c02821ddaa555c24088b2b06ddc05ecf6b0c65b2'}
 Plug 'marijnh/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
@@ -15,7 +15,6 @@ Plug 'tpope/vim-dispatch', {'for': 'clojure'}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'tpope/vim-eunuch'
 Plug 'ledger/vim-ledger'
-Plug 'guns/vim-sexp', {'for': 'clojure'}
 Plug 'radenling/vim-dispatch-neovim', {'for': 'clojure'}
 Plug 'venantius/vim-cljfmt', {'on': 'Cljfmt'}
 Plug 'kien/rainbow_parentheses.vim', {'for': 'clojure'}
@@ -23,12 +22,10 @@ Plug 'snoe/nvim-parinfer.js'
 Plug 'nathanaelkane/vim-indent-guides', {'for': ['stylus', 'jade', 'python']}
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
-Plug 'nanotech/jellybeans.vim'
 Plug 'jnurmine/Zenburn'
 Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'Shougo/unite.vim'
