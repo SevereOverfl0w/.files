@@ -67,10 +67,19 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_THEME.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 setopt promptsubst
-local sep='' #  █
-local inbox='%K{blue}Inbox: $(inbox count)%F{blue}%K{011}${sep}%f%k'
-local task_changes='%F{black}%K{011}Changes: $(cat ~/.config/task/backlog.data | tail -n +2 | wc -l)%F{011}%K{red}${sep}%f%k'
-local dotfiles='%F{black}%K{red}.files: $(git -C ~/.files/ status --porcelain | wc -l)%k%F{red}${sep}%k'
+
+# local sep='' #  █
+local sep=''
+function sep-wrap {
+  local open="%F{$1}%K{$3}${sep}%K{$1}%F{$2}"
+  local close="%f%k"
+
+  echo "$open$4$close"
+}
+
+local inbox=$(sep-wrap blue white black 'Inbox: $(inbox count)')
+local task_changes=$(sep-wrap 011 black blue 'Changes: $(cat ~/.config/task/backlog.data | tail -n +2 | wc -l)')
+local dotfiles=$(sep-wrap red black 011 '.files: $(git -C ~/.files/ status --porcelain | wc -l)')
 local timep='%F{016}%T%f%b'
 local username='%F{010}%n%f'
 local currdir='%F{011}%25<…<%~%<<%f'
