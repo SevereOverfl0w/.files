@@ -1,5 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'neovim/node-host', {'commit': 'c02821ddaa555c24088b2b06ddc05ecf6b0c65b2'}
+Plug 'neovim/node-host'
 Plug 'marijnh/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
