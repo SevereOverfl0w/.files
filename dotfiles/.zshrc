@@ -50,6 +50,7 @@ alias ls='ls --color=auto'
 alias vim='echo You mean nvim && sleep 5 && nvim'
 
 alias tsy='task sync'
+alias in='task add +in'
 alias inbox='task +in +PENDING'
 alias p.files='git -C ~/.files/ add . && git -C ~/.files/ commit && git -C ~/.files/ push'
 # alias npm="npm --python=$(type python2 | awk '{print $3}')"
