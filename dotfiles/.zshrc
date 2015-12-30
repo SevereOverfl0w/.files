@@ -4,6 +4,7 @@ zplug "plugins/taskwarrior", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/archlinux", from:oh-my-zsh
 zplug "plugins/lein", from:oh-my-zsh
+zplug "plugins/git-flow-avh", from:oh-my-zsh
 zplug "djui/alias-tips"
 zplug "b4b4r07/zplug"
 zplug "mfaerevaag/wd"
