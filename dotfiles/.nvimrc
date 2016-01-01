@@ -22,17 +22,19 @@ Plug 'snoe/nvim-parinfer.js'
 Plug 'nathanaelkane/vim-indent-guides', {'for': ['stylus', 'jade', 'python']}
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
-Plug 'jnurmine/Zenburn'
 Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'Shougo/deoplete.nvim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
 call plug#end()
+
+let mapleader="\<Space>"
 
 " Config a few things
 let g:airline_powerline_fonts=1
@@ -42,6 +44,7 @@ let g:paredit_electric_return=0
 
 " Mappings
 inoremap jk <Esc>
+tnoremap jk <C-\><C-n>
 " Edit/Source vim.
 nnoremap <leader>ev :split $MYVIMRC<enter>
 nnoremap <leader>sv :so $MYVIMRC<enter>
@@ -104,16 +107,43 @@ call unite#custom#profile('default', 'context', {
       \   'start_insert': 1,
       \   'prompt': '» '
       \ })
-nnoremap <C-p> :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
-nnoremap <space>s :Unite -quick-match buffer<cr>
-nnoremap <space>/ :Unite grep:.<cr>
-nnoremap <leader>nt :NERDTreeToggle<cr>
-nnoremap <leader>na :e assets/css/_
+nnoremap <leader>p :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
+nnoremap <leader>s :Unite -quick-match buffer<cr>
+nnoremap <leader>/ :Unite grep:.<cr>
 
 nnoremap <leader>go :call fireplace#echo_session_eval('(go)', {'ns': 'user'})<cr>
 nnoremap <leader>rl :call fireplace#echo_session_eval('(reset)', {'ns': 'user'})<cr>
 nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'user'})<cr>
 
-let g:sexp_enable_insert_mode_mappings = 0
-
 match ExtraWhitespace /\s\+$/
+
+let g:rbpt_colorpairs = [
+	\ ['brown',       'RoyalBlue3'],
+	\ ['Darkblue',    'SeaGreen3'],
+	\ ['darkgray',    'DarkOrchid3'],
+	\ ['darkgreen',   'firebrick3'],
+	\ ['darkcyan',    'RoyalBlue3'],
+	\ ['darkred',     'SeaGreen3'],
+	\ ['darkmagenta', 'DarkOrchid3'],
+	\ ['brown',       'firebrick3'],
+	\ ['gray',        'RoyalBlue3'],
+	\ ['darkmagenta', 'DarkOrchid3'],
+	\ ['Darkblue',    'firebrick3'],
+	\ ['darkgreen',   'RoyalBlue3'],
+	\ ['darkcyan',    'SeaGreen3'],
+	\ ['darkred',     'DarkOrchid3'],
+	\ ['red',         'firebrick3'],
+	\ ]
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni#input_patterns = {}
+call deoplete#util#set_pattern(
+  \ g:deoplete#omni#input_patterns,
+  \ 'lisp,clojure', ['[\w!$%&*+/:<=>?@\^_~\-]'])
+
+call deoplete#util#set_pattern(
+  \ g:deoplete#omni#input_patterns,
+  \ 'sh', ['.'])
+
+let g:deoplete#sources = {}
+let g:deoplete#sources._=['buffer', 'omni', 'ultisnips']
