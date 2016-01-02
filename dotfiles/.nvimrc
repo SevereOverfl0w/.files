@@ -32,6 +32,7 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/deoplete.nvim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
+Plug 'jreybert/vimagit'
 call plug#end()
 
 let mapleader="\<Space>"
