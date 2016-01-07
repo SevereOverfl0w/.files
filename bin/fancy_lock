@@ -42,4 +42,7 @@ fi
 # Kill the old i3lock, for the "cached" one
 kill $(pgrep i3lock)
 
-i3lock -u -i $TMPBG
+
+killall -SIGUSR1 dunst # pause
+i3lock -n -u -i $TMPBG
+killall -SIGUSR2 dunst # resume
