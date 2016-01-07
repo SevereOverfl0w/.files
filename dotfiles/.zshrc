@@ -88,6 +88,9 @@ local timep='%F{016}%T%f%b'
 local username='%F{010}%n%f'
 local currdir='%F{011}%25<…<%~%<<%f'
 
+
+PATH=$PATH:~/.cargo/bin
+
 # Prompt
 PROMPT="╭─[${timep}] ${username} ${currdir}
 ╰─➤ "
