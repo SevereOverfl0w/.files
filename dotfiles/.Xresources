@@ -1,0 +1,8 @@
+rofi.bg: #222222
+rofi.bc: #222222
+rofi.hlbg: #333333
+rofi.font: Fira Mono 12
+rofi.fg: #cccccc
+rofi.width: 100
+rofi.padding: 400
+rofi.opacity: 85
