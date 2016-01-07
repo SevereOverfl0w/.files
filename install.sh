@@ -56,9 +56,9 @@ for dotfile in **/*(D); do
 done;
 ending 'symlinking of dotfiles'
 
-if [[ ! -a ~/.nvim/autoload/plug.vim ]]; then;
+if [[ ! -a ~/.config/nvim/autoload/plug.vim ]]; then;
   # Vim-Plug Install
-  curl -fLo ~/.nvim/autoload/plug.vim --create-dirs \
+  curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   nvim +PlugInstall
