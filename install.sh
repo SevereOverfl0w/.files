@@ -14,19 +14,19 @@ ending(){
 
 # Basic install of packages for Arch
 # echo 'Starting package install.'
-start 'package install'
-sudo pacman --needed -S xmonad xmobar dmenu stalonetray
-if [[ ! -a /usr/bin/apacman ]]; then;
-  # Install apacman
-  cd /tmp
-  curl -O https://aur.archlinux.org/packages/ap/apacman/apacman.tar.gz
-  tar -xvf apacman.tar.gz
-  cd apacman
-  makepkg -s
-  sudo pacman -U apacman*.tar.xz
-fi;
-apacman --needed --noedit -S scrot-patched neovim-git python2-neovim
-ending 'package install.'
+# start 'package install'
+# sudo pacman --needed -S xmonad xmobar dmenu stalonetray
+# if [[ ! -a /usr/bin/apacman ]]; then;
+#   # Install apacman
+#   cd /tmp
+#   curl -O https://aur.archlinux.org/packages/ap/apacman/apacman.tar.gz
+#   tar -xvf apacman.tar.gz
+#   cd apacman
+#   makepkg -s
+#   sudo pacman -U apacman*.tar.xz
+# fi;
+# apacman --needed --noedit -S scrot-patched neovim-git python2-neovim
+# ending 'package install.'
 
 start 'symlinking of dotfiles'
 cd $DIR/dotfiles
