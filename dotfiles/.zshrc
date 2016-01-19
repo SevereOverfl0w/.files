@@ -7,7 +7,6 @@ zplug "plugins/lein", from:oh-my-zsh
 zplug "plugins/git-flow-avh", from:oh-my-zsh
 zplug "djui/alias-tips"
 zplug "b4b4r07/zplug"
-zplug "mfaerevaag/wd"
 zplug "k4rthik/git-cal", as:command
 zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf, of:"*linux*amd64*"
 
