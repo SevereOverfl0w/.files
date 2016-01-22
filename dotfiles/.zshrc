@@ -54,7 +54,6 @@ alias in='task add +in'
 alias inbox='task +in +PENDING'
 alias done_today='task +COMPLETED end:today all'
 alias p.files='git -C ~/.files/ add . && git -C ~/.files/ commit && git -C ~/.files/ push'
-# alias npm="npm --python=$(type python2 | awk '{print $3}')"
 
 alias zshrc='nvim ~/.zshrc'
 alias reloadzsh='. ~/.zshrc'
