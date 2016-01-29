@@ -147,4 +147,4 @@ call deoplete#util#set_pattern(
   \ 'sh', ['.'])
 
 let g:deoplete#sources = {}
-let g:deoplete#sources._=['buffer', 'omni', 'ultisnips']
+let g:deoplete#sources._=['buffer', 'omni', 'ultisnips', 'file']
