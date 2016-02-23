@@ -1,26 +1,20 @@
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
+
 call plug#begin('~/.config/nvim/plugged')
+" # Core / Misc
 Plug 'neovim/node-host'
-Plug 'marijnh/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'mxw/vim-jsx', {'for': 'javascript'}
-Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
-Plug 'digitaltoad/vim-jade', {'for': 'jade'}
-Plug 'groenewege/vim-less', {'for': 'less'}
-Plug 'wavded/vim-stylus', {'for': 'stylus'}
-Plug 'othree/html5.vim', {'for': ['html', 'jade', 'htmldjango']}
-Plug 'mattn/emmet-vim/', {'for': ['html', 'htmldjango', 'jade']}
-Plug 'tpope/vim-salve', {'for': 'clojure'}
-Plug 'tpope/vim-projectionist', {'for': 'clojure'}
-Plug 'tpope/vim-dispatch', {'for': 'clojure'}
-Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-eunuch'
-Plug 'ledger/vim-ledger'
-Plug 'radenling/vim-dispatch-neovim', {'for': 'clojure'}
-Plug 'venantius/vim-cljfmt', {'on': 'Cljfmt'}
-Plug 'kien/rainbow_parentheses.vim', {'for': 'clojure'}
-Plug 'snoe/nvim-parinfer.js'
-Plug 'nathanaelkane/vim-indent-guides', {'for': ['stylus', 'jade', 'python']}
-Plug 'bling/vim-airline'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
@@ -33,9 +27,47 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'jreybert/vimagit'
+Plug 'AlessandroYorba/Alduin'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/limelight.vim'
+
+" # Nyaovim
+Plug 'rhysd/nyaovim-popup-tooltip'
+Plug 'rhysd/nyaovim-mini-browser'
+Plug 'rhysd/nyaovim-markdown-preview'
+
+" # Misc languages
+Plug 'ledger/vim-ledger'
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'marijnh/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
+Plug 'mxw/vim-jsx', {'for': 'javascript'}
+Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
+Plug 'digitaltoad/vim-jade', {'for': 'jade'}
+Plug 'groenewege/vim-less', {'for': 'less'}
+Plug 'wavded/vim-stylus', {'for': 'stylus'}
+Plug 'othree/html5.vim', {'for': ['html', 'jade', 'htmldjango']}
+Plug 'mattn/emmet-vim/', {'for': ['html', 'htmldjango', 'jade']}
+Plug 'reedes/vim-pencil'
+
+" # Clojure
+Plug 'tpope/vim-salve', {'for': 'clojure'}
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+Plug 'guns/vim-clojure-static', {'for': 'clojure'} " More up to date
+Plug 'guns/vim-clojure-highlight', {'for': 'clojure'}
+Plug 'Deraen/vim-cider', {'for': 'clojure'}
+Plug 'snoe/clj-refactor.nvim'
+
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'kien/rainbow_parentheses.vim', {'for': 'clojure'}
+" Plug 'venantius/vim-cljfmt', {'for': 'clojure'}
+" Plug 'snoe/nvim-parinfer.js'
 call plug#end()
 
 let mapleader="\<Space>"
+let maplocalleader=","
 
 " Config a few things
 let g:airline_powerline_fonts=1
@@ -51,22 +83,31 @@ nnoremap <leader>ev :split $MYVIMRC<enter>
 nnoremap <leader>sv :so $MYVIMRC<enter>
 " Quicker jumping to start/end of lines.
 nnoremap L $
-vnoremap L $
 nnoremap H ^
+vnoremap L $
 vnoremap H ^
+" Toggle limelight
+let g:limelight_conceal_ctermfg = 'gray'
+nnoremap <leader>ll :Limelight!!<cr>
 
-" fugitive bindings
+" inoremap <expr> <tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+
+" Quick commit a file
 nnoremap <leader>gw :Gwrite<enter>:Gcommit<enter>Go
 
 syntax on
-set autoindent
+" set autoindent
 set background=dark
 " set t_Co=256
 let base16colorspace=256
 set ls=2 "Show vim-airline always
 set number
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-colorscheme base16-default
+" colorscheme base16-default
+
+
+colorscheme alduin
+let g:airline_theme='base16' 
 set tabstop=4 softtabstop=2 expandtab shiftwidth=2 smarttab
 set backspace=indent,eol,start
 set dir=~/.tmp,/var/tmp,/tmp  " No more swp files in project dirs
@@ -74,9 +115,8 @@ set dir=~/.tmp,/var/tmp,/tmp  " No more swp files in project dirs
 
 " Language specific tweaks
 autocmd Filetype javascript set foldmethod=syntax
-autocmd Filetype clojure set indentexpr=
-autocmd Filetype clojure set autoindent
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
 autocmd BufNewFile,BufReadPost *.edn set filetype=clojure
 autocmd BufNewFile,BufReadPost *.clj* set filetype=clojure
 autocmd BufNewFile,BufReadPost [gG]ulpfile* set filetype=javascript.gulpfile
@@ -88,6 +128,8 @@ autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesToggle
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
+let g:clj_fmt_autosave = 0
+let g:parinfer_airline_integration = 1
 function! ParinferToggle()
   if g:parinfer_mode =~ "paren"
     let g:parinfer_mode = "indent"
@@ -103,18 +145,34 @@ vmap <Enter> <Plug>(EasyAlign)
 " " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Ignores for Unite.vim
-call unite#custom#source('file_rec,file_rec/async,grep,file_rec/git', 'ignore_pattern', 'node_modules')
+call unite#custom#source('file_rec,file_rec/async,file_rec/git', 'ignore_pattern', 'node_modules')
 call unite#custom#profile('default', 'context', {
       \   'start_insert': 1,
       \   'prompt': '» '
       \ })
+
+if executable('ag')
+  " Use ag (the silver searcher)
+  " https://github.com/ggreer/the_silver_searcher
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '-i --vimgrep --hidden --ignore ' .
+  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
 nnoremap <leader>p :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
 nnoremap <leader>s :Unite -quick-match buffer<cr>
 nnoremap <leader>/ :Unite grep:.<cr>
+nnoremap <leader>m :Unite mapping<cr>
 
-nnoremap <leader>go :call fireplace#echo_session_eval('(go)', {'ns': 'user'})<cr>
-nnoremap <leader>rl :call fireplace#echo_session_eval('(reset)', {'ns': 'user'})<cr>
-nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'user'})<cr>
+nnoremap <leader>go :call fireplace#echo_session_eval('(go)', {'ns': 'dev'})<cr>
+nnoremap <leader>rl :call fireplace#echo_session_eval('(reset)', {'ns': 'dev'})<cr>
+nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'dev'})<cr>
+nmap gs <Plug>FireplaceDjump
+
+nnoremap <leader>cnf :let g:refactor_nrepl_options = '{:prune-ns-form false}'
+nnoremap <leader>cnt :let g:refactor_nrepl_options = '{:prune-ns-form true}'
 
 match ExtraWhitespace /\s\+$/
 
@@ -136,15 +194,34 @@ let g:rbpt_colorpairs = [
 	\ ['red',         'firebrick3'],
 	\ ]
 
+let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni#input_patterns = {}
-call deoplete#util#set_pattern(
-  \ g:deoplete#omni#input_patterns,
-  \ 'lisp,clojure', ['[\w!$%&*+/:<=>?@\^_~\-]'])
-
 call deoplete#util#set_pattern(
   \ g:deoplete#omni#input_patterns,
   \ 'sh', ['.'])
 
 let g:deoplete#sources = {}
 let g:deoplete#sources._=['buffer', 'omni', 'ultisnips', 'file']
+
+
+" Ledger configs
+
+let g:ledger_detailed_first = 1
+call deoplete#util#set_pattern(
+  \ g:deoplete#omni#input_patterns,
+  \ 'ledger', ['\w+'])
+
+nnoremap <leader>ud :call ledger#transaction_date_set(line('.'), 'primary')<cr>
+nnoremap <leader>it :call ledger#entry()<cr>
+nnoremap <leader>ts :call ledger#transaction_state_toggle(line('.'), ' *?!')<cr>
+
+" Clojure configuration
+call deoplete#util#set_pattern(
+  \ g:deoplete#omni#input_patterns,
+  \ 'lisp,clojure', ['[\w!$%&*+/:<=>?@\^_~\-]*'])
+
+let g:clojure_align_subforms = 1
+let g:clojure_align_multiline_strings = 1
+" Fancier highlighting:
+autocmd BufRead *.clj try | ClojureHighlightReferences | catch /^Fireplace/ | endtry
