@@ -1,3 +1,4 @@
+" vim-Plug {{{
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
     !cargo build --release
@@ -60,22 +61,28 @@ Plug 'Deraen/vim-cider', {'for': 'clojure'}
 Plug 'snoe/clj-refactor.nvim'
 
 Plug 'guns/vim-sexp'
+" Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'kien/rainbow_parentheses.vim', {'for': 'clojure'}
 " Plug 'venantius/vim-cljfmt', {'for': 'clojure'}
 " Plug 'snoe/nvim-parinfer.js'
-call plug#end()
 
-let mapleader="\<Space>"
-let maplocalleader=","
+
+Plug '~/src/async-clj-omni'
+call plug#end()
+" }}}
 
 " Config a few things
 let g:airline_powerline_fonts=1
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:paredit_electric_return=0
+let g:clj_fmt_autosave = 0
 
-" Mappings
+" Mappings {{{
+let mapleader="\<Space>"
+let maplocalleader=","
+
 inoremap jk <Esc>
 tnoremap jk <C-\><C-n>
 " Edit/Source vim.
@@ -95,72 +102,6 @@ nnoremap <leader>ll :Limelight!!<cr>
 " Quick commit a file
 nnoremap <leader>gw :Gwrite<enter>:Gcommit<enter>Go
 
-syntax on
-" set autoindent
-set background=dark
-" set t_Co=256
-let base16colorspace=256
-set ls=2 "Show vim-airline always
-set number
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-" colorscheme base16-default
-
-
-colorscheme alduin
-let g:airline_theme='base16' 
-set tabstop=4 softtabstop=2 expandtab shiftwidth=2 smarttab
-set backspace=indent,eol,start
-set dir=~/.tmp,/var/tmp,/tmp  " No more swp files in project dirs
-
-
-" Language specific tweaks
-autocmd Filetype javascript set foldmethod=syntax
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
-autocmd BufNewFile,BufReadPost *.edn set filetype=clojure
-autocmd BufNewFile,BufReadPost *.clj* set filetype=clojure
-autocmd BufNewFile,BufReadPost [gG]ulpfile* set filetype=javascript.gulpfile
-autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesToggle
-
-" Don't screw up folds when inserting text that might affect them, until
-" leaving insert mode. Foldmethod is local to the window. Protect against
-" screwing up folding when switching between windows.
-autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
-let g:clj_fmt_autosave = 0
-let g:parinfer_airline_integration = 1
-function! ParinferToggle()
-  if g:parinfer_mode =~ "paren"
-    let g:parinfer_mode = "indent"
-  elseif g:parinfer_mode =~ "indent"
-    let g:parinfer_mode = "paren"
-  endif
-endfunction
-
-nnoremap <leader>( :call ParinferToggle()<CR>
-
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-" Ignores for Unite.vim
-call unite#custom#source('file_rec,file_rec/async,file_rec/git', 'ignore_pattern', 'node_modules')
-call unite#custom#profile('default', 'context', {
-      \   'start_insert': 1,
-      \   'prompt': '» '
-      \ })
-
-if executable('ag')
-  " Use ag (the silver searcher)
-  " https://github.com/ggreer/the_silver_searcher
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-  \ '-i --vimgrep --hidden --ignore ' .
-  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
 nnoremap <leader>p :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
 nnoremap <leader>s :Unite -quick-match buffer<cr>
 nnoremap <leader>/ :Unite grep:.<cr>
@@ -174,8 +115,26 @@ nmap gs <Plug>FireplaceDjump
 nnoremap <leader>cnf :let g:refactor_nrepl_options = '{:prune-ns-form false}'
 nnoremap <leader>cnt :let g:refactor_nrepl_options = '{:prune-ns-form true}'
 
-match ExtraWhitespace /\s\+$/
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" }}}
 
+" Colours {{{
+syntax on
+" set autoindent
+set background=dark
+" set t_Co=256
+let base16colorspace=256
+set ls=2 "Show vim-airline always
+set number
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * hi BadGit ctermbg=red guibg=red
+colorscheme alduin
+let g:airline_theme='base16' 
+" colorscheme base16-default
+"
 let g:rbpt_colorpairs = [
 	\ ['brown',       'RoyalBlue3'],
 	\ ['Darkblue',    'SeaGreen3'],
@@ -194,6 +153,59 @@ let g:rbpt_colorpairs = [
 	\ ['red',         'firebrick3'],
 	\ ]
 
+
+" }}}
+
+" General {{{
+set tabstop=4 softtabstop=2 expandtab shiftwidth=2 smarttab
+set backspace=indent,eol,start
+set dir=~/.tmp,/var/tmp,/tmp  " No more swp files in project dirs
+set smartcase
+" }}}
+
+" Language specific tweaks {{{
+autocmd Filetype javascript set foldmethod=syntax
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
+autocmd BufNewFile,BufReadPost *.edn set filetype=clojure
+autocmd BufNewFile,BufReadPost *.clj* set filetype=clojure
+autocmd BufNewFile,BufReadPost [gG]ulpfile* set filetype=javascript.gulpfile
+autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesToggle
+
+"" Match bad first lines in Git Commits (Lowercase, and sentence)
+au Filetype gitcommit mat BadGit /\(^\l\|\.$\)\&\%1l/
+" }}}
+
+" FastFold {{{
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window. Protect against
+" screwing up folding when switching between windows.
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+" }}}
+
+" Unite.vim {{{
+" Ignores for Unite.vim
+call unite#custom#source('file_rec,file_rec/async,file_rec/git', 'ignore_pattern', 'node_modules')
+call unite#custom#profile('default', 'context', {
+      \   'start_insert': 1,
+      \   'prompt': '» '
+      \ })
+
+if executable('ag')
+  " Use ag (the silver searcher)
+  " https://github.com/ggreer/the_silver_searcher
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '-i --vimgrep --hidden --ignore ' .
+  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
+" }}}
+
+match ExtraWhitespace /\s\+$/
+
+" Deoplete {{{
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni#input_patterns = {}
@@ -203,9 +215,14 @@ call deoplete#util#set_pattern(
 
 let g:deoplete#sources = {}
 let g:deoplete#sources._=['buffer', 'omni', 'ultisnips', 'file']
+let g:deoplete#sources.clojure=['buffer', 'async_clj', 'file']
 
+let g:deoplete#auto_completion_start_length = 1
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.]*'
+" }}}
 
-" Ledger configs
+" Ledger {{{
 
 let g:ledger_detailed_first = 1
 call deoplete#util#set_pattern(
@@ -215,13 +232,30 @@ call deoplete#util#set_pattern(
 nnoremap <leader>ud :call ledger#transaction_date_set(line('.'), 'primary')<cr>
 nnoremap <leader>it :call ledger#entry()<cr>
 nnoremap <leader>ts :call ledger#transaction_state_toggle(line('.'), ' *?!')<cr>
+" }}}
 
-" Clojure configuration
+" Clojure {{{
 call deoplete#util#set_pattern(
   \ g:deoplete#omni#input_patterns,
-  \ 'lisp,clojure', ['[\w!$%&*+/:<=>?@\^_~\-]*'])
+  \ 'lisp,clojure', ['[\w!$%&*+/:<=>?@\^_~\-].*'])
 
-let g:clojure_align_subforms = 1
+" let g:clojure_align_subforms = 1
 let g:clojure_align_multiline_strings = 1
 " Fancier highlighting:
 autocmd BufRead *.clj try | ClojureHighlightReferences | catch /^Fireplace/ | endtry
+" Parinfer {{{
+let g:parinfer_airline_integration = 1
+function! ParinferToggle()
+  if g:parinfer_mode =~ "paren"
+    let g:parinfer_mode = "indent"
+  elseif g:parinfer_mode =~ "indent"
+    let g:parinfer_mode = "paren"
+  endif
+endfunction
+
+nnoremap <leader>( :call ParinferToggle()<CR>
+" }}}
+" }}}
+
+au FileType muttrc setlocal foldmethod=marker
+au FileType vim setlocal foldmethod=marker kp=:help
