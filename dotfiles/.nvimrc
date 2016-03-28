@@ -144,6 +144,7 @@ set background=dark
 let base16colorspace=256
 set ls=2 "Show vim-airline always
 set number
+set relativenumber
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au ColorScheme * hi BadGit ctermbg=red guibg=red
 colorscheme alduin
