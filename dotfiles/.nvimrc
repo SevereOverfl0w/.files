@@ -121,6 +121,7 @@ nnoremap [t :tabprev<cr>
 nnoremap <leader>go :call fireplace#echo_session_eval('(go)', {'ns': 'dev'})<cr>
 nnoremap <leader>rl :call fireplace#echo_session_eval('(reset)', {'ns': 'dev'})<cr>
 nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'dev'})<cr>
+nnoremap <leader>rt :call fireplace#echo_session_eval('(restart)', {'ns': 'dev'})<cr>
 nmap gs <Plug>FireplaceDjump
 
 nnoremap <leader>cnf :let g:refactor_nrepl_options = '{:prune-ns-form false}'
