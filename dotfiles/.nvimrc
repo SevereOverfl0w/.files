@@ -146,7 +146,7 @@ set ls=2 "Show vim-airline always
 set number
 set relativenumber
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au ColorScheme * hi BadGit ctermbg=red guibg=red
+
 colorscheme alduin
 let g:airline_theme='base16' 
 " colorscheme base16-default
@@ -189,7 +189,7 @@ autocmd BufNewFile,BufReadPost [gG]ulpfile* set filetype=javascript.gulpfile
 autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesToggle
 
 "" Match bad first lines in Git Commits (Lowercase, and sentence)
-au Filetype gitcommit mat BadGit /\(^\l\|\.$\)\&\%1l/
+au Filetype gitcommit mat Error /\(^\l\|\.$\)\&\%1l/
 " }}}
 
 " FastFold {{{
