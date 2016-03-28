@@ -32,6 +32,7 @@ Plug 'AlessandroYorba/Alduin'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/limelight.vim'
+Plug 'easymotion/vim-easymotion'
 
 " # Nyaovim
 Plug 'rhysd/nyaovim-popup-tooltip'
@@ -124,8 +125,8 @@ nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'dev
 nnoremap <leader>rt :call fireplace#echo_session_eval('(restart)', {'ns': 'dev'})<cr>
 nmap gs <Plug>FireplaceDjump
 
-nnoremap <leader>cnf :let g:refactor_nrepl_options = '{:prune-ns-form false}'
-nnoremap <leader>cnt :let g:refactor_nrepl_options = '{:prune-ns-form true}'
+map <leader>j <Plug>(easymotion-bd-jk)
+map <Leader>f <Plug>(easymotion-bd-f)
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
