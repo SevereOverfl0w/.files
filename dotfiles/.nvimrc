@@ -100,7 +100,7 @@ nnoremap <leader>ll :Limelight!!<cr>
 " inoremap <expr> <tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 
 " Quick commit a file
-nnoremap <leader>gw :Gwrite<enter>:Gcommit<enter>Go
+nnoremap <leader>gw :Gwrite<enter>:Gcommit<enter>i
 
 nnoremap <leader>p :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
 nnoremap <leader>s :Unite -quick-match buffer<cr>
