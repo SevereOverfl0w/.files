@@ -177,6 +177,7 @@ set tabstop=4 softtabstop=2 expandtab shiftwidth=2 smarttab
 set backspace=indent,eol,start
 set dir=~/.tmp,/var/tmp,/tmp  " No more swp files in project dirs
 set smartcase
+set lazyredraw
 " }}}
 
 " Language specific tweaks {{{
