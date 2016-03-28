@@ -102,7 +102,11 @@ nnoremap <leader>ll :Limelight!!<cr>
 " Quick commit a file
 nnoremap <leader>gw :Gwrite<enter>:Gcommit<enter>i
 
-nnoremap <leader>p :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
+
+let g:unite_source_rec_async_command = ['ag', '--nocolor', '-g', '']
+nnoremap <leader>gp :Unite file_rec/git:--cached:--others:--exclude-standard<cr>
+" TODO: Switch to neovim when neovim/neovim#3757
+nnoremap <leader>p :Unite file_rec/async<cr>
 nnoremap <leader>s :Unite -quick-match buffer<cr>
 nnoremap <leader>/ :Unite grep:.<cr>
 nnoremap <leader>m :Unite mapping<cr>
