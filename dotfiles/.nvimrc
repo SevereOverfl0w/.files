@@ -60,6 +60,8 @@ Plug 'guns/vim-clojure-static', {'for': 'clojure'} " More up to date
 Plug 'guns/vim-clojure-highlight', {'for': 'clojure'}
 Plug 'Deraen/vim-cider', {'for': 'clojure'}
 Plug 'snoe/clj-refactor.nvim'
+Plug '~/src/SevereOverfl0w/async-clj-omni'
+Plug '~/src/SevereOverfl0w/deoplete-github'
 
 Plug 'guns/vim-sexp'
 " Plug 'vim-scripts/paredit.vim'
@@ -222,17 +224,30 @@ match ExtraWhitespace /\s\+$/
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni#input_patterns = {}
-call deoplete#util#set_pattern(
-  \ g:deoplete#omni#input_patterns,
-  \ 'sh', ['.'])
+" call deoplete#util#set_pattern(
+"   \ g:deoplete#omni#input_patterns,
+"   \ 'sh', ['.'])
 
 let g:deoplete#sources = {}
-let g:deoplete#sources._=['buffer', 'omni', 'ultisnips', 'file']
-let g:deoplete#sources.clojure=['buffer', 'async_clj', 'file']
+let g:deoplete#sources._=['buffer', 'ultisnips', 'file']
+let g:deoplete#sources._=['dictionary']
+let g:deoplete#sources.clojure=['async_clj', 'file']
+let g:deoplete#sources.gitcommit=['file', 'ultisnips', 'github']
+let g:deoplete#sources.asciidoc=['dictionary', 'file']
 
 let g:deoplete#auto_completion_start_length = 1
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.]*'
+let g:deoplete#keyword_patterns.gitcommit = '.+'
+
+call deoplete#util#set_pattern(
+  \ g:deoplete#omni#input_patterns,
+  \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
+
+call deoplete#util#set_pattern(
+  \ g:deoplete#omni#input_patterns,
+  \ 'lisp,clojure', [g:deoplete#keyword_patterns.clojure])
+
 " }}}
 
 " Ledger {{{
