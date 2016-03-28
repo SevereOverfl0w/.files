@@ -17,7 +17,10 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
-Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-rhubarb'
+Plug 'gregsexton/gitv'
+Plug 'vim-scripts/extradite.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
@@ -33,11 +36,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/limelight.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'blindFS/vim-taskwarrior'
+Plug 'osyo-manga/vim-over'
 
-" # Nyaovim
-Plug 'rhysd/nyaovim-popup-tooltip'
-Plug 'rhysd/nyaovim-mini-browser'
-Plug 'rhysd/nyaovim-markdown-preview'
 
 " # Misc languages
 Plug 'ledger/vim-ledger'
@@ -51,10 +52,18 @@ Plug 'groenewege/vim-less', {'for': 'less'}
 Plug 'wavded/vim-stylus', {'for': 'stylus'}
 Plug 'othree/html5.vim', {'for': ['html', 'jade', 'htmldjango']}
 Plug 'mattn/emmet-vim/', {'for': ['html', 'htmldjango', 'jade']}
+
+" # Writing plugins
+Plug 'rhysd/vim-grammarous'
+" Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'reedes/vim-pencil'
+Plug 'vim-voom/VOoM'
+Plug 'reedes/vim-wordy'
+Plug 'vimwiki/vimwiki'
+
 
 " # Clojure
-Plug 'tpope/vim-salve', {'for': 'clojure'}
+" Plug 'tpope/vim-salve', {'for': 'clojure'}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'guns/vim-clojure-static', {'for': 'clojure'} " More up to date
 Plug 'guns/vim-clojure-highlight', {'for': 'clojure'}
@@ -62,16 +71,11 @@ Plug 'Deraen/vim-cider', {'for': 'clojure'}
 Plug 'snoe/clj-refactor.nvim'
 Plug '~/src/SevereOverfl0w/async-clj-omni'
 Plug '~/src/SevereOverfl0w/deoplete-github'
-
-Plug 'guns/vim-sexp'
-" Plug 'vim-scripts/paredit.vim'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'kien/rainbow_parentheses.vim', {'for': 'clojure'}
-" Plug 'venantius/vim-cljfmt', {'for': 'clojure'}
 " Plug 'snoe/nvim-parinfer.js'
 
-
-Plug '~/src/async-clj-omni'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'kien/rainbow_parentheses.vim', {'for': 'clojure'}
 call plug#end()
 " }}}
 
@@ -96,6 +100,9 @@ nnoremap L $
 nnoremap H ^
 vnoremap L $
 vnoremap H ^
+
+nnoremap <leader>rfsh i(clojure.tools.namespace.repl/refresh)<cr>
+
 " Toggle limelight
 let g:limelight_conceal_ctermfg = 'gray'
 nnoremap <leader>ll :Limelight!!<cr>
@@ -127,6 +134,8 @@ nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'dev
 nnoremap <leader>rt :call fireplace#echo_session_eval('(restart)', {'ns': 'dev'})<cr>
 nmap gs <Plug>FireplaceDjump
 
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
 map <leader>j <Plug>(easymotion-bd-jk)
 map <Leader>f <Plug>(easymotion-bd-f)
 
@@ -140,17 +149,19 @@ nmap ga <Plug>(EasyAlign)
 syntax on
 " set autoindent
 set background=dark
-" set t_Co=256
-let base16colorspace=256
+set t_Co=256
 set ls=2 "Show vim-airline always
 set number
 set relativenumber
+
+let g:airline_theme='base16'
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
+let g:alduin_Shout_Aura_Whisper = 1
 colorscheme alduin
-let g:airline_theme='base16' 
-" colorscheme base16-default
-"
+
+hi StatusLine ctermbg=585858
+
 let g:rbpt_colorpairs = [
 	\ ['brown',       'RoyalBlue3'],
 	\ ['Darkblue',    'SeaGreen3'],
@@ -187,7 +198,8 @@ autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
 autocmd BufNewFile,BufReadPost *.edn set filetype=clojure
 autocmd BufNewFile,BufReadPost *.clj* set filetype=clojure
 autocmd BufNewFile,BufReadPost [gG]ulpfile* set filetype=javascript.gulpfile
-autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesToggle
+autocmd BufNewFile,BufReadPost *.clj* RainbowParenthesesActivate
+autocmd BufNewFile,BufReadPost *.ad,*.adoc set filetype=asciidoc | PencilHard
 
 "" Match bad first lines in Git Commits (Lowercase, and sentence)
 au Filetype gitcommit mat Error /\(^\l\|\.$\)\&\%1l/
@@ -265,27 +277,16 @@ nnoremap <leader>ts :call ledger#transaction_state_toggle(line('.'), ' *?!')<cr>
 " }}}
 
 " Clojure {{{
-call deoplete#util#set_pattern(
-  \ g:deoplete#omni#input_patterns,
-  \ 'lisp,clojure', ['[\w!$%&*+/:<=>?@\^_~\-].*'])
-
 " let g:clojure_align_subforms = 1
 let g:clojure_align_multiline_strings = 1
 " Fancier highlighting:
 autocmd BufRead *.clj try | ClojureHighlightReferences | catch /^Fireplace/ | endtry
-" Parinfer {{{
-let g:parinfer_airline_integration = 1
-function! ParinferToggle()
-  if g:parinfer_mode =~ "paren"
-    let g:parinfer_mode = "indent"
-  elseif g:parinfer_mode =~ "indent"
-    let g:parinfer_mode = "paren"
-  endif
-endfunction
-
-nnoremap <leader>( :call ParinferToggle()<CR>
-" }}}
 " }}}
 
 au FileType muttrc setlocal foldmethod=marker
 au FileType vim setlocal foldmethod=marker kp=:help
+
+" Something needs activating before this, I'm not sure what?!
+hi! link StatusLine airline_c
+
+let g:task_rc_override = 'rc.defaultwidth=0'
