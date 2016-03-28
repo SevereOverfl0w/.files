@@ -2,14 +2,18 @@
 
 ICON=$HOME/.files/icon.png
 TMPBG=/tmp/screen.png
+CACHEBG=/tmp/screen.cache.png
+
+# Copy the old thing to a cache location
+cp $TMPBG $CACHEBG
+scrot $TMPBG
 
 # Load the old tmpbg if it exists, for speed.
-if [[ -f $TMPBG ]]
+if [[ -f $CACHEBG ]]
 then
-  i3lock -u -i $TMPBG
+  i3lock -u -i $CACHEBG
 fi
 
-scrot $TMPBG
 convert $TMPBG -scale 10% -scale 1000% $TMPBG
 
 # Add a cool icon to all screens:
