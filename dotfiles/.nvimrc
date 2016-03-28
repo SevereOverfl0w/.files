@@ -111,6 +111,13 @@ nnoremap <leader>s :Unite -quick-match buffer<cr>
 nnoremap <leader>/ :Unite grep:.<cr>
 nnoremap <leader>m :Unite mapping<cr>
 
+nnoremap ]u :UniteNext<cr>
+nnoremap [u :UnitePrevious<cr>
+
+nnoremap ]t :tabnext<cr>
+nnoremap [t :tabprev<cr>
+
+
 nnoremap <leader>go :call fireplace#echo_session_eval('(go)', {'ns': 'dev'})<cr>
 nnoremap <leader>rl :call fireplace#echo_session_eval('(reset)', {'ns': 'dev'})<cr>
 nnoremap <leader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': 'dev'})<cr>
