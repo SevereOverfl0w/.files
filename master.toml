@@ -1,0 +1,55 @@
+#######################################################################
+#                               macros                                #
+#######################################################################
+
+[macros.install]
+    deps = ["apacman"]
+    prefix = ["apacman", "--noconfirm", "--noedit", "-S"]
+
+#######################################################################
+#                                tasks                                #
+#######################################################################
+
+[tasks.apacman]
+    rejects = [["which", "apacman"]]
+    cmds = [["./bin/install_apacman.sh"]]
+
+[tasks.nvimplug]
+  rejects = [["test", "-f", ".config/nvim/autoload/plug.vim"]]
+  cmds = [["curl", "-fLo", ".config/nvim/autoload/plug.vim", "--create-dirs", "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"]]
+
+[tasks.nvimpackage]
+  rejects = [["which", "nvim"]]
+  cmds = [["@install", "neovim-git"]]
+
+[tasks.nvim]
+  deps = ["nvimplug", "nvimpackage"]
+  links = [[".config/nvim/init.vim","dotfiles/init.vim"]]
+
+[tasks.zshpackage]
+  rejects = [["which", "zsh"]]
+  cmds = [["@install", "zsh"], ["chsh", "-s", "/usr/bin/zsh"]]
+
+[tasks.zshrc]
+  links = [[".zshrc", "dotfiles/.zshrc"]]
+
+[tasks.zsh]
+  deps = ["zshrc", "zshpackage"]
+
+[tasks.termite]
+  links = [[".config/termite/config", "dotfiles/termite"]]
+
+[tasks.xfiles]
+  links = [[".xprofile", "dotfiles/.xprofile"],
+           [".Xresources", "dotfiles/.Xresources"]]
+
+[tasks.i3]
+  deps = ["i3"]
+  links = [[".config/i3/config", "dotfiles/i3/i3"]]
+
+[tasks.default]
+  deps = ["termite",
+          "zsh",
+          "nvim",
+          "xfiles",
+          "i3"]
