@@ -38,6 +38,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'blindFS/vim-taskwarrior'
 Plug 'osyo-manga/vim-over'
+Plug 'cespare/vim-toml'
 
 
 " # Misc languages
