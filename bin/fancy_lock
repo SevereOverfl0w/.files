@@ -1,8 +1,9 @@
 #!/bin/bash
 
-ICON=$HOME/.files/icon.png
 TMPBG=/tmp/screen.png
 CACHEBG=/tmp/screen.cache.png
+
+I3ARGS="-c '#000000' -o '#191d0f' -w '#572020' -l '#ffffff' -e"
 
 # Copy the old thing to a cache location
 cp $TMPBG $CACHEBG
@@ -11,42 +12,14 @@ scrot $TMPBG
 # Load the old tmpbg if it exists, for speed.
 if [[ -f $CACHEBG ]]
 then
-  i3lock -u -i $CACHEBG
+  eval i3lock $I3ARGS -i $CACHEBG
 fi
 
 convert $TMPBG -scale 10% -scale 1000% $TMPBG
 
-# Add a cool icon to all screens:
-if [[ -f $ICON ]]
-then
-    # placement x/y
-    PX=0
-    PY=0
-    # lockscreen image info
-    R=$(file $ICON | grep -o '[0-9]* x [0-9]*')
-    RX=$(echo $R | cut -d' ' -f 1)
-    RY=$(echo $R | cut -d' ' -f 3)
-
-    SR=$(xrandr --query | grep ' connected' | sed 's/primary //' | cut -f3 -d' ')
-    for RES in $SR
-    do
-        # monitor position/offset
-        SRX=$(echo $RES | cut -d'x' -f 1)                   # x pos
-        SRY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 1)  # y pos
-        SROX=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 2) # x offset
-        SROY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 3) # y offset
-        PX=$(($SROX + $SRX/2 - $RX/2))
-        PY=$(($SROY + $SRY/2 - $RY/2))
-
-        convert /tmp/screen.png $ICON -geometry +$PX+$PY -composite $TMPBG
-        echo "done"
-    done
-fi
-
 # Kill the old i3lock, for the "cached" one
 kill $(pgrep i3lock)
 
-
 killall -SIGUSR1 dunst # pause
-i3lock -n -u -i $TMPBG
+eval i3lock $I3ARGS -n -i $TMPBG
 killall -SIGUSR2 dunst # resume
