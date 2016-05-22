@@ -1,0 +1,5 @@
+# neovim ignores
+nvim/plugged
+nvim/.init.vim-rplugin~
+nvim/.netrwhist
+nvim/autoload/plug.vim

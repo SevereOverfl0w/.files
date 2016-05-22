@@ -24,7 +24,7 @@
 
 [tasks.nvim]
   deps = ["nvimplug", "nvimpackage"]
-  links = [[".config/nvim/init.vim","dotfiles/init.vim"]]
+  links = [[".config/nvim","nvim"]]
 
 [tasks.zshpackage]
   rejects = [["which", "zsh"]]
