@@ -1,0 +1,25 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	termite
+
+# program launcher
+super + d
+	rofi -show run
+
+super + x
+	~/.files/bin/fancy_lock
+
+super + n
+	~/.files/bin/bspwm/rename_workspace.sh
+
+super + p
+	passmenu
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+

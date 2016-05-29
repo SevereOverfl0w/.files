@@ -40,16 +40,19 @@
   links = [[".config/termite/config", "dotfiles/termite"]]
 
 [tasks.xfiles]
-  links = [[".xprofile", "dotfiles/.xprofile"],
-           [".Xresources", "dotfiles/.Xresources"]]
+  links = [[".Xresources", "dotfiles/.Xresources"]]
 
 [tasks.i3]
   deps = ["i3"]
   links = [[".config/i3/config", "dotfiles/i3/i3"]]
+
+[tasks.dotfiles]
+  links = [[".config/sxhkd/sxhkdrc", "dotfiles/sxhkdrc"]]
 
 [tasks.default]
   deps = ["termite",
           "zsh",
           "nvim",
           "xfiles",
-          "i3"]
+          "i3",
+          "dotfiles"]
