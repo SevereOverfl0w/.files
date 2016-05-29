@@ -9,7 +9,7 @@ urgent_on_bell = true
 clickable_url = true
 # font = Fira Mono 11
 # Under trial:
-font = Mononoki 12
+font = Mononoki 14
 scrollback_lines = 1000
 search_wrap = true
 #icon_name = terminal
