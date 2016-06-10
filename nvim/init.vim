@@ -30,7 +30,6 @@ endfunction
 call plug#begin('~/.config/nvim/plugged')
   " Util {{{
   Plug 'Shougo/vimproc.vim', {'do': 'make'}
-  Plug 'tpope/vim-projectionist' " close enough to util
   Plug 'tpope/vim-dispatch'
   Plug 'radenling/vim-dispatch-neovim'
   Plug 'tpope/vim-sleuth'
