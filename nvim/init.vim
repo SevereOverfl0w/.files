@@ -177,7 +177,7 @@ autocmd BufWinEnter *
   " Operators {{{
   nmap !i  <Plug>(operator-insert-i)
   nmap !a  <Plug>(operator-insert-a)
-  map _ <Plug>(operator-replace)
+  map !r <Plug>(operator-replace)
   " }}}
   " Git {{{
   nnoremap <Leader>gv :Gitv --all<CR>
