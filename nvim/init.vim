@@ -118,7 +118,7 @@ autocmd BufWinEnter *
   " }}}
   " Git {{{
   let g:easygit_enable_command = 1
-  " let g:gitgutter_map_keys = 0
+  let g:gitgutter_map_keys = 0
   " }}}
   " Clipboard {{{
   set clipboard=unnamedplus
@@ -151,6 +151,9 @@ autocmd BufWinEnter *
   let g:SimplenoteUsername = "monroef4@googlemail.com"
   let g:SimplenoteFiletype = "asciidoc"
   " }}}
+  " Textobj disabling {{{
+  let g:textobj_css_no_default_key_mappings = 1
+  " }}}
 " }}}
 " Mappings {{{
   " Maplocals {{{
@@ -178,6 +181,14 @@ autocmd BufWinEnter *
   nmap !i  <Plug>(operator-insert-i)
   nmap !a  <Plug>(operator-insert-a)
   map !r <Plug>(operator-replace)
+  " }}}
+  " TextObj {{{
+  map aco <Plug>
+  xmap acr <Plug>(textobj-css-a)
+  omap acr <Plug>(textobj-css-a)
+
+  xmap icr <Plug>(textobj-css-i)
+  omap icr <Plug>(textobj-css-i)
   " }}}
   " Git {{{
   nnoremap <Leader>gv :Gitv --all<CR>
