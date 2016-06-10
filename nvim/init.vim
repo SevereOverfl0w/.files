@@ -69,6 +69,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'glts/vim-textobj-comment'
   Plug 'jasonlong/vim-textobj-css'
   Plug 'whatyouhide/vim-textobj-xmlattr'
+  Plug 'chaoren/vim-wordmotion'
   " }}}
   " Operators {{{
   Plug 'tommcdo/vim-exchange'
