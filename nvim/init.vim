@@ -198,6 +198,9 @@ autocmd BufWinEnter *
   nnoremap <Leader>gp :Gpush<CR>
   nnoremap <Leader>gf :Gpull<CR>
   nnoremap <Leader>gW :Gwrite<CR>:Gcommit<CR>
+
+  nmap [c <Plug>GitGutterPrevHunk
+  nmap ]c <Plug>GitGutterNextHunk
   " }}}
   " Undotree {{{
   map <leader>uT :UndotreeShow<CR>
