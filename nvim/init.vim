@@ -170,6 +170,7 @@ autocmd BufWinEnter *
   map <leader>ub :Unite -quick-match buffer<CR>
   map <leader>u/ :Unite -start-insert grep:.<CR>
   map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
+  map <leader>um :Unite mapping<CR>
   " --[Easymotion
   map <leader>f <Plug>(easymotion-bd-f)
   nmap <Leader>f <Plug>(easymotion-bd-f)
