@@ -184,7 +184,6 @@ autocmd BufWinEnter *
   map !r <Plug>(operator-replace)
   " }}}
   " TextObj {{{
-  map aco <Plug>
   xmap acr <Plug>(textobj-css-a)
   omap acr <Plug>(textobj-css-a)
 
