@@ -124,6 +124,7 @@ autocmd BufWinEnter *
   let g:gruvbox_italic = 1
   colorscheme gruvbox
   let g:airline_powerline_fonts = 1
+  set colorcolumn=80
   " }}}
   " Git {{{
   let g:easygit_enable_command = 1
