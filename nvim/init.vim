@@ -38,7 +38,7 @@ call plug#begin('~/.config/nvim/plugged')
   " }}}
   " Interface {{{
   Plug 'Shougo/unite.vim'
-  " Plug 'junegunn/vim-peekaboo'
+  Plug 'junegunn/vim-peekaboo'
   Plug 'kshenoy/vim-signature' " Maybe nav?
   Plug 'mbbill/undotree'
   Plug 'Shougo/deoplete.nvim', {'do': function('DoRemote')}
