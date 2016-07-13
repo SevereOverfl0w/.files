@@ -85,7 +85,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'deris/vim-operator-insert'
   " }}}
   " Lisp {{{
-  Plug 'eapache/rainbow_parentheses.vim' " Adds FOLDING! <3
   Plug 'guns/vim-sexp' " Attempt to strip down?
   " }}}
   " Clojure {{{
@@ -243,13 +242,5 @@ autocmd BufWinEnter *
                           \ setlocal cc=60 |
                           \ setlocal foldmethod=marker |
                           \ setlocal autoindent
-  " }}}
-  " Rainbow Parens {{{
-  augroup rainbow
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
-  augroup END
   " }}}
 " }}}
