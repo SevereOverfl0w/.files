@@ -43,6 +43,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mbbill/undotree'
   Plug 'Shougo/deoplete.nvim', {'do': function('DoRemote')}
   Plug 'vim-airline/vim-airline'
+  " To do with over-running diffs. See beautiful diffs here:
+  " https://github.com/blog/2188-git-2-9-has-been-released
+  " for problem and what this plugin provides:
+  Plug 'sgur/vim-py3diff'
   " }}}
   " Snippets {{{
   Plug 'SirVer/ultisnips'
