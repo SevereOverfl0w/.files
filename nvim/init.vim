@@ -114,6 +114,10 @@ autocmd BufWinEnter *
       \ call matchadd('ExtraWhitespace', '\s\+$')
 " }}}
 " Settings {{{
+  " Maplocals {{{
+  let mapleader="\<Space>"
+  let maplocalleader=","
+  " }}}
   " Theming {{{
   set termguicolors
   set background=dark
@@ -161,10 +165,6 @@ autocmd BufWinEnter *
   " }}}
 " }}}
 " Mappings {{{
-  " Maplocals {{{
-  let mapleader="\<Space>"
-  let maplocalleader=","
-  " }}}
   " Navigating {{{
   map <leader>jk <Plug>(signjk-jk)
   map <leader>eft :execute 'Ftplugin ' . &ft<CR>
