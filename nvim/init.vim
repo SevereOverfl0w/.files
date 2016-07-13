@@ -186,6 +186,7 @@ autocmd BufWinEnter *
   map <leader>u/ :Unite -start-insert grep:.<CR>
   map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
   map <leader>um :Unite mapping<CR>
+  map <leader>ugs :Unite -force-redraw -start-insert file_rec/git:--modified<CR>
   " --[Easymotion
   map <leader>f <Plug>(easymotion-bd-f)
   nmap <Leader>f <Plug>(easymotion-bd-f)
