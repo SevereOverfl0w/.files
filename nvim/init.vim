@@ -164,6 +164,10 @@ autocmd BufWinEnter *
   " Textobj disabling {{{
   let g:textobj_css_no_default_key_mappings = 1
   " }}}
+  " Vim settings {{{
+  " Better diff setup
+  set diffexpr=py3diff#diffexpr()
+  " }}}
 " }}}
 " Mappings {{{
   " Navigating {{{
