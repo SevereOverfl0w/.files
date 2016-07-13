@@ -165,6 +165,12 @@ autocmd BufWinEnter *
   let g:textobj_css_no_default_key_mappings = 1
   " }}}
   " Vim settings {{{
+  " I think I need this
+  set hidden
+  " Make hidden less "evil"
+  set autowrite
+  " Macro redrawing
+  set lazyredraw
   " Better diff setup
   set diffexpr=py3diff#diffexpr()
   " }}}
