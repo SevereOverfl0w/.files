@@ -252,8 +252,4 @@ autocmd BufWinEnter *
   au Syntax * RainbowParenthesesLoadBraces
   augroup END
   " }}}
-  " Highlight Clojure {{{
-  " TODO: Move to filetype file
-  autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
-  " }}}
 " }}}
