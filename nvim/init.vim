@@ -106,6 +106,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ledger/vim-ledger'
   Plug 'mrtazz/simplenote.vim'
   Plug 'thinca/vim-localrc'
+  Plug 'floobits/floobits-neovim'
   " }}}
 call plug#end()
 " }}}
@@ -185,6 +186,7 @@ autocmd BufWinEnter *
 " Mappings {{{
   " Navigating {{{
   map <leader>jk <Plug>(signjk-jk)
+  map <leader>jw <Plug>(easymotion-bd-w)
   map <leader>eft :execute 'Ftplugin ' . &ft<CR>
   " --[Unite
   map <leader>uf :Unite -start-insert file_rec/async<CR>
