@@ -23,9 +23,13 @@ command! -buffer Figwheel :call RunRepl("lein figwheel")")
 " TODO: if/else this,and warn
 command! -buffer Cljsbuild :Dispatch lein cljsbuild once
 
+if !exists('b:dev_ns')
+  let b:dev_ns = 'dev'
+endif
+
 " Stuart Sierra's reloaded workflow
-nnoremap <buffer> <localleader>go :call fireplace#echo_session_eval('(go)', {'ns': 'dev'})<CR>
-nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {'ns': 'dev'})<CR>
+nnoremap <buffer> <localleader>go :call fireplace#echo_session_eval('(go)', {'ns': b:dev_ns})<CR>
+nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {'ns': b:dev_ns})<CR>
 nnoremap <buffer> <localleader>rf :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
 nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
 
