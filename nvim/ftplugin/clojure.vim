@@ -33,10 +33,11 @@ nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {
 nnoremap <buffer> <localleader>rf :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
 nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
 
-function! s:deveval(args)
-  call fireplace#echo_session_eval(a:args, {'ns': 'dev'})
+function! s:EvalIn(args)
+  let sargs = split(a:args)
+  call fireplace#echo_session_eval(join(sargs[1:-1]), {'ns': sargs[0]})
 endfunction
 
-command! -buffer -nargs=* DevEval :exe s:deveval(<q-args>)
+command! -buffer -nargs=* EvalIn :exe s:EvalIn(<q-args>)
 
 setlocal foldmethod=syntax
