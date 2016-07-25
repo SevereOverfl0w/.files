@@ -86,6 +86,7 @@ call plug#begin('~/.config/nvim/plugged')
   " }}}
   " Lisp {{{
   Plug 'guns/vim-sexp' " Attempt to strip down?
+  Plug 'luochen1990/rainbow'
   " }}}
   " Clojure {{{
   " :extends: lisp
@@ -104,6 +105,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'chrisbra/csv.vim'
   Plug 'ledger/vim-ledger'
   Plug 'mrtazz/simplenote.vim'
+  Plug 'thinca/vim-localrc'
   " }}}
 call plug#end()
 " }}}
@@ -172,6 +174,12 @@ autocmd BufWinEnter *
   set lazyredraw
   " Better diff setup
   set diffexpr=py3diff#diffexpr()
+  " }}}
+  " Rainbow Parens {{{
+  let g:rainbow_active = 1
+  " }}}
+  " local-vimrc {{{
+  let g:localrc_filename = ".local.vim"
   " }}}
 " }}}
 " Mappings {{{
