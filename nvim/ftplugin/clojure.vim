@@ -11,7 +11,6 @@ function! RunRepl(cmd)
     call termopen(a:cmd)
   endif
   set syntax=clojure
-  RainbowParenthesesActivate
   tabprevious
 endfunction
 
