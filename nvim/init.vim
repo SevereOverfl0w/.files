@@ -187,6 +187,7 @@ autocmd BufWinEnter *
   " Navigating {{{
   map <leader>jk <Plug>(signjk-jk)
   map <leader>jw <Plug>(easymotion-bd-w)
+  map <leader>jf <Plug>(easymotion-bd-f)
   map <leader>eft :execute 'Ftplugin ' . &ft<CR>
   " --[Unite
   map <leader>uf :Unite -start-insert file_rec/async<CR>
@@ -196,9 +197,6 @@ autocmd BufWinEnter *
   map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
   map <leader>um :Unite mapping<CR>
   map <leader>ugs :Unite -force-redraw -start-insert file_rec/git:--modified<CR>
-  " --[Easymotion
-  map <leader>f <Plug>(easymotion-bd-f)
-  nmap <Leader>f <Plug>(easymotion-bd-f)
   " }}}
   " Vimrc {{{
   noremap <leader>vs :source $MYVIMRC<CR>
