@@ -59,7 +59,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'tommcdo/vim-fugitive-blame-ext'
   Plug 'airblade/vim-gitgutter'
-  Plug 'gregsexton/gitv'
+  Plug 'junegunn/gv.vim'
   " }}}
   " Navigating {{{
   Plug 'haya14busa/vim-signjk-motion'
