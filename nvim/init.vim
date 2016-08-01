@@ -199,6 +199,9 @@ autocmd BufWinEnter *
   map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
   map <leader>um :Unite mapping<CR>
   map <leader>ugs :Unite -force-redraw -start-insert file_rec/git:--modified<CR>
+  " Unite-Interface
+  map <leader>uir :UniteResume<CR>
+  map <leader>uin :UniteNext<CR>
   " }}}
   " Vimrc {{{
   noremap <leader>vs :source $MYVIMRC<CR>
