@@ -182,6 +182,8 @@ autocmd BufWinEnter *
   " local-vimrc {{{
   let g:localrc_filename = ".local.vim"
   " }}}
+  let g:clojure_special_indent_words = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,defcomponent'
+  setlocal lispwords+=go-loop
 " }}}
 " Mappings {{{
   " Navigating {{{
