@@ -147,6 +147,7 @@ autocmd BufWinEnter *
     \ '-i --vimgrep --hidden --ignore ' .
     \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
     let g:unite_source_grep_recursive_opt = ''
+    call unite#custom#source('file_rec/async,grep', 'ignore_globs', ['./out/**', './.cljs_rhino_repl/**', './target/**'])
   endif
   " }}}
   " Deoplete {{{
