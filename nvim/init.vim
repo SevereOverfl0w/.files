@@ -160,6 +160,9 @@ autocmd BufWinEnter *
   let g:deoplete#sources.clojure=['async_clj', 'file']
 
   " }}}
+  " Easymotion {{{
+  let g:EasyMotion_skipfoldedline = 0
+  " }}}
   " SimpleNote {{{
   let g:SimplenoteUsername = "monroef4@googlemail.com"
   let g:SimplenoteFiletype = "asciidoc"
@@ -189,6 +192,7 @@ autocmd BufWinEnter *
 " Mappings {{{
   " Navigating {{{
   map <leader>jk <Plug>(signjk-jk)
+  map <leader>jl <Plug>(easymotion-bd-jk)
   map <leader>jw <Plug>(easymotion-bd-w)
   map <leader>jf <Plug>(easymotion-bd-f)
   map <leader>eft :execute 'Ftplugin ' . &ft<CR>
