@@ -19,6 +19,9 @@ super + n
 super + p
 	passmenu
 
+super + alt + s
+	teiler
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
