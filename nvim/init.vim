@@ -262,3 +262,13 @@ autocmd BufWinEnter *
                           \ setlocal autoindent
   " }}}
 " }}}
+
+let fugitive_diff = {
+      \ 'description' : 'Run :Gvdiff against the file',
+      \ }
+
+function! fugitive_diff.func(candidate)
+  execute 'Gvdiff ' . a:candidate.word
+endfunction
+
+call unite#custom#action('file', 'fugitivediff', fugitive_diff)
