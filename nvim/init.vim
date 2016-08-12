@@ -202,8 +202,8 @@ autocmd BufWinEnter *
   map <leader>ub :Unite -quick-match buffer<CR>
   map <leader>u/ :Unite -start-insert grep:.<CR>
   map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
-  map <leader>um :Unite mapping<CR>
-  map <leader>ugs :Unite -force-redraw -start-insert file_rec/git:--modified<CR>
+  map <leader>um :Unite -smartcase mapping<CR>
+  map <leader>ugs :Unite -force-redraw file_rec/git:--modified<CR>
   " Unite-Interface
   map <leader>uir :UniteResume<CR>
   map <leader>uin :UniteNext<CR>
