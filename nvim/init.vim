@@ -125,6 +125,9 @@ autocmd BufWinEnter *
   set background=dark
   let g:gruvbox_italic = 1
   colorscheme gruvbox
+  " Align signjk and gruvbox
+  hi! link SignjkTarget GruvboxBlueSign
+  hi! link SignjkTarget2 GruvboxYellowSign
   let g:airline_powerline_fonts = 1
   set colorcolumn=80
   " }}}
