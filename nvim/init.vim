@@ -182,6 +182,8 @@ autocmd BufWinEnter *
   set lazyredraw
   " Better diff setup
   set diffexpr=py3diff#diffexpr()
+  " Stop file watchers from freaking out
+  set directory=~/.local/share/nvim/tmp
   " }}}
   " Rainbow Parens {{{
   let g:rainbow_active = 1
