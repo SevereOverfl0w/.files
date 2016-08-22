@@ -29,8 +29,9 @@ endif
 " Stuart Sierra's reloaded workflow
 nnoremap <buffer> <localleader>go :call fireplace#echo_session_eval('(go)', {'ns': b:dev_ns})<CR>
 nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {'ns': b:dev_ns})<CR>
-nnoremap <buffer> <localleader>rf :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
-nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
+nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': b:dev_ns})<CR>
+nnoremap <buffer> <localleader>ff :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
+nnoremap <buffer> <localleader>fa :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
 
 function! s:EvalIn(args)
   let sargs = split(a:args)
