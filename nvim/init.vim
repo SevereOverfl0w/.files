@@ -8,7 +8,6 @@
 
 let g:config_base_dir = '~/.config/nvim'
 
-
 " Things that _need_ to come first
 let mapleader="\<Space>"
 let maplocalleader=","
@@ -27,7 +26,6 @@ endfunction
 " Load layers
 let g:layers = split(globpath(g:config_base_dir.'/layer', '*'), '\n')
 let g:layer_names = Mapped(function("LayerName"), layers)
-
 
 call plug#begin(g:config_base_dir.'/plugged')
   for l in g:layers
