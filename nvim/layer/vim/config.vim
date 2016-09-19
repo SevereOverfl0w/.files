@@ -33,7 +33,9 @@ function! s:EditLayerComplete(ArgLead, CmdLine, CursorPos)
 endfunction
 
 function! s:EditLayer(args)
-  exec ':10split '.g:config_base_dir.'/layer/'.a:args.'/config.vim'
+  tabnew
+  exec ':e '.g:config_base_dir.'/layer/'.a:args.'/after'
+  exec ':vsplit '.g:config_base_dir.'/layer/'.a:args.'/config.vim'
   exec ':vsplit '.g:config_base_dir.'/layer/'.a:args.'/package.vim'
 endfunction
 
