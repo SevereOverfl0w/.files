@@ -1,5 +1,5 @@
 set colorcolumn=80
-set clipboard=unnamedplus
+set clipboard+=unnamedplus,unnamed
 
 " Let me run off and modify files without write
 set hidden
