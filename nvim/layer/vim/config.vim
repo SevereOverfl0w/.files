@@ -9,6 +9,7 @@ set autowrite
 set lazyredraw
 " Stop file watchers from freaking out
 set directory=~/.local/share/nvim/tmp
+set backupdir=~/.local/share/nvim/backup
 " Better diffing
 set diffexpr=py3diff#diffexpr()
 
