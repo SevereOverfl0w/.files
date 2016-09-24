@@ -10,6 +10,9 @@ super + Return
 super + d
 	rofi -show run
 
+super + shift + d
+	rofi -show drun
+
 super + x
 	~/.files/bin/fancy_lock
 
