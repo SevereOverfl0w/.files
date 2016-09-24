@@ -6,3 +6,5 @@
 if [ $? -eq 0 ]; then
   /usr/bin/mbsync -Va
 fi
+
+exit 0
