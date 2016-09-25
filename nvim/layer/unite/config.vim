@@ -1,4 +1,14 @@
-if executable('ag')
+if executable('rg')
+  " Use rg for unite
+  " https://github.com/BurntSushi/ripgrep
+  let g:unite_source_grep_command = 'rg'
+  let g:unite_source_grep_default_opts = '-i --vimgrep -g ''!*.pack.js'' -g ''!*.min.css'' -g ''!*.min.js'''
+  " Ignores directories:
+  for i in ['talks', 'out', '.cljs_rhino_repl', 'target', 'idea']
+    let g:unite_source_grep_default_opts .= ' -g ''!./'.i.'/**/*'''
+  endfor
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ag')
   " Use ag for unite
   " https://github.com/ggreer/the_silver_searcher
   let g:unite_source_grep_command = 'ag'
