@@ -70,4 +70,4 @@ call unite#custom#profile('default', 'context', {
     \   'prompt_direction': 'below',
 \ })
 
-highlight! link uniteInputPrompt GruvboxYellowBold
+highlight! link uniteInputPrompt GruvboxPurpleBold
