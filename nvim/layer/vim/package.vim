@@ -1,4 +1,5 @@
 Plug 'thinca/vim-localrc'
+Plug 'ntpeters/vim-better-whitespace'
 
 " To do with over-running diffs. See beautiful diffs here:
 " https://github.com/blog/2188-git-2-9-has-been-released

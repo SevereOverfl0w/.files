@@ -6,3 +6,4 @@ colorscheme gruvbox
 " TODO: Put in autocmd
 hi! link SignjkTarget GruvboxBlueSign
 hi! link SignjkTarget2 GruvboxYellowSign
+hi! link ExtraWhitespace Error

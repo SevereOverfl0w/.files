@@ -20,13 +20,6 @@ autocmd BufNewFile,BufRead init.vim
 		  \ setlocal foldmethod=marker |
 		  \ setlocal autoindent
 
-highlight! link ExtraWhitespace Error
-autocmd BufWinEnter *
-      \ match ExtraWhitespace '\s\+$'
-
-autocmd FileType unite
-      \ match ExtraWhitespace ''
-
 noremap <leader>vs :source $MYVIMRC<CR>
 noremap <leader>ve :62vsplit $MYVIMRC<CR>
 
