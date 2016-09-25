@@ -1,10 +1,12 @@
+let ignore_dirs = ['talks', 'out', '.cljs_rhino_repl', 'target', 'idea']
+
 if executable('rg')
   " Use rg for unite
   " https://github.com/BurntSushi/ripgrep
   let g:unite_source_grep_command = 'rg'
   let g:unite_source_grep_default_opts = '-i --vimgrep -g ''!*.pack.js'' -g ''!*.min.css'' -g ''!*.min.js'''
   " Ignores directories:
-  for i in ['talks', 'out', '.cljs_rhino_repl', 'target', 'idea']
+  for i in ignore_dirs
     let g:unite_source_grep_default_opts .= ' -g ''!./'.i.'/**/*'''
   endfor
   let g:unite_source_grep_recursive_opt = ''
@@ -16,9 +18,16 @@ elseif executable('ag')
   \ '-i --vimgrep --hidden --ignore ' .
   \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
   let g:unite_source_grep_recursive_opt = ''
-  call unite#custom#source('file_rec/async,grep', 'ignore_globs', ['./out/**', './.cljs_rhino_repl/**', './target/**', './.idea/**'])
 endif
 
+fun! s:UniteDirToGlob(i)
+  return './'.a:i.'/**'
+endf
+
+" Preferably, these would always be done via ignore to the commands
+" themselves, but this isn't always possible (or I've not done it), this
+" stands as a last barrier against my stupidity
+call unite#custom#source('file_rec/async,grep', 'ignore_globs', Mapped(function("s:UniteDirToGlob"), ignore_dirs))
 
 map <leader>uf :Unite -start-insert file_rec/async<CR>
 map <leader>uj :Unite -start-insert jump<CR>
