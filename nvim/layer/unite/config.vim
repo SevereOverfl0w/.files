@@ -63,3 +63,11 @@ let fugitive_diff = {
 function! fugitive_diff.func(candidate)
   execute 'Gvdiff ' . a:candidate.word
 endfunction
+
+call unite#custom#profile('default', 'context', {
+    \   'prompt': '❯ ',
+    \   'direction': 'botright',
+    \   'prompt_direction': 'below',
+\ })
+
+highlight! link uniteInputPrompt GruvboxYellowBold
