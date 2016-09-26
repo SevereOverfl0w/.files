@@ -66,8 +66,7 @@ endfunction
 
 call unite#custom#profile('default', 'context', {
     \   'prompt': '❯ ',
-    \   'direction': 'botright',
-    \   'prompt_direction': 'below',
+    \   'direction': 'dynamicbottom',
 \ })
 
 highlight! link uniteInputPrompt GruvboxPurpleBold
