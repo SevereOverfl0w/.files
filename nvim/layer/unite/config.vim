@@ -1,4 +1,4 @@
-let ignore_dirs = ['talks', 'out', '.cljs_rhino_repl', 'target', 'idea']
+let ignore_dirs = ['talks', 'out', '.cljs_rhino_repl', 'target', '.idea']
 let ignore_file_exts = ['pack.js', 'min.css', 'min.js']
 
 if executable('rg')
