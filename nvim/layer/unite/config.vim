@@ -49,7 +49,7 @@ map <leader>ub :Unite -quick-match buffer<CR>
 map <leader>u/ :Unite -start-insert grep:.<CR>
 map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
 map <leader>um :Unite -smartcase mapping<CR>
-map <leader>ugs :Unite -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
+map <leader>ugs :Unite -start-insert -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
 " Unite-Interface
 map <leader>uir :UniteResume<CR>
 map <leader>uin :UniteNext<CR>
@@ -65,7 +65,8 @@ function! fugitive_diff.func(candidate)
 endfunction
 
 call unite#custom#profile('default', 'context', {
-    \   'prompt': '❯ ',
+    \  'prompt': '❯ ',
+    \  'winheight': 10,
     \   'direction': 'dynamicbottom',
 \ })
 
