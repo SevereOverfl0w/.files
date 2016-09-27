@@ -15,7 +15,7 @@ set diffexpr=py3diff#diffexpr()
 
 let g:localrc_filename = ".local.vim"
 
-autocmd BufNewFile,BufRead init.vim 
+autocmd BufNewFile,BufRead init.vim
 		  \ setlocal cc=60 |
 		  \ setlocal foldmethod=marker |
 		  \ setlocal autoindent
