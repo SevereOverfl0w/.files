@@ -27,11 +27,15 @@ function! s:EditLayerComplete(ArgLead, CmdLine, CursorPos)
   return join(g:layer_names, "\n")
 endfunction
 
+function! s:LR(path)
+  return resolve(expand(a:path))
+endfunction
+
 function! s:EditLayer(args)
   tabnew
-  exec ':e '.g:config_base_dir.'/layer/'.a:args.'/after'
-  exec ':vsplit '.g:config_base_dir.'/layer/'.a:args.'/config.vim'
-  exec ':vsplit '.g:config_base_dir.'/layer/'.a:args.'/package.vim'
+  exec ':e '.s:LR(g:config_base_dir.'/layer/'.a:args.'/after')
+  exec ':vsplit '.s:LR(g:config_base_dir.'/layer/'.a:args.'/config.vim')
+  exec ':vsplit '.s:LR(g:config_base_dir.'/layer/'.a:args.'/package.vim')
 endfunction
 
 " Use custom, not customlist because vim filters the former
