@@ -111,4 +111,13 @@ Wifi() {
 # }}}
 
 # Ordering controls overlays (titles are unimportant)
-echo "%{F$light0}$CENTER$(xtitle -i)$LEFT$(Workspace)$RIGHT$(FG $bright_orange $(Clock)) $(FG $bright_blue $(Volume)) $(FG $bright_yellow $(Battery)) $(Wifi)"
+barcontent="%{F$light0}$CENTER$(xtitle -i)$LEFT$(Workspace)$RIGHT$(FG $bright_orange $(Clock)) $(FG $bright_blue $(Volume)) $(FG $bright_yellow $(Battery)) $(Wifi)"
+
+Monitors=$(xrandr | grep -o "^.* connected" | sed "s/ connected//")
+tmp=0
+for m in $(echo "$Monitors"); do
+    barout+="%{S${tmp}}$barcontent"
+    let tmp=$tmp+1
+done
+
+echo $barout
