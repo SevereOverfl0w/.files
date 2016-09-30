@@ -4,6 +4,7 @@ endfunction
 
 " Lispy plugins
 Plug 'guns/vim-sexp' " Attempt to strip down?
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'luochen1990/rainbow'
 " Clojure plugins
 Plug 'tpope/vim-fireplace'
