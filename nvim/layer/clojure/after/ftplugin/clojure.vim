@@ -14,8 +14,16 @@ function! RunRepl(cmd)
   tabprevious
 endfunction
 
+function! BootRepl(...)
+  if a:0 > 0 && a:1 != ''
+    call RunRepl('boot cider '.join(a:000, ' '))
+  else
+    call RunRepl('boot cider dev')
+  endif
+endfunction
+
 " TODO: Take an optional arg for alternative tasks
-command! -buffer Boot :call RunRepl("boot cider dev")
+command! -nargs=* -buffer Boot :exe BootRepl(<q-args>)
 command! -buffer Lein :call RunRepl("lein repl")
 command! -buffer Figwheel :call RunRepl("lein figwheel")")
 
