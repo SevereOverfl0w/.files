@@ -15,3 +15,4 @@ Plug 'tpope/vim-eunuch'
 " :Start :Dispatch
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
+Plug 'tpope/vim-repeat'
