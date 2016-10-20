@@ -112,7 +112,7 @@ local currdir='%F{011}%25<…<%~%<<%f'
 
 # RPROMPT="%F{white}${inbox}${task_changes}${dotfiles}"
 
-PATH=$PATH:$HOME/bin:$HOME/.files/bin/:$HOME/.gem/ruby/2.3.0/bin
+PATH=$PATH:$HOME/bin:$HOME/.files/bin/:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cargo/bin
 LEDGERF=/home/dominic/sync/general/ledger/2016.ledger
 alias ledger='ledger -f $LEDGERF'
 
