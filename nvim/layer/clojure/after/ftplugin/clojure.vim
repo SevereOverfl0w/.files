@@ -34,12 +34,19 @@ if !exists('b:dev_ns')
   let b:dev_ns = 'dev'
 endif
 
+function! s:CiderRefresh()
+  " TODO: Collect reloading key from all messages, just in case
+  let refresh = fireplace#message({'op': 'refresh'})
+  echon 'reloading: (' join(refresh[0]['reloading'], ' ') ')'
+endfunction
+
 " Stuart Sierra's reloaded workflow
 nnoremap <buffer> <localleader>go :call fireplace#echo_session_eval('(go)', {'ns': b:dev_ns})<CR>
 nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {'ns': b:dev_ns})<CR>
 nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': b:dev_ns})<CR>
 nnoremap <buffer> <localleader>ff :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
 nnoremap <buffer> <localleader>fa :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
+nnoremap <buffer><silent> <localleader>cf :call <SID>CiderRefresh()<CR>
 
 function! s:EvalIn(args)
   let sargs = split(a:args)
