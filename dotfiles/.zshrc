@@ -119,3 +119,15 @@ alias ledger='ledger -f $LEDGERF'
 autoload -U promptinit && promptinit
 PURE_CMD_MAX_EXEC_TIME=10
 # prompt pure
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function fzf-ghq() {
+    local selected_dir=$(ghq list -p | $(__fzfcmd) --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+}
+zle -N fzf-ghq
+bindkey '^g^h' fzf-ghq
