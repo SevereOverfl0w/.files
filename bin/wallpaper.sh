@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 shopt -s nullglob
-cd ~/wallpapers
+cd "$@"
 
 while true; do
   files=()
