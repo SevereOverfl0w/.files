@@ -16,9 +16,6 @@ super + shift + d
 super + x
 	~/.files/bin/fancy_lock
 
-super + n
-	~/.files/bin/bspwm/rename_workspace.sh
-
 super + p
 	passmenu
 
