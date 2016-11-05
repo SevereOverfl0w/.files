@@ -2,9 +2,16 @@
 #                               macros                                #
 #######################################################################
 
-[macros.install]
+[macros.install__arch]
     deps = ["apacman"]
     prefix = ["apacman", "--noconfirm", "--noedit", "-S"]
+
+[macros.install__void]
+    prefix = ["xbps-install", "-S"]
+
+[macros.clone]
+    deps = ["git"]
+    prefix = ["git", "clone"]
 
 #######################################################################
 #                                tasks                                #
@@ -50,10 +57,28 @@
   links = [[".config/sxhkd/sxhkdrc", "dotfiles/sxhkdrc"],
            [".config/sxhkd/sxhkdrc_bspwm", "dotfiles/sxhkdrc_bspwm"]]
 
+[tasks.curl]
+  rejects = [["which", "curl"]]
+  cmds = [["@install", "curl"]]
+
+[tasks.hub]
+  rejects = [["which", "hub"]]
+  deps = ["curl"]
+  cmds = [["curl", "-fLo", "/tmp/hub.tgz", "--create-dirs", "https://github.com/github/hub/releases/download/v2.3.0-pre8/hub-linux-amd64-2.3.0-pre8.tgz"],
+          ["tar", "xf", "/tmp/hub.tgz", "-C", "${HM_DEST}/bin", "--strip-components=2", "--wildcards", "**/bin/hub"]]
+
+[tasks.git]
+  deps = ["hub"]
+
+[tasks.gitbin]
+  rejects = [["which", "git"]]
+  cmds = [["@install", "git"]]
+
 [tasks.default]
   deps = ["termite",
           "zsh",
           "nvim",
           "xfiles",
           "i3",
-          "dotfiles"]
+          "dotfiles",
+          "git"]
