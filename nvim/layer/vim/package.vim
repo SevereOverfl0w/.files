@@ -16,3 +16,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-repeat'
+Plug 'rust-lang/rust.vim'
+
+Plug 'tpope/vim-scriptease'
+Plug 'lukaszkorecki/workflowish'
+Plug 'mhinz/vim-halo'

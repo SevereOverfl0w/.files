@@ -40,3 +40,6 @@ endfunction
 
 " Use custom, not customlist because vim filters the former
 command! -complete=custom,s:EditLayerComplete -nargs=1 EditLayer :exe s:EditLayer(<q-args>)
+
+nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
+nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
