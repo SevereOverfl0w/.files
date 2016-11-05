@@ -15,4 +15,6 @@ Plug 'neovim/node-host'
 Plug 'snoe/clj-refactor.nvim', {'do': function('RefactorDoRemote')}
 
 " TODO: Move to completion layer?
-Plug 'SevereOverfl0w/async-clj-omni'
+" Plug 'SevereOverfl0w/async-clj-omni'
+Plug '~/.ghq/github.com/clojure-vim/async-clj-omni'
+Plug '~/.ghq/github.com/SevereOverfl0w/unite-clojure'
