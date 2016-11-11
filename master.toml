@@ -34,8 +34,12 @@
   cmds = [["@install", "cargo", "python3", "python-neovim", "python3-neovim", "nodejs"],
           ["@install", "neovim-git"]]
 
+[tasks.nvimdirectories]
+  cmds = [["mkdir", "-p", ".local/share/nvim/tmp"],
+          ["mkdir", "-p", ".local/share/nvim/backup"]]
+
 [tasks.nvim]
-  deps = ["nvimpackage", "nvimplug", "nvimnodehost"]
+  deps = ["nvimpackage", "nvimplug", "nvimnodehost", "nvimdirectories"]
   links = [[".config/nvim","nvim"]]
 
 [tasks.zshpackage]
