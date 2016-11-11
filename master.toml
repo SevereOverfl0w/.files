@@ -25,13 +25,17 @@
   rejects = [["test", "-f", ".config/nvim/autoload/plug.vim"]]
   cmds = [["curl", "-fLo", ".config/nvim/autoload/plug.vim", "--create-dirs", "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"]]
 
+[tasks.nvimnodehost]
+  rejects = [["test", "-d", ".config/nvim/plugged/node-host/node_modules"]]
+  cmds = [["npm", "--prefix", ".config/nvim/plugged/node-host", "install"]]
+
 [tasks.nvimpackage]
   rejects = [["which", "nvim"]]
-  cmds = [["@install", "cargo", "python3", "python-neovim", "python3-neovim"],
+  cmds = [["@install", "cargo", "python3", "python-neovim", "python3-neovim", "nodejs"],
           ["@install", "neovim-git"]]
 
 [tasks.nvim]
-  deps = ["nvimpackage", "nvimplug"]
+  deps = ["nvimpackage", "nvimplug", "nvimnodehost"]
   links = [[".config/nvim","nvim"]]
 
 [tasks.zshpackage]
