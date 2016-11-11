@@ -7,13 +7,13 @@ if [ -d /etc/profile.d ]; then
   unset i
 fi
 
-source ~/.config/zplug/zplug
+source ~/.config/zplug/init.zsh
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-zplug petervanderdoes/gitflow-avh, do: "make install prefix=$HOME"
+zplug petervanderdoes/gitflow-avh, hook-build: "make install prefix=$HOME"
 zplug petervanderdoes/git-flow-completion
 zplug mafredri/zsh-async
 zplug sindresorhus/pure
@@ -45,7 +45,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 autoload -U colors && colors
-eval $(dircolors ~/.dircolors)
 
 # Home / Backspace / End keys #
 bindkey '\e[1~'   beginning-of-line  # Linux console

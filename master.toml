@@ -46,11 +46,16 @@
   rejects = [["which", "zsh"]]
   cmds = [["@install", "zsh"], ["chsh", "-s", "/usr/bin/zsh"]]
 
+[tasks.zshplug]
+  rejects = [["test", "-d", ".config/zplug"], ["which", "perl"]]
+  cmds = [["@clone", "https://github.com/zplug/zplug", ".config/zplug"],
+          ["@install", "perl"]]
+
 [tasks.zshrc]
   links = [[".zshrc", "dotfiles/.zshrc"]]
 
 [tasks.zsh]
-  deps = ["zshrc", "zshpackage"]
+  deps = ["zshrc", "zshpackage", "zshplug"]
 
 [tasks.termite]
   links = [[".config/termite/config", "dotfiles/termite"]]
@@ -61,6 +66,10 @@
 [tasks.i3]
   deps = ["i3"]
   links = [[".config/i3/config", "dotfiles/i3/i3"]]
+
+[tasks.miscpkgs]
+  rejects = [["which", "sxhkd", "bspwm"]]
+  cmds = [["@install", "sxhkd", "bspwm"]]
 
 [tasks.dotfiles]
   links = [[".config/sxhkd/sxhkdrc", "dotfiles/sxhkdrc"],
@@ -91,5 +100,6 @@
           "nvim",
           "xfiles",
           "i3",
+          "miscpkgs",
           "dotfiles",
           "git"]
