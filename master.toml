@@ -7,7 +7,7 @@
     prefix = ["apacman", "--noconfirm", "--noedit", "-S"]
 
 [macros.install__void]
-    prefix = ["xbps-install", "-S"]
+    prefix = ["sudo", "xbps-install", "-S"]
 
 [macros.clone]
     deps = ["git"]
@@ -27,10 +27,11 @@
 
 [tasks.nvimpackage]
   rejects = [["which", "nvim"]]
-  cmds = [["@install", "neovim-git"]]
+  cmds = [["@install", "cargo", "python3", "python-neovim", "python3-neovim"],
+          ["@install", "neovim-git"]]
 
 [tasks.nvim]
-  deps = ["nvimplug", "nvimpackage"]
+  deps = ["nvimpackage", "nvimplug"]
   links = [[".config/nvim","nvim"]]
 
 [tasks.zshpackage]
