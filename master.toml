@@ -55,7 +55,8 @@
 
 [tasks.dotfiles]
   links = [[".config/sxhkd/sxhkdrc", "dotfiles/sxhkdrc"],
-           [".config/sxhkd/sxhkdrc_bspwm", "dotfiles/sxhkdrc_bspwm"]]
+           [".config/sxhkd/sxhkdrc_bspwm", "dotfiles/sxhkdrc_bspwm"],
+           [".config/bspwm", "dotfiles/bspwm"]]
 
 [tasks.curl]
   rejects = [["which", "curl"]]
