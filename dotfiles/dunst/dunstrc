@@ -1,0 +1,49 @@
+[global]
+    font = "sans 11"
+    allow_markup = yes
+    format = "<b>%s</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = center
+    bounce_freq = 0
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+    geometry = "400x5-30+20"
+    transparency = 0
+    idle_threshold = 120
+    monitor = 0
+    follow = mouse
+    sticky_history = yes
+    line_height = 0
+    separator_height = 2
+    padding = 8
+    horizontal_padding = 8
+    separator_color = frame
+    startup_notification = false
+    icon_position = right
+
+[frame]
+    width = 1
+    color = "#464B50"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#2d2d2d"
+    foreground = "#99cc99"
+    timeout = 30
+
+[urgency_normal]
+    background = "#2d2d2d"
+    foreground = "#f99157"
+    timeout = 45
+
+[urgency_critical]
+    background = "#2d2d2d"
+    foreground = "#f2777a"
+    timeout = 0
