@@ -83,20 +83,6 @@ endfunction
 function! s:unite_find_symbol_syntax(args, context)
   let info = fireplace#message({'op': 'info', 'symbol': a:context.source__symbol, 'ns': a:context.source__ns})[0]
   syntax case ignore
-  syntax match uniteSource__FSHeader /[^:]*:\d\+:\(\d\+ \)\?/
-  execute 'syntax match uniteSource__FSPattern /'
-        \ . substitute(info['name'], '\([/\\]\)', '\\\1', 'g')
-        \ . '/'
-  highlight default link uniteSource__FSHeader Comment
-
-  execute 'highlight default link uniteSource__FSPattern'
-        \ get(a:context, 'custom_grep_search_word_highlight',
-        \ g:unite_source_grep_search_word_highlight)
-endfunction
-
-function! s:unite_find_symbol_syntax(args, context)
-  let info = fireplace#message({'op': 'info', 'symbol': a:context.source__symbol, 'ns': a:context.source__ns})[0]
-  syntax case ignore
   syntax match uniteSource__FSHeader /[^:]*: \d\+: \(\d\+: \)\?/ contained
         \ containedin=uniteSource__FS
   syntax match uniteSource__FSFile /[^:]*: / contained
