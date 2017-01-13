@@ -69,3 +69,8 @@ if expand('%:t') == 'build.boot'
 endif
 
 setlocal foldmethod=syntax
+
+abbrev break! (com.gfredericks.debug-repl.http-intercept/break!)
+command! -buffer LoadDebugger :Eval (require 'com.gfredericks.debug-repl.http-intercept 'com.gfredericks.debug-repl)<CR>
+command! -buffer Unbreak :Eval (com.gfredericks.debug-repl/unbreak!)
+command! -buffer WaitForBreak :Eval (com.gfredericks.debug-repl.http-intercept/wait-for-breaks)
