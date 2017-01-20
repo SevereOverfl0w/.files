@@ -87,8 +87,12 @@
   cmds = [["curl", "-fLo", "/tmp/hub.tgz", "--create-dirs", "https://github.com/github/hub/releases/download/v2.3.0-pre8/hub-linux-amd64-2.3.0-pre8.tgz"],
           ["tar", "xf", "/tmp/hub.tgz", "-C", "${HM_DEST}/bin", "--strip-components=2", "--wildcards", "**/bin/hub"]]
 
+[tasks.git-extras]
+  rejects = [["which", "git-authors"]]
+  cmds = [["@install", "git-extras"]]
+
 [tasks.git]
-  deps = ["hub"]
+  deps = ["hub", "git-extras"]
 
 [tasks.gitbin]
   rejects = [["which", "git"]]
