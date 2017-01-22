@@ -1,4 +1,5 @@
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
