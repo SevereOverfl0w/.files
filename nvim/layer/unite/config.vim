@@ -43,16 +43,16 @@ let unite_ignore_globs =
 
 call unite#custom#source('file_rec/async,grep', 'ignore_globs', unite_ignore_globs)
 
-map <leader>uf :Unite -start-insert file_rec/async<CR>
-map <leader>uj :Unite -start-insert jump<CR>
-map <leader>ub :Unite -quick-match buffer<CR>
-map <leader>u/ :Unite -start-insert grep:.<CR>
-map <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
-map <leader>um :Unite -smartcase mapping<CR>
-map <leader>ugs :Unite -start-insert -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
-" Unite-Interface
-map <leader>uir :UniteResume<CR>
-map <leader>uin :UniteNext<CR>
+nnoremap <leader>uf :Unite -start-insert file_rec/async<CR>
+nnoremap <leader>uj :Unite -start-insert jump<CR>
+nnoremap <leader>ub :Unite -quick-match buffer<CR>
+nnoremap <leader>u/ :Unite -start-insert grep:.<CR>
+nnoremap <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
+nnoremap <leader>um :Unite -smartcase mapping<CR>
+nnoremap <leader>ugs :Unite -start-insert -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
+nnore" Unite-Interface
+nnoremap <leader>uir :UniteResume<CR>
+nnoremap <leader>uin :UniteNext<CR>
 
 " command! Glog :Unite gitlog:all:30
 
