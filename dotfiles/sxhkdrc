@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	termite
+	roxterm
 
 # program launcher
 super + d
@@ -26,3 +26,5 @@ super + alt + s
 super + Escape
 	pkill -USR1 -x sxhkd
 
+super + alt + m
+	mirrorscreen
