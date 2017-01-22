@@ -9,9 +9,14 @@ rofi.width: 100
 rofi.padding: 200
 rofi.opacity: 85
 
+rofi.dpi: 282
+
+Xcursor.size: 64
+Xcursor*size: 64
+
 ! hard contrast: *background: #1d2021
-! *background: #282828
-*background: #32302f
+*background: #282828
+! *background: #32302f
 ! soft contrast: *background: #32302f
 *foreground: #ebdbb2
 ! Black + DarkGrey
