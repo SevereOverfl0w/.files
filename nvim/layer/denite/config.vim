@@ -30,3 +30,4 @@ call denite#custom#option('default', 'prompt', ' ❯')
 nnoremap <leader>d/ :Denite grep<CR>
 nnoremap <leader>df :Denite file_rec<CR>
 nnoremap <leader>db :Denite buffer<CR>
+nnoremap <leader>dh :Denite help<CR>
