@@ -53,8 +53,8 @@ nnoremap <buffer> <localleader>go :call fireplace#echo_session_eval('(go)', {'ns
 nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {'ns': <SID>FindDevNamespace()})<CR>
 nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': <SID>FindDevNamespace()})<CR>
 
-nnoremap <buffer> <localleader>ff :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
-nnoremap <buffer> <localleader>fa :call fireplace#echo_session_eval('(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
+nnoremap <buffer> <localleader>ff :call fireplace#echo_session_eval('(require ''clojure.tools.namespace.repl)(clojure.tools.namespace.repl/refresh)', {'ns': 'user'})<CR>
+nnoremap <buffer> <localleader>fa :call fireplace#echo_session_eval('(require ''clojure.tools.namespace.repl)(clojure.tools.namespace.repl/refresh-all)', {'ns': 'user'})<CR>
 nnoremap <buffer><silent> <localleader>cf :call <SID>CiderRefresh()<CR>
 
 function! s:EvalIn(args)
