@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# A runsv "run" script
+# TODO: It might be very bad to have this alongside the actual script! Maybe it should move to a service directory of some kind?
+
+exec ./panel

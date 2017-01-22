@@ -1,0 +1,61 @@
+#!/bin/sh
+
+PANEL_FIFO=/tmp/panel-fifo
+
+echo "$$" > /tmp/foo
+export SCRIPT_DIR=$(dirname $0)
+. $SCRIPT_DIR/panel_vars
+
+## Kill children processes when exiting, former line would bring down X with it,
+## this is because the process group was part of X. Using pkill -P kills the
+## children of the process id
+# trap 'trap - SIGTERM; kill 0' INT TERM QUIT EXIT
+trap 'trap - TERM; pkill -TERM -P $$' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+$SCRIPT_DIR/panel_bar < "$PANEL_FIFO" | lemonbar -b -g x36 -o 0 -f Hack-9 -o -4 -f "FontAwesome-8" -B "#ff282828" -U "#f00" | sh &
+
+## Debugging:
+# ./panel_bar < "$PANEL_FIFO" | cat &
+# cat < "$PANEL_FIFO" &
+
+do_while() {
+	eval "$2"
+	while sleep "$1"; do
+		eval "$2"
+	done
+}
+
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+while true; do bspc subscribe report; sleep 1; done > "$PANEL_FIFO" &
+do_while 1 'printf "D%s\n" "$(date "+%a %d %b %T")"' > "$PANEL_FIFO" &
+do_while 1 'printf "BS%s\nBC%s\n" "$(cat /sys/class/power_supply/BAT0/status)" "$(cat /sys/class/power_supply/BAT0/capacity)"' > "$PANEL_FIFO" &
+do_while 5 'printf "X%s\n" "$(iwgetid -r)"' > "$PANEL_FIFO" &
+
+volume(){
+	amixer -M get Master | sed -n 's/^.*\[\([0-9]\+%\).*$/\1/p'
+}
+
+# alsactl monitor only pushes when there's a change (no initial)
+printf "V%s\n" "$(volume)" > "$PANEL_FIFO"
+
+# alsactl does weird line buffering, ugh
+stdbuf -oL -eL alsactl monitor |
+    while IFS= read -r line
+    do
+	printf "V%s\n" "$(volume)"
+    done > "$PANEL_FIFO" &
+
+# do_while 5 'printf "V%s\n" "$(volume)"' > "$PANEL_FIFO" &
+
+# TODO: Debug krypt-n/bar not updating without a short sleep between updates.
+# Short demo:
+#  echo "foo\nbar" | lemonbar -p
+# The above example results in a bar with just "foo"
+# This may apply to origin. Workaround for now is to create an override REFRESH command for the panel
+sleep 0.05;
+printf "%s\n" "Refresh" > "$PANEL_FIFO"
+
+wait
