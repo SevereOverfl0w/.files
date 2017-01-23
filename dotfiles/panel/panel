@@ -28,7 +28,7 @@ do_while() {
 	done
 }
 
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
+xtitle -sf 'T%s\n' > "$PANEL_FIFO" &
 while true; do bspc subscribe report; sleep 1; done > "$PANEL_FIFO" &
 do_while 1 'printf "D%s\n" "$(date "+%a %d %b %T")"' > "$PANEL_FIFO" &
 do_while 1 'printf "BS%s\nBC%s\n" "$(cat /sys/class/power_supply/BAT0/status)" "$(cat /sys/class/power_supply/BAT0/capacity)"' > "$PANEL_FIFO" &
