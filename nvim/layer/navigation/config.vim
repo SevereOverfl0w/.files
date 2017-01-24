@@ -1,7 +1,6 @@
 let ignore_dirs = ['talks', 'out', '.cljs_rhino_repl', 'target', '.idea']
 let ignore_file_exts = ['pack.js', 'min.css', 'min.js']
 
-" Denite
 if executable('rg')
   " Use rg for denite
   " https://github.com/BurntSushi/ripgrep
@@ -95,3 +94,8 @@ nnoremap <leader>df :Denite file_rec<CR>
 nnoremap <leader>dl :Denite line<CR>
 nnoremap <leader>db :Denite buffer<CR>
 nnoremap <leader>dh :Denite help<CR>
+
+" Ubiquitous mappings
+nnoremap <leader>j/ :Denite grep<CR>
+nnoremap <leader>jF :Denite file_rec<CR>
+nnoremap <leader>jb :Unite -quick-match buffer<CR>
