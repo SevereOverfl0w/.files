@@ -80,29 +80,37 @@ highlight! link uniteInputPrompt GruvboxPurpleBold
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_skipfoldedline = 0
 
-nnoremap <leader>juf :Unite -start-insert file_rec/async<CR>
-nnoremap <leader>juj :Unite -start-insert jump<CR>
-nnoremap <leader>jub :Unite -quick-match buffer<CR>
-nnoremap <leader>ju/ :Unite -start-insert grep:.<CR>
-nnoremap <leader>juC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
-nnoremap <leader>jum :Unite -smartcase mapping<CR>
-nnoremap <leader>jugs :Unite -start-insert -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
+nnoremap <leader>uF :Unite -start-insert file_rec/async<CR>
+nnoremap <leader>uj :Unite -start-insert jump<CR>
+nnoremap <leader>ub :Unite -quick-match buffer<CR>
+nnoremap <leader>u/ :Unite -start-insert grep:.<CR>
+nnoremap <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
+nnoremap <leader>um :Unite -smartcase mapping<CR>
+nnoremap <leader>ugs :Unite -start-insert -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
 " Unite-Interface
-nnoremap <leader>juir :UniteResume<CR>
-nnoremap <leader>juin :UniteNext<CR>
+nnoremap <leader>uir :UniteResume<CR>
+nnoremap <leader>uin :UniteNext<CR>
 
-nnoremap <leader>jd/ :Denite grep<CR>
-nnoremap <leader>jdf :Denite file_rec<CR>
-nnoremap <leader>jdl :Denite line<CR>
-nnoremap <leader>jdb :Denite buffer<CR>
-nnoremap <leader>jdh :Denite help<CR>
+nnoremap <leader>d/ :Denite grep<CR>
+nnoremap <leader>dF :Denite file_rec<CR>
+nnoremap <leader>dl :Denite line<CR>
+nnoremap <leader>db :Denite buffer<CR>
+nnoremap <leader>dh :Denite help<CR>
 
-map <leader>jjl <Plug>(easymotion-bd-jk)
+map <leader>dl <Plug>(easymotion-bd-jk)
 
 " Ubiquitous mappings
+"" Grepping
 nnoremap <leader>j/ :Denite grep<CR>
+nnoremap <leader>jC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
+"" File
 nnoremap <leader>jF :Denite file_rec<CR>
+"" Vim-things
 nnoremap <leader>jb :Unite -quick-match buffer<CR>
+nnoremap <leader>jj :Denite jump<CR>
+nnoremap <leader>jh :Denite help<CR>
+nnoremap <leader>jl :Denite line<CR>
+"" Within view
 map <leader>jk <Plug>(signjk-jk)
 map <leader>jw <Plug>(easymotion-bd-w)
 map <leader>jf <Plug>(easymotion-bd-f)
