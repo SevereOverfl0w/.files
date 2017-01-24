@@ -43,14 +43,6 @@ if executable('rg')
   endfor
 
   let g:unite_source_grep_recursive_opt = ''
-elseif executable('ag')
-  " Use ag for unite
-  " https://github.com/ggreer/the_silver_searcher
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-  \ '-i --vimgrep --hidden --ignore ' .
-  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
 endif
 
 " Preferably, this would always be done via ignore to the commands themselves,
@@ -78,7 +70,7 @@ nnoremap <leader>u/ :Unite -start-insert grep:.<CR>
 nnoremap <leader>uC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
 nnoremap <leader>um :Unite -smartcase mapping<CR>
 nnoremap <leader>ugs :Unite -start-insert -force-redraw file_rec/git:--modified:--others:--exclude-standard<CR>
-nnore" Unite-Interface
+" Unite-Interface
 nnoremap <leader>uir :UniteResume<CR>
 nnoremap <leader>uin :UniteNext<CR>
 
