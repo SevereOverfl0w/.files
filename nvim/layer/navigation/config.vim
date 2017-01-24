@@ -24,12 +24,7 @@ if executable('rg')
   call denite#custom#var('grep', 'separator', ['--'])
 
   call denite#custom#var('file_rec', 'command', ['rg', '--files'] + rg_ignore_args)
-endif
 
-call denite#custom#option('default', 'prompt', ' ❯')
-
-
-if executable('rg')
   " Use rg for unite
   " https://github.com/BurntSushi/ripgrep
   let g:unite_source_grep_command = 'rg'
@@ -63,6 +58,26 @@ let unite_ignore_globs =
 
 call unite#custom#source('file_rec/async,grep', 'ignore_globs', unite_ignore_globs)
 
+" command! Glog :Unite gitlog:all:30
+
+let fugitive_diff = {
+      \ 'description' : 'Run :Gvdiff against the file',
+      \ }
+
+function! fugitive_diff.func(candidate)
+  execute 'Gvdiff ' . a:candidate.word
+endfunction
+
+call denite#custom#option('default', 'prompt', ' ❯')
+call unite#custom#profile('default', 'context', {
+    \  'prompt': '❯ ',
+    \  'winheight': 10,
+    \   'direction': 'dynamicbottom',
+\ })
+
+highlight! link uniteInputPrompt GruvboxPurpleBold
+
+
 nnoremap <leader>uf :Unite -start-insert file_rec/async<CR>
 nnoremap <leader>uj :Unite -start-insert jump<CR>
 nnoremap <leader>ub :Unite -quick-match buffer<CR>
@@ -74,23 +89,6 @@ nnoremap <leader>ugs :Unite -start-insert -force-redraw file_rec/git:--modified:
 nnoremap <leader>uir :UniteResume<CR>
 nnoremap <leader>uin :UniteNext<CR>
 
-" command! Glog :Unite gitlog:all:30
-
-let fugitive_diff = {
-      \ 'description' : 'Run :Gvdiff against the file',
-      \ }
-
-function! fugitive_diff.func(candidate)
-  execute 'Gvdiff ' . a:candidate.word
-endfunction
-
-call unite#custom#profile('default', 'context', {
-    \  'prompt': '❯ ',
-    \  'winheight': 10,
-    \   'direction': 'dynamicbottom',
-\ })
-
-highlight! link uniteInputPrompt GruvboxPurpleBold
 
 nnoremap <leader>d/ :Denite grep<CR>
 nnoremap <leader>df :Denite file_rec<CR>
