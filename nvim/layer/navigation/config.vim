@@ -106,4 +106,3 @@ nnoremap <leader>jb :Unite -quick-match buffer<CR>
 map <leader>jk <Plug>(signjk-jk)
 map <leader>jw <Plug>(easymotion-bd-w)
 map <leader>jf <Plug>(easymotion-bd-f)
-
