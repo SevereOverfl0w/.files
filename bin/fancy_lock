@@ -5,7 +5,7 @@ I3ARGS="-c '#000000' -o '#191d0f' -w '#572020' -l '#ffffff' -e"
 RES="$(xrandr | grep 'current' | sed -E 's/.*current\s([0-9]+)\sx\s([0-9]+).*/\1x\2/')"
 
 rm $TMPBG
-ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -filter_complex "boxblur=5:1" -vframes 1 $TMPBG -loglevel quiet
+ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -filter_complex "boxblur=15:1,lutyuv=y=val*0.7" -vframes 1 $TMPBG
 
 killall -SIGUSR1 dunst # pause
 eval i3lock $I3ARGS -n -i $TMPBG
