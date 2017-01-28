@@ -1,4 +1,3 @@
-Plug 'junegunn/vim-pseudocl' | Plug 'junegunn/vim-oblique' " Improved /search
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-fold'
