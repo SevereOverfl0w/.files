@@ -1,6 +1,7 @@
 set colorcolumn=80
 set clipboard+=unnamedplus,unnamed
 
+set inccommand=split
 " Let me run off and modify files without write
 set hidden
 " Make hidden less "evil"
