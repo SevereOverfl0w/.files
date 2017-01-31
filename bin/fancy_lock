@@ -8,5 +8,5 @@ rm $TMPBG
 ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -filter_complex "boxblur=15:1,lutyuv=y=val*0.7" -vframes 1 $TMPBG
 
 killall -SIGUSR1 dunst # pause
-i3lock $I3ARGS -i $TMPBG
+eval i3lock -n $I3ARGS -i $TMPBG
 killall -SIGUSR2 dunst # resume
