@@ -104,12 +104,12 @@ map <leader>dl <Plug>(easymotion-bd-jk)
 nnoremap <leader>j/ :Denite grep<CR>
 nnoremap <leader>jC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
 "" File
-nnoremap <leader>jF :Denite file_rec<CR>
+nnoremap <leader>jF :Files<CR>
 "" Vim-things
-nnoremap <leader>jb :Unite -quick-match buffer<CR>
+nnoremap <leader>jb :Buffers<CR>
 nnoremap <leader>jj :Denite jump<CR>
-nnoremap <leader>jh :Denite help<CR>
-nnoremap <leader>jl :Denite line<CR>
+nnoremap <leader>jh :Helptags<CR>
+nnoremap <leader>jl :Lines<CR>
 "" Within view
 map <leader>jk <Plug>(signjk-jk)
 map <leader>jw <Plug>(easymotion-bd-w)
