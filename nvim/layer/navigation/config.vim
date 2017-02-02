@@ -47,6 +47,10 @@ if executable('rg')
   endfor
 endif
 
+let g:fzf_files_options =
+  \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+let g:fzf_gfiles_options = g:fzf_files_options
+
 " Preferably, this would always be done via ignore to the commands themselves,
 " but this isn't always possible (or I've not done it), this stands as a,
 " slower, last barrier
@@ -107,11 +111,11 @@ nnoremap <leader>dh :Denite help<CR>
 
 map <leader>dl <Plug>(easymotion-bd-jk)
 
-command! -bang -nargs=* Find call fzf#vim#grep(g:fzf_rg_command.' '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep(g:fzf_rg_command.' '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 " Ubiquitous mappings
 "" Grepping
-nnoremap <leader>j/ :execute ':Find '.input('Pattern: ')<CR>
-nnoremap <leader>jC :execute ':Find '.expand('<cword>')<CR>
+nnoremap <leader>j/ :execute ':Rg '.input('Pattern: ')<CR>
+nnoremap <leader>jC :execute ':Rg '.expand('<cword>')<CR>
 "" File
 nnoremap <leader>jF :Files<CR>
 nnoremap <leader>jG :GFiles?<CR>
