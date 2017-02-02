@@ -114,6 +114,7 @@ nnoremap <leader>j/ :execute ':Find '.input('Pattern: ')<CR>
 nnoremap <leader>jC :execute ':Find '.expand('<cword>')<CR>
 "" File
 nnoremap <leader>jF :Files<CR>
+nnoremap <leader>jG :GFiles?<CR>
 "" Vim-things
 nnoremap <leader>jb :Buffers<CR>
 nnoremap <leader>jj :Denite jump<CR>
