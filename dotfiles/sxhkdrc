@@ -28,3 +28,10 @@ super + Escape
 
 super + alt + m
 	mirrorscreen
+
+# function keys
+XF86AudioMute
+	amixer sset Master toggle
+
+XF86Audio{Lower,Raise}Volume
+	amixer set Master 5%{-,+}
