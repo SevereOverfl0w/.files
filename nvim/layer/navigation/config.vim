@@ -108,11 +108,9 @@ nnoremap <leader>dh :Denite help<CR>
 map <leader>dl <Plug>(easymotion-bd-jk)
 
 command! -bang -nargs=* Find call fzf#vim#grep(g:fzf_rg_command.' '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-command! -bang -nargs=0 FindInput call fzf#vim#grep(g:fzf_rg_command.' '.input('Pattern: ').'| tr -d "\017"', 1, <bang>0)
-
 " Ubiquitous mappings
 "" Grepping
-nnoremap <leader>j/ :FindInput<CR>
+nnoremap <leader>j/ :execute ':Find '.input('Pattern: ')<CR>
 nnoremap <leader>jC :execute ':Find '.expand('<cword>')<CR>
 "" File
 nnoremap <leader>jF :Files<CR>
