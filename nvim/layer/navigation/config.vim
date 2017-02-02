@@ -37,6 +37,14 @@ if executable('rg')
   endfor
 
   let g:unite_source_grep_recursive_opt = ''
+
+  let g:fzf_rg_command = 'rg --column --line-number --no-heading --fixed-strings --hidden --follow --color "always"'
+  for i in ignore_file_exts
+    let g:fzf_rg_command .= ' -g ''!*.'.i."'"
+  endfor
+  for i in ignore_dirs
+    let g:fzf_rg_command .= ' -g ''!./'.i.'/**/*'''
+  endfor
 endif
 
 " Preferably, this would always be done via ignore to the commands themselves,
@@ -99,10 +107,13 @@ nnoremap <leader>dh :Denite help<CR>
 
 map <leader>dl <Plug>(easymotion-bd-jk)
 
+command! -bang -nargs=* Find call fzf#vim#grep(g:fzf_rg_command.' '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=0 FindInput call fzf#vim#grep(g:fzf_rg_command.' '.input('Pattern: ').'| tr -d "\017"', 1, <bang>0)
+
 " Ubiquitous mappings
 "" Grepping
-nnoremap <leader>j/ :Denite grep<CR>
-nnoremap <leader>jC :Unite -start-insert -input=`expand('<cword>')` grep:.<CR>
+nnoremap <leader>j/ :FindInput<CR>
+nnoremap <leader>jC :execute ':Find '.expand('<cword>')<CR>
 "" File
 nnoremap <leader>jF :Files<CR>
 "" Vim-things
