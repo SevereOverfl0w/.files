@@ -35,3 +35,6 @@ XF86AudioMute
 
 XF86Audio{Lower,Raise}Volume
 	amixer set Master 5%{-,+}
+
+{_,shift +}XF86MonBrightness{Down,Up}
+	xbacklight {-15,"=10",+15,"=100"}
