@@ -8,10 +8,10 @@ super + Return
 
 # program launcher
 super + d
-	rofi -show run
+	rofi -show run -matching fuzzy
 
 super + shift + d
-	rofi -show drun
+	rofi -show drun -matching fuzzy
 
 super + x
 	~/.files/bin/fancy_lock
