@@ -7,4 +7,9 @@ let g:deoplete#sources.clojure = ['async_clj', 'ultisnips', 'file']
 let g:deoplete#ignore_sources = {}
 let g:deoplete#ignore_sources.clojure = ['buffer']
 
+augroup CompletionGroup
+  autocmd!
+  autocmd CompleteDone * pclose!
+augroup END
+
 command! AsyncCljDebug call deoplete#custom#set('async_clj', 'debug_enabled', 1) | call deoplete#enable_logging("DEBUG", "/tmp/deopletelog")
