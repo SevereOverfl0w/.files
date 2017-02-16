@@ -1,12 +1,29 @@
 #!/usr/bin/env sh
 
+forking=0
+
+while getopts "fn" opt; do
+    case "$opt" in
+    f)
+        forking=1
+        ;;
+    n)
+        forking=0
+        ;;
+    esac
+done
+
 TMPBG=/tmp/screen.png
 I3ARGS="-c '#000000' -o '#191d0f' -w '#572020' -l '#ffffff' -e"
 RES="$(xrandr | grep 'current' | sed -E 's/.*current\s([0-9]+)\sx\s([0-9]+).*/\1x\2/')"
 
 rm $TMPBG
-ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -filter_complex "boxblur=15:1,lutyuv=y=val*0.7" -vframes 1 $TMPBG
+ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -filter_complex "boxblur=15:1,lutyuv=y=val*0.7" -vframes 1 $TMPBG -loglevel quiet
 
-eval i3lock -n $I3ARGS -i $TMPBG
+if [ $forking -ne 1 ]; then
+    i3lockforking="-n"
+fi
+
+eval i3lock $i3lockforking $I3ARGS -i $TMPBG
 #killall -SIGUSR1 dunst # pause
 #killall -SIGUSR2 dunst # resume
