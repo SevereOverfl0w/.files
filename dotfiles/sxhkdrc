@@ -14,7 +14,9 @@ super + shift + d
 	rofi -show drun -matching fuzzy
 
 super + x
-	~/.files/bin/fancy_lock
+	killall -SIGUSR1 dunst; \
+	~/.files/bin/fancy_lock -n; \
+	killall -SIGUSR2 dunst
 
 super + p
 	passmenu
