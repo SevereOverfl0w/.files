@@ -31,8 +31,8 @@ super + alt + s
 super + Escape
 	pkill -USR1 -x sxhkd
 
-super + alt + m
-	mirrorscreen
+super + {alt,shift} + m
+	mirrorscreen {on,off}
 
 # function keys
 XF86AudioMute
