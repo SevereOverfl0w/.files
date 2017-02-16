@@ -40,3 +40,6 @@ XF86Audio{Lower,Raise}Volume
 
 {_,shift +}XF86MonBrightness{Down,Up}
 	xbacklight {-15,"=10",+15,"=100"}
+
+Print
+	maim -s -c 1,0,0,0.6 ~/Pictures/maim-$(date +%F-%T).png
