@@ -111,7 +111,7 @@ nnoremap <leader>dh :Denite help<CR>
 
 map <leader>dl <Plug>(easymotion-bd-jk)
 
-command! -bang -nargs=* Rg call fzf#vim#grep(g:fzf_rg_command.' '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep(g:fzf_rg_command.' '.shellescape(<q-args>).' | tr -d "\017"', 1, <bang>0)
 " Ubiquitous mappings
 "" Grepping
 nnoremap <leader>j/ :execute ':Rg '.input('Pattern: ')<CR>
@@ -121,9 +121,10 @@ nnoremap <leader>jF :Files<CR>
 nnoremap <leader>jG :GFiles?<CR>
 "" Vim-things
 nnoremap <leader>jb :Buffers<CR>
+nnoremap <leader>jB :Lines<CR>
 nnoremap <leader>jj :Denite jump<CR>
 nnoremap <leader>jh :Helptags<CR>
-nnoremap <leader>jl :Lines<CR>
+nnoremap <leader>jl :BLines<CR>
 "" Within view
 map <leader>jk <Plug>(signjk-jk)
 map <leader>jw <Plug>(easymotion-bd-w)
