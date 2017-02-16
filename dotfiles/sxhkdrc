@@ -13,6 +13,9 @@ super + d
 super + shift + d
 	rofi -show drun -matching fuzzy
 
+super + ctrl + d ; {f,u,c}
+	{firefox,uzbl-tabbed,chromium}
+
 super + x
 	killall -SIGUSR1 dunst; \
 	~/.files/bin/fancy_lock -n; \
