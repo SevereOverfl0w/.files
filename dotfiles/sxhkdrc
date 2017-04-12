@@ -36,10 +36,10 @@ super + {alt,shift} + m
 
 # function keys
 XF86AudioMute
-	amixer sset Master toggle
+	ponymix toggle
 
 XF86Audio{Lower,Raise}Volume
-	amixer set Master 5%{-,+}
+	ponymix {decrease,increase} 5%
 
 {_,shift +}XF86MonBrightness{Down,Up}
 	xbacklight {-15,"=10",+15,"=100"}
