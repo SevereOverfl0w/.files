@@ -17,6 +17,9 @@ set diffexpr=py3diff#diffexpr()
 " Insertion cursor is |
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
+" Prefer vertical splits
+set diffopt=filler,vertical
+
 let g:localrc_filename = ".local.vim"
 
 autocmd BufNewFile,BufRead init.vim
