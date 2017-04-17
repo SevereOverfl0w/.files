@@ -13,8 +13,12 @@ super + d
 super + shift + d
 	rofi -show drun -matching fuzzy
 
-super + ctrl + d ; {f,u,c,p,b,s}
-	{firefox,uzbl-tabbed,chromium,pavucontrol,blueman-manager,signal}
+super + ctrl + d ; {f,u,c,p,b,i,s}
+	{firefox,uzbl-tabbed,chromium,pavucontrol,blueman-manager,signal,slack-scaled}
+
+# https://github.com/baskerville/sxhkd/issues/86
+super + ctrl + s ; {1-9}
+	(sleep 0.09 && xdotool search --name 'Slack -.*' windowactivate key ctrl+{1-9}) &
 
 super + x
 	killall -SIGUSR1 dunst; \
