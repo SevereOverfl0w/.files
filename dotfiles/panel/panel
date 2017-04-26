@@ -38,14 +38,18 @@ volume(){
 	amixer -M get Master | sed -n 's/^.*\[\([0-9]\+%\).*$/\1/p'
 }
 
+muted(){
+	amixer -M get Master | sed -n 's/^.*\[\(on\|off\)\].*$/\1/p'
+}
+
 # alsactl monitor only pushes when there's a change (no initial)
-printf "V%s\n" "$(volume)" > "$PANEL_FIFO"
+printf "VL%s\nVM%s\n" "$(volume)" "$(muted)" > "$PANEL_FIFO"
 
 # alsactl does weird line buffering, ugh
 stdbuf -oL -eL alsactl monitor |
     while IFS= read -r line
     do
-	printf "V%s\n" "$(volume)"
+	printf "VL%s\nVM%s\n" "$(volume)" "$(muted)"
     done > "$PANEL_FIFO" &
 
 # do_while 5 'printf "V%s\n" "$(volume)"' > "$PANEL_FIFO" &

@@ -40,14 +40,26 @@ while read -r line; do
 				wifi="%{F$bright_green} ${line#?}%{F-}";
 			fi
 			;;
-		V*)
-			volume="%{F$neutral_aqua} ${line#?}%{F-}"
+		VM*)
+			volumeicon="%{F$neutral_aqua}"
+			case ${line#??} in
+				on)
+					volumeicon="$volumeicon"
+					;;
+				off)
+					volumeicon="$volumeicon"
+					;;
+			esac
+			volumeicon="$volumeicon%{F-}"
+			;;
+		VL*)
+			volume="%{F$neutral_aqua}${line#??}%{F-}"
 			;;
 		Refresh)
 			;;
 	esac
 
-	output="%{c}$title%{l}$workspaces%{r}$volume $wifi $battery_status $battery_capacity $clock"
+	output="%{c}$title%{l}$workspaces%{r}$volumeicon $volume $wifi $battery_status $battery_capacity $clock"
 	barout=""
 	for m in $NUM_MON; do
 		barout=$barout$output
