@@ -8,3 +8,5 @@ endfunction
 Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-pencil'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'vim-voom/VOoM'
+Plug 'plasticboy/vim-markdown' | Plug 'godlygeek/tabular'
