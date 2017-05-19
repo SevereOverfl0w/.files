@@ -50,3 +50,6 @@ XF86Audio{Lower,Raise}Volume
 
 Print
 	maim -s -c 1,0,0,0.6 ~/Pictures/maim-$(date +%F-%T).png
+
+XF86Audio{Next,Play,Prev}
+	mpc {next,toggle,prev}
