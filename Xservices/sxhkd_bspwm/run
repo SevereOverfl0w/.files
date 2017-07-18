@@ -1,3 +1,4 @@
 #!/bin/sh
 
+cd $HOME
 exec sxhkd -c ~/.config/sxhkd/sxhkdrc_bspwm
