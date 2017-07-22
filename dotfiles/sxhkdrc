@@ -13,8 +13,8 @@ super + d
 super + shift + d
 	rofi -show drun -matching fuzzy
 
-super + ctrl + d ; {f,u,c,p,b,i,s,q}
-	{firefox,uzbl-tabbed,chromium,pavucontrol,blueman-manager,signal,slack-scaled,qutebrowser}
+super + ctrl + d ; {f,u,c,p,b,i,s,q,z}
+	{firefox,uzbl-tabbed,chromium,pavucontrol,blueman-manager,signal,slack-scaled,qutebrowser,zeal}
 
 super + ctrl + s ; w
 	rofi -show window
