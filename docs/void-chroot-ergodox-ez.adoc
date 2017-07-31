@@ -1,0 +1,23 @@
+= Full Ergodox EZ build environment for Void Linux
+
+Create a chroot like so:
+
+[source]
+xbps-install -S -R https://repo.voidlinux.eu/current -r /tmp/foo base-voidstrap
+
+Then you can run.
+
+INFO: /tmp/foo here must be absolute. Limitation of xbps-uunshare.
+
+[source]
+xbps-uunshare /tmp/foo xbps-install -- -S gcc wget unzip dfu-programmer zip make teensy_loader_cli git avr-gcc avr-libc
+
+You can fetch qmk like so:
+
+[source]
+xbps-uunshare /tmp/foo git -- clone --depth 1 https://github.com/qmk/qmk_firmware.git
+
+Build with
+
+[source]
+xbps-uunshare /tmp/foo /bin/sh -- -c '(cd /qmk_firmware && make ergodox-ez-default-teensy)'
