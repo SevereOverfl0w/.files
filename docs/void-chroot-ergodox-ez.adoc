@@ -10,7 +10,7 @@ Then you can run.
 INFO: /tmp/foo here must be absolute. Limitation of xbps-uunshare.
 
 [source]
-xbps-uunshare /tmp/foo xbps-install -- -S gcc wget unzip dfu-programmer zip make teensy_loader_cli git avr-gcc avr-libc
+xbps-uunshare /tmp/foo xbps-install -- -S gcc wget unzip dfu-programmer zip make teensy_loader_cli avr-gcc avr-libc
 
 You can fetch qmk like so:
 
