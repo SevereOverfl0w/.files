@@ -31,6 +31,9 @@ super + x
 super + p
 	passmenu
 
+super + shift + p
+	notify-send "Pokoy" "$(pokoy)"
+
 super + alt + s
 	teiler
 
