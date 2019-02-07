@@ -168,7 +168,7 @@ call s:add('tpope/vim-dispatch')
 " This provides dispatch with a neovim :terminal based
 " interface. This means that `:Start` will open a terminal
 " in a tab.
-call s:add('radenling/vim-dispatch-neovim')
+" call s:add('radenling/vim-dispatch-neovim')
 
 " This plugin extends the functionality of `.`.  I added it
 " initially for support with >) from vim-sexp, but
