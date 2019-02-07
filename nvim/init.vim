@@ -517,6 +517,9 @@ let g:grepper.simple_prompt = 1
 nmap <leader>G <plug>(GrepperOperator)
 xmap <leader>G <plug>(GrepperOperator)
 noremap <leader>/ :<C-u>Grepper<CR>
+
+" A quick command for grepping my wiki
+noremap <leader>w/ :<C-u>Grepper -dir ~/doc/<CR>
 " }}}
 
 " Quickfix {{{
@@ -574,6 +577,7 @@ let g:fzf_colors =
   \ 'header': ['fg', 'Comment'] }
 " jf = jump file
 nnoremap <Leader>jf :<C-U>FZF<CR>
+nnoremap <leader>wf :<C-U>FZF ~/doc<CR>
 " }}}
 
 " vimrc {{{
@@ -632,6 +636,110 @@ call s:add('vimwiki/vimwiki')
 let g:nv_search_paths = ['~/vimwiki']
 let g:nv_default_extension = '.wiki'
 call s:add('Alok/notational-fzf-vim')
+" }}}
+
+" Wiki 2.0 {{{
+let g:org_agenda_files = ['~/doc/*.org']
+call s:add('https://gitlab.com/dbeniamine/todo.txt-vim.git')
+call s:add('junegunn/goyo.vim')
+
+" Quickly jump to the root of the wiki in a tab
+nnoremap <leader>wW :<C-U>tabnew \| tcd ~/doc/<CR>
+
+" TODO: Consider this: https://github.com/junegunn/goyo.vim/issues/36#issuecomment-48087863
+
+let g:wiki_goyo = 1
+
+function! s:toggle_wiki_goyo()
+  let g:wiki_goyo = !g:wiki_goyo
+  echo 'Wiki Goyo is ' . (g:wiki_goyo ? 'on' : 'off') . '.'
+  if exists('#goyo') && !g:wiki_goyo
+    let bufnr = bufnr('%')
+    Goyo!
+    execute 'b '.bufnr
+  endif
+endf
+
+function! s:auto_goyo()
+  if exists('#goyo')
+    let bufnr = bufnr('%')
+    Goyo!
+    execute 'b '.bufnr
+  endif
+endfunction
+
+nnoremap <expr> <leader>wG <SID>toggle_wiki_goyo()
+nnoremap <leader>tG : ~/doc/todo.txt<Home>vimgrep<space>
+nnoremap <leader>tj :<C-U>10split ~/doc/todo.txt<CR>
+
+augroup GoyoWiki
+  autocmd!
+  " Specify width (80) so that it is always enabled and
+  " never toggled
+  autocmd BufNewFile,BufRead * call s:auto_goyo()
+  autocmd BufNewFile,BufRead ~/doc/*.md if g:wiki_goyo | Goyo 80 | endif
+  autocmd User GoyoEnter nested setlocal linebreak
+  " autocmd BufNewFile,BufRead ~/doc/**/*.md Goyo
+augroup END
+
+" Improve markdown support
+call s:add('plasticboy/vim-markdown')
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_folding_style_pythonic = 1
+
+map <leader>to  <Plug>(operator-add-todo)
+map <leader>tO  <Plug>(operator-prompt-todo)
+
+nnoremap <leader>tA :<C-U>AddTodo<space>
+
+command! -nargs=* AddTodo call s:AppendToFile(expand('~/doc/todo.txt'), [join([<q-args>], ' ')])
+
+call operator#user#define('add-todo', 'Add_todo')
+call operator#user#define('prompt-todo', 'Prompt_todo')
+
+function! Add_todo(motion_wise)
+  let v = operator#user#visual_command_from_wise_name(a:motion_wise)
+
+  let [original_U_content, original_U_type] = [@", getregtype('"')]
+    execute 'normal!' '`['.v.'`]y'
+    let keyword = @"
+  call setreg('"', original_U_content, original_U_type)
+
+  call s:AppendToFile(expand('~/doc/todo.txt'), [keyword . ''])
+endfunction
+
+function! Prompt_todo(motion_wise)
+  let v = operator#user#visual_command_from_wise_name(a:motion_wise)
+
+  let [original_U_content, original_U_type] = [@", getregtype('"')]
+    execute 'normal!' '`['.v.'`]y'
+    let keyword = @"
+  call setreg('"', original_U_content, original_U_type)
+
+  call feedkeys(":\<C-U>AddTodo " . keyword)
+endfunction
+
+function! s:AppendToFile(file, lines)
+    call writefile(readfile(a:file)+a:lines, a:file)
+endfunction
+
+" Stolen from https://stackoverflow.com/a/4294176
+" Affects more than the wiki.  TBD where this will live.
+function! s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
 " }}}
 
 " Dein outro {{{
