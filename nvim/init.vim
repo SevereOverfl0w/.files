@@ -630,14 +630,6 @@ let &undodir = myUndoDir
 set undofile
 " }}}
 
-" Wiki {{{
-let g:vimwiki_folding = 'expr:quick'
-call s:add('vimwiki/vimwiki')
-let g:nv_search_paths = ['~/vimwiki']
-let g:nv_default_extension = '.wiki'
-call s:add('Alok/notational-fzf-vim')
-" }}}
-
 " Wiki 2.0 {{{
 let g:org_agenda_files = ['~/doc/*.org']
 call s:add('https://gitlab.com/dbeniamine/todo.txt-vim.git')
