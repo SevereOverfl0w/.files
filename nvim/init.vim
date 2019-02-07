@@ -510,6 +510,7 @@ let g:grepper.tools = ['rg', 'ag', 'git', 'grep']
 "   crashing vim
 let g:grepper.rg = get(g:grepper, 'rg', {})
 let g:grepper.rg.grepprg = "rg -H -L --hidden -S -g '!.git' -g '!.stversions' --max-columns=150 --no-heading --vimgrep"
+let g:grepper.simple_prompt = 1
 
 " An operator for grepping. Allows me to do `<leader>GiW` or
 " `<leader>Gie`, etc. to grep for a text object.
