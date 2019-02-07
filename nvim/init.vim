@@ -631,7 +631,6 @@ set undofile
 " }}}
 
 " Wiki 2.0 {{{
-let g:org_agenda_files = ['~/doc/*.org']
 call s:add('https://gitlab.com/dbeniamine/todo.txt-vim.git')
 call s:add('junegunn/goyo.vim')
 
