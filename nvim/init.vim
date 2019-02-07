@@ -119,6 +119,8 @@ function g:hook_source.colors_paramount()
   augroup END
 endf
 
+call s:add('ap/vim-css-color')
+
 " vim-sneak {{{
 " sneak provides alternatives to f,F which:
 " - Work across lines
