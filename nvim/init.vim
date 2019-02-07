@@ -93,7 +93,30 @@ set inccommand=split
 call s:add('sonph/onehalf', {'rtp': 'vim/'})
 
 function g:hook_source.onehalf()
-  colorscheme onehalflight
+  " colorscheme onehalflight
+endf
+
+call s:add('Lokaltog/vim-monotone')
+call s:add('owickstrom/vim-colors-paramount')
+
+" function g:hook_source.monotone()
+"   colorscheme monotone
+" endf
+
+function g:hook_source.colors_paramount()
+  set background=light
+  colorscheme paramount
+
+  augroup paramount_color
+    autocmd!
+
+    " Override paramount's removal of color from the
+    " GitGutter signs
+    autocmd ColorScheme * highlight link GitGutterAdd          DiffAdd
+    autocmd ColorScheme * highlight link GitGutterChange       DiffChange
+    autocmd ColorScheme * highlight link GitGutterDelete       DiffDelete
+    autocmd ColorScheme * highlight link GitGutterChangeDelete GitGutterChange
+  augroup END
 endf
 
 " vim-sneak {{{
