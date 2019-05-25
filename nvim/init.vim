@@ -268,7 +268,7 @@ call s:add('~/src/github.com/clojure-vim/vim-jack-in')
 
 function! g:hook_source.jack_in()
 let g:jack_in_injections['cider/piggieback'] =
-    \  {'version': '0.3.10',
+    \  {'version': '0.4.1',
     \   'middleware': 'cider.piggieback/wrap-cljs-repl'}
 endf
 
