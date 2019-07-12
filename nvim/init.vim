@@ -463,6 +463,12 @@ call s:add('junegunn/gv.vim')
 nnoremap <Leader>gv :GV<CR>
 nnoremap <Leader>gLL :GV!<CR>
 " }}}
+
+" Github Code Review {{{
+call s:add('junkblocker/patchreview-vim')
+call s:add('codegram/vim-codereview')
+call s:add('AGhost-7/critiq.vim')
+" }}}
 " }}}
 
 " Completion {{{
