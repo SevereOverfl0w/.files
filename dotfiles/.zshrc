@@ -16,11 +16,16 @@ SAVEHIST=10000
 zplug petervanderdoes/gitflow-avh, hook-build: "make install prefix=$HOME"
 zplug petervanderdoes/git-flow-completion
 zplug mafredri/zsh-async
-zplug sindresorhus/pure
+# zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug zsh-users/zsh-history-substring-search
 zplug zsh-users/zsh-autosuggestions
+zplug changyuheng/zsh-interactive-cd, use:zsh-interactive-cd.plugin.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme, as:theme
 
 zplug load
+
+source ~/.purepower
 
 ## Arrow Keys ###########################################
 # OPTION 1: for most systems
