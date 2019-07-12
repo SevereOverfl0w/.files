@@ -142,6 +142,10 @@ call s:add('kana/vim-operator-user')
 " (fugitive, rhubarb, jack-in)
 call s:add('tpope/vim-dispatch')
 
+" seed the dispatch compilers so that later groups can set
+" keys in it
+let g:dispatch_compilers = {}
+
 " This provides dispatch with a neovim :terminal based
 " interface. This means that `:Start` will open a terminal
 " in a tab.
