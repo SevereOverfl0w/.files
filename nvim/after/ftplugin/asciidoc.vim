@@ -51,3 +51,4 @@ setlocal foldmethod=expr
 setlocal foldtext=AsciidocFoldText()
 abbrev <buffer> wauthor Dominic Monroe <dominic@juxt.pro>
 
+setlocal lbr
