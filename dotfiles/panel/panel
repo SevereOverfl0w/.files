@@ -14,7 +14,7 @@ trap 'trap - TERM; pkill -TERM -P $$' INT TERM QUIT EXIT
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
-$SCRIPT_DIR/panel_bar < "$PANEL_FIFO" | lemonbar -b -g x36 -o 0 -f Hack-9 -o -4 -f "FontAwesome-8" -B "#ff282828" -U "#f00" | sh &
+$SCRIPT_DIR/panel_bar < "$PANEL_FIFO" | lemonbar -b -g x40 -o 0 -f monospace-12 -o -4 -f "FontAwesome-12" -B "$(xgetresource panel.background)" -U "#f00" -F "$(xgetresource panel.foreground)" | sh &
 
 ## Debugging:
 # ./panel_bar < "$PANEL_FIFO" | cat &

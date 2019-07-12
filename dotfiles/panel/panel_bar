@@ -2,10 +2,17 @@
 
 NUM_MON=$(bspc query -M | wc -l)
 
+bright_yellow="$(xgetresource panel.color11)"
+bright_red="$(xgetresource panel.color1)"
+bright_green="$(xgetresource panel.color10)"
+bright_orange="$(xgetresource panel.orange)"
+neutral_aqua="$(xgetresource panel.color14)"
+
 while read -r line; do
+	old_output="$output"
 	case $line in
 		D*)
-			clock="%{F$bright_orange}${line#?}%{F-}"
+			clock="${line#?}"
 			;;
 		T*)
 			title="${line#?}"
@@ -56,6 +63,7 @@ while read -r line; do
 			volume="%{F$neutral_aqua}${line#??}%{F-}"
 			;;
 		Refresh)
+			old_output=""
 			;;
 	esac
 
@@ -64,5 +72,7 @@ while read -r line; do
 	for m in $NUM_MON; do
 		barout=$barout$output
 	done
-	printf "%s\n" "$barout"
+	if [ "$old_output" != "$output" ]; then
+		printf "%s\n" "$barout"
+	fi;
 done
