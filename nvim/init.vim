@@ -715,6 +715,8 @@ augroup END
 
 " }}}
 
+call s:add('lepture/vim-jinja')
+
 " Dein outro {{{
 call s:really_add()
 
