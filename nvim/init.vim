@@ -609,46 +609,12 @@ set undofile
 
 " Wiki 2.0 {{{
 call s:add('https://gitlab.com/dbeniamine/todo.txt-vim.git')
-call s:add('junegunn/goyo.vim')
 
 " Quickly jump to the root of the wiki in a tab
 nnoremap <leader>wW :<C-U>tabnew \| tcd ~/doc/<CR>
 
-" TODO: Consider this: https://github.com/junegunn/goyo.vim/issues/36#issuecomment-48087863
-
-let g:wiki_goyo = 1
-
-function! s:toggle_wiki_goyo()
-  let g:wiki_goyo = !g:wiki_goyo
-  echo 'Wiki Goyo is ' . (g:wiki_goyo ? 'on' : 'off') . '.'
-  if exists('#goyo') && !g:wiki_goyo
-    let bufnr = bufnr('%')
-    Goyo!
-    execute 'b '.bufnr
-  endif
-endf
-
-function! s:auto_goyo()
-  if exists('#goyo')
-    let bufnr = bufnr('%')
-    Goyo!
-    execute 'b '.bufnr
-  endif
-endfunction
-
-nnoremap <expr> <leader>wG <SID>toggle_wiki_goyo()
 nnoremap <leader>tG : ~/doc/todo.txt<Home>vimgrep<space>
 nnoremap <leader>tj :<C-U>10split ~/doc/todo.txt<CR>
-
-augroup GoyoWiki
-  autocmd!
-  " Specify width (80) so that it is always enabled and
-  " never toggled
-  autocmd BufNewFile,BufRead * call s:auto_goyo()
-  autocmd BufNewFile,BufRead ~/doc/*.md if g:wiki_goyo | Goyo 80 | endif
-  autocmd User GoyoEnter nested setlocal linebreak
-  " autocmd BufNewFile,BufRead ~/doc/**/*.md Goyo
-augroup END
 
 " Improve markdown support
 call s:add('plasticboy/vim-markdown')
