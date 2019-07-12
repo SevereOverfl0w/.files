@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+trap 'cleanup' EXIT
+
+socket="$(mktemp -u -p '' kitty_socket.XXXXXXXXX)"
+
+cleanup(){
+  rm "$socket"
+}
+
+GLFW_IM_MODULE=none kitty --listen-on "unix:${socket}" "$@" > /tmp/log 2> /tmp/log 

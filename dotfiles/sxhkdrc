@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	roxterm
+	kitty_opts
 
 # program launcher
 super + d
