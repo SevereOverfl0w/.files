@@ -14,9 +14,23 @@ bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors true
 bspc config pointer_follows_focus false
 
-bspc config focused_border_color "#B8BB26"
+bspc config merge_overlapping_monitors false
+
+# bspc config focused_border_color "#B8BB26"
+bspc config focused_border_color "$(xgetresource window.colorBorder)"
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
+bspc config external_rules_command ~/bin/bspwm_external_rules
+
 bspc rule -a mplayer2 state=floating
+bspc rule -a mpv state=floating
 bspc rule -a Screenkey manage=off
+bspc rule -a rofi focus=on
+bspc rule -a Pinentry manage=off focus=on state=floating
+bspc rule -a Slack desktop='^10'
+
+# https://github.com/baskerville/bspwm/issues/551
+bspc rule -a Emacs state=tiled
+
+# sv restart ~/.files/Xservices/panel
