@@ -93,7 +93,7 @@ set inccommand=split
 call s:add('sonph/onehalf', {'rtp': 'vim/'})
 
 function g:hook_source.onehalf()
-  colorscheme onehalfdark
+  colorscheme onehalflight
 endf
 
 call s:add('ap/vim-css-color')
