@@ -578,7 +578,7 @@ call s:add('/usr/share/vim/vimfiles')
 
 " `rg` respects gitignore anyway, so use a version of the
 " default command without the direct git integration.
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --follow -g '!.git' || ag -l -g \"\" || find ."
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --follow -g '!.git' -g '!.stversions' || ag -l -g \"\" || find ."
 
 " The default colors look wrong
 let g:fzf_colors =
