@@ -1,5 +1,4 @@
 " vim:fdm=marker:tw=58
-" source ~/src/github.com/SevereOverfl0w/vim-zeno/zeno.vim
 
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
