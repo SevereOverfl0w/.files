@@ -272,6 +272,10 @@ function! g:hook_source.jack_in()
 let g:jack_in_injections['cider/piggieback'] =
     \  {'version': '0.4.1',
     \   'middleware': 'cider.piggieback/wrap-cljs-repl'}
+
+let g:jack_in_injections['com.gfredericks/debug-repl'] =
+      \ {'version': '0.0.11-SNAPSHOT',
+      \  'middleware': 'com.gfredericks.debug-repl/wrap-debug-repl'}
 endf
 
 " async-clj-omni is an auto-completion plugin for
