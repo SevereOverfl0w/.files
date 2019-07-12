@@ -256,6 +256,8 @@ call s:add('tpope/vim-sexp-mappings-for-regular-people')
 " FiREPLace is a plugin for integrating with a Clojure
 " nREPL.
 call s:add('tpope/vim-fireplace')
+" Disable auto-nashorn
+let g:fireplace_cljs_repl = ''
 
 " REPLant is a plugin for enhancing your REPL experience
 " with vim I develop this, so I've selected my src dir.
