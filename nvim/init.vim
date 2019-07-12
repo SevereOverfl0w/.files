@@ -280,8 +280,25 @@ endf
 
 " async-clj-omni is an auto-completion plugin for
 " deoplete.
-call s:add('clojure-vim/async-clj-omni',
-      \ {'depends': ['deoplete.nvim']})
+
+" call s:add('clojure-vim/async-clj-omni',
+"       \ {'depends': ['deoplete.nvim']})
+
+" call s:add('~/src/github.com/clojure-vim/async-clj-omni',
+"       \ {'depends': ['deoplete.nvim']})
+
+
+" call s:add('~/src/github.com/clojure-vim/async-clj-omni',
+"       \ {'depends': ['asyncomplete.vim']})
+
+" https://github.com/prabirshrestha/asyncomplete.vim/issues/117
+" inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
+
+
+" augroup ClojureLint
+" autocmd!
+" autocmd BufWritePost *.clj silent Make
+" augroup END
 " }}}
 
 " Terraform {{{
