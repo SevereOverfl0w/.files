@@ -472,27 +472,42 @@ call s:add('AGhost-7/critiq.vim')
 " }}}
 
 " Completion {{{
-" Deoplete provides asyncronous as-you-type completions
-call s:add('Shougo/deoplete.nvim')
 
-" It isn't enabled by default, so start it up
-let g:deoplete#enable_at_startup = 1
+" " Deoplete provides asyncronous as-you-type completions
+" call s:add('Shougo/deoplete.nvim')
+"
+" " It isn't enabled by default, so start it up
+" let g:deoplete#enable_at_startup = 1
+"
+" " I set some deoplete patterns later on for filetypes
+" let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+" let g:deoplete#omni_patterns = {}
 
-" I set some deoplete patterns later on for filetypes
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
-let g:deoplete#omni_patterns = {}
-')
+" call s:add('prabirshrestha/asyncomplete.vim')
+"
+" au User asyncomplete_setup call asyncomplete#register_source({
+"     \ 'name': 'fireplace',
+"     \ 'whitelist': ['clojure'],
+"     \ 'completor': function('async_clj_omni#sources#complete'),
+"     \ })
+"
+" let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,preview,noinsert,noselect
+
+call s:add('lifepillar/vim-mucomplete')
+let g:mucomplete#enable_auto_at_startup = 1
+
 " Terraform {{{
 " TODO: This doesn't seem to cover all possible cases where
 " terraform can do completions.
-function! g:hook_source.deoplete()
-  call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'terraform': '[^ *\t"{=$]\w*',
-      \})
-endf
-
+" function! g:hook_source.deoplete()
+"   call deoplete#custom#var('omni', 'input_patterns', {
+"       \ 'terraform': '[^ *\t"{=$]\w*',
+"       \})
+" endf
 " }}}
+
 " }}}
 
 " Grepping {{{
