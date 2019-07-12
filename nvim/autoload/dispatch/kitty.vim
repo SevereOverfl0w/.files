@@ -5,7 +5,6 @@ endif
 let g:autoloaded_dispatch_kitty = 1
 
 function! dispatch#kitty#handle(request) abort
-  echom string(a:request)
 	if $KITTY_LISTEN_ON == ''
 	  return 0
 	endif
@@ -36,7 +35,6 @@ function! dispatch#kitty#handle(request) abort
 	  let kitty .= ' --keep-focus'
 	endif
 
-	echom kitty.' '.&shellcmdflag.' '.shellescape(command).redir
 	call system(kitty.' '.&shell.' '.&shellcmdflag.' '.shellescape(command).redir)
 	return !v:shell_error
 endfunction
