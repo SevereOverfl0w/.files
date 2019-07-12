@@ -2,7 +2,6 @@
 
 PANEL_FIFO=/tmp/panel-fifo
 
-echo "$$" > /tmp/foo
 export SCRIPT_DIR=$(dirname $0)
 . $SCRIPT_DIR/panel_vars
 
