@@ -418,6 +418,8 @@ endf
 call s:add('tpope/vim-fugitive')
 " The official integration between fugitive and github
 call s:add('tpope/vim-rhubarb')
+" Integration with gitlab
+call s:add('shumphrey/fugitive-gitlab.vim')
 
 " This list is butched from:
 " https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/cgciltz/
