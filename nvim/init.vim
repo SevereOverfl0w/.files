@@ -625,16 +625,11 @@ cabbr <expr> %% expand('%:p:h')
 abbr parition partition
 
 " Buffer switching {{{
+call s:add('junegunn/fzf.vim')
 
-" In the past I've used fzf.vim for switching buffers using
-" a fuzzy matcher.  The best time was with unite's
-" quick-switch mode.  Bufstop provides a feature like that.
-" The "fallback" is to press a number followed by <CR>, not
-" quite as fast, but still good.
-call s:add('mihaifm/bufstop')
-
-map <leader>b :BufstopFast<CR>
-map <leader>B :ls<CR>:b
+noremap <leader>b <Cmd>Buffers<cr>
+noremap <leader>B <Cmd>BLines<cr>
+noremap <leader>L <Cmd>Lines<cr>
 " }}}
 
 " Line navigation {{{ 
