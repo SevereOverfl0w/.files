@@ -546,6 +546,7 @@ noremap <leader>w/ :<C-u>Grepper -dir ~/doc/<CR>
 " The quickfix is so important, especially with vim-grepper.
 " vim-qf is romainl's collection of hacks for the quickfix.
 call s:add('romainl/vim-qf')
+call s:add('yssl/QFEnter')
 
 " Wrapping version of :cnext and :cprev, for qf and location
 " list.
