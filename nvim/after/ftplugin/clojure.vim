@@ -21,7 +21,7 @@ function! s:FindDevNamespace()
   endif
 endfunction
 nnoremap <buffer> <localleader>go :call fireplace#echo_session_eval('(go)', {'ns': <SID>FindDevNamespace(), 'session': 0})<CR>
-"nnoremap <buffer> <localleader>rs :call fireplace#echo_session_eval('(reset)', {'ns': <SID>FindDevNamespace(), 'session': 0})<CR>
+nnoremap <buffer> <localleader>drs :call fireplace#echo_session_eval('(reset)', {'ns': <SID>FindDevNamespace(), 'session': 0})<CR>
 "nnoremap <buffer> <localleader>ra :call fireplace#echo_session_eval('(reset-all)', {'ns': <SID>FindDevNamespace(), 'session': 0})<CR>
 "function! s:CiderRefresh()
 "  " TODO: Collect reloading key from all messages, just in case
