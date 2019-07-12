@@ -393,10 +393,6 @@ function g:hook_add.gitgutter()
     let g:gitgutter_grep = 'grep'
   endif
 
-  " Configure gitgutter to ignore whitespace when
-  " considering to show columns.
-  let g:gitgutter_diff_args = '-w'
-
   " Mapping for jumping between hunks
   nmap ]h <Plug>GitGutterNextHunk
   nmap [h <Plug>GitGutterPrevHunk
