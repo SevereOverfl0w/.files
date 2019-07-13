@@ -40,9 +40,6 @@ function! dispatch#kitty#handle(request) abort
 endfunction
 
 function! dispatch#kitty#activate(pid) abort
-  echom 'Focused '.a:pid
-endfunction
-
-function! dispatch#kitty#activate(pid) abort
-  return 0
+  echom system('kitty @ focus-tab --match pid:'.a:pid)
+  return !v:shell_error
 endfunction
