@@ -6,7 +6,7 @@
 
 " The replace operator allows you to replace an object with
 " the value in the register (clipboard).
-call dein#add('kana/vim-operator-replace')
+call my_plugin#add('kana/vim-operator-replace')
 
 function! Hook_add_operator_replace()
   map <Leader>or <Plug>(operator-replace)
@@ -17,7 +17,7 @@ endf
 " but it shines on it's own.
 
 " This is a dependency of many textobjs for defining themselves.
-call dein#add('kana/vim-textobj-user')
+call my_plugin#add('kana/vim-textobj-user')
 
 " This adds a text object which refers to the whole buffer.  Pairs well with
 " fireplace's `cp` motion, in place of doing `%:Eval`, and also with `=`.
@@ -26,7 +26,7 @@ call dein#add('kana/vim-textobj-user')
 " with vim-sexp though, so remap to aE and Ie.  I don't
 " expected to use this mapping too much.
 "
-call dein#add('kana/vim-textobj-entire',
+call my_plugin#add('kana/vim-textobj-entire',
       \ {'depends': ['vim-textobj-user']})
 
 function! Hook_add_textobj_entire()
@@ -39,9 +39,9 @@ endf
 
 " Adds a text object which refers to the current line.
 " Binds to `al` and `il` by default.
-call dein#add('kana/vim-textobj-line')
+call my_plugin#add('kana/vim-textobj-line')
 
 " Wordmotion creates word definitions which surpass the
 " default ones in utility.  The readme does a better job of
 " explaining than I can.
-call dein#add('chaoren/vim-wordmotion')
+call my_plugin#add('chaoren/vim-wordmotion')

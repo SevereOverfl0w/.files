@@ -1,6 +1,6 @@
 " vim-terraform "fixes" syntax detection for *.tf to be
 " terraform files
-call dein#add('hashivim/vim-terraform')
+call my_plugin#add('hashivim/vim-terraform')
 
 " Provides:
 " - Contextual completions with deoplete support
@@ -8,7 +8,7 @@ call dein#add('hashivim/vim-terraform')
 " - Tagbar integration
 " - Keybindings for docs
 " For now I am mostly using the completion though.
-call dein#add('juliosueiras/vim-terraform-completion')
+call my_plugin#add('juliosueiras/vim-terraform-completion')
 
 function! Hook_add_terraform_completion()
   " Disable slow registry search for auto-completion

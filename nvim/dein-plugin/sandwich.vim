@@ -1,6 +1,6 @@
 " vim-sandwich looks at vim-surround and says "ha, that is
 " no true operator", and fixes that.
-call dein#add('machakann/vim-sandwich')
+call my_plugin#add('machakann/vim-sandwich')
 
 function! Hook_add_sandwich()
   " The default key mappings collide with s from vim-sneak,
@@ -36,7 +36,7 @@ function! Hook_post_source_sandwich()
   "   integration with vim-plug
   " - In adoc files kbd:[] macro available
   let s:local_recipes = [
-        \ {'__filetype__': 'vim', 'buns': ["dein#add('", "')"], 'input': [ 'pg' ], 'filetype': ['vim']},
+        \ {'__filetype__': 'vim', 'buns': ["my_plugin#add('", "')"], 'input': [ 'pg' ], 'filetype': ['vim']},
         \ {'__filetype__': 'vim', 'buns': ["zeno#github('", "')"], 'input': [ 'zn' ], 'filetype': ['vim']},
         \ {'__filetype__': 'asciidoc', 'buns': ["kbd:[", "]"], 'input': [ 'kbd' ], 'filetype': ['asciidoc']}]
   " Adding custom recipes involves copying the default

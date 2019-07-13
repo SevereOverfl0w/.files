@@ -1,4 +1,4 @@
-call dein#add('https://gitlab.com/dbeniamine/todo.txt-vim.git')
+call my_plugin#add('https://gitlab.com/dbeniamine/todo.txt-vim.git')
 
 " Quickly jump to the root of the wiki in a tab
 nnoremap <leader>wW :<C-U>tabnew \| tcd ~/doc/<CR>

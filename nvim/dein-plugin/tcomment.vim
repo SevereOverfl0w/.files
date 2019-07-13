@@ -4,7 +4,7 @@
 " change that, caw.vim does, but doesn't work well with
 " motions.
 
-call dein#add('tomtom/tcomment_vim')
+call my_plugin#add('tomtom/tcomment_vim')
 
 function! Hook_add_tcomment()
   " I really don't like the insert-mode mappings it creates:

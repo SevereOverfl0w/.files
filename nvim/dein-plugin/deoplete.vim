@@ -3,7 +3,7 @@ if exists('g:my_plugin_loaded_deoplete')
 endif
 
 " Deoplete provides asyncronous as-you-type completions
-call dein#add('Shougo/deoplete.nvim')
+call my_plugin#add('Shougo/deoplete.nvim')
 
 " It isn't enabled by default, so start it up
 let g:deoplete#enable_at_startup = 1

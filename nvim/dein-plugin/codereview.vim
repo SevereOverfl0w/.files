@@ -1,3 +1,3 @@
-call dein#add('junkblocker/patchreview-vim')
-call dein#add('codegram/vim-codereview')
-call dein#add('AGhost-7/critiq.vim')
+call my_plugin#add('junkblocker/patchreview-vim')
+call my_plugin#add('codegram/vim-codereview')
+call my_plugin#add('AGhost-7/critiq.vim')

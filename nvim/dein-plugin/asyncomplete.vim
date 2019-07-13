@@ -2,7 +2,7 @@ if exists('g:my_plugin_loaded_asyncomplete')
   finish
 endif
 
-call dein#add('prabirshrestha/asyncomplete.vim')
+call my_plugin#add('prabirshrestha/asyncomplete.vim')
 
 au User asyncomplete_setup call asyncomplete#register_source({
     \ 'name': 'fireplace',

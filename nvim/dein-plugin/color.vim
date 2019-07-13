@@ -1,4 +1,4 @@
-call dein#add('sonph/onehalf', {'rtp': 'vim/'})
+call my_plugin#add('sonph/onehalf', {'rtp': 'vim/'})
 
 function! Hook_post_source_onehalf()
   colorscheme onehalflight

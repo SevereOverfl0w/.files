@@ -57,3 +57,17 @@ function my_plugin#run()
   runtime! dein-plugin/*.vim
   call my_plugin#end()
 endf
+
+function my_plugin#add(name, ...)
+  let dev_overrides = get(g:, 'dev_overrides', {})
+  let name = a:name
+  if has_key(dev_overrides, a:name)
+    let dev_override = dev_overrides[a:name]
+    if dev_override ==# '~/src'
+      let name = '~/src/github.com/'.name
+    else
+      let name = dev_override
+    endif
+  endif
+  call call('dein#add', [name] + a:000)
+endf

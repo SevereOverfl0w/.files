@@ -5,9 +5,9 @@ endif
 " This loads fzf from my filesystem.  I could perhaps
 " have some check for existence, and fall back otherwise,
 " but I don't want to.
-" call dein#add('junegunn/fzf')
-call dein#add('/usr/share/vim/vimfiles')
-call dein#add('junegunn/fzf.vim')
+" call my_plugin#add('junegunn/fzf')
+call my_plugin#add('/usr/share/vim/vimfiles')
+call my_plugin#add('junegunn/fzf.vim')
 
 " `rg` respects gitignore anyway, so use a version of the
 " default command without the direct git integration.

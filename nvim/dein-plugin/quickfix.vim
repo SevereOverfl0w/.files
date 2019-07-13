@@ -1,7 +1,7 @@
 " The quickfix is so important, especially with vim-grepper.
 " vim-qf is romainl's collection of hacks for the quickfix.
-call dein#add('romainl/vim-qf')
-call dein#add('yssl/QFEnter')
+call my_plugin#add('romainl/vim-qf')
+call my_plugin#add('yssl/QFEnter')
 
 " Wrapping version of :cnext and :cprev, for qf and location
 " list.

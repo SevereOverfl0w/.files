@@ -3,7 +3,7 @@
 " - Provides an awesome label mode which prompts for a
 "   character
 " - Very fast (compared to alternatives I've tried)
-call dein#add('justinmk/vim-sneak')
+call my_plugin#add('justinmk/vim-sneak')
 
 function! Hook_add_sneak()
  " Enable labels for jumping around

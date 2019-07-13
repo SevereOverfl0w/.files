@@ -2,7 +2,7 @@
 " - Show where files have changed via gutter icons
 " - Text object for hunks
 " - Staging / unstaging hunks
-call dein#add('airblade/vim-gitgutter')
+call my_plugin#add('airblade/vim-gitgutter')
 
 function! Hook_add_gitgutter()
   " Disable gitgutter mappings, I can take care of that, thank you!
@@ -34,11 +34,11 @@ endf
 
 " FuGITive is a git wrapper for vim.  The interactive staging features are
 " amazing.
-call dein#add('tpope/vim-fugitive')
+call my_plugin#add('tpope/vim-fugitive')
 " The official integration between fugitive and github
-call dein#add('tpope/vim-rhubarb')
+call my_plugin#add('tpope/vim-rhubarb')
 " Integration with gitlab
-call dein#add('shumphrey/fugitive-gitlab.vim')
+call my_plugin#add('shumphrey/fugitive-gitlab.vim')
 
 " This list is butched from:
 " https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/cgciltz/
@@ -76,7 +76,7 @@ nnoremap <Leader>gpl :Dispatch! git pull<CR>
 nnoremap <Leader>gB :.Gbrowse<CR>
 " }}}
 
-call dein#add('junegunn/gv.vim')
+call my_plugin#add('junegunn/gv.vim')
 
 nnoremap <Leader>gv :GV<CR>
 nnoremap <Leader>gLL :GV!<CR>

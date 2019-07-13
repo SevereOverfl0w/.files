@@ -1,6 +1,6 @@
 " vim-grepper helps you win at grep, integrated with the
 " quickfix
-call dein#add('mhinz/vim-grepper')
+call my_plugin#add('mhinz/vim-grepper')
 
 let g:grepper = {}
 " Change the preferred ordering of tools, ripgrep works better than git-grep
