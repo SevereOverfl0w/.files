@@ -42,6 +42,11 @@ endfunction
 function! dispatch#kitty#activate(pid) abort
   let out = system('ps ewww -p '.a:pid)
   let listen_on = matchstr(out, 'KITTY_LISTEN_ON=\zs\S\+')
-  call system('kitty @ --to='. listen_on . ' focus-window --match pid:'.a:pid)
+  let call = 'kitty @ '
+  if listen_on != ''
+    let call .= '--to '. listen_on . ' '
+  endif
+  let call .= 'focus-window --match pid:'. a:pid
+  call system(call)
   return !v:shell_error
 endfunction
