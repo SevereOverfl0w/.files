@@ -40,6 +40,8 @@ function! dispatch#kitty#handle(request) abort
 endfunction
 
 function! dispatch#kitty#activate(pid) abort
-  echom system('kitty @ focus-tab --match pid:'.a:pid)
+  let out = system('ps ewww -p '.a:pid)
+  let listen_on = matchstr(out, 'KITTY_LISTEN_ON=\zs\S\+')
+  call system('kitty @ --to='. listen_on . ' focus-window --match pid:'.a:pid)
   return !v:shell_error
 endfunction
