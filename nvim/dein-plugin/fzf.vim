@@ -30,7 +30,10 @@ let g:fzf_colors =
   \ 'header': ['fg', 'Comment'] }
 " jf = jump file
 nnoremap <Leader>jf :<C-U>FZF<CR>
-nnoremap <leader>wf :<C-U>FZF ~/doc<CR>
+
+for dirmap in get(g:, 'dirs_of_interest', [])
+  execute 'nnoremap '. dirmap.prefix . 'f :<C-U>FZF '. dirmap['directory'] .'<CR>'
+endfor
 
 noremap <leader>b <Cmd>Buffers<cr>
 noremap <leader>B <Cmd>BLines<cr>
