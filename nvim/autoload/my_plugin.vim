@@ -39,7 +39,6 @@ function my_plugin#end()
 
   if dein#check_install()
     echom 'Need to run dein#install()'
-    " call dein#install()
   endif
 
   augroup PostSource
