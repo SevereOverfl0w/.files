@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " sneak provides alternatives to f,F which:
 " - Work across lines
 " - Provides an awesome label mode which prompts for a

@@ -5,7 +5,7 @@ endif
 let g:autoloaded_dispatch_kitty = 1
 
 function! dispatch#kitty#handle(request) abort
-	if $KITTY_LISTEN_ON == ''
+	if empty($KITTY_LISTEN_ON)
 	  return 0
 	endif
 
@@ -43,7 +43,7 @@ function! dispatch#kitty#activate(pid) abort
   let out = system('ps ewww -p '.a:pid)
   let listen_on = matchstr(out, 'KITTY_LISTEN_ON=\zs\S\+')
   let call = 'kitty @ '
-  if listen_on != ''
+  if !empty(listen_on)
     let call .= '--to '. listen_on . ' '
   endif
   let call .= 'focus-window --match pid:'. a:pid

@@ -1,4 +1,4 @@
-function! s:get_function(name)
+function! s:get_function(name) abort
   try
     return function(a:name)
   catch /.*/
@@ -6,11 +6,11 @@ function! s:get_function(name)
   endtry
 endf
 
-function s:is_func(x)
+function! s:is_func(x) abort
   return type(a:x) == v:t_func
 endf
 
-function s:plugin_hook(prefix)
+function! s:plugin_hook(prefix) abort
   let name = substitute(g:dein#plugin.normalized_name, '-', '_', 'g')
   let F = s:get_function('Hook_'.a:prefix.'_'.name)
   if !s:is_func(F)
@@ -20,12 +20,12 @@ function s:plugin_hook(prefix)
   call F()
 endf
 
-function my_plugin#add_hooks()
+function! my_plugin#add_hooks() abort
   call dein#set_hook([], 'hook_add', function('s:plugin_hook', ['add']))
   call dein#set_hook([], 'hook_post_source', function('s:plugin_hook', ['post_source']))
 endf
 
-function my_plugin#begin()
+function! my_plugin#begin() abort
   set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " Second parameter to dein#begin where plugins may be added from so it may
@@ -34,7 +34,7 @@ function my_plugin#begin()
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 endf
 
-function my_plugin#end()
+function! my_plugin#end() abort
   call dein#end()
 
   if dein#check_install()
@@ -51,14 +51,14 @@ function my_plugin#end()
   syntax enable
 endf
 
-function my_plugin#run()
+function! my_plugin#run() abort
   runtime! config/*.vim
   call my_plugin#begin()
   runtime! dein-plugin/*.vim
   call my_plugin#end()
 endf
 
-function my_plugin#add(name, ...)
+function! my_plugin#add(name, ...) abort
   let dev_overrides = get(g:, 'dev_overrides', {})
   let name = a:name
   if has_key(dev_overrides, a:name)

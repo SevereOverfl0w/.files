@@ -7,22 +7,22 @@ function! s:HeaderLevel(lnum)
   endif
 
   let l:line = getline(a:lnum)
-    if l:line =~ '^== .*$'
+    if l:line =~# '^== .*$'
         return 1
     endif
-    if l:line =~ '^=== .*$'
+    if l:line =~# '^=== .*$'
         return 2
     endif
-    if l:line =~ '^==== .*$'
+    if l:line =~# '^==== .*$'
         return 3
     endif
-    if l:line =~ '^===== .*$'
+    if l:line =~# '^===== .*$'
         return 4
     endif
-    if l:line =~ '^====== .*$'
+    if l:line =~# '^====== .*$'
         return 5
     endif
-    if l:line =~ '^======= .*$'
+    if l:line =~# '^======= .*$'
         return 6
     endif
 
@@ -32,9 +32,9 @@ endfunction
 function! AsciidocLevel()
   let header_level = s:HeaderLevel(v:lnum)
   if header_level > 0
-    return ">".header_level
+    return '>'.header_level
   endif
-  return "="
+  return '='
 endfunction
 
 function! AsciidocFoldText()

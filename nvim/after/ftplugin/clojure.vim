@@ -36,7 +36,7 @@ function! s:EvalIn(args)
 endfunction
 
 command! -buffer -nargs=* EvalIn :exe s:EvalIn(<q-args>)
-if expand('%:t') == 'build.boot'
+if expand('%:t') ==# 'build.boot'
   let b:fireplace_ns = 'boot.user'
 endif
 " setlocal foldmethod=syntax

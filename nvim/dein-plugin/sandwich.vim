@@ -38,7 +38,7 @@ function! Hook_post_source_sandwich()
   let s:local_recipes = [
         \ {'__filetype__': 'vim', 'buns': ["my_plugin#add('", "')"], 'input': [ 'pg' ], 'filetype': ['vim']},
         \ {'__filetype__': 'vim', 'buns': ["zeno#github('", "')"], 'input': [ 'zn' ], 'filetype': ['vim']},
-        \ {'__filetype__': 'asciidoc', 'buns': ["kbd:[", "]"], 'input': [ 'kbd' ], 'filetype': ['asciidoc']}]
+        \ {'__filetype__': 'asciidoc', 'buns': ['kbd:[', ']'], 'input': [ 'kbd' ], 'filetype': ['asciidoc']}]
   " Adding custom recipes involves copying the default
   " recipes and adding.
   let g:sandwich#recipes = deepcopy(sandwich#get_recipes())
