@@ -22,7 +22,9 @@ set inccommand=split
 
 set completeopt=menuone,preview,noinsert,noselect
 
-" TODO: do not use tabs by default. 2/4 spaces maybe.
+set expandtab " Spaces, not tabs
+set shiftwidth=4 " Indent
+set softtabstop=4 " Tab key
 
 " Navigating between lines for operations with jk for
 " example
