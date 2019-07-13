@@ -29,7 +29,7 @@ call dein#add('kana/vim-textobj-user')
 call dein#add('kana/vim-textobj-entire',
       \ {'depends': ['vim-textobj-user']})
 
-function Hook_add_textobj_entire()
+function! Hook_add_textobj_entire()
   let g:textobj_entire_no_default_key_mappings = 1
   xmap aE <Plug>(textobj-entire-a)
   omap aE <Plug>(textobj-entire-a)

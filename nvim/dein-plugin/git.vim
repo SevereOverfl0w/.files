@@ -4,7 +4,7 @@
 " - Staging / unstaging hunks
 call dein#add('airblade/vim-gitgutter')
 
-function Hook_add_gitgutter()
+function! Hook_add_gitgutter()
   " Disable gitgutter mappings, I can take care of that, thank you!
   let g:gitgutter_map_keys = 0
   " Apparently I can integrate with ripgrep really easily, and ripgrep is
