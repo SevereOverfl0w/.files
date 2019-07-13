@@ -20,12 +20,8 @@ function s:plugin_hook(prefix)
   call F()
 endf
 
-function my_plugin#add()
-  call s:plugin_hook('add')
-endf
-
 function my_plugin#add_hooks()
-  call dein#set_hook([], 'hook_add', function('my_plugin#add'))
+  call dein#set_hook([], 'hook_add', function('s:plugin_hook', ['add']))
   call dein#set_hook([], 'hook_post_source', function('s:plugin_hook', ['post_source']))
 endf
 
