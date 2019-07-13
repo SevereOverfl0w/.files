@@ -28,7 +28,9 @@ endf
 function my_plugin#begin()
   set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-  call dein#begin('~/.cache/dein')
+  " Second parameter to dein#begin where plugins may be added from so it may
+  " auto-recache.
+  call dein#begin('~/.cache/dein', add(globpath(&rtp, 'dein-plugin/*.vim', 1, 1), $MYVIMRC))
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 endf
 
