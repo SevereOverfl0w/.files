@@ -3,9 +3,15 @@
 call dein#add('mhinz/vim-grepper')
 
 let g:grepper = {}
-" Change the preferred ordering of tools, ripgrep is too
-" fast to say no
-let g:grepper.tools = ['rg', 'ag', 'git', 'grep']
+" Change the preferred ordering of tools, ripgrep works better than git-grep
+" in most cases. e.g. untracked files
+let g:grepper.tools = ['git', 'grep']
+if executable('ag')
+  call insert(g:grepper.tools, 'ag')
+endif
+if executable('rg')
+  call insert(g:grepper.tools, 'rg')
+endif
 
 " I took the default value for this and added
 " - `-L` to follow symlinks.
