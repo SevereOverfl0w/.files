@@ -1,5 +1,3 @@
-" Clojure {{{
-
 " Update the static files for clojure from it's upstream,
 " this includes fixes like indenting #() properly.
 call dein#add('guns/vim-clojure-static')
