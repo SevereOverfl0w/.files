@@ -22,6 +22,3 @@ let g:grepper.simple_prompt = 1
 nmap <leader>G <plug>(GrepperOperator)
 xmap <leader>G <plug>(GrepperOperator)
 noremap <leader>/ :<C-u>Grepper<CR>
-
-" A quick command for grepping my wiki
-noremap <leader>w/ :<C-u>Grepper -dir ~/doc/<CR>
