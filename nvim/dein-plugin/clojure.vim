@@ -52,9 +52,6 @@ endf
 " call my_plugin#add('~/src/github.com/clojure-vim/async-clj-omni',
 "       \ {'depends': ['asyncomplete.vim']})
 
-" https://github.com/prabirshrestha/asyncomplete.vim/issues/117
-" inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
-
 " augroup ClojureLint
 " autocmd!
 " autocmd BufWritePost *.clj silent Make
