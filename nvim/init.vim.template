@@ -2,6 +2,7 @@
 
 let g:my_plugin_loaded_deoplete = 1
 let g:my_plugin_loaded_asyncomplete = 1
+let g:my_plugin_loaded_ctrlp = 1
 " let g:loaded_dispatch_kitty = 1
 
 let g:dirs_of_interest = [
