@@ -32,7 +32,7 @@ let g:fzf_colors =
 nnoremap <Leader>jf :<C-U>FZF<CR>
 
 for dirmap in get(g:, 'dirs_of_interest', [])
-  execute 'nnoremap '. dirmap.prefix . 'f :<C-U>FZF '. dirmap['directory'] .'<CR>'
+  execute 'nnoremap '. dirmap.prefix . 'f <cmd>FZF '. dirmap['directory'] .'<CR>'
 endfor
 
 noremap <leader>b <Cmd>Buffers<cr>
