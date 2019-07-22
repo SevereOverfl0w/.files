@@ -17,7 +17,7 @@ call my_plugin#add('tpope/vim-sexp-mappings-for-regular-people')
 
 " FiREPLace is a plugin for integrating with a Clojure
 " nREPL.
-call my_plugin#add('tpope/vim-fireplace')
+call my_plugin#add('tpope/vim-fireplace', {'rev': 'asyncomplete'})
 " Disable auto-nashorn
 let g:fireplace_cljs_repl = ''
 
@@ -42,7 +42,7 @@ endf
 " async-clj-omni is an auto-completion plugin for
 " deoplete.
 
-call my_plugin#add('clojure-vim/async-clj-omni')
+call my_plugin#add('clojure-vim/async-clj-omni', {'rev': 'asyncomplete'})
 
 " augroup ClojureLint
 " autocmd!
