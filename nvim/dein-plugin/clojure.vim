@@ -42,15 +42,7 @@ endf
 " async-clj-omni is an auto-completion plugin for
 " deoplete.
 
-" call my_plugin#add('clojure-vim/async-clj-omni',
-"       \ {'depends': ['deoplete.nvim']})
-
-" call my_plugin#add('~/src/github.com/clojure-vim/async-clj-omni',
-"       \ {'depends': ['deoplete.nvim']})
-
-
-" call my_plugin#add('~/src/github.com/clojure-vim/async-clj-omni',
-"       \ {'depends': ['asyncomplete.vim']})
+call my_plugin#add('clojure-vim/async-clj-omni')
 
 " augroup ClojureLint
 " autocmd!
