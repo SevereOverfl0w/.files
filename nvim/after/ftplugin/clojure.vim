@@ -40,10 +40,10 @@ if expand('%:t') ==# 'build.boot'
   let b:fireplace_ns = 'boot.user'
 endif
 " setlocal foldmethod=syntax
-abbrev break! (com.gfredericks.debug-repl.http-intercept/break!)
-command! -buffer LoadDebugger :Eval (require 'com.gfredericks.debug-repl.http-intercept 'com.gfredericks.debug-repl)<CR>
+abbrev break! (com.gfredericks.debug-repl.async/break!)
+command! -buffer LoadDebugger :Eval (require 'com.gfredericks.debug-repl.async 'com.gfredericks.debug-repl)<CR>
 command! -buffer Unbreak :Eval (com.gfredericks.debug-repl/unbreak!)
-command! -buffer WaitForBreak :Eval (com.gfredericks.debug-repl.http-intercept/wait-for-breaks)
+command! -buffer WaitForBreak :Eval (com.gfredericks.debug-repl.async/wait-for-breaks)
 nmap <buffer> <localleader>cmr :CMagicRequires<CR>ggcpp``
 " command! -buffer RunProjectTests call fireplace#capture_test_run('(clojure.test/run-all-tests #"('.luaeval('_A:sub(2,-2)', fireplace#eval('(apply str (interpose "|" (cider.nrepl.middleware.util.namespace/loaded-project-namespaces)))')).')")', '') | copen
 
