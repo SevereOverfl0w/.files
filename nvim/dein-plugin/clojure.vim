@@ -34,8 +34,8 @@ function! Hook_post_source_jack_in()
       \  {'version': '0.4.1',
       \   'middleware': 'cider.piggieback/wrap-cljs-repl'}
 
-  if exists('Local_Jack_In')
-      Local_Jack_In()
+  if exists('*Local_Jack_In')
+      call Local_Jack_In()
   endif
 endf
 
