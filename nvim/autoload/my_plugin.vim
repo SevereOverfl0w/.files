@@ -26,6 +26,11 @@ function! my_plugin#add_hooks() abort
 endf
 
 function! my_plugin#begin() abort
+  if !isdirectory(expand('~/.cache/dein/repos/github.com/Shougo/dein.vim'))
+    !curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
+    !sh /tmp/installer.sh ~/.cache/dein
+  endif
+
   set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " Second parameter to dein#begin where plugins may be added from so it may
