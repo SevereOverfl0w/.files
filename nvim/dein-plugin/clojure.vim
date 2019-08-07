@@ -40,8 +40,7 @@ function! Hook_post_source_jack_in()
 endf
 
 " async-clj-omni is an auto-completion plugin for
-" deoplete.
-
+" clojure
 call my_plugin#add('clojure-vim/async-clj-omni')
 
 " augroup ClojureLint
