@@ -22,7 +22,7 @@ call my_plugin#add('tpope/vim-fireplace')
 let g:fireplace_cljs_repl = ''
 
 " REPLant is a plugin for enhancing your REPL experience
-" with vim I develop this, so I've selected my src dir.
+" with vim.
 call my_plugin#add('SevereOverfl0w/vim-replant')
 
 " A plugin for managing nREPL middleware and starting the
