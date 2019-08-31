@@ -28,3 +28,7 @@ let g:grepper.simple_prompt = 1
 nmap <leader>G <plug>(GrepperOperator)
 xmap <leader>G <plug>(GrepperOperator)
 noremap <leader>/ :<C-u>Grepper<CR>
+
+for dirmap in get(g:, 'dirs_of_interest', [])
+  execute 'noremap '. dirmap.prefix . '/ <cmd>Grepper -cd '. dirmap['directory'] .'<CR>'
+endfor
