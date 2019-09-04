@@ -14,21 +14,21 @@ function! Hook_add_gitgutter()
   endif
 
   " Mapping for jumping between hunks
-  nmap ]h <Plug>GitGutterNextHunk
-  nmap [h <Plug>GitGutterPrevHunk
+  nmap ]h <Plug>(GitGutterNextHunk)
+  nmap [h <Plug>(GitGutterPrevHunk)
 
   " Stage the hunk under the cursor
-  nmap <Leader>ghs <Plug>GitGutterStageHunk
+  nmap <Leader>ghs <Plug>(GitGutterStageHunk)
   " Show the diff of the hunk at cursor.  I'm not convinced this is actually
   " useful yet, but time will tell.
-  nmap <Leader>ghp <Plug>GitGutterPreviewHunk
+  nmap <Leader>ghp <Plug>(GitGutterPreviewHunk)
   " Discard the hunk under the cursor.  Useful for getting rid of println code.
-  nmap <Leader>ghu <Plug>GitGutterUndoHunk
+  nmap <Leader>ghu <Plug>(GitGutterUndoHunk)
   " This is a text object referring to the current hunk
-  omap ih <Plug>GitGutterTextObjectInnerPending
-  omap ah <Plug>GitGutterTextObjectOuterPending
-  xmap ih <Plug>GitGutterTextObjectInnerVisual
-  xmap ah <Plug>GitGutterTextObjectOuterVisual
+  omap ih <Plug>(GitGutterTextObjectInnerPending)
+  omap ah <Plug>(GitGutterTextObjectOuterPending)
+  xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+  xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 endf
 " }}}
 
