@@ -7,7 +7,7 @@ call my_plugin#add('junegunn/fzf.vim')
 
 " `rg` respects gitignore anyway, so use a version of the
 " default command without the direct git integration.
-let $FZF_DEFAULT_COMMAND = "fd --type file ---hidden -follow --exclude .git --exclude .stversions | rg --files --hidden --follow -g '!.git' -g '!.stversions' || ag -l -g \"\" || find ."
+let $FZF_DEFAULT_COMMAND = "fd --type file ---hidden --follow --exclude .git --exclude .stversions | rg --files --hidden --follow -g '!.git' -g '!.stversions' || ag -l -g \"\" || find ."
 
 " The default colors look wrong
 let g:fzf_colors =
