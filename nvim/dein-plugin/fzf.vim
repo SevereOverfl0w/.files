@@ -34,3 +34,31 @@ endfor
 noremap <leader>b <Cmd>Buffers<cr>
 noremap <leader>B <Cmd>BLines<cr>
 noremap <leader>L <Cmd>Lines<cr>
+
+if has('nvim') && exists('&winblend') && &termguicolors
+
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+  if exists('g:fzf_colors.bg')
+    call remove(g:fzf_colors, 'bg')
+  endif
+
+  function! FloatingFZF()
+    let buf = nvim_create_buf(v:false, v:true)
+    call setbufvar(buf, '&signcolumn', 'no')
+
+    let height = &lines - 3
+    let width = float2nr(&columns - (&columns * 2 / 10))
+    let col = float2nr((&columns - width) / 2)
+
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': 1,
+          \ 'col': col,
+          \ 'width': width,
+          \ 'height': height
+          \ }
+
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&number', 0)
+  endfunction
+endif
