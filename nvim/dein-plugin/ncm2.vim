@@ -4,6 +4,7 @@ end
 
 call my_plugin#add('ncm2/ncm2')
 call my_plugin#add('roxma/nvim-yarp')
+call my_plugin#add('ncm2/float-preview.nvim')
 
 " enable ncm2 for all buffers
 augroup activate_ncm2
@@ -12,4 +13,4 @@ augroup activate_ncm2
 augroup END
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect,preview
+set completeopt=noinsert,menuone,noselect
