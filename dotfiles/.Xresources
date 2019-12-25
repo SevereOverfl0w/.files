@@ -1,47 +1,149 @@
+!! Gruvbox:
+!! hard contrast: *background: #1d2021
+!*background: #282828
+!! *background: #32302f
+!! soft contrast: *background: #32302f
+!*foreground: #ebdbb2
+!! Black + DarkGrey
+!*color0:  #282828
+!*color8:  #928374
+!! DarkRed + Red
+!*color1:  #cc241d
+!*color9:  #fb4934
+!! DarkGreen + Green
+!*color2:  #98971a
+!*color10: #b8bb26
+!! DarkYellow + Yellow
+!*color3:  #d79921
+!*color11: #fabd2f
+!! DarkBlue + Blue
+!*color4:  #458588
+!*color12: #83a598
+!! DarkMagenta + Magenta
+!!*color5: #b16286
+!!loljk this is orange. Orange is good.
+!*color5: #fe8019
+!*color13: #d3869b
+!! DarkCyan + Cyan
+!*color6:  #689d6a
+!*color14: #8ec07c
+!! LightGrey + White
+!*color7:  #a89984
+!*color15: #ebdbb2
+
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+#define onehalfdark0 #282c34
+#define onehalfdark1 #e06c75
+#define onehalfdark2 #98c379
+#define onehalfdark3 #e5c07b
+#define onehalfdark4 #61afef
+#define onehalfdark5 #c678dd
+#define onehalfdark6 #56b6c2
+#define onehalfdark7 #dcdfe4
+
+#define onehalfdark8 #282c34
+#define onehalfdark9 #e06c75
+#define onehalfdark10 #98c379
+#define onehalfdark11 #e5c07b
+#define onehalfdark12 #61afef
+#define onehalfdark13 #c678dd
+#define onehalfdark14 #56b6c2
+#define onehalfdark15 #dcdfe4
+
+#define onehalfblack onehalfdark0
+
+#define onehalfdarkblack #282C34
+#define onehalfdarkred #E06C75
+#define onehalfdarkgreen #98C379
+#define onehalfdarkyellow #E5C07B
+#define onehalfdarkblue #61AFEF
+#define onehalfdarkmagenta #C678DD
+#define onehalfdarkcyan #56B6C2
+#define onehalfdarkwhite #DCDFE4
+
+! From https://github.com/sonph/onehalf/blob/master/vim/colors/onehalfdark.vim
+#define onehalfdarkselection #474e5d
+#define onehalfdarkcomment #5c6370
+
+#define onehalfdarkforeground #dcdfe4
+#define onehalfdarkbackground #282c34
+
+*.selection: onehalfdarkselection
+*.comment: onehalfdarkcomment
+*.foreground:   onehalfdarkforeground
+*.background:   onehalfdarkbackground
+*.cursorColor:  onehalfdark4
+*fading: 35
+*fadeColor: onehalfdark3
+
+*.color0: onehalfdark0
+*.color1: onehalfdark1
+*.color2: onehalfdark2
+*.color3: onehalfdark3
+*.color4: onehalfdark4
+*.color5: onehalfdark5
+*.color6: onehalfdark6
+*.color7: onehalfdark7
+*.color8: onehalfdark8
+*.color9: onehalfdark9
+*.color10: onehalfdark10
+*.color11: onehalfdark11
+*.color12: onehalfdark12
+*.color13: onehalfdark13
+*.color14: onehalfdark14
+*.color15: onehalfdark15
+
 rofi.color-enabled: true
-rofi.color-window: #282828, #1d2021, #3c3836
-rofi.color-normal: #282828, #c1c1c1, #32302f, #458588, #ffffff
-rofi.color-active: #282828, #80cbc4, #273238, #394249, #80cbc4
-rofi.color-urgent: #282828, #ff1844, #273238, #394249, #ff1844
+
+!! Gruvbox theme:
+!rofi.color-window: #282828, #1d2021, #3c3836
+!rofi.color-normal: #282828, #c1c1c1, #32302f, #458588, #ffffff
+!rofi.color-active: #282828, #80cbc4, #273238, #394249, #80cbc4
+!rofi.color-urgent: #282828, #ff1844, #273238, #394249, #ff1844
+
+! color-window is background, border, separator
+rofi.color-window: onehalfdarkbackground, onehalfdarkbackground, onehalfdark3
+
+! These are all: bg, fg, bgalt, hlbg, hlfg
+rofi.color-normal: onehalfdarkbackground, onehalfdarkforeground, onehalfdarkbackground, onehalfdarkselection, onehalfdarkforeground
+rofi.color-active: onehalfdark2, onehalfdark14, onehalfdark3, #394249, #80cbc4
+rofi.color-urgent: onehalfdark2, onehalfdarkred, #273238, #394249, onehalfdarkred
 
 rofi.font: Fira Mono 12
 rofi.width: 100
 rofi.padding: 200
 rofi.opacity: 85
 
-rofi.dpi: 282
+rofi.dpi: 192
+Xft.dpi: 192
+xft.dpi: 192
 
-Xcursor.size: 64
-Xcursor*size: 64
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 
-! hard contrast: *background: #1d2021
-*background: #282828
-! *background: #32302f
-! soft contrast: *background: #32302f
-*foreground: #ebdbb2
-! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
-! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
-! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
-! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
-! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
-! DarkMagenta + Magenta
-!*color5: #b16286
-!loljk this is orange. Orange is good.
-*color5: #fe8019
-*color13: #d3869b
-! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
-! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
+! Xcursor.size: 48
+! Xcursor*size: 64
+Xcursor.theme: capitaine-cursors-white
+
+panel.orange: onehalfdarkyellow
+window.colorBorder: onehalfdarkblue
