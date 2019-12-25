@@ -35,24 +35,39 @@ BC%i" > $PANEL_FIFO &
 essid -f "X%s" -sw wlp58s0 > "$PANEL_FIFO" &
 
 volume(){
-	amixer -M get Master | sed -n 's/^.*\[\([0-9]\+%\).*$/\1/p'
+	# amixer -M get Master | sed -n 's/^.*\[\([0-9]\+%\).*$/\1/p'
+	local sink="$(pacmd list-sinks | awk '/index:/{i++} /* index:/{print i; exit}')"
+	pacmd list-sinks | awk '/^\svolume:/{i++} i=='$sink'{print $5; exit}' | sed 's|,$||'
 }
 
 muted(){
-	amixer -M get Master | sed -n 's/^.*\[\(on\|off\)\].*$/\1/p'
+	# amixer -M get Master | sed -n 's/^.*\[\(on\|off\)\].*$/\1/p'
+	local sink="$(pacmd list-sinks | awk '/index:/{i++} /* index:/{print i; exit}')"
+	local muted_status="$(pacmd list-sinks | awk '/^\smuted:/{i++} i=='$sink'{print $2; exit}')"
+
+	if [ $muted_status = "yes" ]; then
+	    echo "off"
+	else
+	    echo "on"
+	fi
 }
 
 # alsactl monitor only pushes when there's a change (no initial)
 printf "VL%s\nVM%s\n" "$(volume)" "$(muted)" > "$PANEL_FIFO"
 
 # alsactl does weird line buffering, ugh
-stdbuf -oL -eL alsactl monitor |
-    while IFS= read -r line
+
+#stdbuf -oL -eL alsactl monitor |
+#    while IFS= read -r line
+#    do
+#	printf "VL%s\nVM%s\n" "$(volume)" "$(muted)"
+#    done > "$PANEL_FIFO" &
+
+pactl subscribe | grep --line-buffered 'sink' |
+    while read -r line
     do
 	printf "VL%s\nVM%s\n" "$(volume)" "$(muted)"
     done > "$PANEL_FIFO" &
-
-do_while 5 'printf "V%s\n" "$(volume)"' > "$PANEL_FIFO" &
 
 # TODO: Debug krypt-n/bar not updating without a short sleep between updates.
 # Short demo:
