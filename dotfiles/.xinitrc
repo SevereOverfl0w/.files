@@ -39,7 +39,7 @@ export ELM_SCALE=2
 # Smooth scrolling & touch screen for Firefox
 export MOZ_USE_XINPUT2=1
 
-if [ -f ~/.files/bin/wallpaper.sh ]; then
+if [ -f ~/.files/bin/wallpaper.sh -a -e ~/Pictures/wallpapers/nord ]; then
   ~/.files/bin/wallpaper.sh ~/Pictures/wallpapers/nord &
 fi
 
