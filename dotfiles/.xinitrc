@@ -35,7 +35,7 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export QT_SCALE_FACTOR=1
 
 export ELM_SCALE=2
- 
+
 # Smooth scrolling & touch screen for Firefox
 export MOZ_USE_XINPUT2=1
 
