@@ -51,8 +51,6 @@ PIDB=$!
 
 command -v start-pulseaudio-x11 >/dev/null 2>&1 && start-pulseaudio-x11
 
-# sxhkd ~/.config/sxhkd/sxhkdrc &
-# sxhkd ~/.config/sxhkd/sxhkdrc_bspwm &
 dbus-launch bspwm
 
 #awesome
