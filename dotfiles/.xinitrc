@@ -23,7 +23,7 @@ if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
   echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
 fi
 
-xsetroot -cursor_name left_ptr
+command -v xsetroot >/dev/null 2>&1 && xsetroot -cursor_name left_ptr
 
 # If you are using a window manager other than Gnome and have scaled the fonts using Xft.dpi, you must tell GDK to scale the UI as well. This will result in a further increase of the font-size for GDK apps, so you must undo the scaling of the text only. 
 export GDK_SCALE=2
