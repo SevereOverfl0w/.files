@@ -80,6 +80,19 @@ alias zshrc='$EDITOR ~/.zshrc'
 alias reloadzsh='. ~/.zshrc'
 alias j="$EDITOR ~/sync/general/journal/\`date +%Y-%m-%d\`.ad"
 
+# package stuff
+alias pacupg='sudo xbps-install -Su'
+alias pacins='sudo xbps-install -S'
+alias pacrem='sudo xbps-remove -R'
+alias pacfind='xbps-query -R -s'
+alias pacinfo='xbps-query -R'
+alias paclocate='xbps-query -Ro'
+alias paclist='xbps-query -Rf'
+
+pacbin(){
+  xlocate 'bin\/'$1'$'
+}
+
 # For termite's Ctrl-Shift-T
 if [[ $TERM == xterm-termite ]]; then
   . /etc/profile.d/vte.sh
