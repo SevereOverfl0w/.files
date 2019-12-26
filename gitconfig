@@ -1,0 +1,49 @@
+[merge]
+	tool = vimdiff
+# [mergetool "vimdiff"]
+# 	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[alias]
+	please = push --force-with-lease
+	it = !git init && git commit -m “root” --allow-empty
+	staash = stash --include-untracked
+	commend = commit --amend -c HEAD
+	signplz = config commit.gpgsign true
+	shudder = !git pull && git push
+	rbi = !sh -c \"git rebase -i `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
+	co = checkout
+	sta = "!f() { git stash push -m \"$(vipe <&-)\" \"$@\"; }; f"
+	pop = stash pop
+
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(yellow)%h%C(reset) %C(normal)%s%C(reset) %C(dim white)%an%C(reset) %C(dim blue)(%ar)%C(reset) %C(auto)%d%C(reset)'
+	oldest-ancestor = !bash -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+	mergedtopiclg = !sh -c \"git lg $(git oldest-ancestor $1^2 ${2:-master})..$1^2\" -
+[push]
+	default = current
+[pull]
+	rebase = true
+[core]
+	excludesfile = ~/.gitignore
+[http "https://gopkg.in"]
+	followRedirects = true
+[rebase]
+	autoStash = true
+[status]
+	showUntrackedFiles = all
+[diff]
+	# Show whitespace errors when doing `git diff`
+	wsErrorHighlight = all
+[ghq]
+	root = ~/src
+[ghq "keybase://"]
+	vcs = git
+[ghq "ssh://git@git.sr.ht"]
+	vcs = git
+[commit]
+	verbose = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+[filesystem "Oracle Corporation|1.8.0_202|/dev/mapper/pool-root"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds
