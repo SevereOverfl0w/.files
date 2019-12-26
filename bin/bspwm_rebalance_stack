@@ -1,0 +1,10 @@
+#!/bin/sh
+
+bspc subscribe node_add node_remove | 
+
+while read -r line; do
+	desktop="$(echo "$line" | awk '{print $3;}')"
+	if [ -e "/tmp/stack-${desktop}" ]; then
+		bspc node biggest.tiled.local#@brother -B;
+	fi
+done;
