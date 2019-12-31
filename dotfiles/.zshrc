@@ -7,11 +7,13 @@ if [ -d /etc/profile.d ]; then
   unset i
 fi
 
-source ~/.config/zplug/init.zsh
-
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
+
+export ZPLUG_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/zplug
+export ZPLUG_HOME=${XDG_DATA_HOME:-$HOME/.local/share}/zplug
+source ${ZPLUG_ROOT}/init.zsh
 
 zplug petervanderdoes/gitflow-avh, hook-build: "make install prefix=$HOME"
 zplug petervanderdoes/git-flow-completion
