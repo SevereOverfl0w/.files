@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Where the repo has been cloned to
+dotfiles_repo="$(dirname $0)"
+
+# Take packages to install, and install it any aren't already installed.
+install(){
+	(echo "$@" | tr ' ' '\n' | xargs -L 1 xbps-query)>/dev/null || sudo xbps-install "$@"
+}
+
+stowstar(){
+	stow "--dir=${dotfiles_repo}" "$@"
+}
+
+# Install GNU Stow
+install stow
+
+# Setup dotfiles
+stowstar --dotfiles "--target=$HOME" dotfiles
+if [ ! -f ~/.config/nvim/init.vim ]; then
+	cp ~/.config/nvim/init.vim.template ~/.config/nvim/init.vim
+	echo "Please see ~/.config/nvim/init.vim for information"
+fi
+
+# Dependencies of dotfiles
+install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot lemonbar neovim fzf mpd
+
+# Setup shell
+if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; then
+	chsh -s /bin/zsh
+fi
+
+# Setup zplug for zsh
+zplug_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zplug"
+
+if [ ! -e "$zplug_dir" ]; then
+	git clone https://github.com/zplug/zplug "$zplug_dir"
+	echo 'source ~/.zshrc; zplug install' | zsh
+fi
+
+# Create local bin directory
+mkdir -p ~/bin/
+
+# Compile xgetresource
+if [ ! -e ~/bin/xgetresource ]; then
+	install make gcc libX11-devel
+	(cd "$dotfiles_repo/src/getresource" && make && cp xgetresource ~/bin/)
+	sudo xbps-remove -R make gcc libX11-devel
+fi
+
+sudo stow --dir=${dotfiles_repo} --target=/ global
