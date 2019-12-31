@@ -27,7 +27,7 @@ zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme, as:theme
 
 zplug load
 
-source ~/.purepower
+source ~/.config/p10k-pure.zsh
 
 ## Arrow Keys ###########################################
 zmodload zsh/terminfo
