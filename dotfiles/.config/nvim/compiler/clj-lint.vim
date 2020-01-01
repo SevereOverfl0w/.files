@@ -14,4 +14,6 @@ elseif executable('clj-kondo')
   let s:prg='clj-kondo --lint %'
 endif
 
-execute 'CompilerSet makeprg='.escape(s:prg, ' \|"')
+if has_key(s:, 'prg')
+  execute 'CompilerSet makeprg='.escape(s:prg, ' \|"')
+endif
