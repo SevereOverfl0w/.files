@@ -69,6 +69,9 @@ alias ls='ls --color=auto'
 alias zshrc='$EDITOR ~/.zshrc'
 alias reloadzsh='. ~/.zshrc'
 
+alias v="nvim"
+alias t="topydo"
+
 # package stuff
 alias pacupg='sudo xbps-install -Su'
 alias pacins='sudo xbps-install -S'
