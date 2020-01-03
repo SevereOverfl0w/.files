@@ -65,22 +65,9 @@ bindkey '\eOF'    end-of-line        # gnome-terminal
 export EDITOR='nvim'
 # Aliases
 alias ls='ls --color=auto'
-alias vim='echo You mean nvim && sleep 5 && nvim'
-
-alias bc_task='export TASKRC=/home/dominic/.juxt_taskrc'
-alias reset_task='unset TASKRC'
-
-alias t='task'
-alias tsy='task sync'
-alias in='task add +in'
-alias inbox='task in'
-alias win='in pro:juxt'
-alias done_today='task end:today all'
-alias p.files='git -C ~/.files/ add . && git -C ~/.files/ commit && git -C ~/.files/ push'
 
 alias zshrc='$EDITOR ~/.zshrc'
 alias reloadzsh='. ~/.zshrc'
-alias j="$EDITOR ~/sync/general/journal/\`date +%Y-%m-%d\`.ad"
 
 # package stuff
 alias pacupg='sudo xbps-install -Su'
