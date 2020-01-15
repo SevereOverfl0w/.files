@@ -137,3 +137,16 @@ function fzf-ghq() {
 }
 zle -N fzf-ghq
 bindkey '^g^h' fzf-ghq
+
+_fzf_complete_gopass() {
+  _fzf_complete '+m' "$@" < <(
+    gopass find ''
+  )
+}
+
+_fzf_complete_gopass_post() {
+  read passurl
+  echo ${(q)passurl}
+}
+
+source <((gopass completion zsh | head -n -1 | tail -n +2; echo 'compdef _gopass gopass'))
