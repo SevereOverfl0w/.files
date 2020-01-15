@@ -138,6 +138,9 @@ function fzf-ghq() {
 zle -N fzf-ghq
 bindkey '^g^h' fzf-ghq
 
+alias t='topydo'
+alias v='nvim'
+
 _fzf_complete_gopass() {
   _fzf_complete '+m' "$@" < <(
     gopass find ''
