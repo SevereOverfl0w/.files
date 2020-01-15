@@ -138,6 +138,8 @@ function fzf-ghq() {
 zle -N fzf-ghq
 bindkey '^g^h' fzf-ghq
 
+export PIPX_BIN_DIR="$HOME/bin"
+
 alias t='topydo'
 alias v='nvim'
 
