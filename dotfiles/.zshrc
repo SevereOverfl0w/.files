@@ -155,3 +155,7 @@ _fzf_complete_gopass_post() {
 }
 
 source <((gopass completion zsh | head -n -1 | tail -n +2; echo 'compdef _gopass gopass'))
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^X^e' edit-command-line
