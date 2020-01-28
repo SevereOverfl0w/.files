@@ -63,6 +63,9 @@ super + {_,shift + }c
 
 # focus the next/previous desktop
 super + bracket{left,right}
+	bspc desktop -f {prev,next}.occupied
+
+super + shift + bracket{left,right}
 	bspc desktop -f {prev,next}
 
 # focus the last node/desktop
