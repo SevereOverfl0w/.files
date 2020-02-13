@@ -36,3 +36,4 @@ if executable('nvr')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
 
+set signcolumn=auto:2
