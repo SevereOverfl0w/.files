@@ -37,3 +37,6 @@ if executable('nvr')
 endif
 
 set signcolumn=auto:2
+
+nmap ]a <Cmd>next<CR>
+nmap [a <Cmd>previous<CR>
