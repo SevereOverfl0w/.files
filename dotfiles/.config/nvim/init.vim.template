@@ -22,4 +22,9 @@ let g:dev_overrides = {
       \ 'tpope/vim-dispatch': '~/src',
       \}
 
+let g:dir_to_doc = {
+      \ '/home/iamdevloper/twitter': '/home/iamdevloper/doc/twitter.md',
+      \ '/home/iamdevloper/website': '/home/iamdevloper/doc/worlddomination/'
+      \ }
+
 call my_plugin#run()
