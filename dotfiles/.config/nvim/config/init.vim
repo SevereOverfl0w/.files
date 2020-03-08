@@ -40,3 +40,4 @@ set signcolumn=auto:2
 
 nmap ]a <Cmd>next<CR>
 nmap [a <Cmd>previous<CR>
+nmap ]oh <Cmd>nohlsearch<CR>
