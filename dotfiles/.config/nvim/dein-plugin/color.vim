@@ -1,6 +1,21 @@
 call my_plugin#add('sonph/onehalf', {'rtp': 'vim/'})
+call my_plugin#add('https://gitlab.com/protesilaos/tempus-themes-vim.git') 
+call my_plugin#add('NLKNguyen/papercolor-theme')
 
 let s:preferred_color_scheme = get(g:, 'preferred_color_scheme', ['onehalf', 'onehalflight'])
+
+let g:PaperColor_Theme_Options = {
+\   'theme': {
+\     'default.light': {
+\       'override': {
+\         'linenumber_fg': ['#111', '000']
+\       }
+\     }
+\   }
+\ }
+
+function! s:custom_PaperColor()
+endf
 
 function! s:custom_onehalflight()
     hi! link IncSearch PMenuSel
