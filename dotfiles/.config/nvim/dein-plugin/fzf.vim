@@ -13,10 +13,10 @@ let $FZF_DEFAULT_COMMAND = "fd --type file ---hidden --follow --exclude .git --e
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Visual'],
+  \ 'hl':      ['fg', 'Keyword'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Visual'],
+  \ 'hl+':     ['fg', 'Keyword'],
   \ 'info':    ['fg', 'PreProc'],
   \ 'border':  ['fg', 'Ignore'],
   \ 'prompt':  ['fg', 'Question'],
