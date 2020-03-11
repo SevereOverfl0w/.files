@@ -11,7 +11,7 @@ function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
     exe 'colorscheme '.s:preferred_color_scheme[1]
     try
-      call function('<SID>custom_'.s:preferred_color_scheme[1])
+      call function('Custom_'.s:preferred_color_scheme[1])()
     catch /E700: Unknown function.*/
     endtry
   endif
