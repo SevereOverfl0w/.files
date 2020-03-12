@@ -14,23 +14,17 @@ let g:PaperColor_Theme_Options = {
 \   }
 \ }
 
-function! s:custom_PaperColor()
-endf
-
-function! s:custom_onehalflight()
-    hi! link IncSearch PMenuSel
-    hi! link ClapCurrentSelection Function
-endf
+augroup ColorOverrides
+  autocmd!
+  autocmd ColorScheme onehalflight hi! link IncSearch PMenuSel
+  autocmd ColorScheme onehalflight hi! link ClapCurrentSelection Function
+augroup END
 
 function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
     exe 'colorscheme '.s:preferred_color_scheme[1]
-    try
-      let F = function('<sid>custom_'.s:preferred_color_scheme[1])
-    catch /E700: Unknown function.*/
-      return
-    endtry
-    call F()
+    " AutoCmds not triggered during VimEnter / other autocmds
+    exe 'doautocmd ColorScheme '.s:preferred_color_scheme[1]
   endif
 endf
 
