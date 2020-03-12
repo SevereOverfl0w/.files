@@ -26,9 +26,11 @@ function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
     exe 'colorscheme '.s:preferred_color_scheme[1]
     try
-      call function('Custom_'.s:preferred_color_scheme[1])()
+      let F = function('<sid>custom_'.s:preferred_color_scheme[1])
     catch /E700: Unknown function.*/
+      return
     endtry
+    call F()
   endif
 endf
 
