@@ -1,0 +1,1 @@
+cnoremap / <C-]>/
