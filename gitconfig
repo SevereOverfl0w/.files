@@ -19,6 +19,7 @@
 	mergedtopiclg = !sh -c \"git lg $(git oldest-ancestor $1^2 ${2:-master})..$1^2\" -
 [push]
 	default = current
+	followTags = true
 [pull]
 	rebase = true
 [core]
