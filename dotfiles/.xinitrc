@@ -25,17 +25,6 @@ fi
 
 command -v xsetroot >/dev/null 2>&1 && xsetroot -cursor_name left_ptr
 
-# If you are using a window manager other than Gnome and have scaled the fonts using Xft.dpi, you must tell GDK to scale the UI as well. This will result in a further increase of the font-size for GDK apps, so you must undo the scaling of the text only. 
-export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
-
-# If you manually set the screen factor, it is important to set QT_AUTO_SCREEN_SCALE_FACTOR=0 otherwise some applications which explicitly force high DPI enabling get scaled twice.
-# If you also set the font DPI manually in xrdb to support other toolkits, QT_SCALE_FACTORS will give you huge fonts.
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
-# export QT_SCALE_FACTOR=1
-
-export ELM_SCALE=2
-
 # Smooth scrolling & touch screen for Firefox
 export MOZ_USE_XINPUT2=1
 
