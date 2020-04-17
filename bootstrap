@@ -23,7 +23,7 @@ if [ ! -f ~/.config/nvim/init.vim ]; then
 fi
 
 # Dependencies of dotfiles
-install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot lemonbar-xft neovim fzf mpd
+install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot neovim fzf mpd nerd-fonts-otf
 
 # Setup shell
 if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; then

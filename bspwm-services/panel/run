@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sleep 1 # small delay to await bspwm starting in .xinitrc
-exec ~/.files/dotfiles/panel/panel
