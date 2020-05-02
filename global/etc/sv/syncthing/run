@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# export USERNAME=overfl0w
+# export HOME="`echo ~overfl0w`"
+
+[ -r conf ] && . ./conf
+
+exec 2>&1
+exec chpst -u "$USERNAME" syncthing -logflags 0
