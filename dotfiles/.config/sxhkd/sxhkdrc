@@ -51,6 +51,9 @@ super + shift + x
 XF86AudioMute
 	ponymix toggle
 
+XF86AudioMicMute
+	ponymix --sink toggle
+
 XF86Audio{Lower,Raise}Volume
 	ponymix {decrease,increase} 5%
 
