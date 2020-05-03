@@ -2,7 +2,7 @@
 
 todos="$(topydo ls)"
 
-action="$(echo -n "$todos" | rofi -p "todo:" -dmenu)"
+action="$(echo -n "$todos" | rofi -p "todo" -dmenu)"
 rofi_exit="$?"
 
 if [ ! 1 -eq "$rofi_exit" ]; then
