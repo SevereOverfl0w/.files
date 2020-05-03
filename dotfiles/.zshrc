@@ -126,6 +126,7 @@ PURE_CMD_MAX_EXEC_TIME=10
 # prompt pure
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/doc/fzf/key-bindings.zsh ] && source /usr/share/doc/fzf/key-bindings.zsh; source /usr/share/doc/fzf/completion.zsh
 
 function fzf-ghq() {
     local selected_dir=$(ghq list -p | $(__fzfcmd) --query "$LBUFFER")
@@ -162,7 +163,7 @@ _fzf_complete_gopass_post() {
   echo ${(q)passurl}
 }
 
-source <((gopass completion zsh | head -n -1 | tail -n +2; echo 'compdef _gopass gopass'))
+command -v gopass >/dev/null 2>&1 && source <((gopass completion zsh | head -n -1 | tail -n +2; echo 'compdef _gopass gopass'))
 
 autoload edit-command-line
 zle -N edit-command-line
