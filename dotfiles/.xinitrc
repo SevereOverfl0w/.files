@@ -44,7 +44,7 @@ PIDB=$!
 
 command -v start-pulseaudio-x11 >/dev/null 2>&1 && start-pulseaudio-x11
 
-dbus-launch bspwm
+command -v dbus-launch>/dev/null 2>&1 && dbus-launch --exit-with-session bspwm || bspwm
 
 #awesome
 #windowchef
