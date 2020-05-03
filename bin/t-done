@@ -1,0 +1,3 @@
+#!/bin/sh
+
+topydo add "x $(date +%Y-%m-%d) $*"

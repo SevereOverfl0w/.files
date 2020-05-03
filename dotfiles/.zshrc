@@ -70,7 +70,6 @@ alias zshrc='$EDITOR ~/.zshrc'
 alias reloadzsh='. ~/.zshrc'
 
 alias v="nvim"
-alias t="topydo"
 
 # package stuff
 alias pacupg='sudo xbps-install -Su'
@@ -140,7 +139,16 @@ bindkey '^g^h' fzf-ghq
 
 export PIPX_BIN_DIR="$HOME/bin"
 
-alias t='topydo'
+function t() {
+  local custom_command="t-$1"
+  if [ 1 -eq ${+commands[$custom_command]} ]; then
+    shift;
+    "$custom_command" "$@"
+  else
+    topydo "$@"
+  fi
+}
+
 alias v='nvim'
 
 _fzf_complete_gopass() {
