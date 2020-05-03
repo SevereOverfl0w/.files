@@ -44,6 +44,9 @@ super + Escape
 super + {alt,shift} + m
 	mirrorscreen {on,off}
 
+super + shift + x
+	todo_dmenu
+
 # function keys
 XF86AudioMute
 	ponymix toggle
