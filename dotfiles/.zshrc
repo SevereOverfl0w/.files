@@ -15,8 +15,6 @@ export ZPLUG_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/zplug
 export ZPLUG_HOME=${XDG_DATA_HOME:-$HOME/.local/share}/zplug
 source ${ZPLUG_ROOT}/init.zsh
 
-zplug petervanderdoes/gitflow-avh, hook-build: "make install prefix=$HOME"
-zplug petervanderdoes/git-flow-completion
 zplug mafredri/zsh-async
 # zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug zsh-users/zsh-history-substring-search
@@ -90,40 +88,7 @@ if [[ $TERM == xterm-termite ]]; then
   __vte_osc7
 fi
 
-# BASE16_THEME="eighties.dark"
-# BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_THEME.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
-setopt promptsubst
-
-# local sep='' #  █
-local sep=''
-function sep-wrap {
-  local open="%F{$1}%K{$3}${sep}%K{$1}%F{$2}"
-  local close="%f%k"
-
-  echo "$open$4$close"
-}
-
-local inbox=$(sep-wrap blue white black 'Inbox: $(t +in status:pending count)')
-# local task_changes=$(sep-wrap 011 black blue 'Changes: $(cat ~/.config/task/backlog.data | tail -n +2 | wc -l)')
-local dotfiles=$(sep-wrap red black 011 '.files: $(git -C ~/.files/ status --porcelain | wc -l)')
-local timep='%F{016}%T%f%b'
-local username='%F{010}%n%f'
-local currdir='%F{011}%25<…<%~%<<%f'
-
-
-# Prompt
-# PROMPT="╭─[${timep}] ${username} ${currdir}
-# ╰─➤ "
-
-# RPROMPT="%F{white}${inbox}${task_changes}${dotfiles}"
-
 PATH=$PATH:$HOME/bin:$HOME/.files/bin/:$HOME/.local/bin:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cargo/bin
-
-autoload -U promptinit && promptinit
-PURE_CMD_MAX_EXEC_TIME=10
-# prompt pure
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/share/doc/fzf/key-bindings.zsh ] && source /usr/share/doc/fzf/key-bindings.zsh; source /usr/share/doc/fzf/completion.zsh
