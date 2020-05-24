@@ -30,12 +30,11 @@ if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; the
 	chsh -s /bin/zsh
 fi
 
-# Setup zplug for zsh
-zplug_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zplug"
+# Setup zinit
+zinit_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 
-if [ ! -e "$zplug_dir" ]; then
-	git clone https://github.com/zplug/zplug "$zplug_dir"
-	echo 'source ~/.zshrc; zplug install' | zsh
+if [ ! -e "$zinit_dir" ]; then
+	git clone https://github.com/zdharma/zinit.git "$zinit_dir"
 fi
 
 # Create local bin directory

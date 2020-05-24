@@ -11,19 +11,22 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-export ZPLUG_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/zplug
-export ZPLUG_HOME=${XDG_DATA_HOME:-$HOME/.local/share}/zplug
-source ${ZPLUG_ROOT}/init.zsh
+export ZINIT_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+declare -A ZINIT
+ZINIT[HOME_DIR]="$ZINIT_ROOT/polaris"
+source "$ZINIT_ROOT/zinit.zsh"
 
-zplug mafredri/zsh-async
-# zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-zplug zsh-users/zsh-history-substring-search
-zplug zsh-users/zsh-autosuggestions
-zplug changyuheng/zsh-interactive-cd, use:zsh-interactive-cd.plugin.zsh
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme, as:theme
+autoload -Uz compinit
+compinit
 
-zplug load
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+zinit light mafredri/zsh-async
+zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-autosuggestions
+zinit light changyuheng/zsh-interactive-cd, use:zsh-interactive-cd.plugin.zsh
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 source ~/.config/p10k-pure.zsh
 
@@ -45,8 +48,6 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-autoload -Uz compinit
-compinit
 # End of lines added by compinstall
 autoload -U colors && colors
 
