@@ -44,4 +44,5 @@ call my_plugin#add('kana/vim-textobj-line')
 " Wordmotion creates word definitions which surpass the
 " default ones in utility.  The readme does a better job of
 " explaining than I can.
+let g:wordmotion_spaces=' '
 call my_plugin#add('chaoren/vim-wordmotion')
