@@ -25,7 +25,7 @@ fi
 # Dependencies of dotfiles
 install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot neovim curl fzf mpd polybar nerd-fonts-otf
 # Wayland dependencies
-install mako bemenu hikari waybar
+install mako bemenu hikari Waybar
 
 # Setup shell
 if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; then
@@ -49,4 +49,4 @@ if [ ! -e ~/bin/xgetresource ]; then
 	sudo xbps-remove -R make gcc libX11-devel
 fi
 
-sudo stow --dir=${dotfiles_repo} --target=/ global
+sudo stow --no-folding --dir=${dotfiles_repo} --target=/ global
