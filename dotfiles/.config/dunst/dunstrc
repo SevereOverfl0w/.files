@@ -22,6 +22,7 @@
     separator_color = frame
     startup_notification = false
     icon_position = right
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
 
 [frame]
     width = 1
