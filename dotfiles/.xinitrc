@@ -44,7 +44,15 @@ PIDB=$!
 
 command -v start-pulseaudio-x11 >/dev/null 2>&1 && start-pulseaudio-x11
 
-command -v dbus-launch>/dev/null 2>&1 && dbus-launch --exit-with-session bspwm || bspwm
+_launch(){
+  if `command -v dbus-launch >/dev/null 2>&1`; then
+    dbus-launch --exit-with-session "$@"
+  else
+    "$@"
+  fi
+}
+
+_launch bspwm
 
 #awesome
 #windowchef
