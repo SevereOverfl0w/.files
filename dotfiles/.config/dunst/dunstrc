@@ -1,5 +1,5 @@
 [global]
-    font = "hack 22"
+    font = "monospace 22"
     allow_markup = yes
     format = "<b>%s</b>\n%b"
     sort = yes
