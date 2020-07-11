@@ -8,7 +8,15 @@ if [[ $1 == "--type" ]]; then
 	shift
 fi
 
-password=$(gopass list -f | rofi -i -dmenu "$@")
+dmenu_display(){
+	if [[ -v WAYLAND_DISPLAY ]]; then
+		bemenu -i -p 'Password'
+	else
+		rofi -i -dmenu "$@"
+	fi
+}
+
+password=$(gopass list -f | dmenu_display)
 
 [[ -n $password ]] || exit
 
