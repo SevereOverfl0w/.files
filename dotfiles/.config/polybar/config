@@ -408,7 +408,7 @@ menu-1-1 = reboot
 menu-1-1-exec = sudo reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = loginctl --no-ask-password poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
