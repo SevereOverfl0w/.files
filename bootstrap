@@ -23,7 +23,7 @@ if [ ! -f ~/.config/nvim/init.vim ]; then
 fi
 
 # Dependencies of dotfiles
-install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot neovim fzf mpd nerd-fonts-otf
+install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot neovim curl fzf mpd polybar nerd-fonts-otf
 # Wayland dependencies
 install mako bemenu hikari waybar
 
