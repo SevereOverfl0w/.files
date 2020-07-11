@@ -42,6 +42,13 @@ call my_plugin#add('tpope/vim-fugitive')
 call my_plugin#add('tpope/vim-rhubarb')
 " Integration with gitlab
 call my_plugin#add('shumphrey/fugitive-gitlab.vim')
+" Conflicted is a plugin for simplifying merges
+call my_plugin#add('christoomey/vim-conflicted')
+
+function! Hook_post_source_conflicted()
+  set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+  set stl+=%{ConflictedVersion()}
+endf
 
 " This list is butched from:
 " https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/cgciltz/
