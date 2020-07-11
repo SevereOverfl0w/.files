@@ -2,4 +2,4 @@
 
 socket="$(mktemp -u -p '' kitty_socket.XXXXXXXXX)"
 
-GLFW_IM_MODULE=none kitty --listen-on "unix:${socket}" "$@" > /tmp/log 2> /tmp/log 
+kitty --listen-on "unix:${socket}" "$@"
