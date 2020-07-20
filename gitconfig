@@ -2,6 +2,8 @@
 	tool = vimdiff
 # [mergetool "vimdiff"]
 # 	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "conflicted"]
+	cmd = nvim +Conflicted
 [alias]
 	please = push --force-with-lease
 	it = !git init && git commit -m “root” --allow-empty
@@ -9,7 +11,7 @@
 	commend = commit --amend -c HEAD
 	signplz = config commit.gpgsign true
 	shudder = !git pull && git push
-	rbi = !sh -c \"git rebase -i `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
+	rbi = !sh -c \"git rebase --autosquash --rebase-merges -i `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
 	co = checkout
 	sta = "!f() { git stash push -m \"$(vipe <&-)\" \"$@\"; }; f"
 	pop = stash pop
@@ -48,3 +50,5 @@
 [filesystem "Oracle Corporation|1.8.0_202|/dev/mapper/pool-root"]
 	timestampResolution = 1001 milliseconds
 	minRacyThreshold = 0 nanoseconds
+[rerere]
+	enabled = true
