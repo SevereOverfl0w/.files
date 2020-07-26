@@ -16,3 +16,11 @@ let g:neomake_clojure_joker_maker = {
       \}
 
 let g:neomake_clojure_enabled_makers = ['kondo', 'joker']
+
+let g:neomake_voidtemplate_xlint_maker = {
+      \ 'exe': 'xlint',
+      \ 'errorformat': '%f:%l: %m',
+      \ 'auto_enabled': 1,
+      \}
+
+let g:neomake_voidtemplate_enabled_makers = ['xlint']
