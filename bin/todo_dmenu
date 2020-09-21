@@ -17,7 +17,7 @@ rofi_exit="$?"
 if [ ! 1 -eq "$rofi_exit" ]; then
   case $action in
     \|*\|*)
-      todo_number="$(echo $action | sed 's/|\([0-9]\+\)|.*/\1/')"
+      todo_number="$(echo $action | sed 's/|\s*\([0-9]\+\)|.*/\1/')"
       if [ 11 -eq "$rofi_exit" ]; then
         topydo edit -E 'kitty nvim' "$todo_number"
       else
