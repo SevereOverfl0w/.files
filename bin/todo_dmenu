@@ -2,8 +2,17 @@
 
 todos="$(topydo ls)"
 
-action="$(echo -n "$todos" | rofi -i -p "todo" -dmenu)"
+export BEMENU_SCALE=2
+action="$(echo -n "$todos" | bemenu -l 15 -i --fn monospace -p "1rm|2edit|3done todo:")"
 rofi_exit="$?"
+
+# Useful bindings
+## ctrl-a start of line
+## ctrl-e end of line
+##
+## Alt-1 rm instead of do
+## Alt-2 edit instead of do
+## Alt-3 Add and complete simultaneously
 
 if [ ! 1 -eq "$rofi_exit" ]; then
   case $action in
@@ -20,7 +29,11 @@ if [ ! 1 -eq "$rofi_exit" ]; then
       fi
       ;;
     *)
-      topydo add "$action"
+      if [ 12 -eq "$rofi_exit" ]; then
+        t-done "$action"
+      else
+        topydo add "$action"
+      fi
       ;;
   esac
 fi
