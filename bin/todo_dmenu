@@ -2,8 +2,7 @@
 
 todos="$(topydo ls)"
 
-export BEMENU_SCALE=2
-action="$(echo -n "$todos" | bemenu -l 15 -i --fn monospace -p "1rm|2edit|3done todo:")"
+action="$(echo -n "$todos" | bemenu -l 15 -i -p "1rm|2edit|3done|shft todo:")"
 rofi_exit="$?"
 
 # Useful bindings
