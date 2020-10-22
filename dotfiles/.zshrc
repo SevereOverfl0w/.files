@@ -134,3 +134,5 @@ command -v gopass >/dev/null 2>&1 && source <((gopass completion zsh | head -n -
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
+
+export BEMENU_OPTS="--fn 'monospace 12'"
