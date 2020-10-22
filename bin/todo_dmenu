@@ -12,6 +12,7 @@ rofi_exit="$?"
 ## Alt-1 rm instead of do
 ## Alt-2 edit instead of do
 ## Alt-3 Add and complete simultaneously
+## Shift-return Add unconditionally
 
 if [ ! 1 -eq "$rofi_exit" ]; then
   case $action in
