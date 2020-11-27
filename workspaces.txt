@@ -4,4 +4,4 @@ time
 code
 work
 im
-slck
+slack
