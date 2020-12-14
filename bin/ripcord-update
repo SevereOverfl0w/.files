@@ -1,0 +1,13 @@
+#!/bin/sh
+
+LATEST="$(curl https://cancel.fm/ripcord/ | grep -Po 'https://cancel.fm/dl/Ripcord-[0-9\.]+-x86_64.AppImage' | head -1)"
+
+mkdir -p ~/.local/share/ripcordnative/
+rm -rf ~/.local/share/ripcordnative/*
+
+curl -L "$LATEST" > ~/.local/share/ripcordnative/ripcord
+cd ~/.local/share/ripcordnative/
+chmod +x ripcord
+./ripcord --appimage-extract
+rm -rf squashfs-root/lib/* squashfs-root/plugins/*
+ln -s /usr/lib/libsodium.so.23 squashfs-root/lib/libsodium.so.18
