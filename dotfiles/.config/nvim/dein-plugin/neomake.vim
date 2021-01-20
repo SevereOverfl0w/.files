@@ -8,14 +8,7 @@ let g:neomake_clojure_kondo_maker = {
       \ 'auto_enabled': 1,
       \}
 
-let g:neomake_clojure_joker_maker = {
-      \ 'exe': 'joker',
-      \ 'args': ['--lint'],
-      \ 'errorformat': '%f:%l:%c: Parse %t%*[^:]: %m,%f:%l:%c: %t%*[^:]: %m',
-      \ 'auto_enabled': 1,
-      \}
-
-let g:neomake_clojure_enabled_makers = ['kondo', 'joker']
+let g:neomake_clojure_enabled_makers = ['kondo']
 
 let g:neomake_voidtemplate_xlint_maker = {
       \ 'exe': 'xlint',
