@@ -1,0 +1,5 @@
+#!/bin/bash
+
+dbus-run-session runsvdir ~/.files/services/ &
+trap "kill $!; finish" TERM INT
+wait

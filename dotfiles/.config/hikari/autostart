@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-runsvdir ~/.files/services &
-PIDA=$!
 runsvdir ~/.files/Waylandservices &
 PIDB=$!
 
 function finish {
-    kill -s HUP "$PIDA"
     kill -s HUP "$PIDB"
 }
 
