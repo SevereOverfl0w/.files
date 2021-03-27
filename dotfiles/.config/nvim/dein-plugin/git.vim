@@ -58,11 +58,11 @@ nnoremap <Leader>ga :Git add %:p<CR><CR>
 " Open status buffer
 nnoremap <Leader>gs :Gstatus<CR>
 " Commit normally
-nnoremap <Leader>gc :Gcommit -v -q<CR>
+nnoremap <Leader>gc :Git commit -v -q<CR>
 " Commit and stage current file (if you commit only)
-nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <Leader>gt :Git commit -v -q %:p<CR>
 " Open current file in diff mode
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gd :Gdiffsplit<CR>
 " Open current file on the index
 nnoremap <Leader>ge :Gedit<CR>
 " Like `:edit` but against the index
@@ -71,11 +71,11 @@ nnoremap <Leader>gr :Gread<CR>
 " basically)
 nnoremap <Leader>gw :Gwrite<CR><CR>
 " Open log for current file
-nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <Leader>gl :silent! Gclog<CR>:bot copen<CR>
 " git-grep version of :grep
 nnoremap <Leader>gp :Ggrep<Space>
 " Rename current buffer and do `git mv`
-nnoremap <Leader>gm :Gmove<Space>
+nnoremap <Leader>gm :GMove<Space>
 " Pass through to git
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>
