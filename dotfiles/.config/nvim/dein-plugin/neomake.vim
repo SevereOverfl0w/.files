@@ -8,3 +8,8 @@ let g:neomake_voidtemplate_xlint_maker = {
       \}
 
 let g:neomake_voidtemplate_enabled_makers = ['xlint']
+
+" javac is slow, due to maven shell out
+" https://github.com/neomake/neomake/issues/875
+" javac is the only java maker
+let g:neomake_java_enabled_makers = []
