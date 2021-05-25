@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kitty_opts --class=quicknote nvim ~/doc/QuickNote.md
