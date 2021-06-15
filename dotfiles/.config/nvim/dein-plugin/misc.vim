@@ -42,3 +42,5 @@ call my_plugin#add('lepture/vim-jinja')
 call my_plugin#add('tpope/vim-scriptease')
 
 call my_plugin#add('ziglang/zig.vim') 
+
+call my_plugin#add('tpope/vim-speeddating')
