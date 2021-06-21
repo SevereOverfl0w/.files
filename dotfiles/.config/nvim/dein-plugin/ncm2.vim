@@ -14,3 +14,14 @@ augroup END
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
+
+au User Ncm2Plugin call ncm2#register_source({
+        \ 'name' : 'todo',
+        \ 'priority': 9,
+        \ 'scope': ['todo'],
+        \ 'mark': 'todo',
+        \ 'word_pattern': '[+@]\S+',
+        \ 'complete_length': -1,
+        \ 'complete_pattern': '[+@]',
+        \ 'on_complete': ['ncm2#on_complete#omni', 'todo#Complete'],
+        \ })
