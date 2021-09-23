@@ -25,7 +25,8 @@ autoload -Uz _zinit
 zinit light mafredri/zsh-async
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-autosuggestions
-zinit light changyuheng/zsh-interactive-cd, use:zsh-interactive-cd.plugin.zsh
+zinit ice pick"zsh-interactive-cd.plugin.zsh";
+zinit light changyuheng/zsh-interactive-cd
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 source ~/.config/p10k-pure.zsh
