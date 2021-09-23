@@ -56,7 +56,7 @@ endf
 " Stage file
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 " Open status buffer
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Git<CR>
 " Commit normally
 nnoremap <Leader>gc :Git commit -v -q<CR>
 " Commit and stage current file (if you commit only)
