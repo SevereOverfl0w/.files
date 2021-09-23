@@ -10,6 +10,10 @@ function! s:is_func(x) abort
   return type(a:x) == v:t_func
 endf
 
+function my_plugin#echo_hook_suffix(plugin_repo)
+  echom substitute(get(dein#parse#_dict({'repo': a:plugin_repo}), 'normalized_name'), '-', '_', 'g')
+endfunction
+
 function! s:plugin_hook(prefix) abort
   let name = substitute(g:dein#plugin.normalized_name, '-', '_', 'g')
   let F = s:get_function('Hook_'.a:prefix.'_'.name)
