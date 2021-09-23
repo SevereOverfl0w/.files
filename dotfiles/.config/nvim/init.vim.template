@@ -6,6 +6,7 @@ let g:my_plugin_loaded_deoplete = 1
 let g:my_plugin_loaded_asyncomplete = 1
 let g:my_plugin_loaded_ncm2 = 1
 let g:my_plugin_loaded_coc = 1
+let g:my_plugin_loaded_cmp = 1
 
 let g:my_plugin_loaded_ctrlp = 1
 
