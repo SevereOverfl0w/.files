@@ -25,7 +25,7 @@ fi
 # Dependencies of dotfiles
 install zsh dunst sxhkd rofi bspwm wmname xrdb xsetroot neovim curl fzf mpd polybar nerd-fonts-otf
 # Wayland dependencies
-install mako bemenu hikari Waybar
+install mako bemenu hikari Waybar xdg-desktop-portal-wlr
 
 # Setup shell
 if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; then
