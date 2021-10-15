@@ -1,6 +1,6 @@
 " Update the static files for clojure from it's upstream,
 " this includes fixes like indenting #() properly.
-call my_plugin#add('guns/vim-clojure-static')
+call my_plugin#add('clojure-vim/clojure.vim')
 
 " This plugin allows you to manipulate sexp (clojure
 " parens) in magical ways.
