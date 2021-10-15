@@ -10,8 +10,6 @@ function! Hook_post_source_cmp()
   " TODO: set preview, or use += and base on init.vim
   set completeopt=menu,menuone,noselect,preview
 
-  call async_clj_omni#cmp#register()
-
   lua <<EOF
 local cmp = require'cmp'
 
