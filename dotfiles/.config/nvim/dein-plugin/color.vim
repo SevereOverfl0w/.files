@@ -2,7 +2,7 @@ call my_plugin#add('sonph/onehalf', {'rtp': 'vim/'})
 call my_plugin#add('https://gitlab.com/protesilaos/tempus-themes-vim.git') 
 call my_plugin#add('NLKNguyen/papercolor-theme')
 
-let s:preferred_color_scheme = get(g:, 'preferred_color_scheme', ['onehalf', 'onehalflight'])
+let s:preferred_color_scheme = get(g:, 'preferred_color_scheme', ['onehalf', 'onehalflight', 'onehalfdark'])
 
 let g:PaperColor_Theme_Options = {
 \   'theme': {
@@ -22,9 +22,10 @@ augroup END
 
 function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
-    exe 'colorscheme '.s:preferred_color_scheme[1]
+    let scheme = get(g:, 'DARKMODE', 0) ? s:preferred_color_scheme[2] :  s:preferred_color_scheme[1]
+    exe 'colorscheme '.scheme
     " AutoCmds not triggered during VimEnter / other autocmds
-    exe 'doautocmd ColorScheme '.s:preferred_color_scheme[1]
+    exe 'doautocmd ColorScheme '.scheme
   endif
 endf
 
