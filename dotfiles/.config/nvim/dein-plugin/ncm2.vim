@@ -26,4 +26,14 @@ function Hook_post_source_ncm2()
           \ 'complete_pattern': '[+@]',
           \ 'on_complete': ['ncm2#on_complete#omni', 'todo#Complete'],
           \ })
+
+  au User Ncm2Plugin call ncm2#register_source({
+      \ 'name' : 'zk',
+      \ 'priority': 9,
+      \ 'scope': ['markdown'],
+      \ 'mark': 'ZK',
+      \ 'complete_pattern': ['\[\[', '#'],
+      \ 'on_complete': 'ncm2#on_complete#lsp',
+      \ })
 endfunction
+
