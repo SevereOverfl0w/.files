@@ -13,6 +13,7 @@
 	shudder = !git pull && git push
 	rbi = !sh -c \"git rebase --autosquash --rebase-merges -i `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
 	rbp = !sh -c \"git rebase -x 'return 1' `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
+	rbc = rebase --continue
 	co = checkout
 	sta = "!f() { git stash push -m \"$(vipe <&-)\" \"$@\"; }; f"
 	pop = stash pop
