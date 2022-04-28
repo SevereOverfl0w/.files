@@ -25,6 +25,7 @@
 	mergedtopiclg = !sh -c \"git lg $(git oldest-ancestor $1^2 ${2:-master})..$1^2\" -
 	step-through = "!sh -c \"GIT_EDITOR=\\\"ex -sc '%s/\\v^[^#][^ ]+/edit' +wq\\\" git rebase -i $(git oldest-ancestor ${1:-origin/master})\""
 	review-change = !sh -c \"nvim  '+Gedit HEAD' '+Git difftool -y HEAD^' '+normal gT'\" -
+	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
 [push]
 	default = current
 	followTags = true
