@@ -29,6 +29,8 @@ zinit ice pick"zsh-interactive-cd.plugin.zsh";
 zinit light changyuheng/zsh-interactive-cd
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
+zstyle ':completion::complete:git-switch:*:branch-names' menu yes select=long search
+
 source ~/.config/p10k-pure.zsh
 
 ## Arrow Keys ###########################################
