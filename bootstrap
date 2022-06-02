@@ -55,7 +55,7 @@ sudo stow --no-folding --dir=${dotfiles_repo} --target=/ global
 ## Manually:
 ## sudo ln -s /etv/sv/seatd /var/service/
 ## sudo ln -s /etc/sv/rundird /var/service/
-install pipewire seatd rundird
+install pipewire wireplumber seatd rundird
 
 if ! id -nG "$USER" | grep -qw "_seatd"; then
 	echo "Adding to _seatd"
