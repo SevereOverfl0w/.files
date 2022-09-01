@@ -86,7 +86,10 @@ fi
 PATH=$PATH:$HOME/bin:$HOME/.files/bin/:$HOME/.local/bin:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cargo/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /usr/share/doc/fzf/key-bindings.zsh ] && source /usr/share/doc/fzf/key-bindings.zsh; source /usr/share/doc/fzf/completion.zsh
+if [ -f /usr/share/doc/fzf/key-bindings.zsh ]; then
+  source /usr/share/doc/fzf/key-bindings.zsh
+  source /usr/share/doc/fzf/completion.zsh
+fi
 
 function fzf-ghq() {
     local selected_dir=$(ghq list -p | $(__fzfcmd) --query "$LBUFFER")
