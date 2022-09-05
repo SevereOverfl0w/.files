@@ -36,7 +36,7 @@ fi
 zinit_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 
 if [ ! -e "$zinit_dir" ]; then
-	git clone https://github.com/zdharma/zinit.git "$zinit_dir"
+	git clone https://github.com/zdharma-continuum/zinit.git "$zinit_dir"
 fi
 
 # Create local bin directory
