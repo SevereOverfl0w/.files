@@ -1,5 +1,8 @@
 call my_plugin#add('neomake/neomake')
-call neomake#configure#automake('nrwi', 500)
+
+function Hook_post_source_neomake()
+    call neomake#configure#automake('nrwi', 500)
+endfunction
 
 let g:neomake_voidtemplate_xlint_maker = {
       \ 'exe': 'xlint',
