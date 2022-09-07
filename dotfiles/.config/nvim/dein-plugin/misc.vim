@@ -10,6 +10,10 @@ endf
 " own operators.  More than just those in operators.
 call my_plugin#add('kana/vim-operator-user')
 
+function! Hook_post_source_operator_user()
+    doautocmd User OperatorUserDefine
+endf
+
 " This is both a utility and dependency of a few plugins
 " (fugitive, rhubarb, jack-in)
 call my_plugin#add('tpope/vim-dispatch')

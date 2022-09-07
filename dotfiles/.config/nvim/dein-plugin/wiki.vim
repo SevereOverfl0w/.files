@@ -15,8 +15,11 @@ nnoremap <leader>tA :<C-U>AddTodo<space>
 
 command! -nargs=* AddTodo call s:AppendToFile(expand('~/doc/todo.txt'), [join([<q-args>], ' ')])
 
-call operator#user#define('add-todo', 'Add_todo')
-call operator#user#define('prompt-todo', 'Prompt_todo')
+augroup WikiUserDefine
+    autocmd!
+    autocmd User OperatorUserDefine call operator#user#define('add-todo', 'Add_todo')
+    autocmd User OperatorUserDefine call operator#user#define('prompt-todo', 'Prompt_todo')
+augroup END
 
 function! Add_todo(motion_wise)
   let v = operator#user#visual_command_from_wise_name(a:motion_wise)
