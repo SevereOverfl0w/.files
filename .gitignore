@@ -6,3 +6,5 @@ nvim/autoload/plug.vim*
 nvim/layer/local
 nvim/spell/*
 supervise
+
+dotfiles/.config/kitty/platform.conf
