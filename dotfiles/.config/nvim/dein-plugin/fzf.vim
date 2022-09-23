@@ -36,3 +36,21 @@ noremap <leader>B <Cmd>BLines<cr>
 noremap <leader>L <Cmd>Lines<cr>
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+
+function s:tabName(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return bufname(buflist[winnr - 1])
+endfunction
+
+function! s:jumpToTab(line)
+    let pair = split(a:line, ' ')
+    let cmd = pair[0].'gt'
+    execute 'normal' cmd
+endfunction
+
+command! Tabs :call fzf#run({
+\   'source':  reverse(map(range(1, tabpagenr('$')), 'v:val." "." ".<SID>tabName(v:val)')),
+\   'sink':    function('<sid>jumpToTab'),
+\   'down':    tabpagenr('$') + 2
+\ })
