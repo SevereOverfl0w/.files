@@ -15,13 +15,22 @@ local cmp = require'cmp'
 
 cmp.setup({
   mapping = {
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-y>'] = cmp.mapping.confirm({
+      select = true,
+      -- behavior = cmp.ConfirmBehavior.Replace,
+    }),
   },
   sources = {
-    { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'async_clj_omni' },
   }
 })
+
+cmp.setup.filetype({'markdown'}, {
+  sources = {
+      { name = 'nvim_lsp' },
+      { name = 'buffer' },
+    }
+  })
 EOF
 endfunction
