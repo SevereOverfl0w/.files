@@ -46,6 +46,9 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+# DBus integration - for things like Gnome secrets manager to launch UI
+exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 ### Input configuration
 #
 # Example configuration:
