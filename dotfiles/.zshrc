@@ -68,7 +68,12 @@ alias v="nvim"
 alias pacupg='sudo xbps-install -Su'
 alias pacins='sudo xbps-install -S'
 alias pacrem='sudo xbps-remove -R'
-alias pacfind='xbps-query -R -s'
+
+# alias pacfind='xbps-query -R -s'
+function pacfind(){
+    xbps-query -R -s "$@" | grep -Pv -- "-dbg-\d"
+}
+
 alias pacinfo='xbps-query -R'
 alias paclocate='xbps-query -Ro'
 alias paclist='xbps-query -Rf'
