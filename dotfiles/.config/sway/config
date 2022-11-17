@@ -61,6 +61,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Read `man 5 sway-input` for more information about this section.
 
 input type:keyboard xkb_layout gb
+input type:keyboard xkb_options lv3:ralt_switch_multikey
 input type:touchpad natural_scroll enabled
 ### Key bindings
 #
