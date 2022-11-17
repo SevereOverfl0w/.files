@@ -5,9 +5,9 @@ function! Hook_post_source_lspconfig()
   lua << EOF
   function _G.clojure_omnifunc_lsp_fallback(...)
     if vim.fn['fireplace#op_available']('complete') == 0 then
-      vim.lsp.omnifunc(...)
+      return vim.lsp.omnifunc(...)
     else
-      vim.fn['fireplace#omnicomplete'](...)
+      return vim.fn['fireplace#omnicomplete'](...)
     end
   end
 
