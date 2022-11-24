@@ -120,6 +120,9 @@ function t() {
 
 alias v='nvim'
 
+# https://github.com/android-password-store/Android-Password-Store/issues/173#issuecomment-453686599
+export GOPASS_GPG_OPTS='--no-throw-keyids'
+
 _fzf_complete_gopass() {
   _fzf_complete '+m' "$@" < <(
     gopass find ''
