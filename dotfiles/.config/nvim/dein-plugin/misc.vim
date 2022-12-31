@@ -51,6 +51,8 @@ call my_plugin#add('zaid/vim-rec')
 
 call my_plugin#add('tpope/vim-speeddating')
 
+call my_plugin#add('tpope/vim-eunuch')
+
 let g:textobj_diff_no_default_key_mappings = 1
 call my_plugin#add('kana/vim-textobj-diff')
 
