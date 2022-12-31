@@ -47,6 +47,8 @@ call my_plugin#add('tpope/vim-scriptease')
 
 call my_plugin#add('ziglang/zig.vim') 
 
+call my_plugin#add('zaid/vim-rec')
+
 call my_plugin#add('tpope/vim-speeddating')
 
 let g:textobj_diff_no_default_key_mappings = 1
