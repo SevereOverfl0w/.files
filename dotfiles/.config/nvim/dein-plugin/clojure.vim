@@ -31,8 +31,11 @@ call my_plugin#add('clojure-vim/vim-jack-in')
 
 function! Hook_post_source_jack_in()
   let g:jack_in_injections['cider/piggieback'] =
-      \  {'version': '0.4.2',
+      \  {'version': '0.5.3',
       \   'middleware': 'cider.piggieback/wrap-cljs-repl'}
+
+  let g:jack_in_injections['refactor-nrepl/refactor-nrepl']['version'] = '3.6.0'
+  let g:jack_in_injections['cider/cider-nrepl']['version'] = '0.29.0'
 
   if exists('*Local_Jack_In')
       call Local_Jack_In()
