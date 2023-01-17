@@ -2,7 +2,7 @@ call my_plugin#add('sonph/onehalf', {'rtp': 'vim/'})
 call my_plugin#add('https://gitlab.com/protesilaos/tempus-themes-vim.git') 
 call my_plugin#add('NLKNguyen/papercolor-theme')
 
-let s:preferred_color_scheme = get(g:, 'preferred_color_scheme', ['onehalf', 'onehalflight', 'onehalfdark'])
+let s:preferred_color_scheme = get(g:, 'preferred_color_scheme', ['tempus_themes', 'tempus_day', 'tempus_night'])
 
 let g:PaperColor_Theme_Options = {
 \   'theme': {

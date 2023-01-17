@@ -141,3 +141,5 @@ zle -N edit-command-line
 bindkey '^X^e' edit-command-line
 
 export BEMENU_OPTS="--fn 'monospace 12'"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=15"

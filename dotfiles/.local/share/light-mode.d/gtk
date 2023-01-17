@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case "$(basename "$(dirname $0)")" in
+  light-mode.d)
+    theme="Arc"
+    color_scheme=prefer-light
+    ;;
+  dark-mode.d)
+    theme="Arc-Dark"
+    color_scheme=prefer-dark
+    ;;
+esac
+
+gsettings set org.gnome.desktop.interface gtk-theme "$theme"
+gsettings set org.gnome.desktop.interface color-scheme "$color_scheme"

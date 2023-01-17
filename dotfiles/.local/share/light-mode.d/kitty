@@ -1,0 +1,9 @@
+#!/bin/sh
+
+case "$(basename "$(dirname $0)")" in
+  light-mode.d) theme="Tempus Day";;
+  dark-mode.d) theme="Tempus Night";;
+esac
+
+kitty +kitten themes --dump-theme "$theme" > ~/.config/kitty/current-theme.conf
+pkill -USR1 kitty
