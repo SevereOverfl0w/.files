@@ -1,0 +1,17 @@
+#!/bin/sh
+
+"exec" "clojure" "-Sdeps" '{:deps {borkdude/rewrite-edn {:mvn/version "0.4.6"}}}' "-M" "$0" "$(dirname $0)" "$@"
+
+(require '[borkdude.rewrite-edn :as r]
+         '[clojure.java.io :as io]
+         '[clojure.string :as string])
+
+(def home (System/getProperty "user.home"))
+(def deps-f (io/file home ".clojure/deps.edn"))
+(def deps-edn (r/parse-string (if (.exists deps-f) (slurp deps-f) "{}")))
+(def script-dir (first *command-line-args*))
+(def dev-alias
+  (-> (r/parse-string (slurp (io/file script-dir "dev.edn")))
+      (r/update :main-opts (comp #(update % 1 string/replace #"^~" home) r/sexpr))))
+
+(spit deps-f (str (r/assoc-in deps-edn [:aliases :user/dev] dev-alias)))

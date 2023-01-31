@@ -1,0 +1,5 @@
+{;; N.B: Do not edit, instead edit ~/.files/clojure/dev.edn
+ :extra-deps {com.gfredericks/dot-slash-2 {:mvn/version "0.1.5"}
+              vvvvalvalval/scope-capture {:mvn/version "0.3.3"}}
+ :jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
+ :main-opts ["-i" "~/.files/clojure/dev.clj"]}
