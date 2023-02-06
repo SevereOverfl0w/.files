@@ -37,10 +37,38 @@ function! Hook_post_source_jack_in()
   let g:jack_in_injections['refactor-nrepl/refactor-nrepl']['version'] = '3.6.0'
   let g:jack_in_injections['cider/cider-nrepl']['version'] = '0.29.0'
 
+  let g:jack_in_injections['io.dominic/nrepl-bind'] =
+              \  {'version': '0.1.1',
+              \   'middleware': 'io.dominic.nrepl-bind/wrap-bind'}
+  " let g:jack_in_injections['io.dominic/nrepl-bind'] = {'middleware': 'io.dominic.nrepl-bind/wrap-bind'}
+
   if exists('*Local_Jack_In')
       call Local_Jack_In()
   endif
 endf
+
+let s:setup = []
+function! s:SetupBind(a)
+    if !fireplace#op_available('eval')
+        return
+    endif
+    let id = fireplace#client().session.url
+    if index(s:setup, id)
+        let Eval = fireplace#clj().Eval
+        " TODO: Changes *1, so not ideal.  Probably need to add an op to
+        " nrepl-bind instead.
+        call Eval("(ns io.dominic.mise.vim) (io.dominic.nrepl-bind/try-bind-vars matcher-combinators.ansi-color/*use-color*)")
+        call Eval("(ns io.dominic.mise.vim) (when (resolve 'matcher-combinators.ansi-color/*use-color*) (eval '(set! matcher-combinators.ansi-color/*use-color* false)))")
+        call add(s:setup, id)
+    endif
+endfunction
+
+augroup FireplaceCustom
+    autocmd!
+    autocmd FileType clojure call s:SetupBind()
+    autocmd User FireplaceActivate call s:SetupBind()
+augroup END
+
 
 " async-clj-omni is an auto-completion plugin for
 " clojure
