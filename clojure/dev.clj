@@ -3,7 +3,7 @@
 (require '[com.gfredericks.dot-slash-2 :as dot-slash-2])
 
 (dot-slash-2/!
-  '{. [clojure.test/run-tests
+  '{. [clojure.test/run-tests clojure.test/test-vars
        {:var sc.api/spy :lazy? true :macro? true}
        {:var sc.api/letsc :lazy? true :macro? true}
        {:var sc.api/defsc :lazy? true :macro? true}
