@@ -15,3 +15,6 @@
 (let [platform (java.io.File. (System/getProperty "user.home") ".clojure/platform.clj")]
   (when (.exists platform)
     (load-file (.getAbsolutePath platform))))
+
+(require 'pjstadig.humane-test-output)
+(pjstadig.humane-test-output/activate!)
