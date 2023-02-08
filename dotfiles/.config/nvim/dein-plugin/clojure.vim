@@ -49,7 +49,7 @@ endf
 
 let s:setup = []
 function! s:SetupBind()
-    if !fireplace#op_available('eval')
+    if !fireplace#op_available('eval') || !has_key(fireplace#client(), 'session')
         return
     endif
     let id = fireplace#client().session.url
