@@ -49,10 +49,10 @@ endf
 
 let s:setup = []
 function! s:SetupBind()
-    if !fireplace#op_available('eval') || !has_key(fireplace#client(), 'session')
+    if !fireplace#op_available('eval')
         return
     endif
-    let id = fireplace#client().session.url
+    let id = fireplace#clj().Client().session.url
     if index(s:setup, id)
         let Eval = fireplace#clj().Eval
         " TODO: Changes *1, so not ideal.  Probably need to add an op to
