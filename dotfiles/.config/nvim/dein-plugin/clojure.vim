@@ -48,7 +48,7 @@ function! Hook_post_source_jack_in()
 endf
 
 let s:setup = []
-function! s:SetupBind(a)
+function! s:SetupBind()
     if !fireplace#op_available('eval')
         return
     endif
