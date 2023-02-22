@@ -26,6 +26,9 @@
 	mergedtopiclg = !sh -c \"git lg $(git oldest-ancestor $1^2 ${2:-master})..$1^2\" -
 	step-through = "!sh -c \"GIT_EDITOR=\\\"nvim -e -sc '%s/\\v^pick/edit' +wq\\\" git rebase --rebase-merges -i $(git oldest-ancestor ${1:-origin/master})\""
 	review-change = !sh -c \"nvim  '+Gedit HEAD' '+Git difftool -y HEAD^' '+normal gT'\" -
+	# review-changes = !sh -c \"nvim  \\\"+Git log -p ${1:-HEAD}\\\" \\\"+Git difftool -y ${1:-HEAD^}\\\" '+normal gT'\" -
+	# review-changes = !bash -c \"nvim \\\"+Git log -p ${1:-HEAD}\\\" \\\"+Git log --oneline ${1:-HEAD}\\\" \\\"+Git difftool -y ${*:-HEAD^}\\\" '+normal gT'\"
+	review-changes = !bash -c \"nvim \\\"+Git log ${1:-HEAD}\\\" \\\"+Git log --oneline ${1:-HEAD}\\\" \\\"+Git difftool -y ${*:-HEAD^}\\\" '+normal gT'\"
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
 [push]
 	default = current
