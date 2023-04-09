@@ -41,3 +41,7 @@ set signcolumn=auto:2
 nmap ]a <Cmd>next<CR>
 nmap [a <Cmd>previous<CR>
 nmap ]oh <Cmd>nohlsearch<CR>
+
+if has('nvim-0.9.0')
+    set diffopt+=linematch:60
+endif
