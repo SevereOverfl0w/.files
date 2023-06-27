@@ -25,10 +25,10 @@ function! dispatch#kitty#handle(request) abort
 	    let redir = &shellredir . ' ' . '/dev/null'
 	endif
 
-	let kitty = 'kitty @ new-window --title='.shellescape(a:request.title).' '.'--cwd='.shellescape(a:request.directory)
+	let kitty = 'kitty @ launch --title='.shellescape(a:request.title).' '.'--cwd='.shellescape(a:request.directory)
 
 	if a:request.action ==# 'start'
-	  let kitty .= ' --new-tab --tab-title='.shellescape(a:request.title)
+	  let kitty .= ' --type=tab --tab-title='.shellescape(a:request.title)
 	endif
 
 	if a:request.background
