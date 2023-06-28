@@ -5,8 +5,12 @@
 
               com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.3"}
               com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.0.3"}
-              criterium/criterium {:mvn/version "0.4.6"}}
+              criterium/criterium {:mvn/version "0.4.6"}
+
+              io.github.nubank/morse {:git/tag "v2023.04.30.01" :git/sha "d99b09c"}}
  :jvm-opts ["-XX:-OmitStackTraceInFastThrow"
             ;; profiler flags:
-            "-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"]
+            "-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"
+            ;; allow morse to work:
+            "-Djava.awt.headless=false"]
  :main-opts ["-i" "~/.files/clojure/dev.clj"]}

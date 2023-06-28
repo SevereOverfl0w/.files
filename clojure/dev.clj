@@ -10,7 +10,9 @@
        {:var sc.api/undefsc :lazy? true :macro? true}
        {:var clj-async-profiler.core/profile :lazy? true :macro? true}
        {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
-       {:var clj-memory-meter.core/measure :lazy? true :macro? false}]})
+       {:var clj-memory-meter.core/measure :lazy? true :macro? false}
+
+       dev.nu.morse/launch-in-proc dev.nu.morse/inspect]})
 
 (let [platform (java.io.File. (System/getProperty "user.home") ".clojure/platform.clj")]
   (when (.exists platform)
