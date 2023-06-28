@@ -6,6 +6,15 @@ let g:grepper = {}
 " Change the preferred ordering of tools, ripgrep works better than git-grep
 " in most cases. e.g. untracked files
 let g:grepper.tools = ['git', 'grep']
+if executable('grape')
+  call insert(g:grepper.tools, 'grape')
+  let g:grepper.grape = {
+        \ 'grepprg': 'grape --inline $* .',
+        \ 'grepprgbuf': 'grape --inline $* $.',
+        \ 'grepformat': '%+P%f:,%l: %m,%-Q'
+        \ }
+endif
+
 if executable('ag')
   call insert(g:grepper.tools, 'ag')
 endif
