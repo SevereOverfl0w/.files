@@ -50,3 +50,6 @@ nmap <buffer> <localleader>cmr :CMagicRequires<CR>ggcpp``
 compiler clj-lint
 
 nmap <LocalLeader>]d <Plug>ReplantPeekSource
+
+
+setlocal lispwords+=$d,<>
