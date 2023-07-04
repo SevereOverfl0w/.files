@@ -54,7 +54,7 @@ function! Hook_post_source_lspconfig()
     }
 
     if cmp_loaded then
-      opts.capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+      opts.capabilities = cmp_nvim_lsp.default_capabilities()
     end
     nvim_lsp[lsp].setup(opts)
   end
