@@ -35,8 +35,8 @@
 	followTags = true
 [pull]
 	rebase = true
-[core]
-	excludesfile = ~/.gitignore
+# [core]
+# 	excludesfile = ~/.gitignore
 [http "https://gopkg.in"]
 	followRedirects = true
 [rebase]
