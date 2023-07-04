@@ -13,7 +13,8 @@
 	shudder = !git pull && git push
 	rb = rebase
 	rbi = !sh -c \"git rebase --autosquash --rebase-merges -i `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
-	rbp = !sh -c \"git rebase -x 'return 1' `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
+	# rbp = !sh -c \"git rebase -x 'return 1' `git merge-base --fork-point ${1:-origin/master} HEAD`\" -
+	rbp = !sh -c \"git rebase -x 'return 1' `git merge-base --fork-point ${1:-origin/master} HEAD || git merge-base ${1:-origin/master} HEAD`\" -
 	rbc = rebase --continue
 	rba = rebase --abort
 	co = checkout
