@@ -23,7 +23,7 @@
 
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(yellow)%h%C(reset) %C(normal)%s%C(reset) %C(dim white)%an%C(reset) %C(dim blue)(%ar)%C(reset) %C(auto)%d%C(reset)'
 	oldest-ancestor = !bash -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
-	blg = !sh -c \"git lg $(git oldest-ancestor ${1:-master})..\" -
+	blg = !sh -c \"git lg $(git oldest-ancestor ${1:-origin/master})..\" -
 	mergedtopiclg = !sh -c \"git lg $(git oldest-ancestor $1^2 ${2:-master})..$1^2\" -
 	step-through = "!sh -c \"GIT_EDITOR=\\\"nvim -e -sc '%s/\\v^pick/edit' +wq\\\" git rebase --rebase-merges -i $(git oldest-ancestor ${1:-origin/master})\""
 	review-change = !sh -c \"nvim  '+Gedit HEAD' '+Git difftool -y HEAD^' '+normal gT'\" -
