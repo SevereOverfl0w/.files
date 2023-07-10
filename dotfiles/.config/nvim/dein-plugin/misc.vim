@@ -53,6 +53,8 @@ call my_plugin#add('tpope/vim-speeddating')
 
 call my_plugin#add('tpope/vim-eunuch')
 
+call my_plugin#add('rhysd/conflict-marker.vim')
+
 let g:textobj_diff_no_default_key_mappings = 1
 call my_plugin#add('kana/vim-textobj-diff')
 
