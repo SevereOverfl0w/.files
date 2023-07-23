@@ -1,0 +1,2 @@
+# Nitrokey 3(A mini/A nfc/C nfc)
+ATTRS{idVendor}=="20a0", ATTRS{idProduct}=="42b2", GROUP="plugdev", TAG+="uaccess"
