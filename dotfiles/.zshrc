@@ -116,7 +116,16 @@ function t() {
   else
     topydo "$@"
   fi
+
+function _quick_todo(){
+  zle push-line
+  BUFFER="~/doc/bin/single-todo-entry"
+  zle accept-line
+  zle reset-prompt
 }
+
+zle -N _quick_todo
+bindkey '^i^t' _quick_todo
 
 alias v='nvim'
 
