@@ -116,6 +116,7 @@ function t() {
   else
     topydo "$@"
   fi
+}
 
 function _quick_todo(){
   zle push-line
