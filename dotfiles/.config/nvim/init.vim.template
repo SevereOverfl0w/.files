@@ -9,6 +9,7 @@ let g:my_plugin_loaded_coc = 1
 let g:my_plugin_loaded_cmp = 1
 
 let g:my_plugin_loaded_ctrlp = 1
+let g:my_plugin_loaded_clap = 1
 
 let g:dirs_of_interest = [
       \ {'directory': '~/doc',
