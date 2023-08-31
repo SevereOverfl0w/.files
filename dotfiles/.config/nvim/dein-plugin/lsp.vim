@@ -3,6 +3,20 @@ call my_plugin#add('neovim/nvim-lspconfig')
 function! Hook_post_source_lspconfig()
 
   lua << EOF
+  function _G.code_action_printer(code_action)
+      vim.notify(vim.inspect(code_action))
+      return true
+  end
+
+
+  function _G.filter_code_action(name)
+    return function(code_action)
+        return code_action.command.command == name
+    end
+  end
+
+
+
   function _G.clojure_omnifunc_lsp_fallback(...)
     if vim.fn['fireplace#op_available']('complete') == 0 then
       return vim.lsp.omnifunc(...)
@@ -35,7 +49,8 @@ function! Hook_post_source_lspconfig()
     -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     -- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
@@ -77,6 +92,13 @@ function! Hook_post_source_lspconfig()
       buf_set_keymap('n', '<C-w>gs', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>', opts)
       -- TODO: Use K, but only when fireplace isn't connected.
       buf_set_keymap('n', '<localleader>K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+      buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      buf_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+
+      buf_set_keymap('v', '<localleader>ef', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("extract-function"), apply = true})<CR>', opts)
+      buf_set_keymap('v', '<localleader>tf', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("thread-first-all"), apply = true})<CR>', opts)
+      buf_set_keymap('v', '<localleader>nsc', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("clean-ns"), apply = true})<CR>', opts)
 
       buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
