@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rg --no-line-number --no-column --no-filename  --no-heading --only-matching "\[$1 :as (.*?)\]" -r '$1' | sort | uniq -c | sort -hr
