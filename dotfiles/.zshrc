@@ -156,3 +156,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=15"
 
 setopt HIST_IGNORE_SPACE
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+
+alias ghbase="gh pr view --json 'baseRefName' --jq '.baseRefName'"
