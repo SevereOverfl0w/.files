@@ -67,4 +67,4 @@ if ! grep -qw "pam_rundird.so" /etc/pam.d/login; then
 	printf "session\toptional\tpam_rundird.so" | sudo tee -a /etc/pam.d/login
 fi
 
-git config --global include.path "$dotfiles_repo/gitconfig"
+git config --replace-all --global include.path "$dotfiles_repo/gitconfig" "$dotfiles_repo/gitconfig"
