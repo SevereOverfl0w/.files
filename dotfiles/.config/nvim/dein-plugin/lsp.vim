@@ -62,6 +62,14 @@ function! Hook_post_source_lspconfig()
 
   local cmp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
   local servers = { 'zk', 'tsserver' }
+
+  function is_cmd_installed(lsp)
+    local cmd = nvim_lsp[lsp].document_config.default_config.cmd
+    -- Only present after a start:
+    -- nvim_lsp[lsp].cmd[1]
+    return vim.fn.executable(cmd[1]) == 1
+  end
+
   for _, lsp in ipairs(servers) do
     opts = {
       on_attach = on_attach,
@@ -71,49 +79,53 @@ function! Hook_post_source_lspconfig()
     if cmp_loaded then
       opts.capabilities = cmp_nvim_lsp.default_capabilities()
     end
-    nvim_lsp[lsp].setup(opts)
+    if is_cmd_installed(lsp) then
+      nvim_lsp[lsp].setup(opts)
+    end
   end
 
-  nvim_lsp.clojure_lsp.setup{
-    settings = {
-      diagnostics = true,
-    },
-    on_attach = function(client, bufnr)
-      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  if is_cmd_installed('clojure_lsp') then
+    nvim_lsp.clojure_lsp.setup{
+      settings = {
+        diagnostics = true,
+      },
+      on_attach = function(client, bufnr)
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-      buf_set_option('omnifunc', 'v:lua._G.clojure_omnifunc_lsp_fallback')
+        buf_set_option('omnifunc', 'v:lua._G.clojure_omnifunc_lsp_fallback')
 
-      local opts = { noremap=true, silent=true }
+        local opts = { noremap=true, silent=true }
 
-      -- TODO: Use gs, but only when fireplace isn't connected.
-      buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      -- Fireplace is already using <C-w>gd
-      buf_set_keymap('n', '<C-w>gs', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>', opts)
-      -- TODO: Use K, but only when fireplace isn't connected.
-      buf_set_keymap('n', '<localleader>K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        -- TODO: Use gs, but only when fireplace isn't connected.
+        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        -- Fireplace is already using <C-w>gd
+        buf_set_keymap('n', '<C-w>gs', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>', opts)
+        -- TODO: Use K, but only when fireplace isn't connected.
+        buf_set_keymap('n', '<localleader>K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
-      buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-      buf_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        buf_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
-      buf_set_keymap('v', '<localleader>ef', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("extract-function"), apply = true})<CR>', opts)
-      buf_set_keymap('v', '<localleader>tf', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("thread-first-all"), apply = true})<CR>', opts)
-      buf_set_keymap('v', '<localleader>nsc', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("clean-ns"), apply = true})<CR>', opts)
+        buf_set_keymap('v', '<localleader>ef', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("extract-function"), apply = true})<CR>', opts)
+        buf_set_keymap('v', '<localleader>tf', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("thread-first-all"), apply = true})<CR>', opts)
+        buf_set_keymap('v', '<localleader>nsc', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("clean-ns"), apply = true})<CR>', opts)
 
-      buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-      -- I don't like that this is a loop, but in practice it should be a
-      -- short loop.  Ideally I could do a O(1) mapping from client.id to
-      -- diagnostic_namespace.
-      for diagnostic_namespace, namespace_metadata in pairs(vim.diagnostic.get_namespaces()) do
-        if namespace_metadata.name == "vim.lsp.clojure_lsp." .. client.id then
-          vim.diagnostic.disable(0, diagnostic_namespace)
-          break
+        -- I don't like that this is a loop, but in practice it should be a
+        -- short loop.  Ideally I could do a O(1) mapping from client.id to
+        -- diagnostic_namespace.
+        for diagnostic_namespace, namespace_metadata in pairs(vim.diagnostic.get_namespaces()) do
+          if namespace_metadata.name == "vim.lsp.clojure_lsp." .. client.id then
+            vim.diagnostic.disable(0, diagnostic_namespace)
+            break
+          end
         end
-      end
-    end,
-    autostart = true,
-  }
+      end,
+      autostart = true,
+    }
+  end
 EOF
   LspStart
 
