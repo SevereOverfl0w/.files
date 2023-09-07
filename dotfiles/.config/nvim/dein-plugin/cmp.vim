@@ -14,15 +14,17 @@ function! Hook_post_source_cmp()
 local cmp = require'cmp'
 
 cmp.setup({
-  mapping = {
-    ['<C-y>'] = cmp.mapping.confirm({
-      select = true,
-      -- behavior = cmp.ConfirmBehavior.Replace,
-    }),
-  },
+  mapping = cmp.mapping.preset.insert(),
+  -- mapping = {
+  --   ['<C-y>'] = cmp.mapping.confirm({
+  --     select = true,
+  --     -- behavior = cmp.ConfirmBehavior.Replace,
+  --   }),
+  -- },
   sources = {
     { name = 'buffer' },
     { name = 'async_clj_omni' },
+    { name = 'nvim_lsp' },
   }
 })
 
