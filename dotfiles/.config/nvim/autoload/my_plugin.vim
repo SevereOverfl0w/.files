@@ -30,12 +30,20 @@ function! my_plugin#add_hooks() abort
 endf
 
 function! my_plugin#begin() abort
-  if !isdirectory(expand('~/.cache/dein/repos/github.com/Shougo/dein.vim'))
-    !curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
-    !sh /tmp/installer.sh ~/.cache/dein
+  let $CACHE = expand('~/.cache')
+  if !($CACHE->isdirectory())
+      call mkdir($CACHE, 'p')
   endif
-
-  set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+  if &runtimepath !~# '/dein.vim'
+      let s:dir = 'dein.vim'->fnamemodify(':p')
+      if !(s:dir->isdirectory())
+          let s:dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+          if !(s:dir->isdirectory())
+              execute '!git clone https://github.com/Shougo/dein.vim' s:dir
+          endif
+      endif
+      execute 'set runtimepath^=' .. s:dir->fnamemodify(':p')->substitute('[/\\]$', '', '')
+  endif
 
   " Second parameter to dein#begin where plugins may be added from so it may
   " auto-recache.
