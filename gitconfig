@@ -3,7 +3,7 @@
 # [mergetool "vimdiff"]
 # 	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "conflicted"]
-	cmd = nvim $MERGED +Merger
+	cmd = nvim $MERGED +'call MyMerger()'
 [alias]
 	please = push --force-with-lease
 	it = !git init && git commit -m “root” --allow-empty

@@ -59,6 +59,11 @@ function! Hook_post_source_conflicted()
   set stl+=%{LspStatus()}
 endf
 
+function! MyMerger()
+    set tabline=%!ConflictedTabline()
+    Merger
+endfunction
+
 " This list is butched from:
 " https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/cgciltz/
 
