@@ -45,19 +45,9 @@ call my_plugin#add('shumphrey/fugitive-gitlab.vim')
 " Conflicted is a plugin for simplifying merges
 call my_plugin#add('christoomey/vim-conflicted')
 
-function! LspStatus()
-  if luaeval('#vim.lsp.buf_get_clients()') > 0
-    return '[LSP+]'
-  else
-    return '[LSP-]'
-  endif
-endf
-
-function! Hook_post_source_conflicted()
-  set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-  set stl+=%{ConflictedVersion()}
-  set stl+=%{LspStatus()}
-endf
+if dein#is_available('vim-conflicted')
+  autocmd User Flags call Hoist("window", "ConflictedVersion")
+endif
 
 function! MyMerger()
     set tabline=%!ConflictedTabline()

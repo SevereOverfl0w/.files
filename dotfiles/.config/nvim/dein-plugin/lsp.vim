@@ -1,5 +1,15 @@
 call my_plugin#add('neovim/nvim-lspconfig')
 
+function! LspStatus()
+  if luaeval('#vim.lsp.buf_get_clients()') > 0
+    return '[LSP+]'
+  else
+    return '[LSP-]'
+  endif
+endf
+
+autocmd User Flags call Hoist("buffer", "LspStatus")
+
 function! Hook_post_source_lspconfig()
 
   lua << EOF
