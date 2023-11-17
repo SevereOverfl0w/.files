@@ -11,6 +11,7 @@
  :jvm-opts ["-XX:-OmitStackTraceInFastThrow"
             ;; profiler flags:
             "-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"
+            "-XX:+EnableDynamicAgentLoading"
             ;; allow morse to work:
             "-Djava.awt.headless=false"]
  :main-opts ["-i" "~/.files/clojure/dev.clj"]}
