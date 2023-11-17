@@ -15,12 +15,6 @@ local cmp = require'cmp'
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert(),
-  -- mapping = {
-  --   ['<C-y>'] = cmp.mapping.confirm({
-  --     select = true,
-  --     -- behavior = cmp.ConfirmBehavior.Replace,
-  --   }),
-  -- },
   sources = {
     { name = 'buffer' },
     { name = 'async_clj_omni' },
