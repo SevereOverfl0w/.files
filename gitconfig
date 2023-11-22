@@ -64,3 +64,5 @@
 	minRacyThreshold = 0 nanoseconds
 [rerere]
 	enabled = true
+[init]
+	defaultBranch = master
