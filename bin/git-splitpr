@@ -1,0 +1,8 @@
+#!/bin/sh
+
+DIR=/tmp/$1
+
+git worktree add -B $1 "$DIR" --guess-remote origin/master 1>&2
+shift
+git -C "$DIR" cherry-pick "$@" 1>&2
+echo "$DIR"
