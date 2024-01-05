@@ -31,6 +31,7 @@
 	# review-changes = !bash -c \"nvim \\\"+Git log -p ${1:-HEAD}\\\" \\\"+Git log --oneline ${1:-HEAD}\\\" \\\"+Git difftool -y ${*:-HEAD^}\\\" '+normal gT'\"
 	review-changes = !bash -c \"nvim \\\"+Git log ${1:-HEAD}\\\" \\\"+Git log --oneline ${1:-HEAD}\\\" \\\"+Git difftool -y ${*:-HEAD^}\\\" '+normal gT'\"
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
+	startpr = !sh -c \"git switch --guess -c $1 master\"
 [push]
 	default = current
 	followTags = true
