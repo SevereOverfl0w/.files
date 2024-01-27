@@ -22,7 +22,11 @@ augroup END
 
 function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
-    let scheme = get(g:, 'DARKMODE', 0) ? s:preferred_color_scheme[2] :  s:preferred_color_scheme[1]
+    if len(s:preferred_color_scheme) > 2
+      let scheme = get(g:, 'DARKMODE', 0) ? s:preferred_color_scheme[2] :  s:preferred_color_scheme[1]
+    else
+      let scheme = s:preferred_color_scheme[1]
+    endif
     exe 'colorscheme '.scheme
     " AutoCmds not triggered during VimEnter / other autocmds
     exe 'doautocmd ColorScheme '.scheme
