@@ -1,3 +1,4 @@
+call my_plugin#add('miikanissi/modus-themes.nvim')
 call my_plugin#add('sonph/onehalf', {'rtp': 'vim/'})
 call my_plugin#add('https://gitlab.com/protesilaos/tempus-themes-vim.git') 
 call my_plugin#add('NLKNguyen/papercolor-theme')
