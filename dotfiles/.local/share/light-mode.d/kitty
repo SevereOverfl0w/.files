@@ -6,4 +6,5 @@ case "$(basename "$(dirname $0)")" in
 esac
 
 kitty +kitten themes --dump-theme "$theme" > ~/.config/kitty/current-theme.conf
-pkill -USR1 kitty
+# background the pkill because otherwise darkman gets sad
+pkill -x -USR1 kitty &
