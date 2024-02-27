@@ -1,5 +1,6 @@
 [merge]
 	tool = vimdiff
+	conflictStyle = zdiff3
 # [mergetool "vimdiff"]
 # 	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "conflicted"]
@@ -46,11 +47,13 @@
 	followRedirects = true
 [rebase]
 	autoStash = true
+	updateRefs = true
 [status]
 	showUntrackedFiles = all
 [diff]
 	# Show whitespace errors when doing `git diff`
 	wsErrorHighlight = all
+	algorithm = histogram
 [ghq]
 	root = ~/src
 [ghq "keybase://"]
