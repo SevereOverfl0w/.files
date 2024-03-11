@@ -9,6 +9,15 @@
   (some (apply (requiring-resolve 'sc.api/ep-info) args)
         [:sc.ep/value :sc.ep/error]))
 
+(defmacro with-test-result
+  "Example use: (./with-test-result (./test-vars [#'foo-test]))"
+  [& body]
+  `(let [result# (atom (transient []))]
+     (binding [clojure.test/report (fn [m#]
+                                     (swap! result# conj! m#))]
+       ~@body)
+     (persistent! @result#)))
+
 (dot-slash-2/!
   '{. [clojure.test/run-tests clojure.test/test-vars
        {:var sc.api/spy :lazy? true :macro? true}
@@ -16,6 +25,7 @@
        {:var sc.api/defsc :lazy? true :macro? true}
        {:var sc.api/undefsc :lazy? true :macro? true}
        {:var io.dominic.mise/saved-value}
+       {:var io.dominic.mise/with-test-result}
        {:var clj-async-profiler.core/profile :lazy? true :macro? true}
        {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
        {:var clj-memory-meter.core/measure :lazy? true :macro? false}
