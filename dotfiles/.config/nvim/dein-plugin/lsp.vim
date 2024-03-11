@@ -120,6 +120,7 @@ function! Hook_post_source_lspconfig()
         buf_set_keymap('v', '<localleader>ef', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("extract-function"), apply = true})<CR>', opts)
         buf_set_keymap('v', '<localleader>tf', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("thread-first-all"), apply = true})<CR>', opts)
         buf_set_keymap('v', '<localleader>nsc', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("clean-ns"), apply = true})<CR>', opts)
+        buf_set_keymap('n', '<localleader>lcp', '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("cycle-privacy"), apply = true})<CR>', opts)
 
         buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
@@ -137,6 +138,5 @@ function! Hook_post_source_lspconfig()
     }
   end
 EOF
-  LspStart
 
 endfunction
