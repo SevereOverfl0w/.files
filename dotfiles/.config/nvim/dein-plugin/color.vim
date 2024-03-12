@@ -23,6 +23,7 @@ augroup END
 
 function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
+    let &background = get(g:, 'DARKMODE', 0) ? 'dark' : 'light'
     if len(s:preferred_color_scheme) > 2
       let scheme = get(g:, 'DARKMODE', 0) ? s:preferred_color_scheme[2] :  s:preferred_color_scheme[1]
     else
