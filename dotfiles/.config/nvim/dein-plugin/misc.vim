@@ -65,6 +65,21 @@ call my_plugin#add('bronson/vim-trailing-whitespace')
 call my_plugin#add('tpope/vim-flagship')
 let g:tabprefix = ''
 
+call my_plugin#add('m00qek/baleia.nvim', {'rev': 'v1.4.0'})
+
+function! Hook_post_source_baleia()
+  let s:baleia = luaeval("require('baleia').setup({ strip_ansi_codes = false })")
+  let s:baleia_strips = luaeval("require('baleia').setup()")
+  command! BaleiaColorize call s:baleia.once(bufnr('%'))
+  command! BaleiaLogs call s:baleia.logger.show()
+  augroup BaleiaUser
+    autocmd!
+    autocmd BufReadPost quickfix setlocal modifiable | silent call s:baleia_strips.once(bufnr('%')) | setlocal nomodifiable
+  augroup END
+endf
+
+" call my_plugin#add('powerman/vim-plugin-ansiesc')
+
 call my_plugin#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': ':TSUpdate'})
 
 function! Hook_post_source_treesitter()
