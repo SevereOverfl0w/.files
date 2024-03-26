@@ -67,6 +67,14 @@ let g:tabprefix = ''
 
 call my_plugin#add('m00qek/baleia.nvim', {'rev': 'v1.4.0'})
 
+function! MaybeActivateBaleia(baleia)
+    if w:quickfix_title =~? 'clojure.test'
+        setlocal modifiable
+        silent call a:baleia.once(bufnr('%'))
+        setlocal nomodifiable
+    endif
+endfunction
+
 function! Hook_post_source_baleia()
   let s:baleia = luaeval("require('baleia').setup({ strip_ansi_codes = false })")
   let s:baleia_strips = luaeval("require('baleia').setup()")
@@ -74,7 +82,8 @@ function! Hook_post_source_baleia()
   command! BaleiaLogs call s:baleia.logger.show()
   augroup BaleiaUser
     autocmd!
-    autocmd BufReadPost quickfix setlocal modifiable | silent call s:baleia_strips.once(bufnr('%')) | setlocal nomodifiable
+    autocmd BufReadPost quickfix call MaybeActivateBaleia(s:baleia_strips)
+    autocmd BufWinEnter quickfix call MaybeActivateBaleia(s:baleia_strips)
   augroup END
 endf
 
