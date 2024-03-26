@@ -1,10 +1,12 @@
 #!/bin/sh
 
 case "$(basename "$(dirname $0)")" in
-  light-mode.d) theme="Modus Operandi";;
-  dark-mode.d) theme="Modus Vivendi";;
+  light-mode.d) theme="Modus Operandi"; theme_file="modus_operandi.conf";;
+  dark-mode.d) theme="Modus Vivendi"; theme_file="modus_vivendi.conf";;
 esac
 
-kitty +kitten themes --dump-theme "$theme" > ~/.config/kitty/current-theme.conf
+# kitty +kitten themes --dump-theme "$theme" > ~/.config/kitty/current-theme.conf
+cp "$HOME/.config/kitty/themes/${theme_file}" ~/.config/kitty/current-theme.conf
+
 # background the pkill because otherwise darkman gets sad
 pkill -x -USR1 kitty &
