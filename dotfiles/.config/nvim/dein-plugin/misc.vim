@@ -77,3 +77,9 @@ function! Hook_post_source_treesitter()
     }
 EOF
 endfunction
+
+call my_plugin#add('RRethy/nvim-treesitter-endwise')
+
+function! Hook_post_source_treesitter_endwise()
+    lua require('nvim-treesitter.configs').setup { endwise = { enable = true, } }
+endf
