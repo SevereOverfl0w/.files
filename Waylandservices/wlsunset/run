@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec wlsunset -l 52.04 -L -0.75
