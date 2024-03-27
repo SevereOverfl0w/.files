@@ -69,9 +69,9 @@ call my_plugin#add('m00qek/baleia.nvim', {'rev': 'v1.4.0'})
 
 function! MaybeActivateBaleia(baleia)
     if w:quickfix_title =~? 'clojure.test'
-        setlocal modifiable
+        setlocal modifiable undolevels=-1
         silent call a:baleia.once(bufnr('%'))
-        setlocal nomodifiable
+        setlocal nomodifiable nomodified
     endif
 endfunction
 
