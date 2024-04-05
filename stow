@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dotfiles_repo="$(dirname $0)"
+stow "--dir=${dotfiles_repo}" "$@"
