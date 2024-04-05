@@ -1,0 +1,22 @@
+#!/bin/sh
+
+worktrees="$(git rev-parse --show-toplevel)/worktrees"
+
+fetch(){
+    git worktree prune
+    git worktree list --porcelain | grep "^branch .*${1}$"
+    if [ $? -eq 1 ]; then
+        # git worktree list | grep "^branch .*${1}$"
+        git fetch;
+        if git ls-remote --exit-code --heads origin "${1}"; then
+            git worktree add "$worktrees/$1" $1;
+        else
+            git worktree add -B $1 "$worktrees/$1" --guess-remote origin/master
+        fi
+    else
+        cd /$worktrees/$1
+        git pull
+    fi
+}
+
+fetch "$1" 1>&2 && echo "$worktrees/$1" || echo "$PWD"
