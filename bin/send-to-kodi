@@ -1,0 +1,26 @@
+#!/bin/sh
+
+serverurl="$(cat $(dirname "$0")/.send-to-kodi.jsonrpc)"
+
+send_to_kodi(){
+  curl -v -H 'Content-Type: application/json' -d"
+  {
+      \"jsonrpc\":\"2.0\",
+      \"method\":\"Player.Open\",
+      \"params\": {
+        \"item\":{
+          \"file\":\"${1}\"
+        }
+      },
+      \"id\": 1
+    }" "$serverurl"
+}
+
+case "$1" in
+  *youtube.com*)
+    send_to_kodi "plugin://plugin.video.youtube/play/?video_id=$(echo "$1" | grep -oP '(?<=v=)[^&]*')"
+    ;;
+  *)
+    send_to_kodi "$1"
+    ;;
+esac
