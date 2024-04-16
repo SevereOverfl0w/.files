@@ -14,7 +14,7 @@ fetch(){
             git worktree add -B $1 "$worktrees/$1" --guess-remote origin/master
         fi
     else
-        cd /$worktrees/$1
+        cd $worktrees/$1
         git pull
     fi
 }
