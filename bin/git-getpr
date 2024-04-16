@@ -1,6 +1,6 @@
 #!/bin/sh
 
-worktrees="$(git rev-parse --show-toplevel)/worktrees"
+worktrees="$(git rev-parse --git-common-dir --path-format=absolute)/../worktrees"
 
 fetch(){
     git worktree prune

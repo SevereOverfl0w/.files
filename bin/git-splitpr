@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIR="$(git rev-parse --show-toplevel)/worktrees/$1"
+DIR="$(git rev-parse --git-common-dir --path-format=absolute)/../worktrees/$1"
 base="$(git branch -rl '*/HEAD' | cut -d' ' -f3)"
 
 git worktree add -B "$1" "$DIR" --guess-remote "$base" 1>&2
