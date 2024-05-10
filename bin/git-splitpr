@@ -6,4 +6,4 @@ base="$(git branch -rl '*/HEAD' | cut -d' ' -f3)"
 git worktree add -B "$1" "$DIR" --guess-remote "$base" 1>&2
 shift
 git -C "$DIR" cherry-pick "$@" 1>&2
-echo "$DIR"
+echo "$(realpath "$DIR")"
