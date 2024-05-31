@@ -20,7 +20,7 @@ stowstar(){
 install stow
 
 # Setup dotfiles
-mkdir -p ~/.config ~/.config/nvim ~/.config/sway # Prevent stow from symlinking these root folders
+mkdir -p ~/.config ~/.config/nvim ~/.config/sway ~/.local/share # Prevent stow from symlinking these root folders
 stowstar --dotfiles "--target=$HOME" dotfiles
 if [ ! -f ~/.config/nvim/init.vim ]; then
 	cp ~/.config/nvim/init.vim.template ~/.config/nvim/init.vim
