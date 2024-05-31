@@ -59,22 +59,15 @@ sudo stow --no-folding --dir=${dotfiles_repo} --target=/ global
 # All hail the desktop stack
 ## Manually:
 ## sudo ln -s /etv/sv/seatd /var/service/
-## sudo ln -s /etc/sv/rundird /var/service/
-
-if ! is_installed rundird; then
-	install rundird
-	sudo xbps-pkgdb -m hold rundird
-fi
-install pipewire wireplumber seatd rundird
+## sudo ln -s /etc/sv/turnstile /var/service/
+install pipewire wireplumber seatd turnstile
 
 if ! id -nG "$USER" | grep -qw "_seatd"; then
 	echo "Adding to _seatd"
 	sudo usermod -a -G _seatd "$USER"
 fi
 
-if ! grep -qw "pam_rundird.so" /etc/pam.d/login; then
-	printf "session\toptional\tpam_rundird.so" | sudo tee -a /etc/pam.d/login
-fi
-
+mkdir -p $HOME/.config/service
+stowstar --no-folding --target $HOME/.config/service services
 
 git config --replace-all --global include.path "$(realpath "$dotfiles_repo")/gitconfig" "$(realpath "$dotfiles_repo")/gitconfig"

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-runsvdir ~/.files/services/ &
-trap "kill $!; finish" TERM INT
-wait

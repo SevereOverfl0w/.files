@@ -36,9 +36,6 @@ if [ -f ~/.files/bin/wallpaper.sh -a -e ~/Pictures/wallpapers/nord ]; then
   ~/.files/bin/wallpaper.sh ~/Pictures/wallpapers/nord &
 fi
 
-runsvdir ~/.files/services/ &
-PIDA=$!
-
 runsvdir ~/.files/Xservices/ &
 PIDB=$!
 
@@ -58,5 +55,4 @@ _launch bspwm
 #windowchef
 
 # Stop runsv instances in the "right" way.
-kill -s HUP "$PIDA"
 kill -s HUP "$PIDB"
