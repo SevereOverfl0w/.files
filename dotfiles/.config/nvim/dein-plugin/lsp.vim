@@ -72,7 +72,7 @@ function! Hook_post_source_lspconfig()
   end
 
   local cmp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-  local servers = { 'zk', 'tsserver' }
+  local servers = { 'zk' }
 
   function is_cmd_installed(lsp)
     local cmd = nvim_lsp[lsp].document_config.default_config.cmd
