@@ -12,7 +12,7 @@ fetch(){
         if git ls-remote --exit-code --heads origin "${1}"; then
             git worktree add "$destination" $1;
         else
-            git worktree add -B $1 "$destination" --guess-remote origin/master
+            git worktree add -B $1 "$destination" --guess-remote "$(git rev-parse origin/master)"
         fi
     else
         cd "$destination"
