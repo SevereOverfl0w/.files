@@ -26,6 +26,7 @@ let g:fzf_colors =
   \ 'header': ['fg', 'Comment'] }
 " jf = jump file
 nnoremap <Leader>jf :<C-U>FZF<CR>
+nnoremap <Leader>jF :<C-U>GFiles?<CR>
 
 for dirmap in get(g:, 'dirs_of_interest', [])
   execute 'nnoremap '. dirmap.prefix . 'f <cmd>FZF '. dirmap['directory'] .'<CR>'
