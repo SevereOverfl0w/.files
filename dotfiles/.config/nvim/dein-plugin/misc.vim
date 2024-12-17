@@ -64,6 +64,26 @@ call my_plugin#add('bronson/vim-trailing-whitespace')
 
 call my_plugin#add('tpope/vim-flagship')
 let g:tabprefix = ''
+function! MaybeTabCwds(...)
+    let args = copy(a:000)
+    let tabnr = type(get(args, 0, '')) == type(0) ? remove(args, 0) : v:lnum
+    let tabinfo = gettabinfo(tabnr)[0]
+
+    let difftabs = []
+    for windowid in tabinfo.windows
+        if gettabwinvar(tabnr, windowid, 'fugitive_diff_restore')
+            call add(difftabs, windowid)
+        endif
+    endfor
+
+    if len(difftabs) == 2
+        let f = FugitiveReal(getbufinfo(getwininfo(difftabs[0])[0].bufnr)[0].name)
+        return pathshorten(fnamemodify(f, ':.'), 1)
+    else
+        return flagship#tabcwds(tabnr, 'shorten',',')
+    endif
+endfunction
+let g:tablabel = '%N%{flagship#tabmodified()} %{MaybeTabCwds()}'
 
 call my_plugin#add('m00qek/baleia.nvim', {'rev': 'v1.4.0'})
 
