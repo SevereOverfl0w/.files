@@ -1,4 +1,7 @@
 function! s:get_function(name) abort
+  if has_key(g:, a:name)
+    return get(g:, a:name)
+  endif
   try
     return function(a:name)
   catch /.*/
@@ -69,9 +72,9 @@ function! my_plugin#end() abort
 endf
 
 function! my_plugin#run() abort
-  runtime! config/*.vim
+  runtime! config/*
   call my_plugin#begin()
-  runtime! dein-plugin/*.vim
+  runtime! dein-plugin/*
   call my_plugin#end()
 endf
 
