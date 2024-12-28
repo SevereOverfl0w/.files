@@ -97,6 +97,7 @@ function! Hook_post_source_lspconfig()
 
   if is_cmd_installed('clojure_lsp') then
     nvim_lsp.clojure_lsp.setup{
+      capabilities = cmp_nvim_lsp.default_capabilities(),
       settings = {
         diagnostics = true,
       },
