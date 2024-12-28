@@ -19,13 +19,19 @@ cmp.setup({
     { name = 'buffer' },
     { name = 'async_clj_omni' },
     { name = 'nvim_lsp' },
-  }
+  },
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+    },
 })
 
 cmp.setup.filetype({'markdown'}, {
   sources = {
       { name = 'nvim_lsp' },
       { name = 'buffer' },
+      { name = 'emoji' },
     }
   })
 EOF
