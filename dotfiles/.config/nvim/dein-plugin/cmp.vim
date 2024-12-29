@@ -28,7 +28,7 @@ cmp.setup({
     },
 })
 
-cmp.setup.filetype({'markdown'}, {
+cmp.setup.filetype({'markdown', 'gitcommit'}, {
   sources = {
       { name = 'nvim_lsp' },
       { name = 'buffer' },
