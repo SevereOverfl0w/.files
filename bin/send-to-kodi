@@ -16,11 +16,35 @@ send_to_kodi(){
     }" "$serverurl"
 }
 
+
+# Note: doesn't hit "play" which is necessary if nothing is playing already...
+queue_on_kodi(){
+  curl -v -H 'Content-Type: application/json' -d"
+  {
+      \"jsonrpc\":\"2.0\",
+      \"method\":\"Playlist.Add\",
+      \"params\": {
+        \"playlistid\":1,
+        \"item\":{
+          \"file\":\"${1}\"
+        }
+      },
+      \"id\": 1
+    }" "$serverurl"
+}
+
+f=send_to_kodi
+
+if [ "$1" = "--queue" ]; then
+  f=queue_on_kodi
+  shift
+fi
+
 case "$1" in
   *youtube.com*)
-    send_to_kodi "plugin://plugin.video.youtube/play/?video_id=$(echo "$1" | grep -oP '(?<=v=)[^&]*')"
+    $f "plugin://plugin.video.youtube/play/?video_id=$(echo "$1" | grep -oP '(?<=v=)[^&]*')"
     ;;
   *)
-    send_to_kodi "$1"
+    $f "$1"
     ;;
 esac
