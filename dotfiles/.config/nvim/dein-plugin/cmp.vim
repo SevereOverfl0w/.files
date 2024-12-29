@@ -5,6 +5,7 @@ endif
 call my_plugin#add('hrsh7th/nvim-cmp')
 call my_plugin#add('hrsh7th/cmp-nvim-lsp')
 call my_plugin#add('hrsh7th/cmp-buffer')
+call my_plugin#add('hrsh7th/cmp-emoji')
 
 function! Hook_post_source_cmp()
   " TODO: set preview, or use += and base on init.vim
