@@ -41,6 +41,7 @@ local on_attach = function(client, bufnr)
   end
 
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr(#{timeout_ms:250})'
 
   local opts = { noremap = true, silent = true }
 
@@ -108,6 +109,7 @@ vim.g.Hook_post_source_lspconfig = function()
         end
 
         buf_set_option("omnifunc", "v:lua._G.clojure_omnifunc_lsp_fallback")
+        vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr(#{timeout_ms:250})'
 
         local opts = { noremap = true, silent = true }
 
