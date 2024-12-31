@@ -1,5 +1,4 @@
-nmap <buffer> gs <Plug>FireplaceDjump
-nmap <buffer> gvs <Plug>FireplaceDsplit
+nmap <buffer> gd <Plug>FireplaceDjump
 nnoremap <leader>jV :<C-U>ReplantApropos --project --private<CR>
 nmap <localleader>eF <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 "function! s:CiderRefresh()

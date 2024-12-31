@@ -61,9 +61,7 @@ vim.g.Hook_post_source_lspconfig = function()
 
         local opts = { noremap = true, silent = true }
 
-        -- TODO: Use gs, but only when fireplace isn't connected.
-        buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-        -- Fireplace is already using <C-w>gd
+        buf_set_keymap("n", "gs", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
         buf_set_keymap("n", "<C-w>gs", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
         -- TODO: Use K, but only when fireplace isn't connected.
         buf_set_keymap("n", "<localleader>K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
