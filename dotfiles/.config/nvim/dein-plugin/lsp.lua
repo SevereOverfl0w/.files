@@ -96,6 +96,7 @@ vim.g.Hook_post_source_lspconfig = function()
         )
 
         buf_set_keymap("n", "grr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+        vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, opts)
 
         -- I don't like that this is a loop, but in practice it should be a
         -- short loop.  Ideally I could do a O(1) mapping from client.id to
