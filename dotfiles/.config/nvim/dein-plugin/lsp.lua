@@ -67,8 +67,8 @@ vim.g.Hook_post_source_lspconfig = function()
 
         buf_set_keymap("n", "grn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 
-        buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-        buf_set_keymap("v", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        buf_set_keymap("n", "gra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        buf_set_keymap("v", "gra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 
         buf_set_keymap(
           "v",
