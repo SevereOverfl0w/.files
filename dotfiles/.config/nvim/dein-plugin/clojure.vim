@@ -63,10 +63,24 @@ function! s:SetupBind()
     endif
 endfunction
 
+function! s:ClearTagBind()
+  " Clear tag bindings set by fireplace, in favour of using LSP with a tagfunc
+  nunmap <buffer> <C-]>
+  nunmap <buffer> g<LeftMouse>
+  " nunmap <buffer> <C LeftMouse>
+  nunmap <buffer> g]
+  nunmap <buffer> g<C-]>
+  nunmap <buffer> <C-W>]
+  nunmap <buffer> <C-W><C-]>
+  nunmap <buffer> <C-W>g]
+  nunmap <buffer> <C-W>g<C-]>
+endfunction
+
 augroup FireplaceCustom
     autocmd!
     autocmd FileType clojure call s:SetupBind()
     autocmd User FireplaceActivate call s:SetupBind()
+    autocmd User FireplaceActivate call s:ClearTagBind()
 augroup END
 
 

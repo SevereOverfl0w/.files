@@ -58,6 +58,7 @@ vim.g.Hook_post_source_lspconfig = function()
 
         buf_set_option("omnifunc", "v:lua._G.clojure_omnifunc_lsp_fallback")
         vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr(#{timeout_ms:250})'
+        vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
 
         local opts = { noremap = true, silent = true }
 
