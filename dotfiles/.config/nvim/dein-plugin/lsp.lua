@@ -62,8 +62,6 @@ vim.g.Hook_post_source_lspconfig = function()
 
         local opts = { noremap = true, silent = true }
 
-        buf_set_keymap("n", "gs", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-        buf_set_keymap("n", "<C-w>gs", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
         -- TODO: Use K, but only when fireplace isn't connected.
         buf_set_keymap("n", "<localleader>K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
@@ -97,7 +95,7 @@ vim.g.Hook_post_source_lspconfig = function()
           opts
         )
 
-        buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+        buf_set_keymap("n", "grr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 
         -- I don't like that this is a loop, but in practice it should be a
         -- short loop.  Ideally I could do a O(1) mapping from client.id to
