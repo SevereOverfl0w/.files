@@ -1,13 +1,13 @@
 vim.fn["my_plugin#add"]("neovim/nvim-lspconfig")
 
-vim.g.LspStatus = function()
+function LspStatus()
   return "[LSP" .. (#vim.lsp.buf_get_clients() > 0 and "+" or "-") .. "]"
 end
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "Flags",
   callback = function()
-    vim.fn.Hoist("buffer", "%!g:LspStatus()")
+    vim.fn.Hoist("buffer", LspStatus)
   end,
 })
 
