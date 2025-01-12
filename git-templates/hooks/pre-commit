@@ -1,6 +1,13 @@
 #!/bin/sh
 
-if git diff --cached --  '*.clj[sc]' '*.clj' | grep -F '(./'; then
+
+if git diff --cached --  '*.clj[sc]' '*.clj' | awk '
+    BEGIN {code=1;}
+    /^diff --git/{buffer=$0; next}
+    {buffer=buffer ORS $0}
+    /\(\.\//{print buffer; buffer=""; code=0}
+    END { exit code }
+'; then
     echo
     echo "Adding line containing dev helper"
     exit 1
