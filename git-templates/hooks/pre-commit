@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if git diff --cached --  '*.clj[sc]' '*.clj' | grep -F '(./'; then
+    echo
+    echo "Adding line containing dev helper"
+    exit 1
+fi
