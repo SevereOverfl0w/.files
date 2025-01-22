@@ -106,6 +106,66 @@ function fzf-ghq() {
 zle -N fzf-ghq
 bindkey '^g^h' fzf-ghq
 
+relpath() {
+    [[ $# -ge 1 ]] && [[ $# -le 2 ]] || return 1
+    local target=${${2:-$1}:a} # replace `:a` by `:A` to resolve symlinks
+    local current=${${${2:+$1}:-$PWD}:a} # replace `:a` by `:A` to resolve symlinks
+    local appendix=${target#/}
+    local relative=''
+    while appendix=${target#$current/}
+        [[ $current != '/' ]] && [[ $appendix = $target ]]; do
+        if [[ $current = $appendix ]]; then
+            relative=${relative:-.}
+            print ${relative#/}
+            return 0
+        fi
+        current=${current%/*}
+        relative="$relative${relative:+/}.."
+    done
+    relative+=${relative:+${appendix:+/}}${appendix#/}
+    print $relative
+}
+
+function fzf-worktree() {
+    worktrees=()
+    typeset -A worktrees
+
+    local worktree=()
+    typeset -A worktree
+
+    while IFS= read -r line; do
+      if [[ $line == worktree\ * ]]; then
+        worktree["dir"]="${line#worktree }";
+      elif [[ $line == "branch "* ]]; then
+        worktree[branch]="${line#branch }"
+      elif [[ $line == "HEAD "* ]]; then
+        worktree["HEAD"]="${line#HEAD }"
+      elif [[ -z $line ]]; then
+        if [[ -v worktree[branch] ]]; then
+          local branch="$(git rev-parse --abbrev-ref "${worktree[branch]}")"
+          worktrees[$branch]="${worktree["dir"]}"
+        else
+          local dir="${worktree["dir"]}"
+          local sha="$(git -C "$dir" rev-parse --short HEAD)"
+          worktrees[$sha]="$dir"
+        fi
+        worktree=()
+      fi
+
+    done < <(git worktree list --porcelain)
+
+    local selected_branch="$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --preview-window=down,8 --preview "git worktree list | grep -F '[{}]'; printf '\n'; git -c color.ui=always lg '{}'")"
+
+    if [ -n "$selected_branch" ]; then
+        local selected_dir="${worktrees[$selected_branch]}"
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+}
+
+zle -N fzf-worktree
+bindkey '^g^w' fzf-worktree
+
 export PIPX_BIN_DIR="$HOME/bin"
 
 function t() {
