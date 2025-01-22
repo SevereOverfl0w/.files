@@ -60,7 +60,7 @@ export EDITOR='nvim'
 alias ls='ls --color=auto'
 
 alias zshrc='$EDITOR ~/.zshrc'
-alias reloadzsh='. ~/.zshrc'
+alias reloadzsh='exec zsh'
 
 alias v="nvim"
 
