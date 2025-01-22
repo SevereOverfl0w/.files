@@ -64,6 +64,33 @@ call my_plugin#add('bronson/vim-trailing-whitespace')
 
 call my_plugin#add('tpope/vim-flagship')
 let g:tabprefix = ''
+
+function! Filename(bufnr) abort
+  let buftype = getbufvar(a:bufnr, "&buftype")
+  let f = getbufinfo(a:bufnr)[0].name
+  if buftype ==# 'quickfix'
+    return '[Quickfix List]'
+  elseif buftype =~# '^\%(nofile\|acwrite\|terminal\)$'
+    return empty(f) ? '[Scratch]' : f
+  elseif empty(f)
+    return '[No Name]'
+  elseif buftype ==# 'help'
+    return fnamemodify(f, ':t')
+  endif
+  let ns = substitute(matchstr(f, '^\a\a\+\ze:'), '^\a', '\u&', 'g')
+  if len(ns) && exists('*' . ns . 'Real')
+    try
+      let f2 = {ns}Real(f)
+      if !empty(f2)
+        let f = f2
+      endif
+    catch
+    endtry
+  endif
+
+  return f
+endfunction
+
 function! MaybeTabCwds(...)
     let args = copy(a:000)
     let tabnr = type(get(args, 0, '')) == type(0) ? remove(args, 0) : v:lnum
@@ -79,6 +106,8 @@ function! MaybeTabCwds(...)
     if len(difftabs) == 2
         let f = FugitiveReal(getbufinfo(getwininfo(difftabs[0])[0].bufnr)[0].name)
         return pathshorten(fnamemodify(f, ':.'), 1)
+    elseif len(tabinfo.windows) == 1
+        return pathshorten(fnamemodify(Filename(getwininfo(tabinfo.windows[0])[0].bufnr), ':~:.'))
     else
         return flagship#tabcwds(tabnr, 'shorten',',')
     endif
@@ -127,3 +156,5 @@ call my_plugin#add('RRethy/nvim-treesitter-endwise')
 function! Hook_post_source_treesitter_endwise()
     lua require('nvim-treesitter.configs').setup { endwise = { enable = true, } }
 endf
+
+call my_plugin#add('AndrewRadev/inline_edit.vim')
