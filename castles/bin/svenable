@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ "void" = "$os" ]; then
+    for sv in "$@"; do
+        if [ -e "/etc/sv/$sv" ] && [ ! -e "/var/service/$sv" ]; then
+            sudo ln -s "/etc/sv/$sv" /var/service
+        fi
+    done
+fi

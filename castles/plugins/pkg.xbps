@@ -1,0 +1,14 @@
+#!/bin/sh
+
+is_installed(){
+	(echo "$@" | tr ' ' '\n' | xargs -L 1 xbps-query)>/dev/null
+}
+
+# Take packages to install, and install it any aren't already installed.
+install(){
+	(echo "$@" | tr ' ' '\n' | xargs -L 1 xbps-query)>/dev/null || sudo xbps-install "$@"
+}
+
+if [ "void" = "$os" ]; then
+    install "$@"
+fi

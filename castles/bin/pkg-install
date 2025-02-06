@@ -1,0 +1,21 @@
+#!/bin/sh
+
+onlyinstaller=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --*)
+            onlyinstaller="${1#??}";
+            shift;
+            ;;
+    esac
+
+    if [ ! -z "$onlyinstaller" ]; then
+        "$PLUGINS"/"pkg.$onlyinstaller" "$1"
+    else
+        for installer in "$PLUGINS"/pkg.*; do
+            "$installer" "$1"
+        done
+    fi
+    shift
+done

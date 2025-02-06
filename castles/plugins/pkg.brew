@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+is_installed(){
+	(echo "$@" | tr ' ' '\n' | xargs -L 1 xbps-query)>/dev/null
+}
+
+# Take packages to install, and install it any aren't already installed.
+install(){
+	for pkg in "$@"; do
+		IFS='__' read -r pkgtype pkgname <<< "$pkg"
+		if [ -z "$pkgname" ]; then
+			pkgtype="brew"
+			pkgname="$pkg"
+		fi
+		printf '%s "%s"\n' "$pkgtype" "$pkgname"
+	done | brew bundle --no-lock --file=/dev/stdin
+}
+
+if [ "darwin" = "$os" ]; then
+    install "$@"
+fi

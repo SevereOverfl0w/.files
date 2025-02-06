@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Git clone, but mandates that the destination directory is provided and only
+# clones if it doesn't already exist.
+if [ ! -e "${@: -1}" ]; then
+    git clone "$@"
+fi

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+export dotfiles_repo="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+export castles="$dotfiles_repo/castles"
+export STOW_DIR="$dotfiles_repo"
+export PLUGINS="$castles/plugins"
+export PATH="$castles/bin:$PATH"
+
+case "$OSTYPE" in
+    linux*) export os="$(lsb_release -cs)" ;;
+    darwin*) export os="darwin" ;;
+esac
+
+castle(){
+    echo "CASTLE: $1"
+    "$castles/$1"
+}
+
+if [ $# -gt 0 ] && [ -e "$dotfiles_repo/.castles" ]; then
+    for castle in "$@"; do
+        castle "$castle"
+    done
+else
+    if [ $# -gt 0 ]; then
+        for castle in "$@"; do
+            echo "$castle" >> "$dotfiles_repo/.castles"
+        done
+    fi
+    while IFS= read -r LINE; do
+      castle "$LINE"
+    done < ".castles"
+fi

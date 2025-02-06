@@ -1,0 +1,17 @@
+#!/bin/sh
+
+pkg-install zsh neovim neovim-remote curl fzf
+
+# Prevent stow from symlinking these directories in their whole
+mkdir -p ~/.config ~/.config/nvim ~/.config/sway ~/.local/share ~/.config/service
+stow --dotfiles "--target=$HOME" dotfiles
+stow --no-folding "--target=$HOME/.config/service" services
+
+# Zsh
+git cclone https://github.com/zdharma-continuum/zinit.git "${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; then
+	chsh -s /bin/zsh
+fi
+
+# Git
+git config --replace-all --global include.path "$(realpath "$dotfiles_repo")/gitconfig" "$(realpath "$dotfiles_repo")/gitconfig"
