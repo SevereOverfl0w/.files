@@ -1,2 +1,4 @@
 worktrees
 .rebl/prefs.edn
+.nrepl-port
+.lsp/.cache
