@@ -2,7 +2,7 @@ if exists('g:my_plugin_loaded_clap')
   finish
 endif
 
-call dein#add('liuchengxu/vim-clap')
+call my_plugin#add('liuchengxu/vim-clap')
 
 nnoremap <Leader>jf <Cmd>Clap files<cr>
 

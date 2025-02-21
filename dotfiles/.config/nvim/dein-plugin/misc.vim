@@ -56,7 +56,7 @@ call my_plugin#add('tpope/vim-eunuch')
 call my_plugin#add('rhysd/conflict-marker.vim')
 
 let g:textobj_diff_no_default_key_mappings = 1
-call my_plugin#add('kana/vim-textobj-diff')
+call my_plugin#add('kana/vim-textobj-diff', #{dependencies: ['kana/vim-textobj-user']})
 
 " `:Git status` diffs include trailing whitespace for the diff.  So does `:Git show HEAD`
 let g:extra_whitespace_ignored_filetypes = ['fugitive', 'git', 'gitcommit']

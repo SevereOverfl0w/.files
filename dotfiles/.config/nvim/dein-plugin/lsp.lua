@@ -30,11 +30,17 @@ function _G.clojure_omnifunc_lsp_fallback(...)
   end
 end
 
-local nvim_lsp = require("lspconfig")
+local nvim_lsp
+local cmp_loaded
+local cmp_nvim_lsp
 
-local cmp_loaded, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+function init()
+  nvim_lsp = require("lspconfig")
+  cmp_loaded, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+end
 
 function is_cmd_installed(lsp)
+  init()
   local cmd = nvim_lsp[lsp].document_config.default_config.cmd
   -- Only present after a start:
   -- nvim_lsp[lsp].cmd[1]
@@ -43,12 +49,14 @@ end
 
 vim.g.Hook_post_source_lspconfig = function()
   if is_cmd_installed("clojure_lsp") then
+    init()
     nvim_lsp.clojure_lsp.setup({
       capabilities = cmp_nvim_lsp.default_capabilities(),
       settings = {
         diagnostics = true,
       },
       on_attach = function(client, bufnr)
+        -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
         local function buf_set_keymap(...)
           vim.api.nvim_buf_set_keymap(bufnr, ...)
         end

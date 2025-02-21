@@ -6,7 +6,7 @@
 
 " The replace operator allows you to replace an object with
 " the value in the register (clipboard).
-call my_plugin#add('kana/vim-operator-replace')
+call my_plugin#add('kana/vim-operator-replace', #{dependencies: ['kana/vim-operator-user']})
 
 function! Hook_add_operator_replace()
   map <Leader>or <Plug>(operator-replace)
@@ -39,7 +39,7 @@ endf
 
 " Adds a text object which refers to the current line.
 " Binds to `al` and `il` by default.
-call my_plugin#add('kana/vim-textobj-line')
+call my_plugin#add('kana/vim-textobj-line', #{dependencies: ['kana/vim-textobj-user']})
 
 " Wordmotion creates word definitions which surpass the
 " default ones in utility.  The readme does a better job of
