@@ -40,8 +40,6 @@ function makeargs(vimplugins)
         luaplugins[i] = opts
     end
 
-    table.insert(luaplugins, {import = 'plugins'})
-
     return luaplugins
 end
 

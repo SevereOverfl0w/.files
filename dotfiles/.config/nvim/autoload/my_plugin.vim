@@ -24,7 +24,7 @@ let s:plugins = []
 
 function! my_plugin#end() abort
   let g:plugins = s:plugins
-  call luaeval("require('lazy').setup({spec = require('myplugin').makeargs(_A)})", s:plugins)
+  call luaeval("require('plugin_init')(_A)", s:plugins)
 
   filetype plugin indent on
   syntax enable
