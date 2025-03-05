@@ -1,4 +1,5 @@
 nmap <buffer> gd <Plug>FireplaceDjump
+
 nnoremap <leader>jV :<C-U>ReplantApropos --project --private<CR>
 nmap <localleader>eF <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 "function! s:CiderRefresh()
@@ -39,7 +40,6 @@ if expand('%:t') ==# 'build.boot'
   let b:fireplace_ns = 'boot.user'
 endif
 " setlocal foldmethod=syntax
-nmap <buffer> <localleader>cmr :CMagicRequires<CR>ggcpp``
 " command! -buffer RunProjectTests call fireplace#capture_test_run('(clojure.test/run-all-tests #"('.luaeval('_A:sub(2,-2)', fireplace#eval('(apply str (interpose "|" (cider.nrepl.middleware.util.namespace/loaded-project-namespaces)))')).')")', '') | copen
 
 compiler clj-lint
