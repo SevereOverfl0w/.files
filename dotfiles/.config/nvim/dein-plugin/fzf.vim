@@ -4,7 +4,7 @@ endif
 
 call my_plugin#add('junegunn/fzf', {'merged': 0})
 call my_plugin#add('junegunn/fzf.vim')
-call my_plugin#add('ibhagwan/fzf-lua',  #{dependencies: "nvim-tree/nvim-web-devicons"})
+call my_plugin#add('ibhagwan/fzf-lua',  #{dependencies: "nvim-tree/nvim-web-devicons", opts: #{files: #{follow: v:true}}})
 
 " `rg` respects gitignore anyway, so use a version of the
 " default command without the direct git integration.
@@ -26,16 +26,16 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header': ['fg', 'Comment'] }
 " jf = jump file
-nnoremap <Leader>jf :<C-U>FZF<CR>
-nnoremap <Leader>jF :<C-U>GFiles?<CR>
+nnoremap <Leader>jf :<C-U>FzfLua files<CR>
+nnoremap <Leader>jF :<C-U>FzfLua git_status<CR>
 
 for dirmap in get(g:, 'dirs_of_interest', [])
-  execute 'nnoremap '. dirmap.prefix . 'f <cmd>FZF '. dirmap['directory'] .'<CR>'
+  execute 'nnoremap '. dirmap.prefix . 'f <cmd>lua require("fzf-lua").files({prompt = "LS> ", cwd = "' . dirmap["directory"] . '", follow = true})<CR>'
 endfor
 
-noremap <leader>b <Cmd>Buffers<cr>
-noremap <leader>B <Cmd>BLines<cr>
-noremap <leader>L <Cmd>Lines<cr>
+noremap <leader>b <Cmd>FzfLua buffers<cr>
+noremap <leader>B <Cmd>FzfLua blines<cr>
+noremap <leader>L <Cmd>FzfLua lines<cr>
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
