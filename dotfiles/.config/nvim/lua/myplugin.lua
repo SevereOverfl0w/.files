@@ -4,10 +4,12 @@ function makeargs(vimplugins)
 
     for i, vimplugin in ipairs(vimplugins) do
         local opts = vimplugin[2] or {}
-        local name = vim.fn.fnamemodify(vim.fn.get(vim.fn.split(vimplugin[1], ':'), -1, ''), ':s?/$??:t:s?\\c\\.git\\s*$??')
+        local pluginname = vimplugin[1].name or vimplugin[1]
+        local name = vim.fn.fnamemodify(vim.fn.get(vim.fn.split(pluginname, ':'), -1, ''), ':s?/$??:t:s?\\c\\.git\\s*$??')
 
-        opts[1] = vimplugin[1]
-        opts['name'] = name
+        opts[1] = pluginname
+        opts['dir'] = vimplugin[1].dir
+        opts['pre_clean_name'] = name
         opts['normalized_name'] = vim.fn.substitute(vim.fn.fnamemodify(name, ':r'), '\\c^\\%(n\\?vim\\|dps\\|denops\\)[_-]\\|[_-]n\\?vim$', '', 'g')
         local hookname = vim.fn.substitute(opts['normalized_name'], '-', '_', 'g')
 

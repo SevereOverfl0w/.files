@@ -44,9 +44,9 @@ function! my_plugin#add(name, ...) abort
   if has_key(dev_overrides, a:name)
     let dev_override = dev_overrides[a:name]
     if dev_override ==# '~/src'
-      let name = '~/src/github.com/'.name
+      let name = #{dir: '~/src/github.com/'.a:name, name: a:name}
     else
-      let name = dev_override
+      let name = #{dir: dev_override, name: a:name}
     endif
   endif
   call add(s:plugins, [name] + a:000)
