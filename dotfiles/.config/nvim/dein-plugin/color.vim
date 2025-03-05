@@ -35,4 +35,4 @@ function! ActivatePreferredColorScheme()
   endif
 endf
 
-execute 'function! Hook_post_source_'.s:preferred_color_scheme[0]."()\n   call ActivatePreferredColorScheme()\n endf"
+execute 'function! Hook_post_source_'.s:preferred_color_scheme[0]."()\n   autocmd VimEnter * ++once call ActivatePreferredColorScheme()\n endf"
