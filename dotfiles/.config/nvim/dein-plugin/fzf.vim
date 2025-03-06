@@ -35,7 +35,7 @@ endfor
 
 noremap <leader>b <Cmd>FzfLua buffers<cr>
 noremap <leader>B <Cmd>FzfLua blines<cr>
-noremap <leader>L <Cmd>FzfLua lines<cr>
+noremap <leader>ll <Cmd>FzfLua lines<cr>
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
