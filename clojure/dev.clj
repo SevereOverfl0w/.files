@@ -18,6 +18,23 @@
        ~@body)
      (persistent! @result#)))
 
+(defmacro with-test-timing
+  [& body]
+  `(let [result# (atom {:r [] :acc 0})]
+     (binding [clojure.test/report
+               (fn [m#]
+                 (cond
+                   (= :begin-test-var (:type m#))
+                   (swap! result# assoc :acc (System/currentTimeMillis))
+                   (= :end-test-var (:type m#))
+                   (swap! result#
+                          (fn [result#]
+                            {:r (conj (:r result#)
+                                      (assoc m# :time-elapsed-ms
+                                             (- (System/currentTimeMillis) (:acc result#))))}))))]
+       ~@body
+       (:r @result#))))
+
 (dot-slash-2/!
   '{. [clojure.test/run-tests clojure.test/test-vars
        {:var sc.api/spy :lazy? true :macro? true}
@@ -26,6 +43,7 @@
        {:var sc.api/undefsc :lazy? true :macro? true}
        {:var io.dominic.mise/saved-value}
        {:var io.dominic.mise/with-test-result}
+       {:var io.dominic.mise/with-test-timing}
        {:var clj-async-profiler.core/profile :lazy? true :macro? true}
        {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
        {:var clj-memory-meter.core/measure :lazy? true :macro? false}
