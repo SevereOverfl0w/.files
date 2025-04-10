@@ -38,6 +38,12 @@ endf
 " FuGITive is a git wrapper for vim.  The interactive staging features are
 " amazing.
 call my_plugin#add('tpope/vim-fugitive')
+
+function! Hook_post_source_fugitive()
+  for cmd in ['Gremove']
+    exe 'delcommand ' . cmd
+  endfor
+endf
 " The official integration between fugitive and github
 call my_plugin#add('tpope/vim-rhubarb')
 " Integration with gitlab
