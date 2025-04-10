@@ -46,10 +46,5 @@ compiler clj-lint
 
 nmap <LocalLeader>]d <Plug>ReplantPeekSource
 
-
 setlocal lispwords+=$d,<>
-
-command! -buffer ATest :execute 'e ' . expand('%:s?src?test?:s?.clj?_test.clj?')
-command! -buffer A :execute 'e ' . expand('%:s?test?src?:s?_test??')
-
 setlocal shiftwidth=2
