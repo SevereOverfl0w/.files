@@ -158,3 +158,5 @@ function! Hook_post_source_treesitter_endwise()
 endf
 
 call my_plugin#add('AndrewRadev/inline_edit.vim')
+
+call my_plugin#add('Apeiros-46B/qalc.nvim', #{opts: #{cmd_args: ["--set", "curconv 0"]}})
