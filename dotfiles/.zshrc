@@ -2,10 +2,11 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-export ZINIT_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 declare -A ZINIT
-ZINIT[HOME_DIR]="$ZINIT_ROOT/polaris"
-source "$ZINIT_ROOT/zinit.zsh"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "$ZINIT_HOME/zinit.zsh"
 
 autoload -Uz compinit
 compinit
