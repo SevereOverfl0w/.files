@@ -72,7 +72,7 @@ alias pacrem='sudo xbps-remove -R'
 
 # alias pacfind='xbps-query -R -s'
 function pacfind(){
-    xbps-query -R -s "$@" | grep -Pv -- "-dbg-\d"
+    xbps-query --regex -R -s "$@" | grep -Pv -- "-dbg-\d"
 }
 
 alias pacinfo='xbps-query -R'
