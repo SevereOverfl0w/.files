@@ -221,18 +221,21 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 alias ghbase="gh pr view --json 'baseRefName' --jq '.baseRefName'"
 
-autoload -U add-zsh-hook
+if test -n "$KITTY_INSTALLATION_DIR"; then
+  autoload -U add-zsh-hook
 
-saved_title=""
-ls_after_cd() {
-  local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-  if [ -n "$branch" ]; then
-    kitty @ set-window-title "$(basename "$(realpath "$(git rev-parse --git-common-dir --path-format=absolute)/..")")@$branch"
-  else
-    # Clear the window title so shell integration can set it again
-    kitty @ set-window-title --temporary ''
-  fi
-}
+  saved_title=""
+  ls_after_cd() {
+    local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+    if [ -n "$branch" ]; then
+      kitty @ set-window-title "$(basename "$(realpath "$(git rev-parse --git-common-dir --path-format=absolute)/..")")@$branch"
+    else
+      # Clear the window title so shell integration can set it again
+      kitty @ set-window-title --temporary ''
+    fi
+  }
 
-add-zsh-hook chpwd ls_after_cd
-add-zsh-hook precmd ls_after_cd
+  # TODO re-enable once kitty detection is done
+  add-zsh-hook chpwd ls_after_cd
+  add-zsh-hook precmd ls_after_cd
+fi
