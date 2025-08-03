@@ -17,9 +17,18 @@ call my_plugin#add('tpope/vim-sexp-mappings-for-regular-people')
 
 " FiREPLace is a plugin for integrating with a Clojure
 " nREPL.
-call my_plugin#add('tpope/vim-fireplace')
+call my_plugin#add('SevereOverfl0w/vim-fireplace', #{branch: 'dominic/patches'})
 " Disable auto-nashorn
 let g:fireplace_cljs_repl = ''
+
+let g:FIREPLACE_PRINT_META = get(g:, 'FIREPLACE_PRINT_META', v:true)
+function! g:Fireplace_pprint_func(msg, width)
+  let opts = #{}
+  if g:FIREPLACE_PRINT_META
+    let opts['print-meta'] = v:true
+  endif
+  call fireplace#pprint_puget(a:msg, a:width, opts)
+endfunction
 
 " REPLant is a plugin for enhancing your REPL experience
 " with vim.
