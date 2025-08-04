@@ -104,7 +104,7 @@ vim.g.Hook_post_source_lspconfig = function()
           opts
         )
         buf_set_keymap(
-          "v",
+          "n",
           "<localleader>nsc",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("clean-ns"), apply = true})<CR>',
           opts
