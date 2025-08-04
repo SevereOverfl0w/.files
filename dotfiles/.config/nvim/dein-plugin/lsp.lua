@@ -103,6 +103,20 @@ vim.g.Hook_post_source_lspconfig = function()
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("thread-first-all"), apply = true})<CR>',
           opts
         )
+
+        buf_set_keymap(
+          "v",
+          "<localleader>uw",
+          '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("unwind-thread"), apply = true})<CR>',
+          opts
+        )
+        buf_set_keymap(
+          "v",
+          "<localleader>ua",
+          '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("unwind-all"), apply = true})<CR>',
+          opts
+        )
+
         buf_set_keymap(
           "n",
           "<localleader>nsc",
