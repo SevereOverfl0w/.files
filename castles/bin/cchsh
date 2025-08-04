@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+current_shell=$(command -v getent >/dev/null 2>&1 && \
+               getent passwd $(id -un) | awk -F: '{print $NF}' || \
+               dscl . -read ~/ UserShell | awk '{print $2}')
+
+if [ "$current_shell" != "$@[-1]" ]; then
+    chsh "$@"
+fi

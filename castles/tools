@@ -9,9 +9,8 @@ stow --no-folding "--target=$HOME/.config/service" services
 
 # Zsh
 git cclone https://github.com/zdharma-continuum/zinit.git "${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
-if [ ! "/bin/zsh" = "$(getent passwd $(id -un) | awk -F : '{print $NF}')" ]; then
-	chsh -s /bin/zsh
-fi
+
+cchsh -s /bin/zsh
 
 # Git
 git config --replace-all --global include.path "$(realpath "$dotfiles_repo")/gitconfig" "$(realpath "$dotfiles_repo")/gitconfig"
