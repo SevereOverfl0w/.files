@@ -143,10 +143,12 @@ call my_plugin#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': ':TSU
 function! Hook_post_source_treesitter()
     lua <<EOF
     require'nvim-treesitter.configs'.setup {
-        ensure_installed = { "lua", "vim", "vimdoc", "bash" },
+        ensure_installed = { "lua", "vim", "vimdoc", "bash", "clojure" },
         highlight = {
-            enable = true
-        }
+            enable = true,
+            disable = { "clojure", -- breaks vim-sexp
+            },
+        },
     }
 EOF
 endfunction
