@@ -13,7 +13,7 @@ install(){
 			pkgname="$pkg"
 		fi
 		printf '%s "%s"\n' "$pkgtype" "$pkgname"
-	done | brew bundle --no-lock --file=/dev/stdin
+	done | brew bundle --file=/dev/stdin
 }
 
 if [ "darwin" = "$os" ]; then
