@@ -1,7 +1,8 @@
 vim.fn["my_plugin#add"]("neovim/nvim-lspconfig")
 
-function LspStatus()
-  return "[LSP" .. (#vim.lsp.buf_get_clients() > 0 and "+" or "-") .. "]"
+function LspStatus(...)
+  local bufnr = vim.fn.winbufnr(vim.g.statusline_winid)
+  return "[LSP" .. (#vim.lsp.get_clients({bufnr = bufnr}) > 0 and "+" or "-") .. "]"
 end
 
 vim.api.nvim_create_autocmd("User", {
@@ -50,7 +51,19 @@ end
 vim.g.Hook_post_source_lspconfig = function()
   if is_cmd_installed("clojure_lsp") then
     init()
-    nvim_lsp.clojure_lsp.setup({
+
+    -- TODO: Make Clojure-only
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(ev)
+        vim.bo[ev.buf].formatexpr = nil
+        vim.bo[ev.buf].omnifunc = nil
+        vim.keymap.del('n', 'K', { buffer = ev.buf })
+      end,
+    })
+
+    vim.lsp.enable('clojure_lsp')
+
+    vim.lsp.config('clojure_lsp', {
       capabilities = cmp_loaded and cmp_nvim_lsp.default_capabilities(),
       settings = {
         diagnostics = true,
@@ -112,7 +125,7 @@ vim.g.Hook_post_source_lspconfig = function()
         -- diagnostic_namespace.
         for diagnostic_namespace, namespace_metadata in pairs(vim.diagnostic.get_namespaces()) do
           if namespace_metadata.name == "vim.lsp.clojure_lsp." .. client.id then
-            vim.diagnostic.disable(0, diagnostic_namespace)
+            vim.diagnostic.enable(false, {diagnostic_namespace, bufnr})
             break
           end
         end
