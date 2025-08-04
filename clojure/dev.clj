@@ -35,6 +35,13 @@
        ~@body
        (:r @result#))))
 
+(defmacro time-data
+  [expr]
+  `(let [start# (. System (nanoTime))
+         ret# ~expr]
+     [(/ (double (- (. System (nanoTime)) start#)) 1000000.0)
+      ret#]))
+
 (dot-slash-2/!
   '{. [clojure.test/run-tests clojure.test/test-vars
        {:var sc.api/spy :lazy? true :macro? true}
@@ -44,6 +51,7 @@
        {:var io.dominic.mise/saved-value}
        {:var io.dominic.mise/with-test-result}
        {:var io.dominic.mise/with-test-timing}
+       {:var io.dominic.mise/time-data}
        {:var clj-async-profiler.core/profile :lazy? true :macro? true}
        {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
        {:var clj-memory-meter.core/measure :lazy? true :macro? false}
