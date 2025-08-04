@@ -10,6 +10,7 @@
 	it = !git init && git commit -m “root” --allow-empty
 	staash = stash --include-untracked
 	commend = commit --amend -c HEAD
+	comms = commend --no-edit
 	signplz = config commit.gpgsign true
 	shudder = !git pull && git push
 	rb = rebase
