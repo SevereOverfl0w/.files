@@ -164,3 +164,5 @@ call my_plugin#add('AndrewRadev/inline_edit.vim')
 call my_plugin#add('Apeiros-46B/qalc.nvim', #{opts: #{cmd_args: ["--set", "curconv 0"]}})
 
 call my_plugin#add('terrastruct/d2-vim')
+
+call my_plugin#add('mtikekar/nvim-send-to-term')
