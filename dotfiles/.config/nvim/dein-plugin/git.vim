@@ -20,6 +20,8 @@ function! Hook_add_gitgutter()
   nmap ]h <Plug>(GitGutterNextHunk)
   nmap [h <Plug>(GitGutterPrevHunk)
 
+  nmap <Leader>gff <cmd>GitGutterFold<CR>
+
   " Stage the hunk under the cursor
   nmap <Leader>ghs <Plug>(GitGutterStageHunk)
   " Show the diff of the hunk at cursor.  I'm not convinced this is actually
@@ -71,8 +73,6 @@ nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gc :Git commit -v -q<CR>
 " Commit and stage current file (if you commit only)
 nnoremap <Leader>gt :Git commit -v -q %:p<CR>
-" Open current file in diff mode
-nnoremap <Leader>gd :Gdiffsplit<CR>
 " Open current file on the index
 nnoremap <Leader>ge :Gedit<CR>
 " Like `:edit` but against the index
@@ -100,3 +100,28 @@ call my_plugin#add('junegunn/gv.vim')
 
 nnoremap <Leader>gv :GV<CR>
 nnoremap <Leader>gLL :GV!<CR>
+
+function! SetGitBase(base)
+  let g:gitgutter_diff_base = a:base
+endfunction
+
+command! -nargs=0 GitListChanges :exec 'Git difftool --name-status ' . g:gitgutter_diff_base
+
+function! ToggleDiff()
+  if &diff
+    for win in range(1, winnr('$'))
+      let bufnr = winbufnr(win)
+      if getwinvar(win, '&diff') && (getbufvar(bufnr, 'fugitive_type') == 'blob' || getbufvar(bufnr, '&buftype') == 'nofile')
+        call nvim_win_close(win_getid(win), 0)
+      endif
+    endfor
+  else
+    if FugitiveGitDir() == ''
+      GitGutterDiffOrig
+    else
+      exec 'Gvdiffsplit! ' . get(g:, 'gitgutter_diff_base', '')
+    end
+  endif
+endfunction
+
+nnoremap <leader>gd <Cmd>call ToggleDiff()<CR>
