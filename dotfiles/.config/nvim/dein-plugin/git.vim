@@ -133,3 +133,54 @@ function Review(base)
 endfunction
 
 command! -nargs=1 Review call Review(<q-args>)
+
+function! GHPRLink(bang, line1, line2, args) abort
+  " Commit SHA
+  let l:commit = system(FugitiveShellCommand('rev-parse', 'HEAD'))
+  let l:commit = substitute(l:commit, '\n$', '', '')
+
+  " PR number
+  let l:pr = system('gh pr view --json number -q .number')
+  if v:shell_error > 0
+    echoerr 'Could not determine PR number'
+    return 1
+  endif
+  let l:pr = substitute(l:pr, '\n$', '', '')
+
+  " Repo slug (org/repo)
+  " let l:repo = system('git remote get-url origin')
+  let l:repo = system(FugitiveShellCommand('remote', 'get-url', 'origin'))
+  let l:repo = substitute(l:repo, '\n$', '', '')
+  if l:repo =~? '^git@'
+    let l:repo = substitute(l:repo, '.*:', '', '')
+  else
+    let l:repo = substitute(l:repo, '.*/github.com/', '', '')
+  endif
+  let l:repo = substitute(l:repo, '\.git$', '', '')
+
+  " File relative path
+  let l:file = fugitive#Path(expand('%'), '')
+  let l:diffsha = sha256(l:file)
+
+  " Anchor to first line of range (GitHub diffs don't support ranges)
+  let l:start = a:line1
+
+  let l:endstr = ''
+  if a:line2 != a:line1
+    let l:endstr = '-R' . a:line2
+  endif
+
+  " Build URL (PR diff + commit context)
+  let l:url = 'https://github.com/' . l:repo . '/pull/' . l:pr
+        \ . '/commits/' . l:commit
+        \ . '#diff-' . l:diffsha . 'R' . l:start . l:endstr
+
+  " Delegate to GBrowse or GBrowse!
+  if a:bang
+    execute 'GBrowse!' l:url
+  else
+    execute 'GBrowse' l:url
+  endif
+endfunction
+
+command! -bang -range=% -nargs=* GHPRLink call GHPRLink(<bang>0, <line1>, <line2>, <q-args>)
