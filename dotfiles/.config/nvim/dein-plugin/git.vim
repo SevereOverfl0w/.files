@@ -134,46 +134,48 @@ endfunction
 
 command! -nargs=1 Review call Review(<q-args>)
 
-function! GHPRLink(bang, line1, line2, args) abort
-  " Commit SHA
+function! GHPRLink(bang, count, line1, range, line2, args) abort
+  let l:pathtype = 'sha'
+  call system(FugitiveShellCommand('symbolic-ref', '-q', 'HEAD'))
+  if v:shell_error == 0
+    let l:pathtype = 'files'
+  endif
+
   let l:commit = system(FugitiveShellCommand('rev-parse', 'HEAD'))
   let l:commit = substitute(l:commit, '\n$', '', '')
 
-  " PR number
-  let l:pr = system('gh pr view --json number -q .number')
-  if v:shell_error > 0
+  if l:pathtype ==# 'files'
+    let l:locpath = '/files'
+  else
+    let l:locpath = '/commits/' . l:commit
+  endif
+
+  let l:pr = system("gh pr view --json number -q .number 2>/dev/null || gh pr list -s all --search " .. l:commit .. " -L 1 --json number -q '.[0].number'")
+  let l:pr = substitute(l:pr, '\n$', '', '')
+  if v:shell_error > 0 || l:pr ==# ''
     echoerr 'Could not determine PR number'
     return 1
   endif
-  let l:pr = substitute(l:pr, '\n$', '', '')
 
-  " Repo slug (org/repo)
-  " let l:repo = system('git remote get-url origin')
-  let l:repo = system(FugitiveShellCommand('remote', 'get-url', 'origin'))
+  let l:repo = system('gh browse -n')
   let l:repo = substitute(l:repo, '\n$', '', '')
-  if l:repo =~? '^git@'
-    let l:repo = substitute(l:repo, '.*:', '', '')
-  else
-    let l:repo = substitute(l:repo, '.*/github.com/', '', '')
-  endif
-  let l:repo = substitute(l:repo, '\.git$', '', '')
 
   " File relative path
   let l:file = fugitive#Path(expand('%'), '')
   let l:diffsha = sha256(l:file)
 
   " Anchor to first line of range (GitHub diffs don't support ranges)
-  let l:start = a:line1
-
   let l:endstr = ''
-  if a:line2 != a:line1
-    let l:endstr = '-R' . a:line2
+
+  if a:count > 0
+    let l:endstr .= 'R' . a:line1
+
+    if a:range == 2
+      let l:endstr .= '-R' . a:line2
+    endif
   endif
 
-  " Build URL (PR diff + commit context)
-  let l:url = 'https://github.com/' . l:repo . '/pull/' . l:pr
-        \ . '/commits/' . l:commit
-        \ . '#diff-' . l:diffsha . 'R' . l:start . l:endstr
+  let l:url = l:repo . '/pull/' . l:pr . l:locpath . '#diff-' . l:diffsha . l:endstr
 
   " Delegate to GBrowse or GBrowse!
   if a:bang
@@ -183,4 +185,4 @@ function! GHPRLink(bang, line1, line2, args) abort
   endif
 endfunction
 
-command! -bang -range=% -nargs=* GHPRLink call GHPRLink(<bang>0, <line1>, <line2>, <q-args>)
+command! -bang -range=-1 -nargs=* GHPRLink call GHPRLink(<bang>0, <count>, <line1>, +"<range>", <line2>, <q-args>)
