@@ -1,4 +1,15 @@
 vim.fn["my_plugin#add"]("neovim/nvim-lspconfig")
+vim.fn["my_plugin#add"]("j-hui/fidget.nvim",
+  {opts =
+   {
+     notification = {
+       window =
+       {
+         border = "rounded"
+       }
+     }
+   }
+  })
 
 function LspStatus(...)
   local bufnr = vim.fn.winbufnr(vim.g.statusline_winid)
