@@ -47,15 +47,12 @@ local cmp_loaded
 local cmp_nvim_lsp
 
 function init()
-  nvim_lsp = require("lspconfig")
   cmp_loaded, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 end
 
 function is_cmd_installed(lsp)
   init()
-  local cmd = nvim_lsp[lsp].document_config.default_config.cmd
-  -- Only present after a start:
-  -- nvim_lsp[lsp].cmd[1]
+  local cmd = vim.lsp.config[lsp].cmd
   return vim.fn.executable(cmd[1]) == 1
 end
 
@@ -72,7 +69,52 @@ vim.g.Hook_post_source_lspconfig = function()
       end,
     })
 
-    vim.lsp.enable('clojure_lsp')
+    function start_clojure_lsp(opts)
+      local config = vim.deepcopy(vim.lsp.config['clojure_lsp'])
+      local final_opts = vim.tbl_extend('force', {_root_markers = config.root_markers}, opts or {})
+      if type(config.root_dir) == 'function' then
+        config.root_dir(bufnr, function(root_dir)
+          config.root_dir = root_dir
+          vim.schedule(function()
+            vim.lsp.start(config, final_opts)
+          end)
+        end)
+      else
+        vim.lsp.start(config, final_opts)
+      end
+    end
+
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = {'clojure'}, -- in my setup only clojure_lsp is known to have this problem
+      group = vim.api.nvim_create_augroup('clojure_lsp.enable', {}),
+      callback = function(ev)
+        -- https://github.com/neovim/neovim/issues/33061
+        -- https://github.com/neovim/neovim/issues/33225
+        -- Form taken from lsp.lua/lsp_enable_callback
+        -- _root_markers is undocumented, but is how vim.lsp.enable() passes it in
+        if not ev.file:match('^fugitive://') then
+          -- vim.print('enabling for: ' .. ev.file)
+          local config = vim.deepcopy(vim.lsp.config['clojure_lsp'])
+          local bufnr = ev.buf
+          start_clojure_lsp({bufnr = bufnr})
+        end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('VimEnter', {
+      callback = function(ev)
+        for _, file in ipairs(vim.lsp.config['clojure_lsp'].root_markers) do
+          if vim.fn.filereadable(file) == 1 then
+            return vim.schedule(function()
+              start_clojure_lsp()
+            end)
+          end
+        end
+      end
+    })
+
+    -- Trigger for existing buffers
+    vim.cmd.doautoall('clojure_lsp.enable FileType')
 
     vim.lsp.config('clojure_lsp', {
       capabilities = cmp_loaded and cmp_nvim_lsp.default_capabilities(),
@@ -155,7 +197,6 @@ vim.g.Hook_post_source_lspconfig = function()
           end
         end
       end,
-      autostart = true,
     })
   end
 end
