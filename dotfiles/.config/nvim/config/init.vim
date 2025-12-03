@@ -45,3 +45,5 @@ nmap ]oh <Cmd>nohlsearch<CR>
 if has('nvim-0.9.0')
     set diffopt+=linematch:60
 endif
+
+set textwidth=120
