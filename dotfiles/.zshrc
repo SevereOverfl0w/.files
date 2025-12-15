@@ -155,12 +155,29 @@ function fzf-worktree() {
 
     done < <(git worktree list --porcelain)
 
-    local selected_branch="$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --preview-window=down,8 --preview "git worktree list | grep -F '[{}]'; printf '\n'; git -c color.ui=always lg '{}'")"
+    IFS=$'\n' local fzfresult=("${(@f)$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --expect 'ctrl-d,alt-d' --preview-window=down,8 --preview "git worktree list | grep -F '[{}]'; printf '\n'; git -c color.ui=always lg '{}'")}")
+
+    local selected_branch="$fzfresult[2]"
+    local binding="$fzfresult[1]"
 
     if [ -n "$selected_branch" ]; then
-        local selected_dir="${worktrees[$selected_branch]}"
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
+      local selected_dir="${worktrees[$selected_branch]}"
+      local rm_args
+      case $binding in
+        '')
+          BUFFER="cd ${selected_dir}"
+          zle accept-line
+          ;;
+        'alt-d')
+          rm_args="-f "
+          ;&
+        'ctrl-d')
+          BUFFER="git worktree remove $rm_args"
+          CURSOR="${#BUFFER}"
+          # Space to allow for entering -f
+          BUFFER+=" ${(q)selected_dir}"
+          ;;
+      esac
     fi
 }
 
