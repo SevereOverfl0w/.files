@@ -28,13 +28,21 @@ function makeargs(vimplugins)
         local hookpostsource = 'Hook_post_source_' .. hookname
         local hook_exists = vim.fn['my_plugin#_is_find_function'](hookpostsource) == 1
         if hook_exists or opts['rtp'] then
-            opts['config'] = function(plugin)
+            opts['config'] = function(plugin, opts)
                 if hook_exists then
                     local f = vim.g[hookpostsource] or vim.fn[hookpostsource]
                     f()
                 end
                 if opts['rtp'] then
                     vim.opt.rtp:append(plugin.dir .. "/" .. opts['rtp'])
+                end
+
+                if opts and next(opts) then
+                    local cloned = vim.tbl_extend('error', {}, plugin)
+                    local cloned_mt = vim.tbl_extend('error', {}, getmetatable(plugin))
+                    cloned_mt.__index.config = nil
+                    setmetatable(cloned, cloned_mt)
+                    require('lazy.core.loader').config(cloned)
                 end
             end
         end
