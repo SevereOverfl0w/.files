@@ -21,14 +21,19 @@ augroup ColorOverrides
   autocmd ColorScheme onehalflight hi! link ClapCurrentSelection Function
 augroup END
 
+function! GetColorSchemeForBackground()
+  return &background ==# 'dark' ? s:preferred_color_scheme[2] : s:preferred_color_scheme[1]
+endfunction
+
+function! ReactBackgroundChange()
+  if len(s:preferred_color_scheme) > 2
+    exe 'colorscheme '.GetColorSchemeForBackground()
+  endif
+endfunction
+
 function! ActivatePreferredColorScheme()
   if $TERM !=# 'linux'
-    let &background = get(g:, 'DARKMODE', 0) ? 'dark' : 'light'
-    if len(s:preferred_color_scheme) > 2
-      let scheme = get(g:, 'DARKMODE', 0) ? s:preferred_color_scheme[2] :  s:preferred_color_scheme[1]
-    else
-      let scheme = s:preferred_color_scheme[1]
-    endif
+    let scheme = len(s:preferred_color_scheme) > 2 ? GetColorSchemeForBackground() : s:preferred_color_scheme[1]
     exe 'colorscheme '.scheme
     " AutoCmds not triggered during VimEnter / other autocmds
     exe 'doautocmd ColorScheme '.scheme
@@ -36,3 +41,7 @@ function! ActivatePreferredColorScheme()
 endf
 
 execute 'function! Hook_post_source_'.s:preferred_color_scheme[0]."()\n   autocmd VimEnter * ++once call ActivatePreferredColorScheme()\n endf"
+
+augroup BackgroundHandler
+  autocmd OptionSet background call ActivatePreferredColorScheme()
+augroup END
