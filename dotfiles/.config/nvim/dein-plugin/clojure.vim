@@ -6,18 +6,6 @@ call my_plugin#add('clojure-vim/clojure.vim')
 " parens) in magical ways.
 call my_plugin#add('bpstahlman/vim-sexp', #{branch: 'master'})
 
-" indent that respects cljfmt
-call my_plugin#add('raystubbs/nvim-cljfmt-indents', #{config: v:true})
-
-function! Hook_post_source_cljfmt_indents()
-    lua require('nvim-cljfmt-indents').setup()
-    augroup SetupCljfmtIndents
-        autocmd!
-        " autocmd BufEnter,BufWinEnter *.clj,*.cljc,*.cljs,*.edn setlocal indentexpr=GetCljfmtIndent()
-        autocmd FileType clojure setlocal indentexpr=GetCljfmtIndent()
-    augroup END
-endfunction
-
 " By default == has a maximum number of lines to prevent
 " hanging. Disable that, because I'm happy to wait when I
 " want this.
