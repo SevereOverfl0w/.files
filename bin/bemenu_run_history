@@ -2,7 +2,7 @@
 
 ## Source: https://tools.suckless.org/dmenu/scripts/dmenu_run_with_command_history/
 ## Changes:
-## 1. Use bemenu rather than dmenu
+## 1. Use fuzzel rather than dmenu
 ## 2. Use "run" prompt
 ## 3. Echo rather than exec the command - this allows sway to perform workspace tracking with the opened command
 
@@ -29,7 +29,7 @@ awk -v histfile=$historyfile '
 			x[$0]=1
 		}
 	} !x[$0]++ ' "$cache" \
-	| bemenu -p "run" "$@" \
+	| fuzzel --dmenu -p "> " "$@" \
 	| awk -v histfile=$historyfile '
 		BEGIN {
 			FS=OFS="\t"

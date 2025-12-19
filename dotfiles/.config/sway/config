@@ -78,6 +78,7 @@ input type:touchpad natural_scroll enabled
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+shift+d exec fuzzel --launch-prefix 'swaymsg exec --'
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

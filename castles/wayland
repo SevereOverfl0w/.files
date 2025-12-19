@@ -1,1 +1,1 @@
-pkg-install bemenu mako dmenu sway Waybar xdg-desktop-portal-wlr
+pkg-install bemenu fuzzel mako dmenu sway Waybar xdg-desktop-portal-wlr
