@@ -165,4 +165,10 @@ call my_plugin#add('Apeiros-46B/qalc.nvim', #{opts: #{cmd_args: ["--set", "curco
 
 call my_plugin#add('terrastruct/d2-vim')
 
+let g:send_disable_mapping = 1
 call my_plugin#add('mtikekar/nvim-send-to-term')
+
+function! Hook_post_source_send_to_term()
+    nmap <leader>st <Plug>Send
+    vmap <leader>st <Plug>Send
+endfunction
