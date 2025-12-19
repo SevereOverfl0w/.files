@@ -44,13 +44,6 @@ if [ ! -e "$zinit_dir" ]; then
 	git clone https://github.com/zdharma-continuum/zinit.git "$zinit_dir"
 fi
 
-# Compile xgetresource
-if [ ! -e ~/bin/xgetresource ]; then
-	install make gcc libX11-devel
-	(cd "$dotfiles_repo/src/getresource" && make && cp xgetresource ~/bin/)
-	sudo xbps-remove -R make gcc libX11-devel
-fi
-
 sudo stow --no-folding --dir=${dotfiles_repo} --target=/ global
 
 # All hail the desktop stack
