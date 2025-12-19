@@ -34,13 +34,16 @@ call my_plugin#add('SevereOverfl0w/vim-fireplace', #{branch: 'dominic/patches'})
 let g:fireplace_cljs_repl = ''
 
 let g:FIREPLACE_PRINT_META = get(g:, 'FIREPLACE_PRINT_META', v:true)
-function! g:Fireplace_pprint_func(msg, width)
+
+function! Pprint_fun(msg, width)
   let opts = #{}
   if g:FIREPLACE_PRINT_META
     let opts['print-meta'] = v:true
   endif
   call fireplace#pprint_puget(a:msg, a:width, opts)
 endfunction
+
+let g:Fireplace_pprint_func = 'Pprint_fun'
 
 " REPLant is a plugin for enhancing your REPL experience
 " with vim.
