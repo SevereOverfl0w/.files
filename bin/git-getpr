@@ -9,7 +9,7 @@ fetch(){
     if [ $? -eq 1 ]; then
         # git worktree list | grep "^branch .*${1}$"
         git fetch;
-        if git ls-remote --exit-code --heads origin "${1}"; then
+        if git ls-remote --exit-code --heads origin "${1}" || git show-ref --verify --quiet "refs/heads/$1"; then
             git worktree add "$destination" $1;
         else
             git worktree add -B $1 "$destination" --guess-remote "$(git rev-parse origin/master)"
