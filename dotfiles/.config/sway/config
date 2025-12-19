@@ -22,6 +22,8 @@ set $term kitty
 ### set $menu bemenu-run --no-exec | xargs swaymsg exec --
 set $menu bemenu_run_history | xargs swaymsg exec --
 
+mouse_warping container
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
