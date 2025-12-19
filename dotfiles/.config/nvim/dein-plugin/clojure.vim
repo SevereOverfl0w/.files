@@ -4,7 +4,7 @@ call my_plugin#add('clojure-vim/clojure.vim')
 
 " This plugin allows you to manipulate sexp (clojure
 " parens) in magical ways.
-call my_plugin#add('bpstahlman/vim-sexp', #{branch: 'bugfix/issue-43-anon-fn-selection'})
+call my_plugin#add('bpstahlman/vim-sexp', #{branch: 'master'})
 
 " indent that respects cljfmt
 call my_plugin#add('raystubbs/nvim-cljfmt-indents', #{config: v:true})
