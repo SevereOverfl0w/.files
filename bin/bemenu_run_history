@@ -29,7 +29,7 @@ awk -v histfile=$historyfile '
 			x[$0]=1
 		}
 	} !x[$0]++ ' "$cache" \
-	| fuzzel --dmenu -p "> " "$@" \
+	| fuzzel -w 120 --dmenu -p "> " "$@" \
 	| awk -v histfile=$historyfile '
 		BEGIN {
 			FS=OFS="\t"
