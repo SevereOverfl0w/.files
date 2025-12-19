@@ -48,3 +48,14 @@ nmap <LocalLeader>]d <Plug>ReplantPeekSource
 
 setlocal lispwords+=$d,<>
 setlocal shiftwidth=2
+
+function! s:StacktraceExpr(expr) abort
+  let expr = '(clojure.core/with-out-str (clojure.core/binding [clojure.core/*err* clojure.core/*out*] ((requiring-resolve ''clojure.repl/pst) ' . a:expr . ')))'
+  let stacktrace = split(fireplace#evalparse(expr), '\n')
+  let qf = fireplace#quickfix_for(stacktrace)
+  call setqflist([], ' ', #{title: a:expr, items: qf})
+endfunction
+
+command! -buffer -nargs=*
+        \ -complete=customlist,fireplace#eval_complete StacktraceExpr
+        \ call <SID>StacktraceExpr(<q-args>)
