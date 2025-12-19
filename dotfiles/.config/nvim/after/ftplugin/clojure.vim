@@ -46,7 +46,7 @@ compiler clj-lint
 
 nmap <LocalLeader>]d <Plug>ReplantPeekSource
 
-setlocal lispwords+=$d,<>
+setlocal lispwords+=$d,<>,$
 setlocal shiftwidth=2
 
 function! s:StacktraceExpr(expr) abort
