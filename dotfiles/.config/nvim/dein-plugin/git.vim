@@ -133,6 +133,7 @@ function Review(base)
 endfunction
 
 command! -nargs=1 Review call Review(<q-args>)
+command! -nargs=0 ReviewNext silent Git rbc | Review HEAD^
 
 function! GHPRLink(bang, count, line1, range, line2, args) abort
   let l:pathtype = 'sha'
