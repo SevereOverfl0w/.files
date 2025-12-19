@@ -44,9 +44,6 @@ if [ ! -e "$zinit_dir" ]; then
 	git clone https://github.com/zdharma-continuum/zinit.git "$zinit_dir"
 fi
 
-# Create local bin directory
-mkdir -p ~/bin/
-
 # Compile xgetresource
 if [ ! -e ~/bin/xgetresource ]; then
 	install make gcc libX11-devel
