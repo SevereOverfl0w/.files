@@ -145,11 +145,19 @@ input type:touchpad natural_scroll enabled
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
-    bindsym $mod+bracketright workspace next
-    bindsym $mod+bracketleft workspace prev
-#
-# Layout stuff:
-#
+    bindsym $mod+bracketright workspace next_on_output
+    bindsym $mod+bracketleft workspace prev_on_output
+
+    # Move container to screen directionally
+    bindsym $mod+Shift+Control+$right move container to output right
+    bindsym $mod+Shift+Control+$left move container to output left
+    # Move workspace to screen directionally
+    bindsym $mod+Control+$right move workspace to output right
+    bindsym $mod+Control+$left move workspace to output left
+
+    #
+    # Layout stuff:
+    #
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
