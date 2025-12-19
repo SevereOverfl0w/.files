@@ -138,7 +138,7 @@ endf
 
 " call my_plugin#add('powerman/vim-plugin-ansiesc')
 
-call my_plugin#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': ':TSUpdate'})
+call my_plugin#add('nvim-treesitter/nvim-treesitter', #{hook_post_update: ':TSUpdate'})
 
 function! Hook_post_source_treesitter()
     lua <<EOF
