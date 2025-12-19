@@ -257,3 +257,5 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
   add-zsh-hook chpwd ls_after_cd
   add-zsh-hook precmd ls_after_cd
 fi
+
+setopt incappendhistory sharehistory
