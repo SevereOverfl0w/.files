@@ -6,6 +6,7 @@ call my_plugin#add('airblade/vim-gitgutter')
 
 " Leave my sign column alone!
 let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_highlight_linenrs = 1
 
 function! Hook_add_gitgutter()
   " Disable gitgutter mappings, I can take care of that, thank you!
