@@ -45,8 +45,6 @@
 	autoSetupRemote = true
 [pull]
 	rebase = true
-# [core]
-# 	excludesfile = ~/.gitignore
 [http "https://gopkg.in"]
 	followRedirects = true
 [rebase]
