@@ -91,8 +91,8 @@ nnoremap <Leader>gm :GMove<Space>
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>
 " Pull & push
-nnoremap <Leader>gps :Dispatch! git push<CR>
-nnoremap <Leader>gpl :Dispatch! git pull<CR>
+nnoremap <Leader>gps :Git push<CR>
+nnoremap <Leader>gpl :Git pull<CR>
 
 nnoremap <Leader>gB :.Gbrowse<CR>
 " }}}
