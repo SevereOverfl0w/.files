@@ -8,4 +8,9 @@
                         :snippet "#_(comment (./letsc [$1] $0))"}
                        {:name "letsc"
                         :detail "Add letsc"
-                        :snippet "(./letsc [$1] $0)"}]}
+                        :snippet "(./letsc [$1] $0)"}
+                       {:name "throwspy"
+                        :detail "Add a try/catch and spy in the catch"
+                        :snippet "(try $0$current-form (catch Exception e (./spy) (throw e)))"}]
+ :clean {:ns-inner-blocks-indentation :same-line}
+ :log-path "/tmp/clojure-lsp.out"}
