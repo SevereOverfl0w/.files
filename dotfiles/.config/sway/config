@@ -64,7 +64,7 @@ exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # Read `man 5 sway-input` for more information about this section.
 
 input type:keyboard xkb_layout gb
-input type:keyboard xkb_options lv3:ralt_switch_multikey
+input type:keyboard xkb_options compose:ralt
 input type:touchpad natural_scroll enabled
 ### Key bindings
 #
