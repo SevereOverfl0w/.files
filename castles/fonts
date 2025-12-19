@@ -1,0 +1,26 @@
+#!/bin/sh
+
+cleanup() {
+    for tmpfile in $temp_files; do
+        [ -f "$tmpfile" ] && rm -f "$tmpfile"
+    done
+}
+trap cleanup EXIT
+
+mktemp_tracked() {
+    tmp="$(mktemp "$@")"
+    temp_files="$temp_files $tmp"
+    echo "$tmp"
+}
+
+jb_dir="$(fontdir "jetbrainsmono-2.304")"
+if [ ! -d "$jb_dir" ]; then
+    output="$(mktemp_tracked --suffix=.tmp)"
+    curl --progress-bar -L --output "$output" "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+    mkdir -p "$jb_dir"
+    unzip -d "$jb_dir" "$output" fonts/ttf/JetBrainsMonoNL-Regular.ttf fonts/ttf/JetBrainsMono-Regular.ttf
+fi
+
+if [ "linux" = "$ostype" ]; then
+    fc-cache -f
+fi

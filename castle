@@ -6,9 +6,15 @@ export STOW_DIR="$dotfiles_repo"
 export PLUGINS="$castles/plugins"
 export PATH="$castles/bin:$PATH"
 
-case "$OSTYPE" in
-    linux*) export os="$(lsb_release -cs)" ;;
-    darwin*) export os="darwin" ;;
+# OSTYPE does not exist in posix sh
+case "$(uname)" in
+    Linux) export ostype="linux" ;;
+    Darwin) export ostype="darwin" ;;
+esac
+
+case "$ostype" in
+    linux) os="$(lsb_release -cs)"; export os ;;
+    darwin) export os="darwin" ;;
 esac
 
 castle(){

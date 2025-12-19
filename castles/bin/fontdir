@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "darwin" = "$os" ]; then
+    printf "$HOME/Library/Fonts/%s" "$1"
+else
+    printf "$HOME/.local/share/fonts/%s" "$1"
+fi
