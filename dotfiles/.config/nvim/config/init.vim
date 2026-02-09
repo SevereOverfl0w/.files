@@ -47,3 +47,5 @@ if has('nvim-0.9.0')
 endif
 
 set textwidth=120
+
+nmap ZB <CMD>Bdelete<CR>

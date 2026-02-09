@@ -172,3 +172,5 @@ function! Hook_post_source_send_to_term()
     nmap <leader>st <Plug>Send
     vmap <leader>st <Plug>Send
 endfunction
+
+call my_plugin#add('moll/vim-bbye')
