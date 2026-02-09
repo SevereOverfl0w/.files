@@ -15,7 +15,7 @@ mktemp_tracked() {
 
 jb_dir="$(fontdir "jetbrainsmono-2.304")"
 if [ ! -d "$jb_dir" ]; then
-    output="$(mktemp_tracked --suffix=.tmp)"
+    output="$(mktemp_tracked).tmp"
     curl --progress-bar -L --output "$output" "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
     oldfiles="$(ls -d "$(fontdir)"/jetbrains* 2>/dev/null)"
     mkdir -p "$jb_dir"
