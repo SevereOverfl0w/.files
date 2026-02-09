@@ -10,6 +10,9 @@ function! Hook_add_tcomment()
   " I really don't like the insert-mode mappings it creates:
   let g:tcomment_mapleader1 = ''
   let g:tcomment_mapleader2 = ''
+
+  " The `ic` mapping overrides vim-sexp's `ic`.
+  let g:tcomment_textobject_inlinecomment = ''
 endf
 
 function! Hook_post_source_tcomment()
