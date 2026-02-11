@@ -4,13 +4,31 @@
 ## Changes:
 ## 1. Use fuzzel rather than dmenu
 ## 2. Use "run" prompt
-## 3. Echo rather than exec the command - this allows sway to perform workspace tracking with the opened command
+## 3. Echo rather than exec the command by default (allows sway workspace tracking)
+## 4. Support --exec flag to execute directly
+
+# Parse arguments
+EXEC_MODE=0
+FUZZEL_ARGS=""
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+		--exec)
+			EXEC_MODE=1
+			shift
+			;;
+		*)
+			FUZZEL_ARGS="$FUZZEL_ARGS $1"
+			shift
+			;;
+	esac
+done
 
 cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 if [ -d "$cachedir" ]; then
 	cache=$cachedir/dmenu_run
 	historyfile=$cachedir/dmenu_history
-else			# if no xdg dir, fall back to dotfiles in ~
+else
 	cache=$HOME/.dmenu_cache
 	historyfile=$HOME/.dmenu_history
 fi
@@ -29,7 +47,7 @@ awk -v histfile=$historyfile '
 			x[$0]=1
 		}
 	} !x[$0]++ ' "$cache" \
-	| fuzzel -w 120 --dmenu -p "> " "$@" \
+	| fuzzel -w 120 --dmenu -p "> " $FUZZEL_ARGS \
 	| awk -v histfile=$historyfile '
 		BEGIN {
 			FS=OFS="\t"
@@ -41,16 +59,20 @@ awk -v histfile=$historyfile '
 			}
 			close(histfile)
 		}
-
 		{
 			history[$0]++
 			print
 		}
-
 		END {
 			if(!NR) exit
 			for (f in history)
 				print history[f],f | "sort -t '\t' -k1rn >" histfile
 		}
-	' # \
-	#| while read cmd; do ${SHELL:-"/bin/sh"} -c "$cmd" & done
+	' \
+	| while read cmd; do
+		if [ $EXEC_MODE -eq 1 ]; then
+			${SHELL:-"/bin/sh"} -c "$cmd" &
+		else
+			echo "$cmd"
+		fi
+	done
