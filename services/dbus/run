@@ -9,4 +9,4 @@ if [ -d "$TURNSTILE_ENV_DIR" ]; then
 	echo "$DBUS_SESSION_BUS_ADDRESS" > "$TURNSTILE_ENV_DIR"/DBUS_SESSION_BUS_ADDRESS
 fi
 
-exec chpst -e "$TURNSTILE_ENV_DIR" dbus-daemon --session --nofork --nopidfile --address="$DBUS_SESSION_BUS_ADDRESS" $OPTS
+exec chpst -e "$TURNSTILE_ENV_DIR" dbus-daemon --session --nofork --nopidfile --address="$DBUS_SESSION_BUS_ADDRESS" --print-pid 3 $OPTS 3>"${TURNSTILE_ENV_DIR}/DBUS_SESSION_BUS_PID"
