@@ -21,6 +21,9 @@ window > box > * > widget > box, window > box > * > widget > label {
 #workspaces button { padding: 0; }
 #workspaces button > * { padding: 0 10px; }
 
+/* hide window name when no window focused, kinda (uses empty workspace as proxy) */
+window#waybar.empty box#window { opacity: 0 }
+
 button.urgent {
     background-color: #eb4d4b;
 }
