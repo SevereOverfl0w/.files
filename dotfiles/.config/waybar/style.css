@@ -1,7 +1,7 @@
 window#waybar {
     background: rgba(0,0,0,0);
     color: #ffffff;
-    transition-property: background-color;
+    transition-property: background-color, border-color;
     transition-duration: .5s;
 }
 
@@ -28,6 +28,28 @@ button.urgent {
 #network.disconnected {
     border-color: #ff9500;
 }
+
+@keyframes urgentblink {
+    to {
+        border-color: #eb4d4b;
+    }
+}
+
+@keyframes criticalblink {
+    to {
+        border-color: #eb4d4b;
+    }
+}
+
+#battery.warning:not(.charging), #battery.critical:not(.charging) {
+    animation-duration: 0.4s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning:not(.charging) { animation-name: urgentblink; }
+#battery.critical:not(.charging) { animation-name: criticalblink; }
 
 #tray > .passive {
     -gtk-icon-effect: dim;

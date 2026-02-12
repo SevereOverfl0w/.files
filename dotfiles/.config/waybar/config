@@ -9,7 +9,7 @@
 
     "modules-left":["niri/workspaces"],
     "modules-center":["niri/window"],
-    "modules-right":["pulseaudio", "network", "clock", "tray"],
+    "modules-right":["pulseaudio", "network", "battery", "clock", "tray"],
     "tray": {
         "icon-size": 20,
         "spacing": 10
