@@ -10,6 +10,7 @@
     "modules-left":["niri/workspaces"],
     "modules-center":["niri/window"],
     "modules-right":["pulseaudio", "network", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "backlight", "battery", "clock", "tray"],
     "tray": {
         "icon-size": 20,
         "spacing": 10
@@ -42,5 +43,13 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}"
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""],
+        "on-scroll-up": "xbacklight -inc 1",
+        "on-scroll-down": "xbacklight -dec 1",
+        "on-click": "wrap-brightness",
+        "on-click-right": "xbacklight -dec 15",
     },
 }
