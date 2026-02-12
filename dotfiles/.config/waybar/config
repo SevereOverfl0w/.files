@@ -16,7 +16,8 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%c}"
+        "format": "{:%c}",
+        "format-alt": "{:%F %R}"
     },
     "pulseaudio": {
         "format": "{icon}  {volume}% {format_source}",
