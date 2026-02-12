@@ -31,7 +31,7 @@ button.urgent {
 
 @keyframes urgentblink {
     to {
-        border-color: #eb4d4b;
+        border-color: #f0a500;
     }
 }
 
