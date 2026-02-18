@@ -59,3 +59,5 @@ endfunction
 command! -buffer -nargs=*
         \ -complete=customlist,fireplace#eval_complete StacktraceExpr
         \ call <SID>StacktraceExpr(<q-args>)
+
+command! -buffer -nargs=0 ConnectShadow exe ':Connect ' . readfile('.shadow-cljs/nrepl.port')[0]<CR>
