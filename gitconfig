@@ -57,6 +57,8 @@
 	# Show whitespace errors when doing `git diff`
 	wsErrorHighlight = all
 	algorithm = histogram
+[diff "clojure"]
+	xfuncname = "^\\(((ns|def[a-zA-Z]*|extend-type|extend-protocol) +[^ ].*)"
 [ghq]
 	root = ~/src
 [ghq "keybase://"]
