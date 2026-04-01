@@ -186,16 +186,6 @@ vim.g.Hook_post_source_lspconfig = function()
         buf_set_keymap("n", "grr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
         vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, opts)
         vim.keymap.set({'n', 'i'}, '<C-S>', vim.lsp.buf.signature_help, opts)
-
-        -- I don't like that this is a loop, but in practice it should be a
-        -- short loop.  Ideally I could do a O(1) mapping from client.id to
-        -- diagnostic_namespace.
-        for diagnostic_namespace, namespace_metadata in pairs(vim.diagnostic.get_namespaces()) do
-          if namespace_metadata.name == "vim.lsp.clojure_lsp." .. client.id then
-            vim.diagnostic.enable(false, {diagnostic_namespace, bufnr})
-            break
-          end
-        end
       end,
     })
   end

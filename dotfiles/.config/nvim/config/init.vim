@@ -49,3 +49,6 @@ endif
 set textwidth=120
 
 nmap ZB <CMD>Bdelete<CR>
+
+nnoremap gl <cmd>call v:lua.vim.diagnostic.open_float()<cr>
+lua vim.diagnostic.config({ virtual_text = { current_line = true } })
