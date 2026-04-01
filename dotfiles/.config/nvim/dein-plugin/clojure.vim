@@ -4,7 +4,7 @@ call my_plugin#add('clojure-vim/clojure.vim')
 
 " This plugin allows you to manipulate sexp (clojure
 " parens) in magical ways.
-call my_plugin#add('bpstahlman/vim-sexp', #{branch: 'master'})
+call my_plugin#add('guns/vim-sexp', #{branch: 'master'})
 
 " By default == has a maximum number of lines to prevent
 " hanging. Disable that, because I'm happy to wait when I
