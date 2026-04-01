@@ -49,6 +49,15 @@ nmap <LocalLeader>]d <Plug>ReplantPeekSource
 setlocal lispwords+=$d,<>,$
 setlocal shiftwidth=2
 
+function! s:ClojureFormatExpr()
+  if luaeval('#vim.lsp.get_clients({bufnr: 0}) > 0')
+    return v:lua.vim.lsp.formatexpr(#{timeout_ms: 250})
+  endif
+  return fireplace#format(v:lnum, v:count, v:char)
+endfunction
+
+setlocal formatexpr=s:ClojureFormatExpr()
+
 function! s:StacktraceExpr(expr) abort
   let expr = '(clojure.core/with-out-str (clojure.core/binding [clojure.core/*err* clojure.core/*out*] ((requiring-resolve ''clojure.repl/pst) ' . a:expr . ')))'
   let stacktrace = split(fireplace#evalparse(expr), '\n')
