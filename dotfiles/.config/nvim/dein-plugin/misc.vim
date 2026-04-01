@@ -174,3 +174,5 @@ function! Hook_post_source_send_to_term()
 endfunction
 
 call my_plugin#add('moll/vim-bbye')
+
+call my_plugin#add('nvim-treesitter/nvim-treesitter-context')
