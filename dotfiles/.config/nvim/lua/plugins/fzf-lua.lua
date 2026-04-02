@@ -1,8 +1,14 @@
 local Bdelete = function(selected, opts)
+    local path = require "fzf-lua.path"
+
     for _, s in ipairs(selected) do
-        local b = s:match("%[(%d+)%]")
-        vim.cmd.Bdelete(b)
+        local entry = path.entry_to_file(s, opts)
+        if entry.bufnr then
+            vim.cmd.Bdelete(entry.bufnr)
+        end
     end
+
+    require('fzf-lua').resume()
 end
 
 vim.keymap.set("i", "<C-f>", function()
