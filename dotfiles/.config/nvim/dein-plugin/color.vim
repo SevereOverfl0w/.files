@@ -1,4 +1,4 @@
-call my_plugin#add('miikanissi/modus-themes.nvim', #{opts: #{variant: "tinted", line_nr_column_background: v:false}})
+call my_plugin#add('miikanissi/modus-themes.nvim', #{opts: #{variants: #{modus_operandi: "tinted", modus_vivendi: "tinted"}, line_nr_column_background: v:false}})
 call my_plugin#add('sonph/onehalf', {'rtp': 'vim/'})
 call my_plugin#add('https://gitlab.com/protesilaos/tempus-themes-vim.git') 
 call my_plugin#add('NLKNguyen/papercolor-theme')
