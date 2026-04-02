@@ -27,6 +27,7 @@ return {
               end
               return true
             end,
+            ignore_errors = true -- if binary is missing, don't ENOENT https://github.com/mfussenegger/nvim-lint/issues/711 - bit of a blunt tool
           })
       end,
     })
