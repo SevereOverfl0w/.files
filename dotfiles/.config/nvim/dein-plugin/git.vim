@@ -11,11 +11,6 @@ let g:gitgutter_highlight_linenrs = 1
 function! Hook_add_gitgutter()
   " Disable gitgutter mappings, I can take care of that, thank you!
   let g:gitgutter_map_keys = 0
-  " Apparently I can integrate with ripgrep really easily, and ripgrep is
-  " awesome.
-  if executable('rg')
-    let g:gitgutter_grep = 'grep'
-  endif
 
   " Mapping for jumping between hunks
   nmap ]h <Plug>(GitGutterNextHunk)
