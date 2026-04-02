@@ -19,6 +19,7 @@ augroup ColorOverrides
   autocmd!
   autocmd ColorScheme onehalflight hi! link IncSearch PMenuSel
   autocmd ColorScheme onehalflight hi! link ClapCurrentSelection Function
+  autocmd ColorScheme * highlight DiagnosticDeprecated guisp=Red gui=undercurl cterm=undercurl
 augroup END
 
 function! GetColorSchemeForBackground()
