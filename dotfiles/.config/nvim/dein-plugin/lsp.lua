@@ -42,37 +42,30 @@ function _G.clojure_omnifunc_lsp_fallback(...)
   end
 end
 
-local nvim_lsp
 local cmp_loaded
 local cmp_nvim_lsp
 
-function init()
+local function is_cmd_installed(lsp)
   cmp_loaded, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-end
-
-function is_cmd_installed(lsp)
-  init()
   local cmd = vim.lsp.config[lsp].cmd
   return vim.fn.executable(cmd[1]) == 1
 end
 
 vim.g.Hook_post_source_lspconfig = function()
   if is_cmd_installed("clojure_lsp") then
-    init()
 
-    -- TODO: Make Clojure-only
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(ev)
-        vim.bo[ev.buf].omnifunc = nil
-        vim.keymap.del('n', 'K', { buffer = ev.buf })
+        if vim.bo[ev.buf].filetype ~= 'clojure' then return end
+        vim.bo[ev.buf].omnifunc = 'v:lua._G.clojure_omnifunc_lsp_fallback'
       end,
     })
 
-    function start_clojure_lsp(opts)
+    local function start_clojure_lsp(opts)
       local config = vim.deepcopy(vim.lsp.config['clojure_lsp'])
       local final_opts = vim.tbl_extend('force', {_root_markers = config.root_markers}, opts or {})
       if type(config.root_dir) == 'function' then
-        config.root_dir(bufnr, function(root_dir)
+        config.root_dir(opts and opts.bufnr or 0, function(root_dir)
           config.root_dir = root_dir
           vim.schedule(function()
             vim.lsp.start(config, final_opts)
@@ -92,10 +85,7 @@ vim.g.Hook_post_source_lspconfig = function()
         -- Form taken from lsp.lua/lsp_enable_callback
         -- _root_markers is undocumented, but is how vim.lsp.enable() passes it in
         if not ev.file:match('^fugitive://') then
-          -- vim.print('enabling for: ' .. ev.file)
-          local config = vim.deepcopy(vim.lsp.config['clojure_lsp'])
-          local bufnr = ev.buf
-          start_clojure_lsp({bufnr = bufnr})
+          start_clojure_lsp({bufnr = ev.buf})
         end
       end,
     })
@@ -121,69 +111,46 @@ vim.g.Hook_post_source_lspconfig = function()
         diagnostics = true,
       },
       on_attach = function(client, bufnr)
-        -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-        local function buf_set_keymap(...)
-          vim.api.nvim_buf_set_keymap(bufnr, ...)
-        end
-        local function buf_set_option(...)
-          vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-        buf_set_option("omnifunc", "v:lua._G.clojure_omnifunc_lsp_fallback")
-        vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
-
         local opts = { noremap = true, silent = true }
 
-        -- TODO: Use K, but only when fireplace isn't connected.
-        buf_set_keymap("n", "<localleader>K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-
-        buf_set_keymap("n", "grn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-
-        buf_set_keymap("n", "gra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-        buf_set_keymap("v", "gra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-
-        buf_set_keymap(
-          "v",
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "v",
           "<localleader>ef",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("extract-function"), apply = true})<CR>',
           opts
         )
-        buf_set_keymap(
-          "v",
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "v",
           "<localleader>tf",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("thread-first-all"), apply = true})<CR>',
           opts
         )
 
-        buf_set_keymap(
-          "v",
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "v",
           "<localleader>uw",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("unwind-thread"), apply = true})<CR>',
           opts
         )
-        buf_set_keymap(
-          "v",
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "v",
           "<localleader>ua",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("unwind-all"), apply = true})<CR>',
           opts
         )
 
-        buf_set_keymap(
-          "n",
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "n",
           "<localleader>nsc",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("clean-ns"), apply = true})<CR>',
           opts
         )
-        buf_set_keymap(
-          "n",
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "n",
           "<localleader>lcp",
           '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("cycle-privacy"), apply = true})<CR>',
           opts
         )
-
-        buf_set_keymap("n", "grr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-        vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, opts)
-        vim.keymap.set({'n', 'i'}, '<C-S>', vim.lsp.buf.signature_help, opts)
       end,
     })
   end

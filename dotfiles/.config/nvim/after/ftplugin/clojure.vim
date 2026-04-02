@@ -58,6 +58,16 @@ endfunction
 
 setlocal formatexpr=s:ClojureFormatExpr()
 
+function! s:ClojureK()
+  if exists('*fireplace#op_available') && fireplace#op_available('eval')
+    exe "normal \<Plug>FireplaceK"
+  else
+    lua vim.lsp.buf.hover()
+  endif
+endfunction
+
+nnoremap <buffer> K <Cmd>call <SID>ClojureK()<CR>
+
 function! s:StacktraceExpr(expr) abort
   let expr = '(clojure.core/with-out-str (clojure.core/binding [clojure.core/*err* clojure.core/*out*] ((requiring-resolve ''clojure.repl/pst) ' . a:expr . ')))'
   let stacktrace = split(fireplace#evalparse(expr), '\n')
