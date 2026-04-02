@@ -41,13 +41,15 @@ endf
 function! my_plugin#add(name, ...) abort
   let dev_overrides = get(g:, 'dev_overrides', {})
   let name = a:name
-  if has_key(dev_overrides, a:name)
-    let dev_override = dev_overrides[a:name]
+
+  if type(name) == v:t_string && has_key(dev_overrides, name)
+    let dev_override = dev_overrides[name]
     if dev_override ==# '~/src'
-      let name = #{dir: '~/src/github.com/'.a:name, name: a:name}
+      let name = #{dir: '~/src/github.com/'.name, name: name}
     else
-      let name = #{dir: dev_override, name: a:name}
+      let name = #{dir: dev_override, name: name}
     endif
   endif
+
   call add(s:plugins, [name] + a:000)
 endf
