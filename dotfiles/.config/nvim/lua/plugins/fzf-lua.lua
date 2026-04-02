@@ -5,6 +5,18 @@ local Bdelete = function(selected, opts)
     end
 end
 
+vim.keymap.set("i", "<C-f>", function()
+  require("fzf-lua").files({
+    actions = {
+["default"] = function(selected, opts)
+  local fzf_path = require("fzf-lua.path")
+  local entry = fzf_path.entry_to_file(selected[1], opts)
+  local relpath = fzf_path.relative_to(entry.path, vim.uv.cwd())
+  vim.api.nvim_put({ relpath }, "c", true, true)
+end,    },
+  })
+end)
+
 return {
     {
         "ibhagwan/fzf-lua",
