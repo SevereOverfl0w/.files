@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+mkdir -p "$HOME/.agents" "$HOME/.claude"
+stow --dotfiles --target="$HOME" dotfiles
+
+npmig @myerscarpenter/cdp-cli
+
+# clojure mcp light
+bbini clj-nrepl-eval https://github.com/bhauman/clojure-mcp-light.git --tag v0.2.2 --main-opts '["-m" "clojure-mcp-light.nrepl-eval"]'
+bbini clj-paren-repair https://github.com/bhauman/clojure-mcp-light.git --tag v0.2.2 --main-opts '["-m" "clojure-mcp-light.paren-repair"]'
+bbini clj-paren-repair-claude-hook https://github.com/bhauman/clojure-mcp-light.git --tag v0.2.2
+
+bbini brepl io.github.licht1stein/brepl

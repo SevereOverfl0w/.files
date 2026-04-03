@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+spec="${1:?usage: npmig <package> [npm install -g args...] }"
+shift || true
+
+case "$spec" in
+  http*|git+*) ;;
+  *)
+    if npm -g ls --depth=0 "$spec" >/dev/null 2>&1; then
+      exit 0
+    fi
+    ;;
+esac
+
+npm install -g "$spec" "$@"

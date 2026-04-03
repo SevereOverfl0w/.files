@@ -1,0 +1,23 @@
+{
+  "lastChangelogVersion": "0.64.0",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.4",
+  "defaultThinkingLevel": "medium",
+  "theme": "light",
+  "hideThinkingBlock": true,
+  "packages": [
+    "npm:@calesennett/pi-codex-usage",
+    {
+      "source": "npm:pi-amplike",
+      "extensions": [
+        "!extensions/modes.ts",
+        "!extensions/amp-skills.ts"
+      ]
+    },
+    "npm:pi-librarian"
+  ],
+  "pi-codex-usage": {
+    "usageMode": "left",
+    "refreshWindow": "7d"
+  }
+}

@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+bin="${1:?usage: bbini <bin> <spec> [bbin install args...] }"
+spec="${2:?usage: bbini <bin> <spec> [bbin install args...] }"
+shift 2 || true
+
+if ! command -v bbin >/dev/null 2>&1; then
+  mkdir -p "$HOME/.local/bin"
+  curl -o- -L https://raw.githubusercontent.com/babashka/bbin/v0.2.4/bbin > "$HOME/.local/bin/bbin"
+  chmod +x "$HOME/.local/bin/bbin"
+fi
+
+if bbin ls --plain 2>/dev/null | grep -qE "^${bin}[[:space:]]"; then
+  exit 0
+fi
+
+bbin install "$spec" --as "$bin" "$@"
