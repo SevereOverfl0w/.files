@@ -173,7 +173,7 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // spawn-at-startup "alacritty" "-e" "fish"
-spawn-at-startup "runsvdir" "/home/overfl0w/.files/Waylandservices/"
+spawn-at-startup "spawn-wayland-services"
 // spawn-at-startup "dbus-update-activation-environment" "DISPLAY" "WAYLAND_DISPLAY" "SWAYSOCK"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
