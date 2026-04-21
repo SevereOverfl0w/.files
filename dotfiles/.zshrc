@@ -259,3 +259,9 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
 fi
 
 setopt incappendhistory sharehistory
+
+# Date aliases for filenames (ISO format)
+alias datedate='date +%Y-%m-%d'
+alias datetime='date +%Y-%m-%dT%H%M%S'
+alias dateweek='date +%Y-W%V'
+alias datemonth='date +%Y-%m'
