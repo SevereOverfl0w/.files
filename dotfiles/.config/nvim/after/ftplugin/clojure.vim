@@ -60,7 +60,11 @@ setlocal formatexpr=s:ClojureFormatExpr()
 
 function! s:ClojureK()
   if exists('*fireplace#op_available') && fireplace#op_available('eval')
-    exe "normal \<Plug>FireplaceK"
+    try
+      exe "normal \<Plug>FireplaceK"
+    catch /Fireplace: no default ClojureScript REPL/
+      lua vim.lsp.buf.hover()
+    endtry
   else
     lua vim.lsp.buf.hover()
   endif
