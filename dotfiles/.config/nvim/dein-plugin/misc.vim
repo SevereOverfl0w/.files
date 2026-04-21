@@ -1,9 +1,8 @@
 " call my_plugin#add('ap/vim-css-color')
-call my_plugin#add('norcalli/nvim-colorizer.lua')
+call my_plugin#add('catgoose/nvim-colorizer.lua')
 
 function! Hook_post_source_colorizer()
   lua require'colorizer'.setup()
-  lua COLORIZER_SETUP_HOOK()
 endf
 
 " A few plugins require this plugin in order to make their
