@@ -163,6 +163,8 @@ function! Hook_post_source_send_to_term()
     vmap <leader>st <Plug>Send
 endfunction
 
+call my_plugin#add('aymericbeaumet/vim-symlink')
+
 call my_plugin#add('moll/vim-bbye')
 
 call my_plugin#add('nvim-treesitter/nvim-treesitter-context')
