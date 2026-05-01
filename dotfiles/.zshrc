@@ -63,7 +63,7 @@ alias ls='ls --color=auto'
 alias zshrc='$EDITOR ~/.zshrc'
 alias reloadzsh='exec zsh'
 
-alias v="nvim"
+alias v="fg %nvim 2>/dev/null || nvim"
 
 # package stuff
 alias pacupg='sudo xbps-install -Su'
