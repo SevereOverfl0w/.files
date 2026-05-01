@@ -125,7 +125,13 @@ nnoremap <leader>gd <Cmd>call ToggleDiff()<CR>
 function Review(base)
   let g:gitgutter_diff_base = a:base
   GitGutterQuickFix | copen | cfirst
-  exec 'Git! lg ' . a:base . '...HEAD'
+  let l:cur = win_getid()
+  exec 'Git! flg ' . a:base . '...HEAD'
+  if FugitiveRemoteUrl() =~# 'github\.com'
+    wincmd P
+    vsplit | terminal gh pr view
+  endif
+  call win_gotoid(l:cur)
 endfunction
 
 command! -nargs=1 Review call Review(<q-args>)
