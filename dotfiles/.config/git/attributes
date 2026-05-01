@@ -1,0 +1,4 @@
+*.clj diff=clojure
+*.cljs diff=clojure
+*.cljc diff=clojure
+*.edn diff=clojure
