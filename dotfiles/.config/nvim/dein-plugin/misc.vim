@@ -146,6 +146,10 @@ call my_plugin#add('nvim-treesitter/nvim-treesitter', #{hook_post_update: ':TSUp
 
 function! Hook_post_source_treesitter()
   lua require'nvim-treesitter'.install({"lua", "vim", "vimdoc", "bash", "clojure"})
+  augroup treesitter_start
+          autocmd!
+          autocmd FileType lua,vim,help,bash,clojure call v:lua.vim.treesitter.start(str2nr(expand('<abuf>')))
+  augroup END
 endfunction
 
 call my_plugin#add('RRethy/nvim-treesitter-endwise')
