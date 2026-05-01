@@ -27,6 +27,7 @@ let g:fzf_colors =
   \ 'header': ['fg', 'Comment'] }
 " jf = jump file
 nnoremap <Leader>jf :<C-U>FzfLua files<CR>
+nnoremap <Leader>Jf :<C-U>FzfLua frecency all_files=true cwd_only=true<CR>
 nnoremap <Leader>jF :<C-U>FzfLua git_status<CR>
 
 for dirmap in get(g:, 'dirs_of_interest', [])
