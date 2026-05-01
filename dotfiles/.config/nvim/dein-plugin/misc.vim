@@ -137,7 +137,12 @@ endf
 
 " call my_plugin#add('powerman/vim-plugin-ansiesc')
 
-call my_plugin#add('nvim-treesitter/nvim-treesitter', #{hook_post_update: ':TSUpdate', branch: 'main'})
+if executable('tree-sitter')
+  let s:tree_sitter_cli = v:true
+else
+  let s:tree_sitter_cli = v:false
+endif
+call my_plugin#add('nvim-treesitter/nvim-treesitter', #{hook_post_update: ':TSUpdate', branch: 'main', enabled: s:tree_sitter_cli})
 
 function! Hook_post_source_treesitter()
   lua require'nvim-treesitter'.install({"lua", "vim", "vimdoc", "bash", "clojure"})
