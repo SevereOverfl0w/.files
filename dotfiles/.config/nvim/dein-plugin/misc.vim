@@ -152,11 +152,7 @@ function! Hook_post_source_treesitter()
   augroup END
 endfunction
 
-call my_plugin#add('RRethy/nvim-treesitter-endwise')
-
-function! Hook_post_source_treesitter_endwise()
-    lua require('nvim-treesitter.configs').setup { endwise = { enable = true, } }
-endf
+call my_plugin#add('SevereOverfl0w/nvim-treesitter-endwise', #{branch: 'nvim-0.12'})
 
 call my_plugin#add('AndrewRadev/inline_edit.vim')
 
