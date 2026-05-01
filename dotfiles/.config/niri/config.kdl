@@ -260,8 +260,8 @@ binds {
     Mod+Q { close-window; }
 
     Mod+Left  { focus-column-or-monitor-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-workspace-down; }
+    Mod+Up    { focus-workspace-up; }
     Mod+Right { focus-column-or-monitor-right; }
     Mod+H     { focus-column-or-monitor-left; }
     // Mod+J     { focus-window-down; }
