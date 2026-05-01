@@ -1,6 +1,6 @@
 ---
-name: clojure-eval
-description: Evaluate Clojure code via nREPL using clj-nrepl-eval. Use this when you need to test code, check if edited files compile, verify function behavior, or interact with a running REPL session.
+name: clojure-user-eval
+description: User's Evaluate Clojure code via nREPL using clj-nrepl-eval. Use this if the project doesn't provide its own eval.  Use when you need to test code, check if edited files compile, verify function behavior, or interact with a running REPL session.
 ---
 
 # Clojure REPL Evaluation
@@ -105,11 +105,6 @@ clj-nrepl-eval -p <PORT> "(require '[my.namespace :as ns] :reload)"
 **Test a function after requiring:**
 ```bash
 clj-nrepl-eval -p <PORT> "(ns/my-function arg1 arg2)"
-```
-
-**Switch namespaces before calling lifecycle helpers (e.g. dev/go):**
-```bash
-clj-nrepl-eval -p <PORT> "(in-ns 'dev) (go)"
 ```
 
 **Check if a file compiles:**
