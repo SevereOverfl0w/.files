@@ -148,14 +148,15 @@ function fzf-worktree() {
         else
           local dir="${worktree["dir"]}"
           local sha="$(git -C "$dir" rev-parse --short HEAD)"
-          worktrees[$sha]="$dir"
+          local key="$sha (${dir:t})"
+          worktrees[$key]="$dir"
         fi
         worktree=()
       fi
 
     done < <(git worktree list --porcelain)
 
-    IFS=$'\n' local fzfresult=("${(@f)$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --expect 'ctrl-d,alt-d' --preview-window=down,8 --preview "git worktree list | grep -F '[{}]'; printf '\n'; git -c color.ui=always lg '{}'")}")
+    IFS=$'\n' local fzfresult=("${(@f)$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --expect 'ctrl-d,alt-d' --delimiter=' ' --preview-window=down,8 --preview "git worktree list | grep -F '[{1}]'; printf '\n'; git -c color.ui=always lg '{1}'")}")
 
     local selected_branch="$fzfresult[2]"
     local binding="$fzfresult[1]"
