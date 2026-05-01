@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# exec awk '
+#     /^\+\+\+ b/ { file = substr($2,3); next }
+#     /^@@ /      { line = int($3) }
+#     /^\+/       { print file ":" line++ ":" substr($0,2) }
+# '
+
+  exec awk '                                                                                                                                                  
+      /^--- a/    { old_file = substr($2,3); next }
+      /^\+\+\+ b/ { new_file = substr($2,3); next }                                                                                                           
+      /^@@ /      { old_line = int($2) * -1; new_line = int($3) }                                                                                             
+      /^\+/       { print new_file ":" new_line++ ":+" substr($0,2) }
+      /^-/        { print old_file ":" old_line++ ":-" substr($0,2) }                                                                                          
+  '                 
