@@ -207,8 +207,6 @@ function _quick_todo(){
 zle -N _quick_todo
 bindkey '^i^t' _quick_todo
 
-alias v='nvim'
-
 # https://github.com/android-password-store/Android-Password-Store/issues/173#issuecomment-453686599
 export GOPASS_GPG_OPTS='--no-throw-keyids'
 
