@@ -9,6 +9,6 @@ unset SSH_AGENT_PID
 # export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 # export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 
-for E in ~/.config/service-env/*; do
+for E in ~/.config/service-env/*(N); do
   export "$(basename "$E")=$(cat "$E")"
 done
