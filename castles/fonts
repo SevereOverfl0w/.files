@@ -23,6 +23,17 @@ if [ ! -d "$jb_dir" ]; then
     [ -n "$oldfiles" ] && rm -rf "$oldfiles"
 fi
 
+maple_dir="$(fontdir "maplemono-7.9")"
+
+if [ ! -d "$maple_dir" ]; then
+    output="$(mktemp_tracked).tmp"
+    curl --progress-bar -L --output "$output" "https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMono-NF-unhinted.zip"
+    oldfiles="$(ls -d "$(fontdir)"/maplemono* 2>/dev/null)"
+    mkdir -p "$maple_dir"
+    unzip -d "$maple_dir" "$output" -x LICENSE.txt config.json
+    [ -n "$oldfiles" ] && rm -rf "$oldfiles"
+fi
+
 if [ "linux" = "$ostype" ]; then
     fc-cache -f
 fi
