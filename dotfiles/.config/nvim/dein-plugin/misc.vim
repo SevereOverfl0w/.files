@@ -137,19 +137,10 @@ endf
 
 " call my_plugin#add('powerman/vim-plugin-ansiesc')
 
-call my_plugin#add('nvim-treesitter/nvim-treesitter', #{hook_post_update: ':TSUpdate'})
+call my_plugin#add('nvim-treesitter/nvim-treesitter', #{hook_post_update: ':TSUpdate', branch: 'main'})
 
 function! Hook_post_source_treesitter()
-    lua <<EOF
-    require'nvim-treesitter.configs'.setup {
-        ensure_installed = { "lua", "vim", "vimdoc", "bash", "clojure" },
-        highlight = {
-            enable = true,
-            disable = { "clojure", -- breaks vim-sexp
-            },
-        },
-    }
-EOF
+  lua require'nvim-treesitter'.install({"lua", "vim", "vimdoc", "bash", "clojure"})
 endfunction
 
 call my_plugin#add('RRethy/nvim-treesitter-endwise')
