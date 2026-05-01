@@ -189,3 +189,5 @@ function! GHPRLink(bang, count, line1, range, line2, args) abort
 endfunction
 
 command! -bang -range=-1 -nargs=* GHPRLink call GHPRLink(<bang>0, <count>, <line1>, +"<range>", <line2>, <q-args>)
+
+command! DdiffFile execute ':Start -wait=always git ddiff -p ' . get(g:, 'gitgutter_diff_base', '--cached') . ' -- ' . expand('%')
