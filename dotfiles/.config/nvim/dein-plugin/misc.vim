@@ -168,3 +168,14 @@ call my_plugin#add('aymericbeaumet/vim-symlink')
 call my_plugin#add('moll/vim-bbye')
 
 call my_plugin#add('nvim-treesitter/nvim-treesitter-context')
+
+let g:kitty_navigator_no_mappings = 1
+
+call my_plugin#add('knubie/vim-kitty-navigator')
+
+function! Hook_post_source_kitty_navigator()
+  nnoremap <silent> <C-w>h :KittyNavigateLeft<cr>
+  nnoremap <silent> <C-w>j :KittyNavigateDown<cr>
+  nnoremap <silent> <C-w>k :KittyNavigateUp<cr>
+  nnoremap <silent> <C-w>l :KittyNavigateRight<cr>
+endf
