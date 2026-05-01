@@ -35,6 +35,17 @@
        ~@body
        (:r @result#))))
 
+(defmacro test-until-failure
+  "Run body (which should trigger a test) n times or until failure"
+  [n & body]
+  `(reduce
+     (fn [_# _n#]
+       (let [result# (./with-test-result ~@body)]
+         (when (some #(#{:fail :error} (:type %)) result#)
+           (reduced result#))))
+     nil
+     (range ~n)))
+
 (defmacro time-data
   [expr]
   `(let [start# (. System (nanoTime))
@@ -51,6 +62,7 @@
        {:var io.dominic.mise/saved-value}
        {:var io.dominic.mise/with-test-result}
        {:var io.dominic.mise/with-test-timing}
+       {:var io.dominic.mise/test-until-failure}
        {:var io.dominic.mise/time-data}
        {:var clj-async-profiler.core/profile :lazy? true :macro? true}
        {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
