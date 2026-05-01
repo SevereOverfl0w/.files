@@ -36,10 +36,16 @@
       vcs                       # git status
       context                   # user@host
       command_execution_time    # previous command duration
+      background_jobs
       newline                   # \n
       virtualenv                # python virtual environment
       prompt_char               # prompt symbol
   )
+
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE_ALWAYS=true
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=3
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION=''
 
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
