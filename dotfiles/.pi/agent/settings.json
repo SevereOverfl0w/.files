@@ -13,6 +13,10 @@
         "!extensions/modes.ts",
         "!extensions/amp-skills.ts",
         "!extensions/permissions.ts"
+      ],
+      "skills": [
+        "!skills/web-search/SKILL.md",
+        "!skills/visit-webpage/SKILL.md"
       ]
     },
     "npm:pi-librarian"
