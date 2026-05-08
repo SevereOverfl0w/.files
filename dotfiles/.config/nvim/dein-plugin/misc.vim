@@ -184,3 +184,5 @@ function! Hook_post_source_kitty_navigator()
   nnoremap <silent> <C-w>k :KittyNavigateUp<cr>
   nnoremap <silent> <C-w>l :KittyNavigateRight<cr>
 endf
+
+call my_plugin#add('MMesch/quickfix-review-nvim')
