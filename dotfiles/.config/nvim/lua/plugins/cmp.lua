@@ -24,7 +24,7 @@ return {
     config = function(_, opts)
       local cmp = require("cmp")
       cmp.setup(opts)
-      cmp.setup.filetype({ "markdown", "gitcommit" }, {
+      cmp.setup.filetype({ "markdown", "gitcommit", "markdown.nvim_reply_review" }, {
         sources = {
           { name = "nvim_lsp" },
           { name = "buffer" },
