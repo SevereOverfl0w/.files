@@ -190,3 +190,4 @@ call my_plugin#add('MMesch/quickfix-review-nvim')
 function! Hook_post_source_quickfix_review()
   lua require'quickfix-review'.setup()
 endfunction
+call my_plugin#add('chpeters/annotator.nvim', #{opts: #{mappings: v:false}})
