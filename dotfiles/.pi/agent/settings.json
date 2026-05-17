@@ -22,7 +22,9 @@
     "npm:pi-librarian",
     "npm:pi-interactive-shell",
     "git:github.com/jonjonrankin/pi-caveman",
-    "npm:@howaboua/pi-codex-conversion"
+    "npm:@howaboua/pi-codex-conversion",
+    "npm:pi-model-provider-native-prompting",
+    "npm:@juicesharp/rpiv-ask-user-question"
   ],
   "pi-codex-usage": {
     "usageMode": "left",
