@@ -128,8 +128,11 @@ function Review(base)
   let l:cur = win_getid()
   exec 'Git! flg ' . a:base . '...HEAD'
   if FugitiveRemoteUrl() =~# 'github\.com'
-    wincmd P
-    vsplit | terminal gh pr view
+    call system('gh pr view --json number')
+    if v:shell_error == 0
+      wincmd P
+      vsplit | terminal gh pr view
+    endif
   endif
   call win_gotoid(l:cur)
 endfunction
