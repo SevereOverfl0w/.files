@@ -195,5 +195,7 @@ command! -bang -range=-1 -nargs=* GHPRLink call GHPRLink(<bang>0, <count>, <line
 
 command! DdiffFile execute ':Start -wait=always git ddiff -p ' . get(g:, 'gitgutter_diff_base', '--cached') . ' -- ' . expand('%')
 
+silent! packadd nvim.difftool
+
 call my_plugin#add('SevereOverfl0w/nvim-review')
 lua vim.diagnostic.config({ virtual_lines = true, virtual_text = false }, vim.api.nvim_create_namespace('nvim_review'))
