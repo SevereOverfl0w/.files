@@ -15,11 +15,22 @@ let g:clojure_maxlines = 0
 " to press (lots of ctrl & alt), but tpope has us covered:
 call my_plugin#add('tpope/vim-sexp-mappings-for-regular-people')
 
+" g:campfire selects vim-campfire over vim-fireplace. Set by
+" ~/.config/nvim/campfire.vim launcher (-u campfire.vim).
+let s:campfire = get(g:, 'campfire', 0) ? v:true : v:false
+let s:fireplace = s:campfire ? v:false : v:true
+
+echom s:campfire . 'bool'
+
 " FiREPLace is a plugin for integrating with a Clojure
 " nREPL.
-call my_plugin#add('SevereOverfl0w/vim-fireplace', #{branch: 'dominic/patches'})
+call my_plugin#add('SevereOverfl0w/vim-fireplace', #{branch: 'dominic/patches', enabled: s:fireplace})
 " Disable auto-nashorn
 let g:fireplace_cljs_repl = ''
+
+" vim-campfire: alternative nREPL client used when g:campfire=1.
+call my_plugin#add('SevereOverfl0w/vim-campfire', #{enabled: s:campfire})
+" TODO: add none-ls here
 
 let g:FIREPLACE_PRINT_META = get(g:, 'FIREPLACE_PRINT_META', v:true)
 
@@ -89,11 +100,13 @@ call extend(g:nremap, {
       \ '<C-W>g<C-]>': '',
       \ })
 
-augroup FireplaceCustom
-    autocmd!
-    autocmd FileType clojure call s:SetupBind()
-    autocmd User FireplaceActivate call s:SetupBind()
-augroup END
+if s:fireplace
+  augroup FireplaceCustom
+      autocmd!
+      autocmd FileType clojure call s:SetupBind()
+      autocmd User FireplaceActivate call s:SetupBind()
+  augroup END
+endif
 
 
 " async-clj-omni is an auto-completion plugin for
