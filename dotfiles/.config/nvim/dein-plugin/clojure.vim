@@ -5,6 +5,14 @@ call my_plugin#add('clojure-vim/clojure.vim')
 " This plugin allows you to manipulate sexp (clojure
 " parens) in magical ways.
 call my_plugin#add('guns/vim-sexp', #{branch: 'master'})
+" Only do sexp-aware smart paste when yanking vim-sexp objects - XXX: Undecided on the value of this yet or if I'm
+" giving up sweet sweet perks.
+let g:sexp_regput_fallback_source = 'o'
+" When pasting into a comment or string, don't use special sexp-aware paste behaviour
+let g:sexp_regput_fallback_target = 'cs'
+" Pasting when on a open/closing bracket will paste into head/tail rather than "put into list", meaning [count]
+" specifies number of pastes into that position, rather than position in that list.
+let g:sexp_regput_bracket_is_target = 2
 
 " By default == has a maximum number of lines to prevent
 " hanging. Disable that, because I'm happy to wait when I
