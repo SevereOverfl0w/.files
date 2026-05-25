@@ -73,7 +73,7 @@
 [difftool "kitty.gui"]
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [difftool "nvim"]
-    cmd = nvr -cc \"DiffTool $LOCAL $REMOTE\" --remote-tab-wait +\"set bufhidden=delete\" \"$LOCAL\"
+    cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
 [filesystem "Oracle Corporation|1.8.0_202|/dev/mapper/pool-root"]
 	timestampResolution = 1001 milliseconds
 	minRacyThreshold = 0 nanoseconds
