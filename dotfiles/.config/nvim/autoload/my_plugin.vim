@@ -31,10 +31,10 @@ function! my_plugin#end() abort
 endf
 
 function! my_plugin#run() abort
-  runtime! config/*
+  runtime! config/*.vim config/*.lua
   call my_plugin#begin()
   let s:plugins = []
-  runtime! dein-plugin/*
+  runtime! dein-plugin/*.vim dein-plugin/*.lua
   call my_plugin#end()
 endf
 
