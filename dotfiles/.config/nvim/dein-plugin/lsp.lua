@@ -35,11 +35,11 @@ function _G.filter_code_action(name)
 end
 
 function _G.clojure_omnifunc_lsp_fallback(...)
-  if vim.fn["fireplace#op_available"]("complete") == 0 then
-    return vim.lsp.omnifunc(...)
-  else
+  if vim.fn.exists("*fireplace#op_available") == 1
+     and vim.fn["fireplace#op_available"]("complete") == 1 then
     return vim.fn["fireplace#omnicomplete"](...)
   end
+  return vim.lsp.omnifunc(...)
 end
 
 local cmp_loaded
