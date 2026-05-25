@@ -95,7 +95,8 @@ vim.g.Hook_post_source_lspconfig = function()
         for _, file in ipairs(vim.lsp.config['clojure_lsp'].root_markers) do
           if vim.fn.filereadable(file) == 1 then
             return vim.schedule(function()
-              start_clojure_lsp()
+              -- attach=false: prestart only; FileType autocmd attaches clojure bufs
+              start_clojure_lsp({attach = false})
             end)
           end
         end
