@@ -30,5 +30,6 @@
     "usageMode": "left",
     "refreshWindow": "5h"
   },
+  "collapseChangelog": true,
   "enableInstallTelemetry": false
 }
