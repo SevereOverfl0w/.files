@@ -9,25 +9,19 @@ Break a plan into independently-grabbable issues using vertical slices (tracer b
 
 ## Issue tracker: Local Markdown
 
-Issues and PRDs for this repo live as markdown files under the repository's shared git directory.
-
-Resolve the scratch root with:
-
-```sh
-scratch_root="$(git rev-parse --git-common-dir)/info/scratch"
-```
+Issues live as markdown files under .scratch/
 
 ## Conventions
 
-- One feature per directory: `$scratch_root/<feature-slug>/`
-- The PRD is `$scratch_root/<feature-slug>/PRD.md`
-- Implementation issues are `$scratch_root/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01`
+- One feature per directory: `.scratch/<feature-slug>/`
+- The PRD is `.scratch/<feature-slug>/PRD.md`
+- Implementation issues are `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01`
 - Triage state is recorded as a `Status:` line near the top of each issue file
 - Comments and conversation history append to the bottom of the file under a `## Comments` heading
 
 ## When this skill says "publish to the issue tracker"
 
-Create a new file under `$scratch_root/<feature-slug>/issues/`, creating directories as needed.
+Create a new file under `.scratch/<feature-slug>/issues/`, creating directories as needed.
 
 ## When this skill says "fetch the relevant ticket"
 
