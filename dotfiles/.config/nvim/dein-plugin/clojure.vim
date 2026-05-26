@@ -39,6 +39,24 @@ let g:fireplace_cljs_repl = ''
 " vim-campfire: alternative nREPL client used when g:campfire=1.
 call my_plugin#add('SevereOverfl0w/vim-campfire', #{enabled: s:campfire})
 " TODO: add none-ls here
+call my_plugin#add('nvimtools/none-ls.nvim', #{dependencies: ['nvim-lua/plenary.nvim']})
+
+function Hook_post_source_none_ls()
+    lua <<EOF
+local null_ls = require('null-ls')
+
+local sources = {
+  null_ls.builtins.completion.spell,
+}
+local campfire_none_ls_ok, campfire_none_ls = pcall(require, 'campfire.none_ls')
+if campfire_none_ls_ok then
+  vim.list_extend(sources, campfire_none_ls.sources())
+end
+
+null_ls.setup({ sources = sources })
+EOF
+
+endfunction
 
 let g:FIREPLACE_PRINT_META = get(g:, 'FIREPLACE_PRINT_META', v:true)
 
