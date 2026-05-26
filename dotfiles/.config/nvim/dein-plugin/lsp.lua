@@ -34,6 +34,23 @@ function _G.filter_code_action(name)
   end
 end
 
+local function set_repeat(sequence, count)
+  vim.fn["repeat#set"](vim.keycode(sequence), count)
+end
+
+function _G.repeat_code_action(name, repeat_sequence)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local count = vim.v.count
+  vim.api.nvim_create_autocmd({"TextChanged", "TextChangedI"}, {
+    buffer = bufnr,
+    once = true,
+    callback = function()
+      set_repeat(repeat_sequence, count)
+    end,
+  })
+  vim.lsp.buf.code_action({filter = _G.filter_code_action(name), apply = true})
+end
+
 function _G.clojure_omnifunc_lsp_fallback(...)
   if vim.fn.exists("*fireplace#op_available") == 1
      and vim.fn["fireplace#op_available"]("complete") == 1 then
@@ -148,8 +165,14 @@ vim.g.Hook_post_source_lspconfig = function()
         )
         vim.api.nvim_buf_set_keymap(
           bufnr, "n",
+          "<Plug>(lsp-cycle-privacy)",
+          '<cmd>lua _G.repeat_code_action("cycle-privacy", "<lt>Plug>(lsp-cycle-privacy)")<CR>',
+          opts
+        )
+        vim.api.nvim_buf_set_keymap(
+          bufnr, "n",
           "<localleader>lcp",
-          '<cmd>lua vim.lsp.buf.code_action({filter = _G.filter_code_action("cycle-privacy"), apply = true})<CR>',
+          "<Plug>(lsp-cycle-privacy)",
           opts
         )
       end,
