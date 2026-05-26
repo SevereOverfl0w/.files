@@ -1,6 +1,9 @@
 import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
-import { createEditTool, createWriteTool } from "@mariozechner/pi-coding-agent";
+import { withFileMutationQueue } from "@mariozechner/pi-coding-agent";
 import { createHash } from "node:crypto";
+import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { isAbsolute, resolve } from "node:path";
 import { spawn } from "node:child_process";
 
 const HOOK_COMMAND = process.env.PI_CLJ_PAREN_REPAIR_HOOK_CMD ?? "clj-paren-repair-claude-hook --cljfmt";
@@ -9,6 +12,8 @@ const HOOK_TIMEOUT_MS = Number(process.env.PI_CLJ_PAREN_REPAIR_HOOK_TIMEOUT_MS ?
 type HookEventName = "PreToolUse" | "PostToolUse" | "SessionEnd";
 type HookToolName = "Write" | "Edit" | null;
 
+type ToolResultContent = Array<{ type: string; text?: string; data?: string; mimeType?: string }>;
+
 type HookResponse = {
 	decision?: "block";
 	reason?: string;
@@ -16,13 +21,28 @@ type HookResponse = {
 		hookEventName?: string;
 		permissionDecision?: "deny";
 		permissionDecisionReason?: string;
-		updatedInput?: {
-			file_path?: string;
-			content?: string;
-		};
 		additionalContext?: string;
 	};
 };
+
+function parseHookOutput(text: string): HookResponse | null {
+	const trimmed = text.trim();
+	if (!trimmed) return null;
+
+	try {
+		return JSON.parse(trimmed) as HookResponse;
+	} catch {}
+
+	for (const line of trimmed.split("\n").reverse()) {
+		const candidate = line.trim();
+		if (!candidate.startsWith("{") || !candidate.endsWith("}")) continue;
+		try {
+			return JSON.parse(candidate) as HookResponse;
+		} catch {}
+	}
+
+	return null;
+}
 
 function getSessionId(ctx: ExtensionContext): string {
 	const sessionFile = ctx.sessionManager.getSessionFile();
@@ -102,126 +122,136 @@ async function runHook(
 				return;
 			}
 
-			const text = stdout.trim();
-			if (!text) {
-				resolve(null);
-				return;
-			}
-
-			try {
-				resolve(JSON.parse(text) as HookResponse);
-			} catch (error) {
-				reject(new Error(`Failed to parse clj-paren-repair hook output as JSON: ${text}`));
-			}
+			resolve(parseHookOutput(stdout));
 		});
 
 		child.stdin.end(JSON.stringify(payload));
 	});
 }
 
+function isClojurePath(path: string): boolean {
+	return /\.(clj|cljs|cljc|cljd|bb|lpy|edn)$/i.test(path);
+}
+
+function toAbsolutePath(cwd: string, path: string): string {
+	return isAbsolute(path) ? path : resolve(cwd, path);
+}
+
+function getString(value: unknown, key: string): string | undefined {
+	if (!value || typeof value !== "object" || !(key in value)) return undefined;
+	const candidate = (value as Record<string, unknown>)[key];
+	return typeof candidate === "string" ? candidate : undefined;
+}
+
+function getStringArray(value: unknown, key: string): string[] {
+	if (!value || typeof value !== "object" || !(key in value)) return [];
+	const candidate = (value as Record<string, unknown>)[key];
+	return Array.isArray(candidate) ? candidate.filter((item): item is string => typeof item === "string") : [];
+}
+
+function extractPatchPathsFromInput(input: unknown): string[] {
+	const patchText = getString(input, "input");
+	if (!patchText) return [];
+
+	const paths: string[] = [];
+	for (const line of patchText.split("\n")) {
+		const match = line.match(/^\*\*\* (?:Add|Update|Delete) File: (.+)$/);
+		if (match) paths.push(match[1].trim());
+	}
+	return paths;
+}
+
+function extractPatchPathsFromDetails(details: unknown): string[] {
+	const result = details && typeof details === "object" && "result" in details ? (details as Record<string, unknown>).result : undefined;
+	if (!result || typeof result !== "object") return [];
+
+	return [
+		...getStringArray(result, "changedFiles"),
+		...getStringArray(result, "createdFiles"),
+		...getStringArray(result, "movedFiles").map((move) => move.split(" -> ").at(-1) ?? move),
+	];
+}
+
+function uniquePaths(paths: string[]): string[] {
+	return Array.from(new Set(paths.filter((path) => path.length > 0)));
+}
+
+function getToolPaths(toolName: string, input: unknown, details: unknown): string[] {
+	if (toolName === "write" || toolName === "edit") {
+		const path = getString(input, "path") ?? getString(input, "file_path");
+		return path ? [path] : [];
+	}
+
+	if (toolName === "apply_patch") {
+		const pathsFromDetails = extractPatchPathsFromDetails(details);
+		return pathsFromDetails.length > 0 ? pathsFromDetails : extractPatchPathsFromInput(input);
+	}
+
+	return [];
+}
+
+async function repairPath(ctx: ExtensionContext, path: string): Promise<{ path: string; changed: boolean; error?: string }> {
+	const absolutePath = toAbsolutePath(ctx.cwd, path);
+	if (!isClojurePath(absolutePath) || !existsSync(absolutePath)) return { path, changed: false };
+
+	try {
+		return await withFileMutationQueue(absolutePath, async () => {
+			const before = await readFile(absolutePath, "utf8");
+			const response = await runHook(ctx, "PostToolUse", "Edit", {
+				tool_input: { file_path: absolutePath },
+				tool_response: { success: true },
+			});
+
+			const block = isBlocked(response);
+			if (block.blocked) return { path, changed: false, error: block.reason ?? "clj-paren-repair blocked the edit" };
+
+			const after = await readFile(absolutePath, "utf8");
+			return { path, changed: before !== after };
+		});
+	} catch (error) {
+		return { path, changed: false, error: error instanceof Error ? error.message : String(error) };
+	}
+}
+
+function formatChangedMessage(paths: string[]): string {
+	if (paths.length === 1) {
+		return `formatted ${paths[0]}; re-read it before further edits`;
+	}
+
+	return `formatted:\n${paths.map((path) => `- ${path}`).join("\n")}\nre-read them before further edits`;
+}
+
+function formatErrorMessage(errors: Array<{ path: string; error: string }>): string {
+	if (errors.length === 1) {
+		return `clj-paren-repair failed ${errors[0].path}: ${errors[0].error}`;
+	}
+
+	return `clj-paren-repair failed:\n${errors.map(({ path, error }) => `- ${path}: ${error}`).join("\n")}`;
+}
+
 export default function (pi: ExtensionAPI) {
-	const cwd = process.cwd();
-	const originalWrite = createWriteTool(cwd);
-	const originalEdit = createEditTool(cwd);
+	pi.on("tool_result", async (event, ctx) => {
+		if (event.isError) return undefined;
+		if (event.toolName !== "write" && event.toolName !== "edit" && event.toolName !== "apply_patch") return undefined;
 
-	pi.registerTool({
-		name: "write",
-		label: "write",
-		description: originalWrite.description,
-		parameters: originalWrite.parameters,
+		const paths = uniquePaths(getToolPaths(event.toolName, event.input, event.details));
+		if (paths.length === 0) return undefined;
 
-		async execute(toolCallId, params, signal, onUpdate, ctx) {
-			const pre = await runHook(ctx, "PreToolUse", "Write", {
-				tool_input: {
-					file_path: params.path,
-					content: params.content,
-				},
-			});
+		const results = await Promise.all(paths.map((path) => repairPath(ctx, path)));
+		const changedPaths = results.filter((result) => result.changed).map((result) => result.path);
+		const errors = results.filter((result): result is { path: string; changed: boolean; error: string } => Boolean(result.error));
 
-			const preBlock = isBlocked(pre);
-			if (preBlock.blocked) {
-				throw new Error(preBlock.reason ?? "Write blocked by clj-paren-repair hook");
-			}
+		if (changedPaths.length === 0 && errors.length === 0) return undefined;
 
-			const updatedPath = pre?.hookSpecificOutput?.updatedInput?.file_path ?? params.path;
-			const updatedContent = pre?.hookSpecificOutput?.updatedInput?.content ?? params.content;
-			const effectiveParams = { ...params, path: updatedPath, content: updatedContent };
+		const content: ToolResultContent = [...event.content];
+		if (changedPaths.length > 0) {
+			content.push({ type: "text", text: formatChangedMessage(changedPaths) });
+		}
+		if (errors.length > 0) {
+			content.push({ type: "text", text: formatErrorMessage(errors) });
+		}
 
-			let result;
-			let toolResponse: Record<string, unknown> | null = null;
-			try {
-				result = await originalWrite.execute(toolCallId, effectiveParams, signal, onUpdate);
-				toolResponse = { success: true };
-			} catch (error) {
-				toolResponse = null;
-				throw error;
-			} finally {
-				const post = await runHook(ctx, "PostToolUse", "Write", {
-					tool_input: {
-						file_path: updatedPath,
-						content: updatedContent,
-					},
-					tool_response: toolResponse,
-				});
-
-				const postBlock = isBlocked(post);
-				if (postBlock.blocked) {
-					throw new Error(postBlock.reason ?? "Post-write blocked by clj-paren-repair hook");
-				}
-			}
-
-			return result;
-		},
-	});
-
-	pi.registerTool({
-		name: "edit",
-		label: "edit",
-		description: originalEdit.description,
-		parameters: originalEdit.parameters,
-
-		async execute(toolCallId, params, signal, onUpdate, ctx) {
-			const pre = await runHook(ctx, "PreToolUse", "Edit", {
-				tool_input: {
-					file_path: params.path,
-					old_string: params.oldText,
-					new_string: params.newText,
-					replace_all: params.replaceAll,
-				},
-			});
-
-			const preBlock = isBlocked(pre);
-			if (preBlock.blocked) {
-				throw new Error(preBlock.reason ?? "Edit blocked by clj-paren-repair hook");
-			}
-
-			let result;
-			let toolResponse: Record<string, unknown> | null = null;
-			try {
-				result = await originalEdit.execute(toolCallId, params, signal, onUpdate);
-				toolResponse = { success: true };
-			} catch (error) {
-				toolResponse = null;
-				throw error;
-			} finally {
-				const post = await runHook(ctx, "PostToolUse", "Edit", {
-					tool_input: {
-						file_path: params.path,
-						old_string: params.oldText,
-						new_string: params.newText,
-						replace_all: params.replaceAll,
-					},
-					tool_response: toolResponse,
-				});
-
-				const postBlock = isBlocked(post);
-				if (postBlock.blocked) {
-					throw new Error(postBlock.reason ?? "Post-edit blocked by clj-paren-repair hook");
-				}
-			}
-
-			return result;
-		},
+		return { content, isError: errors.length > 0 ? true : event.isError };
 	});
 
 	pi.on("session_shutdown", async (_event, ctx) => {
