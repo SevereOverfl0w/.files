@@ -1,6 +1,8 @@
 #!/bin/sh
 
-pkg-install pipewire wireplumber seatd turnstile nitro
+pkg-install pipewire wireplumber seatd turnstile nitro xdg-utils
 svenable seatd turnstile
 
 sudo -E stow --no-folding --target=/ global
+
+xdg-default text/plain kitty-open.desktop
