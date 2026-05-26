@@ -28,6 +28,6 @@
   ],
   "pi-codex-usage": {
     "usageMode": "left",
-    "refreshWindow": "7d"
+    "refreshWindow": "5h"
   }
 }
