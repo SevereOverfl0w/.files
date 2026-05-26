@@ -24,7 +24,7 @@
     "git:github.com/jonjonrankin/pi-caveman",
     "npm:@howaboua/pi-codex-conversion",
     "npm:pi-model-provider-native-prompting",
-    "npm:@juicesharp/rpiv-ask-user-question"
+    "npm:pi-ask-user"
   ],
   "pi-codex-usage": {
     "usageMode": "left",
