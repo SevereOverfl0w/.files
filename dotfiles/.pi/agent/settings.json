@@ -29,5 +29,6 @@
   "pi-codex-usage": {
     "usageMode": "left",
     "refreshWindow": "5h"
-  }
+  },
+  "enableInstallTelemetry": false
 }
