@@ -26,6 +26,9 @@
     "npm:pi-model-provider-native-prompting",
     "npm:pi-ask-user",
     "git:github.com/apmantza/pi-free",
+    "npm:@tintinweb/pi-subagents",
+    "npm:pi-ask-user",
+    "npm:@juicesharp/rpiv-args"
   ],
   "pi-codex-usage": {
     "usageMode": "left",
