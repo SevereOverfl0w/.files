@@ -137,7 +137,7 @@ endif
 
 " async-clj-omni is an auto-completion plugin for
 " clojure
-call my_plugin#add('clojure-vim/async-clj-omni')
+call my_plugin#add('clojure-vim/async-clj-omni',  #{enabled: s:fireplace})
 
 " augroup ClojureLint
 " autocmd!
