@@ -1,10 +1,13 @@
 scriptencoding utf-8
+let s:flash = v:true
+let s:sneak = s:flash ? v:false : v:true
+
 " sneak provides alternatives to f,F which:
 " - Work across lines
 " - Provides an awesome label mode which prompts for a
 "   character
 " - Very fast (compared to alternatives I've tried)
-call my_plugin#add('justinmk/vim-sneak')
+call my_plugin#add('justinmk/vim-sneak', #{enabled: s:sneak})
 
 function! Hook_add_sneak()
  " Enable labels for jumping around
@@ -30,4 +33,15 @@ function! Hook_add_sneak()
  " sindresorhus found the best prompt character in unicode,
  " use it for vim-sneak's prompt
  let g:sneak#prompt = '❯'
+endf
+
+call my_plugin#add('folke/flash.nvim', #{enabled: s:flash, opts: {}})
+
+function! Hook_add_flash()
+  nnoremap s <Cmd>lua require('flash').jump()<CR>
+  xnoremap s <Cmd>lua require('flash').jump()<CR>
+  onoremap s <Cmd>lua require('flash').jump()<CR>
+  nnoremap S <Cmd>lua require('flash').treesitter()<CR>
+  xnoremap S <Cmd>lua require('flash').treesitter()<CR>
+  onoremap S <Cmd>lua require('flash').treesitter()<CR>
 endf
