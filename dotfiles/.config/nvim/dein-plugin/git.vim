@@ -202,3 +202,4 @@ lua vim.diagnostic.config({ virtual_lines = true, virtual_text = false }, vim.ap
 
 call my_plugin#add('rbong/vim-flog')
 call my_plugin#add('linrongbin16/gitlinker.nvim', #{opts: {}})
+call my_plugin#add('SevereOverfl0w/difft.nvim')
