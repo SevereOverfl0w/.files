@@ -15,9 +15,11 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 zinit light mafredri/zsh-async
+zinit ice wait lucid
 zinit light zsh-users/zsh-history-substring-search
+zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
-zinit ice pick"zsh-interactive-cd.plugin.zsh";
+zinit ice wait lucid pick"zsh-interactive-cd.plugin.zsh";
 zinit light changyuheng/zsh-interactive-cd
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
