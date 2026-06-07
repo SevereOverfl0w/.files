@@ -223,7 +223,18 @@ _fzf_complete_gopass_post() {
   echo ${(q)passurl}
 }
 
-command -v gopass >/dev/null 2>&1 && source <((gopass completion zsh | head -n -1 | tail -n +2; echo 'compdef _gopass gopass'))
+if (( $+commands[gopass] )); then
+ gopass_comp="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/gopass-completion.zsh"
+ mkdir -p "${gopass_comp:h}"
+
+ if [[ ! -s $gopass_comp || $gopass_comp -ot $commands[gopass] ]]; then
+   gopass completion zsh >| "$gopass_comp.tmp" &&
+     mv "$gopass_comp.tmp" "$gopass_comp"
+ fi
+
+ source "$gopass_comp"
+ unset gopass_comp
+fi
 
 autoload edit-command-line
 zle -N edit-command-line
