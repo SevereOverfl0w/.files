@@ -10,7 +10,6 @@
     {
       "source": "npm:pi-amplike",
       "extensions": [
-        "!extensions/modes.ts",
         "!extensions/amp-skills.ts",
         "!extensions/permissions.ts"
       ],
