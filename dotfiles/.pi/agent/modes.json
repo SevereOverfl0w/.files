@@ -8,7 +8,7 @@
       "thinkingLevel": "minimal",
       "color": "red"
     },
-    "daily": {
+    "smart": {
       "provider": "openai-codex",
       "modelId": "gpt-5.5",
       "thinkingLevel": "high",
