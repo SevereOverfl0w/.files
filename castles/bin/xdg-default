@@ -1,0 +1,28 @@
+#!/bin/sh
+set -eu
+
+mime="${1:?usage: xdg-default <mime> <desktop-file>}"
+desktop="${2:?usage: xdg-default <mime> <desktop-file>}"
+
+desktop_path=""
+search_dirs="${XDG_DATA_HOME:-$HOME/.local/share}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+
+old_ifs="$IFS"
+IFS=:
+for dir in $search_dirs; do
+    if [ -f "$dir/applications/$desktop" ]; then
+        desktop_path="$dir/applications/$desktop"
+        break
+    fi
+done
+IFS="$old_ifs"
+
+if [ -z "$desktop_path" ]; then
+    echo "xdg-default: skipping $mime, missing $desktop" >&2
+    exit 0
+fi
+
+current="$(xdg-mime query default "$mime" 2>/dev/null || true)"
+if [ "$current" != "$desktop" ]; then
+    xdg-mime default "$desktop" "$mime"
+fi
