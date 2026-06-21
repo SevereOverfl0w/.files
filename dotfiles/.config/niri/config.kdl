@@ -44,7 +44,7 @@ input {
     focus-follows-mouse
 }
 
-include "local.kdl"
+include optional=true "local.kdl"
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
