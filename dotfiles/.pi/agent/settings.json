@@ -33,5 +33,8 @@
     "refreshWindow": "5h"
   },
   "collapseChangelog": true,
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "quietStartup": true,
+  "defaultProjectTrust": "ask",
+  "treeFilterMode": "default"
 }
