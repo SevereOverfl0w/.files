@@ -46,7 +46,7 @@ if has('nvim-0.9.0')
     set diffopt+=linematch:60
 endif
 
-set textwidth=120
+set textwidth=100
 
 nmap ZB <CMD>Bdelete<CR>
 
