@@ -6,7 +6,7 @@
   "theme": "light",
   "hideThinkingBlock": true,
   "packages": [
-    "npm:@calesennett/pi-codex-usage",
+    "npm:@narumitw/pi-codex-usage",
     {
       "source": "npm:pi-amplike",
       "extensions": [
