@@ -26,7 +26,8 @@
     "git:github.com/apmantza/pi-free",
     "npm:@tintinweb/pi-subagents",
     "npm:pi-ask-user",
-    "npm:@juicesharp/rpiv-args"
+    "npm:@juicesharp/rpiv-args",
+    "npm:@alexanderfortin/pi-deepseek-usage"
   ],
   "pi-codex-usage": {
     "usageMode": "left",
