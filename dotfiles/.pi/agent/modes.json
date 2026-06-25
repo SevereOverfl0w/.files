@@ -19,6 +19,18 @@
       "modelId": "gpt-5.5",
       "thinkingLevel": "xhigh",
       "color": "yellow"
+    },
+    "free": {
+      "provider": "kilo",
+      "modelId": "poolside/laguna-m.1:free",
+      "thinkingLevel": "high",
+      "color": "blue"
+    },
+    "free (auto)": {
+      "provider": "kilo",
+      "modelId": "kilo-auto/free",
+      "thinkingLevel": "high",
+      "color": "purple"
     }
   }
 }
