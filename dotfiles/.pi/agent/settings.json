@@ -18,7 +18,7 @@
         "!skills/visit-webpage/SKILL.md"
       ]
     },
-    "npm:pi-librarian",
+    "npm:@diegopetrucci/pi-librarian",
     "git:github.com/jonjonrankin/pi-caveman",
     "npm:@howaboua/pi-codex-conversion",
     "npm:pi-model-provider-native-prompting",
