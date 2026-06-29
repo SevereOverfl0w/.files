@@ -17,7 +17,6 @@ autoload -Uz _zinit
 zinit light mafredri/zsh-async
 zinit ice wait lucid
 zinit light zsh-users/zsh-history-substring-search
-zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid pick"zsh-interactive-cd.plugin.zsh";
 zinit light changyuheng/zsh-interactive-cd
