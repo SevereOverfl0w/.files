@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -eux
+
+target="$1"
+archive="$2"
+
+# Loop over files in the zip
+unzip -Z1 "$archive" | while IFS= read -r file; do
+    # Replace invalid FAT32 chars with underscore
+    safe_file="${file//[\"\/\\\[\]\:\;\|\=\,\?\*\<\>\+]/_}"
+
+    # Extract only this file to the sanitized path
+    unzip -p "$archive" "$file" > "$target/$safe_file"
+done
