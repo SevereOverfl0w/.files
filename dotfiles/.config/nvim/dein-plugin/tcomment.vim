@@ -6,18 +6,14 @@
 
 call my_plugin#add('tomtom/tcomment_vim')
 
-function! Hook_add_tcomment()
-  " I really don't like the insert-mode mappings it creates:
-  let g:tcomment_mapleader1 = ''
-  let g:tcomment_mapleader2 = ''
+" I really don't like the insert-mode mappings it creates:
+let g:tcomment_mapleader1 = ''
+let g:tcomment_mapleader2 = ''
 
-  " The `ic` mapping overrides vim-sexp's `ic`.
-  let g:tcomment_textobject_inlinecomment = ''
-endf
+" The `ic` mapping overrides vim-sexp's `ic`.
+let g:tcomment_textobject_inlinecomment = ''
 
-function! Hook_post_source_tcomment()
-  " Integrate tcomment with terraform
-  call tcomment#type#Define('terraform', '# %s')
-  call tcomment#type#Define('terraform_block', '/* %s */' )
-  call tcomment#type#Define('terraform_inline', '/* %s */' )
-endf
+let g:tcomment_types = get(g:, 'tcomment_types', {})
+let g:tcomment_types.terraform = '# %s'
+let g:tcomment_types.terraform_block = '/* %s */'
+let g:tcomment_types.terraform_inline = '/* %s */'
