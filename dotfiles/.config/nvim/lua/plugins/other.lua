@@ -2,6 +2,7 @@ return {
   {
     "rgroli/other.nvim",
     main = "other-nvim",
+    cmd = { "Other", "OtherTabNew", "OtherSplit", "OtherVSplit", "OtherClear" },
     opts = {
       mappings = {
         -- src/foo.cljc -> test/foo_test.cljc
