@@ -122,22 +122,24 @@ endfunction
 
 nnoremap <leader>gd <Cmd>call ToggleDiff()<CR>
 
-function Review(base)
+function Review(base = '')
   let g:gitgutter_diff_base = a:base
   GitGutterQuickFix | copen | cfirst
-  let l:cur = win_getid()
-  exec 'Git! flg ' . a:base . '...HEAD'
-  if FugitiveRemoteUrl() =~# 'github\.com'
-    call system('gh pr view --json number')
-    if v:shell_error == 0
-      wincmd P
-      vsplit | terminal gh pr view
+  if a:base != ''
+    let l:cur = win_getid()
+    exec 'Git! flg ' . a:base . '...HEAD'
+    if FugitiveRemoteUrl() =~# 'github\.com'
+      call system('gh pr view --json number')
+      if v:shell_error == 0
+        wincmd P
+        vsplit | terminal gh pr view
+      endif
     endif
+    call win_gotoid(l:cur)
   endif
-  call win_gotoid(l:cur)
 endfunction
 
-command! -nargs=1 Review call Review(<q-args>)
+command! -nargs=? Review call Review(<q-args>)
 command! -nargs=0 ReviewNext silent Git rbc | Review HEAD^
 
 function! GHPRLink(bang, count, line1, range, line2, args) abort
