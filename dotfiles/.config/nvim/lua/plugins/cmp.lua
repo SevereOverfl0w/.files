@@ -7,6 +7,7 @@ return {
         sources = {
           { name = "buffer" },
           { name = "async_clj_omni" },
+          { name = "campfire" },
           { name = "nvim_lsp" },
         },
         snippet = {
