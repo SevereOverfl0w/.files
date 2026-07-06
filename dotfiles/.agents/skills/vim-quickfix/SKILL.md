@@ -2,6 +2,7 @@
 name: vim-quickfix
 description: Output lists of locations as vim quickfix lists.
 allowed-tools: Bash(mkdir -p .qf), Write(.qf/*), Edit(.qf/*)
+disable-model-invocation: true
 ---
 
 !`mkdir -p .qf`
