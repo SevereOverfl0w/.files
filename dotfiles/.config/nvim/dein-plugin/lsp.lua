@@ -1,6 +1,7 @@
 vim.fn["my_plugin#add"]("neovim/nvim-lspconfig")
 vim.fn["my_plugin#add"]("j-hui/fidget.nvim",
-  {opts =
+  {event = "LspAttach",
+   opts =
    {
      notification = {
        window =
