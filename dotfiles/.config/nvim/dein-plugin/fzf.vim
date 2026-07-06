@@ -4,7 +4,6 @@ endif
 
 call my_plugin#add('junegunn/fzf', {'merged': 0})
 call my_plugin#add('junegunn/fzf.vim')
-call my_plugin#add('elanmed/fzf-lua-frecency.nvim', #{opts: #{}, dependencies: 'ibhagwan/fzf-lua'})
 
 " `rg` respects gitignore anyway, so use a version of the
 " default command without the direct git integration.
