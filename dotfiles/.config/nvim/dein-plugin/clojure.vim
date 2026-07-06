@@ -70,7 +70,7 @@ let g:Fireplace_pprint_func = 'Pprint_fun'
 
 " REPLant is a plugin for enhancing your REPL experience
 " with vim.
-call my_plugin#add('SevereOverfl0w/vim-replant')
+call my_plugin#add('SevereOverfl0w/vim-replant', #{enabled: s:fireplace})
 
 " A plugin for managing nREPL middleware and starting the
 " nREPL.
