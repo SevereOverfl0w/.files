@@ -1,6 +1,7 @@
 ---
 name: konsta-compact-react
 description: Compact Konsta UI React reference. Use this first for source-grounded component roles and the highest-signal props from the local reference files. Open the per-component reference files for colors, defaults, forwarded HTML props, types, event handlers, class-name hooks, theme variants, and full details.
+disable-model-invocation: true
 ---
 
 # Konsta UI React Skill
