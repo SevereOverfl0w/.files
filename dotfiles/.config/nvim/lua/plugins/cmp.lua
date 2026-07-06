@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     opts = function()
       return {
         mapping = require("cmp").mapping.preset.insert(),
@@ -35,6 +36,6 @@ return {
     end,
   },
   {"hrsh7th/cmp-nvim-lsp", enabled = not vim.g.my_plugin_loaded_cmp},
-  {"hrsh7th/cmp-buffer", enabled = not vim.g.my_plugin_loaded_cmp},
-  {"hrsh7th/cmp-emoji", enabled = not vim.g.my_plugin_loaded_cmp},
+  {"hrsh7th/cmp-buffer", event = "InsertEnter", enabled = not vim.g.my_plugin_loaded_cmp},
+  {"hrsh7th/cmp-emoji", event = "InsertEnter", enabled = not vim.g.my_plugin_loaded_cmp},
 }
