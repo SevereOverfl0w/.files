@@ -11,6 +11,6 @@ vim.keymap.set('n', '<S-CR>', function()
 
     vim.opt.switchbuf = original_switchbuf
 end, {
-    buffer = true,
+    buf = true,
   }
 )

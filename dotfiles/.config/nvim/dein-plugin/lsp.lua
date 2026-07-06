@@ -42,7 +42,7 @@ function _G.repeat_code_action(name, repeat_sequence)
   local bufnr = vim.api.nvim_get_current_buf()
   local count = vim.v.count
   vim.api.nvim_create_autocmd({"TextChanged", "TextChangedI"}, {
-    buffer = bufnr,
+    buf = bufnr,
     once = true,
     callback = function()
       set_repeat(repeat_sequence, count)
