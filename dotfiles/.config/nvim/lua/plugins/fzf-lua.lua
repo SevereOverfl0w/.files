@@ -27,10 +27,7 @@ return {
     {
         "ibhagwan/fzf-lua",
         cmd = "FzfLua",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            { "elanmed/fzf-lua-frecency.nvim", opts = {} },
-        },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             "ivy",
             files = { follow = true },
