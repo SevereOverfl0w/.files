@@ -3,6 +3,8 @@ return {
   config = function()
     local lint = require("lint")
 
+    local prose = { "alex", "blocklint", "codespell", "cspell", "languagetool", "proselint", "typos", "vale", "woke", "write_good" }
+
     local linters_by_ft = {
       ansible = { "ansible_lint" },
       awk = { "gawk" },
@@ -33,7 +35,7 @@ return {
       fish = { "fish" },
       fortran = { "fortitude" },
       gdscript = { "gdlint" },
-      gitcommit = { "commitlint", "gitlint" },
+      gitcommit = vim.list_extend({ "commitlint", "gitlint" }, prose),
       glsl = { "glslc" },
       go = { "fieldalignment", "golangcilint", "revive", "staticcheck" },
       graphql = { "spectral" },
@@ -61,7 +63,7 @@ return {
       lua = { "luac", "luacheck", "selene" },
       luau = { "selene" },
       make = { "checkmake", "mbake" },
-      markdown = { "alex", "blocklint", "codespell", "cspell", "languagetool", "mado", "markdownlint", "markdownlint-cli2", "proselint", "rumdl", "typos", "vale", "woke", "write_good" },
+      markdown = vim.list_extend({ "mado", "markdownlint", "markdownlint-cli2", "rumdl" }, prose),
       matlab = { "mh_lint", "mlint" },
       nix = { "deadnix", "nix", "statix" },
       oe = { "oelint-adv" },
