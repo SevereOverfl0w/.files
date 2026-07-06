@@ -100,7 +100,7 @@ function! s:SetupBind()
         return
     endif
     let id = fireplace#clj().Client().session.url
-    if index(s:setup, id)
+    if index(s:setup, id) == -1
         let Eval = fireplace#clj().Eval
         " TODO: Changes *1, so not ideal.  Probably need to add an op to
         " nrepl-bind instead.
