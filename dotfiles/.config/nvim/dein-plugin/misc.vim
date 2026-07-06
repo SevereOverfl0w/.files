@@ -177,3 +177,5 @@ call my_plugin#add('nvim-treesitter/nvim-treesitter-context')
 call my_plugin#add('SevereOverfl0w/annotator.nvim', #{branch: 'qfs', opts: {}})
 
 call my_plugin#add('digitaltoad/vim-pug')
+
+call my_plugin#add('folke/ts-comments.nvim', #{opts: #{lang: #{vim: ['" %s']}}})
