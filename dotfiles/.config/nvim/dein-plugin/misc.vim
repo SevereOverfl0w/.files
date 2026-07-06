@@ -156,7 +156,7 @@ call my_plugin#add('SevereOverfl0w/nvim-treesitter-endwise', #{branch: 'nvim-0.1
 
 call my_plugin#add('AndrewRadev/inline_edit.vim')
 
-call my_plugin#add('Apeiros-46B/qalc.nvim', #{opts: #{cmd_args: ["--set", "curconv 0"]}})
+call my_plugin#add('Apeiros-46B/qalc.nvim', #{cmd: ['Qalc', 'QalcAttach', 'QalcYank'], ft: 'qalc', opts: #{cmd_args: ["--set", "curconv 0"]}})
 
 call my_plugin#add('terrastruct/d2-vim')
 
