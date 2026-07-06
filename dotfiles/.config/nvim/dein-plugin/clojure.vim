@@ -28,8 +28,6 @@ call my_plugin#add('tpope/vim-sexp-mappings-for-regular-people')
 let s:campfire = get(g:, 'campfire', 0) ? v:true : v:false
 let s:fireplace = s:campfire ? v:false : v:true
 
-echom s:campfire . 'bool'
-
 " FiREPLace is a plugin for integrating with a Clojure
 " nREPL.
 call my_plugin#add('SevereOverfl0w/vim-fireplace', #{branch: 'dominic/patches', enabled: s:fireplace})
