@@ -203,5 +203,5 @@ call my_plugin#add('SevereOverfl0w/nvim-review')
 lua vim.diagnostic.config({ virtual_lines = true, virtual_text = false }, vim.api.nvim_create_namespace('nvim_review'))
 
 call my_plugin#add('rbong/vim-flog')
-call my_plugin#add('linrongbin16/gitlinker.nvim', #{opts: {}})
+call my_plugin#add('linrongbin16/gitlinker.nvim', #{cmd: 'GitLink', opts: {}})
 call my_plugin#add('SevereOverfl0w/difft.nvim')
