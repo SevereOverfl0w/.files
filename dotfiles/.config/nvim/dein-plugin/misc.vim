@@ -174,7 +174,7 @@ call my_plugin#add('moll/vim-bbye')
 
 call my_plugin#add('nvim-treesitter/nvim-treesitter-context')
 
-call my_plugin#add('SevereOverfl0w/annotator.nvim', #{branch: 'qfs', opts: {}})
+call my_plugin#add('SevereOverfl0w/annotator.nvim', #{branch: 'qfs', cmd: ['AnnotatorAdd', 'AnnotatorSuggest', 'AnnotatorMarkDelete', 'AnnotatorLabel', 'AnnotatorEdit', 'AnnotatorDelete', 'AnnotatorList', 'AnnotatorExport', 'AnnotatorClear'], opts: {}})
 
 call my_plugin#add('digitaltoad/vim-pug')
 
