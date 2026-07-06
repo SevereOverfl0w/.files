@@ -27,7 +27,7 @@ call my_plugin#add('kana/vim-textobj-user')
 " expected to use this mapping too much.
 "
 call my_plugin#add('kana/vim-textobj-entire',
-      \ {'depends': ['vim-textobj-user']})
+      \ {'depends': ['vim-textobj-user'], 'enabled': has('nvim-0.13') ? v:false : v:true})
 
 function! Hook_add_textobj_entire()
   let g:textobj_entire_no_default_key_mappings = 1
@@ -39,7 +39,7 @@ endf
 
 " Adds a text object which refers to the current line.
 " Binds to `al` and `il` by default.
-call my_plugin#add('kana/vim-textobj-line', #{dependencies: ['kana/vim-textobj-user']})
+call my_plugin#add('kana/vim-textobj-line', #{dependencies: ['kana/vim-textobj-user'], enabled: has('nvim-0.13') ? v:false : v:true})
 
 " Wordmotion creates word definitions which surpass the
 " default ones in utility.  The readme does a better job of
