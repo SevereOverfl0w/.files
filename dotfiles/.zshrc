@@ -253,20 +253,44 @@ alias ghbase="gh pr view --json 'baseRefName' --jq '.baseRefName'"
 if test -n "$KITTY_INSTALLATION_DIR"; then
   autoload -U add-zsh-hook
 
-  saved_title=""
-  ls_after_cd() {
-    local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    if [ -n "$branch" ]; then
-      kitty @ set-window-title "$(basename "$(realpath "$(git rev-parse --git-common-dir --path-format=absolute)/..")")@$branch"
+  typeset -g _kitty_title _kitty_title_git_dir
+  typeset -gi _kitty_title_set=0 _kitty_title_needs_discovery=1
+
+  _kitty_title_mark_dirty() {
+    _kitty_title_needs_discovery=1
+  }
+
+  _kitty_title_refresh() {
+    local title
+    if (( _kitty_title_needs_discovery )); then
+      _kitty_title_git_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) ||
+        _kitty_title_git_dir=
+      _kitty_title_needs_discovery=0
+    fi
+
+    if [[ -r ${_kitty_title_git_dir}/HEAD ]]; then
+      local head=$(<"${_kitty_title_git_dir}/HEAD")
+      if [[ $head == 'ref: refs/heads/'* ]]; then
+        title="${_kitty_title_git_dir:h:t}@${head#ref: refs/heads/}"
+      else
+        title="${_kitty_title_git_dir:h:t}@HEAD"
+      fi
+    fi
+
+    (( _kitty_title_set )) && [[ $title == $_kitty_title ]] && return
+    _kitty_title=$title
+    _kitty_title_set=1
+
+    # Kitty remote control waits ~30ms. Title updates must not block prompt redraw.
+    if [[ -n $title ]]; then
+      command kitty @ set-window-title "$title" >/dev/null 2>&1 &!
     else
-      # Clear the window title so shell integration can set it again
-      kitty @ set-window-title --temporary ''
+      command kitty @ set-window-title --temporary '' >/dev/null 2>&1 &!
     fi
   }
 
-  # TODO re-enable once kitty detection is done
-  add-zsh-hook chpwd ls_after_cd
-  add-zsh-hook precmd ls_after_cd
+  add-zsh-hook chpwd _kitty_title_mark_dirty
+  add-zsh-hook precmd _kitty_title_refresh
 fi
 
 setopt incappendhistory sharehistory
