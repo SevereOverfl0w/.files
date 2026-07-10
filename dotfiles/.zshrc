@@ -2,27 +2,34 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-declare -A ZINIT
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "$ZINIT_HOME/zinit.zsh"
+antidote_dir="${XDG_DATA_HOME:-$HOME/.local/share}/antidote"
+ANTIDOTE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}/antidote"
+zsh_plugins="${ZDOTDIR:-$HOME}/.zsh_plugins"
 
+if [[ ! -r $antidote_dir/antidote.zsh ]]; then
+  mkdir -p -- "${antidote_dir:h}"
+  git clone --depth=1 https://github.com/mattmc3/antidote.git "$antidote_dir"
+fi
+
+if [[ ! $zsh_plugins.zsh -nt $zsh_plugins.txt ]]; then
+  (
+    source "$antidote_dir/antidote.zsh"
+    antidote bundle <"$zsh_plugins.txt" >"$zsh_plugins.zsh"
+  )
+fi
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+source ~/.zsh_plugins.zsh
+zstyle ':completion::complete:git-switch:*:branch-names' menu yes select=long search
 autoload -Uz compinit
 compinit
-
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-zinit light mafredri/zsh-async
-zinit ice wait lucid
-zinit light zsh-users/zsh-history-substring-search
-zinit light zsh-users/zsh-autosuggestions
-zinit ice wait lucid pick"zsh-interactive-cd.plugin.zsh";
-zinit light changyuheng/zsh-interactive-cd
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-zstyle ':completion::complete:git-switch:*:branch-names' menu yes select=long search
+if [[ ! ~/.zcompdump.zwc -nt ~/.zcompdump ]]; then
+  zcompile -R -- ~/.zcompdump.zwc ~/.zcompdump
+fi
 
 source ~/.config/p10k-pure.zsh
 
