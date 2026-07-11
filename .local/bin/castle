@@ -1,10 +1,12 @@
 #!/bin/sh
 
-export dotfiles_repo="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-export castles="$dotfiles_repo/castles"
+castle_bin="$(command -v "$0")"
+export dotfiles_repo="$(cd -- "$(dirname "$castle_bin")/../.." >/dev/null 2>&1 && pwd -P)"
+export castles="$dotfiles_repo/.local/libexec/castles"
 export STOW_DIR="$dotfiles_repo"
 export PLUGINS="$castles/plugins"
 export PATH="$castles/bin:$PATH"
+castle_config="$HOME/.config/castles"
 
 # OSTYPE does not exist in posix sh
 case "$(uname)" in
@@ -22,17 +24,18 @@ castle(){
     "$castles/$1"
 }
 
-if [ $# -gt 0 ] && [ -e "$dotfiles_repo/.castles" ]; then
+if [ $# -gt 0 ] && [ -e "$castle_config" ]; then
     for castle in "$@"; do
         castle "$castle"
     done
 else
     if [ $# -gt 0 ]; then
+        mkdir -p "${castle_config%/*}"
         for castle in "$@"; do
-            echo "$castle" >> "$dotfiles_repo/.castles"
+            echo "$castle" >> "$castle_config"
         done
     fi
     while IFS= read -r LINE; do
       castle "$LINE"
-    done < ".castles"
+    done < "$castle_config"
 fi
