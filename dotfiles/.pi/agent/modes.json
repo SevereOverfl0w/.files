@@ -1,36 +1,24 @@
 {
   "version": 1,
-  "currentMode": "default",
+  "currentMode": "smart",
   "modes": {
     "rush": {
       "provider": "openai-codex",
-      "modelId": "gpt-5.5",
-      "thinkingLevel": "minimal",
+      "modelId": "gpt-5.6-luna",
+      "thinkingLevel": "high",
       "color": "red"
     },
     "smart": {
       "provider": "openai-codex",
-      "modelId": "gpt-5.5",
-      "thinkingLevel": "high",
+      "modelId": "gpt-5.6-terra",
+      "thinkingLevel": "xhigh",
       "color": "green"
     },
     "deep": {
       "provider": "openai-codex",
-      "modelId": "gpt-5.5",
+      "modelId": "gpt-5.6-sol",
       "thinkingLevel": "xhigh",
       "color": "yellow"
-    },
-    "free": {
-      "provider": "kilo",
-      "modelId": "poolside/laguna-m.1:free",
-      "thinkingLevel": "high",
-      "color": "blue"
-    },
-    "free (auto)": {
-      "provider": "kilo",
-      "modelId": "kilo-auto/free",
-      "thinkingLevel": "high",
-      "color": "purple"
     }
   }
 }
