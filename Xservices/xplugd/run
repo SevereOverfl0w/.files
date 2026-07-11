@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec xplugd -n -s ~/.config/xplugrc

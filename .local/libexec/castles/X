@@ -1,3 +1,0 @@
-#!/bin/sh
-
-pkg-install dunst sxhkd rofi bspwm wmname xrdb xsetroot polybar nerd-fonts-otf

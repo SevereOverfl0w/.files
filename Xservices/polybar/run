@@ -1,5 +1,0 @@
-#!/bin/sh
-
-pgrep ^bspwm$ || exit 1
-
-exec polybar example

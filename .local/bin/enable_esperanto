@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-setxkbmap -option "lv3:ralt_switch,esperanto:qwerty"
