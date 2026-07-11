@@ -1,4 +1,4 @@
-{;; N.B: Do not edit, instead edit ~/.files/clojure/dev.edn
+{;; Managed by clj-install-dev.
  :extra-deps {com.gfredericks/dot-slash-2 {:mvn/version "0.1.5"}
               vvvvalvalval/scope-capture {:mvn/version "0.3.3"}
               pjstadig/humane-test-output {:mvn/version "0.11.0"}
@@ -14,4 +14,4 @@
             "-XX:+EnableDynamicAgentLoading"
             ;; allow morse to work:
             "-Djava.awt.headless=false"]
- :main-opts ["-i" "~/.files/clojure/dev.clj"]}
+ :main-opts ["-i" "~/.files/.local/share/clj-install-dev/dev.clj"]}

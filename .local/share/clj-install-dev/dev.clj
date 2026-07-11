@@ -2,7 +2,6 @@
 
 (require '[com.gfredericks.dot-slash-2 :as dot-slash-2])
 
-
 (defn saved-value
   "Return either value or exception of ep-info"
   [& args]
@@ -39,12 +38,12 @@
   "Run body (which should trigger a test) n times or until failure"
   [n & body]
   `(reduce
-     (fn [_# _n#]
-       (let [result# (./with-test-result ~@body)]
-         (when (some #(#{:fail :error} (:type %)) result#)
-           (reduced result#))))
-     nil
-     (range ~n)))
+    (fn [_# _n#]
+      (let [result# (./with-test-result ~@body)]
+        (when (some #(#{:fail :error} (:type %)) result#)
+          (reduced result#))))
+    nil
+    (range ~n)))
 
 (defmacro time-data
   [expr]
@@ -54,23 +53,26 @@
       ret#]))
 
 (dot-slash-2/!
-  '{. [clojure.test/run-tests clojure.test/test-vars
-       {:var sc.api/spy :lazy? true :macro? true}
-       {:var sc.api/letsc :lazy? true :macro? true}
-       {:var sc.api/defsc :lazy? true :macro? true}
-       {:var sc.api/undefsc :lazy? true :macro? true}
-       {:var io.dominic.mise/saved-value}
-       {:var io.dominic.mise/with-test-result}
-       {:var io.dominic.mise/with-test-timing}
-       {:var io.dominic.mise/test-until-failure}
-       {:var io.dominic.mise/time-data}
-       {:var clj-async-profiler.core/profile :lazy? true :macro? true}
-       {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
-       {:var clj-memory-meter.core/measure :lazy? true :macro? false}
+ '{. [clojure.test/run-tests clojure.test/test-vars
+      {:var sc.api/spy :lazy? true :macro? true}
+      {:var sc.api/letsc :lazy? true :macro? true}
+      {:var sc.api/defsc :lazy? true :macro? true}
+      {:var sc.api/undefsc :lazy? true :macro? true}
+      {:var io.dominic.mise/saved-value}
+      {:var io.dominic.mise/with-test-result}
+      {:var io.dominic.mise/with-test-timing}
+      {:var io.dominic.mise/test-until-failure}
+      {:var io.dominic.mise/time-data}
+      {:var clj-async-profiler.core/profile :lazy? true :macro? true}
+      {:var clj-async-profiler.core/serve-ui :lazy? true :macro? false}
+      {:var clj-memory-meter.core/measure :lazy? true :macro? false}
 
-       dev.nu.morse/launch-in-proc dev.nu.morse/inspect]})
+      dev.nu.morse/launch-in-proc dev.nu.morse/inspect]})
 
-(let [platform (java.io.File. (System/getProperty "user.home") ".clojure/platform.clj")]
+(let [config-dir (or (System/getenv "CLJ_CONFIG")
+                     (some-> (System/getenv "XDG_CONFIG_HOME") (str "/clojure"))
+                     (str (System/getProperty "user.home") "/.clojure"))
+      platform (java.io.File. config-dir "platform.clj")]
   (when (.exists platform)
     (load-file (.getAbsolutePath platform))))
 
