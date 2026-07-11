@@ -100,7 +100,7 @@ if [[ $TERM == xterm-termite ]]; then
   __vte_osc7
 fi
 
-PATH=$PATH:$HOME/bin:$HOME/.files/bin/:$HOME/.local/bin:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cargo/bin
+PATH=$PATH:$HOME/bin:$HOME/.files/.local/bin/:$HOME/.local/bin:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cargo/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if [ -f /usr/share/fzf/key-bindings.zsh ]; then
