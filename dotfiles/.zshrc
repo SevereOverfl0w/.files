@@ -22,6 +22,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# stop history-substring-search's fallback from clearing autosuggestion highlights.
+# https://github.com/zsh-users/zsh-history-substring-search/pull/178
+_zsh_highlight() { :; }
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source ~/.zsh_plugins.zsh
 zstyle ':completion::complete:git-switch:*:branch-names' menu yes select=long search
