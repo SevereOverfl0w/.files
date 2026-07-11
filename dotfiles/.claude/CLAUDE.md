@@ -1,4 +1,4 @@
-@~/.files/_agent/AGENTS.md
+@~/.config/agents/AGENTS.md
 
 # Commit Editing
 When working on a multi-commit branch, before making a new commit, check

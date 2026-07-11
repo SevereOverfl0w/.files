@@ -1,1 +1,1 @@
-../../../_agent/AGENTS.md
+../../.config/agents/AGENTS.md
