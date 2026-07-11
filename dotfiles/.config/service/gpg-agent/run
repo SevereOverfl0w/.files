@@ -1,0 +1,18 @@
+#!/bin/sh
+exec 2>&1
+
+exec 2>&1
+
+# export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+#
+# echo "$SSH_AUTH_SOCK" "$TURNSTILE_ENV_DIR"/SSH_AUTH_SOCK > /tmp/gpg-agent-debug
+# env >> /tmp/gpg-agent-debug
+#
+# if [ -d "$TURNSTILE_ENV_DIR" ]; then
+# 	echo "$SSH_AUTH_SOCK" > "$TURNSTILE_ENV_DIR"/SSH_AUTH_SOCK
+# fi
+
+# export GPG_TTY=$(tty)
+gpg-connect-agent /bye >/dev/null
+
+exec pause

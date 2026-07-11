@@ -3,9 +3,8 @@
 pkg-install zsh neovim neovim-remote curl fzf
 
 # Prevent stow from symlinking these directories in their whole
-mkdir -p ~/.config ~/.config/nvim ~/.config/sway ~/.local/share ~/.config/service
-stow --dotfiles "--target=$HOME" dotfiles
-stow --no-folding "--target=$HOME/.config/service" services
+mkdir -p ~/.config ~/.config/nvim ~/.config/sway ~/.local/share
+stow --adopt --dotfiles "--target=$HOME" dotfiles
 
 # Zsh
 git cclone https://github.com/zdharma-continuum/zinit.git "${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
