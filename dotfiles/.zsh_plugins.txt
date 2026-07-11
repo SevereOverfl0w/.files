@@ -1,0 +1,5 @@
+mafredri/zsh-async
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-autosuggestions
+changyuheng/zsh-interactive-cd
+romkatv/powerlevel10k path:powerlevel10k.zsh-theme
