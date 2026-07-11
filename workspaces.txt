@@ -1,7 +1,0 @@
-web
-mail
-time
-code
-work
-im
-slck
