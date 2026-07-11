@@ -81,4 +81,4 @@
 	enabled = true
 [init]
 	defaultBranch = master
-	templatedir = ~/.files/git-templates
+	templatedir = ~/.config/git/templates
