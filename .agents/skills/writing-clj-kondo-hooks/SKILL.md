@@ -1,6 +1,6 @@
 ---
 name: writing-clj-kondo-hooks
-description: "Write clj-kondo hooks for custom macros using the hooks API and rewrite-clj nodes. Use when creating, editing, or debugging clj-kondo hooks, writing analyze-call or macroexpand hooks, or registering custom lint warnings."
+description: Write clj-kondo hooks for custom macros using the hooks API and rewrite-clj nodes. Use when creating, editing, or debugging clj-kondo hooks, writing analyze-call or macroexpand hooks, or registering custom lint warnings.
 ---
 
 # Writing clj-kondo Hooks
