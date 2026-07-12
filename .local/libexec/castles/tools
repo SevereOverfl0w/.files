@@ -2,9 +2,6 @@
 
 pkg-install zsh neovim neovim-remote curl fzf
 
-# Zsh
-git cclone https://github.com/zdharma-continuum/zinit.git "${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
-
 cchsh -s /bin/zsh
 
 # Git
