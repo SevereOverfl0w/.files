@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e
 
-mkdir -p "$HOME/.agents" "$HOME/.claude"
-stow --dotfiles --target="$HOME" dotfiles
-
 npmig @myerscarpenter/cdp-cli
 
 # clojure mcp light

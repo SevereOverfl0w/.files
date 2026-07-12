@@ -14,4 +14,4 @@
             "-XX:+EnableDynamicAgentLoading"
             ;; allow morse to work:
             "-Djava.awt.headless=false"]
- :main-opts ["-i" "~/.files/.local/share/clj-install-dev/dev.clj"]}
+ :main-opts ["-i" "~/.local/share/clj-install-dev/dev.clj"]}

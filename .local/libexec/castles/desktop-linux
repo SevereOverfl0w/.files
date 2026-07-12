@@ -7,5 +7,5 @@ xdg-default text/plain kitty-open.desktop
 
 mkdir -p ~/.cache/dotfiles
 cd ~/.cache/dotfiles
-xbps-create -A noarch -n dotfiles-0.0_1 -s 'dotfiles' -m 'Dominic Monroe <dominic@dominic.io>' ~/.files/.local/share/dotfiles/global
+xbps-create -A noarch -n dotfiles-0.0_1 -s 'dotfiles' -m 'Dominic Monroe <dominic@dominic.io>' ~/.local/share/dotfiles/global
 sudo sh -c '(yes Y | xdowngrade dotfiles-*.xbps)'

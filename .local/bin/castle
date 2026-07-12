@@ -1,9 +1,6 @@
 #!/bin/sh
 
-castle_bin="$(command -v "$0")"
-export dotfiles_repo="$(cd -- "$(dirname "$castle_bin")/../.." >/dev/null 2>&1 && pwd -P)"
-export castles="$dotfiles_repo/.local/libexec/castles"
-export STOW_DIR="$dotfiles_repo"
+export castles="$HOME/.local/libexec/castles"
 export PLUGINS="$castles/plugins"
 export PATH="$castles/bin:$PATH"
 castle_config="$HOME/.config/castles"
