@@ -448,6 +448,20 @@ binds {
 
 
 window-rule {
+    match app-id="kitty"
+    draw-border-with-background false
+    geometry-corner-radius 2
+}
+
+layer-rule {
+    match namespace="^launcher$"
+
+    background-effect {
+        blur true
+    }
+}
+
+window-rule {
     geometry-corner-radius 4
     clip-to-geometry true
 }
