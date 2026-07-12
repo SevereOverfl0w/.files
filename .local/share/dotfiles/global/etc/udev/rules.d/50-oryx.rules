@@ -2,3 +2,7 @@
 SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="1307", GROUP="input"
 # Rule for the Planck EZ Standard / Glow
 SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="6060", GROUP="input"
+
+# For keymapp
+KERNEL=="hidraw*", ATTRS{idVendor}=="16c0", MODE="0664", GROUP="input"
+KERNEL=="hidraw*", ATTRS{idVendor}=="3297", MODE="0664", GROUP="input"
