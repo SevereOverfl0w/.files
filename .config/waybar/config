@@ -68,4 +68,8 @@
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""]
     },
+    "custom/keyboard": {
+        "format": "",
+        "on-click": "pkill -SIGRTMIN wvkbd-mobintl"
+    }
 }
