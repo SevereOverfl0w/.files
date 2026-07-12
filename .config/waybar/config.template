@@ -1,0 +1,6 @@
+{
+    "include": ["config.shared"],
+    "modules-left":["sway/workspaces", "niri/workspaces", "sway/window", "niri/window"],
+    "modules-center":[],
+    "modules-right": ["custom/keyboard", "pulseaudio", "network", "backlight", "battery", "clock", "tray"],
+}
