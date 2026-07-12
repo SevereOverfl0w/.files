@@ -179,3 +179,5 @@ call my_plugin#add('SevereOverfl0w/annotator.nvim', #{branch: 'qfs', cmd: ['Anno
 call my_plugin#add('digitaltoad/vim-pug')
 
 call my_plugin#add('folke/ts-comments.nvim', #{opts: #{lang: #{vim: ['" %s']}}})
+
+call my_plugin#add('purarue/yadm-git.vim')
