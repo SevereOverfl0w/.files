@@ -445,3 +445,14 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
+
+
+window-rule {
+    geometry-corner-radius 4
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id="dino"
+    geometry-corner-radius 14
+}
