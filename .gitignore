@@ -7,5 +7,5 @@ nvim/layer/local
 nvim/spell/*
 supervise
 
-dotfiles/.config/kitty/platform.conf
-dotfiles/.config/kitty/current-theme.conf
+.config/kitty/platform.conf
+.config/kitty/current-theme.conf
