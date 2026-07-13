@@ -3,6 +3,7 @@ window#waybar {
     color: #ffffff;
     transition-property: background-color, border-color;
     transition-duration: .5s;
+    font-size: 12px;
 }
 
 window > box > * > widget > box, window > box > * > widget > label {
