@@ -19,13 +19,14 @@
       ]
     },
     "npm:@diegopetrucci/pi-librarian",
-    "npm:@howaboua/pi-codex-conversion",
     "npm:pi-model-provider-native-prompting",
     "npm:pi-ask-user",
     "npm:@juicesharp/rpiv-args",
     "npm:@alexanderfortin/pi-deepseek-usage",
     "npm:pi-system-prompt",
-    "npm:pi-token-burden"
+    "npm:@carter-mcalister/pi-codex-image-gen",
+    "npm:@carter-mcalister/pi-codex-tools",
+    "npm:pi-codex-search"
   ],
   "collapseChangelog": true,
   "enableInstallTelemetry": false,
