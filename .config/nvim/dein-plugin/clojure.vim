@@ -35,7 +35,7 @@ call my_plugin#add('SevereOverfl0w/vim-fireplace', #{branch: 'dominic/patches', 
 let g:fireplace_cljs_repl = ''
 
 " vim-campfire: alternative nREPL client used when g:campfire=1.
-call my_plugin#add('SevereOverfl0w/vim-campfire', #{enabled: s:campfire})
+call my_plugin#add('SevereOverfl0w/campfire.nvim', #{enabled: s:campfire})
 " TODO: add none-ls here
 call my_plugin#add('nvimtools/none-ls.nvim', #{dependencies: ['nvim-lua/plenary.nvim']})
 
