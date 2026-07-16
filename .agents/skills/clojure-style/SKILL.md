@@ -26,3 +26,6 @@ Deprecation notice → clojure.core/replicate DEPRECATED: prefix.
 
 Write fn arglist on newline after fn name.
 Args: clojure.core. No :as.
+*<binding> for deref bindings, foobar = @*foobar
+use `some?` only when True is important vs just truthy
+test names end -test
