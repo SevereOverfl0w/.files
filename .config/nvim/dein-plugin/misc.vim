@@ -181,3 +181,14 @@ call my_plugin#add('digitaltoad/vim-pug')
 call my_plugin#add('folke/ts-comments.nvim', #{opts: #{lang: #{vim: ['" %s']}}})
 
 call my_plugin#add('purarue/yadm-git.vim')
+
+lua <<EOF
+vim.g.diffs = {
+  integrations = {
+    fugitive = true,
+    difftastic = true,
+  },
+}
+EOF
+
+call my_plugin#add('barrettruth/diffs.nvim')
