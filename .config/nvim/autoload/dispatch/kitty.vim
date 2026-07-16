@@ -28,7 +28,11 @@ function! dispatch#kitty#handle(request) abort
 	let kitty = 'kitty @ launch --title='.shellescape(a:request.title).' '.'--cwd='.shellescape(a:request.directory)
 
 	if a:request.action ==# 'start'
-	  let kitty .= ' --type=tab --tab-title='.shellescape(a:request.title)
+	  if a:request.background
+	    let kitty .= ' --type=tab --tab-title='.shellescape(a:request.title)
+	  else
+	    let kitty .= ' --type=window'
+	  endif
 	endif
 
 	if a:request.background
