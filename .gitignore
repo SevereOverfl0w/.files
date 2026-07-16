@@ -1,3 +1,27 @@
+*
+!/.*
+!/.*/**
+.*_history*
+.*hist*
+.*hst*
+.cargo
+.password-store
+*.orig
+*.backup
+*logs*
+.serena
+.tweakcc
+.npm
+node_modules
+**/.cpcache
+.scratch
+.yarnrc
+**/.cache*
+**/*cache*
+**/*.log
+**/*.bak
+**/*.local.*
+
 # neovim ignores
 nvim/plugged
 nvim/.init.vim-rplugin~
@@ -9,3 +33,86 @@ supervise
 
 .config/kitty/platform.conf
 .config/kitty/current-theme.conf
+
+# zsh
+.zcompdump*
+.zcomp*
+## antidote
+.zsh_plugins.zsh
+
+# Griffin
+.bazelrc
+
+# Darwin
+.DS_Store
+.CFUserTextEncoding
+.Trash
+## Apps
+.config/raycast
+
+# Secrets
+/.aws/
+/.ssh/
+/.gnupg/
+/.kube/
+/.docker/
+/.tsh/
+/.ecr/
+/.config/gh/
+/.config/gopass/
+/.backport/
+/.claude.json
+
+# Machine-local state / regenerable caches
+/.cache/
+/.m2/
+/.gem/
+/.lein/
+/.cljs/
+/.gitlibs/
+/.deps.clj/
+/.cdk/
+/.homebrew/
+/.openjfx/
+/.pnpm-state/
+/.matplotlib/
+/.mcporter/
+/.data/
+/.viminfo
+/.zsh_sessions/
+/.chiasmus/
+/.cagent/
+/.claude-control/
+/.config/configstore/
+/.local/share/
+/.local/state/
+/.local/lib/
+/.local/pipx/
+
+# Claude — track config/customizations, ignore runtime state
+.claude/backups
+.claude/file-history
+.claude/plugins
+.claude/projects
+.claude/sessions
+.claude/tasks
+.claude/teams
+.claude/shell-snapshots
+.claude/daemon
+.claude/debug
+.claude/downloads
+.claude/history.jsonl
+.claude/ide
+.claude/jobs
+.claude/scheduled-tasks
+.claude/session-env
+.claude/policy-limits.json
+.claude/remote-settings.json
+.claude/.caveman-active
+.claude/.caveman-statusline-suffix
+.claude/.ponytail-active
+.claude/.last-cleanup
+.claude/.last-update-result.json
+
+.config/castles
+.clojure/deps.edn
