@@ -35,7 +35,7 @@ function! dispatch#kitty#handle(request) abort
 	  let kitty .= ' --keep-focus'
 	endif
 
-	call system(kitty.' '.&shell.' '.&shellcmdflag.' '.shellescape(command).redir)
+	call system(kitty.' '.dispatch#isolate(a:request, [], command).redir)
 	return !v:shell_error
 endfunction
 
