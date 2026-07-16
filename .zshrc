@@ -67,7 +67,6 @@ bindkey '\e[4~'   end-of-line        # Linux console
 bindkey '\e[F'    end-of-line        # xterm
 bindkey '\eOF'    end-of-line        # gnome-terminal
 
-export EDITOR='nvim'
 # Aliases
 alias ls='ls --color=auto'
 
@@ -99,8 +98,6 @@ if [[ $TERM == xterm-termite ]]; then
   . /etc/profile.d/vte.sh
   __vte_osc7
 fi
-
-PATH=$HOME/.local/bin:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cargo/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if [ -f /usr/share/fzf/key-bindings.zsh ]; then
@@ -196,8 +193,6 @@ function fzf-worktree() {
 zle -N fzf-worktree
 bindkey '^g^w' fzf-worktree
 
-export PIPX_BIN_DIR="$HOME/bin"
-
 function t() {
   local custom_command="t-$1"
   if [ 1 -eq ${+commands[$custom_command]} ]; then
@@ -218,8 +213,6 @@ function _quick_todo(){
 zle -N _quick_todo
 bindkey '^i^t' _quick_todo
 
-# https://github.com/android-password-store/Android-Password-Store/issues/173#issuecomment-453686599
-export GOPASS_GPG_OPTS='--no-throw-keyids'
 
 _fzf_complete_gopass() {
   _fzf_complete '+m' "$@" < <(
@@ -248,8 +241,6 @@ fi
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
-
-export BEMENU_OPTS="--fn 'monospace 12'"
 
 
 setopt HIST_IGNORE_SPACE
