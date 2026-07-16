@@ -22,5 +22,7 @@ Options map → clojure.tools.deps/create-basis (or calc-basis for single-arg op
 Structured return-map → clojure.tools.deps/make-classpath-map
 Otherwise generally copy clojure.core, and other core team libs.
 
+Deprecation notice → clojure.core/replicate DEPRECATED: prefix.
+
 Write fn arglist on newline after fn name.
 Args: clojure.core. No :as.
