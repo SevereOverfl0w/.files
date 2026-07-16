@@ -7,6 +7,10 @@ endif
 let g:loaded_fugitive_revise = 1
 
 function! s:ReviseArgument() abort
+  if &filetype ==# 'floggraph'
+    " Flog maps each line to a commit; GetAtLine returns {} off-commit.
+    return get(flog#floggraph#commit#GetAtLine(), 'hash', '')
+  endif
   let object = matchstr(@%, '\c^fugitive://.\{-\}//\zs\x\{40,\}')
   if !empty(object)
     return object
