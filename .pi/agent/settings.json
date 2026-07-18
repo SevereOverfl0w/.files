@@ -3,7 +3,7 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
-  "theme": "light",
+  "theme": "light/dark",
   "hideThinkingBlock": true,
   "packages": [
     "npm:@narumitw/pi-codex-usage",
