@@ -254,44 +254,36 @@ alias ghbase="gh pr view --json 'baseRefName' --jq '.baseRefName'"
 if test -n "$KITTY_INSTALLATION_DIR"; then
   autoload -U add-zsh-hook
 
-  typeset -g _kitty_title _kitty_title_git_dir
-  typeset -gi _kitty_title_set=0 _kitty_title_needs_discovery=1
+  typeset -g _kitty_title_head_file _kitty_title_repo
 
-  _kitty_title_mark_dirty() {
-    _kitty_title_needs_discovery=1
+  # The only forking step, so it runs on chpwd rather than every prompt.
+  # HEAD comes from --git-dir (per-worktree); the repo name from
+  # --git-common-dir, which every worktree of a repo shares.
+  _kitty_title_discover() {
+    local dirs=(${(f)"$(git rev-parse --path-format=absolute --git-dir --git-common-dir 2>/dev/null)"})
+    if (( $#dirs == 2 )); then
+      _kitty_title_head_file=$dirs[1]/HEAD
+      _kitty_title_repo=${dirs[2]:h:t}
+    else
+      _kitty_title_head_file= _kitty_title_repo=
+    fi
   }
 
   _kitty_title_refresh() {
-    local title
-    if (( _kitty_title_needs_discovery )); then
-      _kitty_title_git_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) ||
-        _kitty_title_git_dir=
-      _kitty_title_needs_discovery=0
-    fi
-
-    if [[ -r ${_kitty_title_git_dir}/HEAD ]]; then
-      local head=$(<"${_kitty_title_git_dir}/HEAD")
+    local title=${(%):-%(4~|…/%3~|%~)} head
+    if [[ -r $_kitty_title_head_file ]] && read -r head < $_kitty_title_head_file; then
       if [[ $head == 'ref: refs/heads/'* ]]; then
-        title="${_kitty_title_git_dir:h:t}@${head#ref: refs/heads/}"
+        title="$_kitty_title_repo@${head#ref: refs/heads/}"
       else
-        title="${_kitty_title_git_dir:h:t}@HEAD"
+        title="$_kitty_title_repo@HEAD"
       fi
     fi
-
-    (( _kitty_title_set )) && [[ $title == $_kitty_title ]] && return
-    _kitty_title=$title
-    _kitty_title_set=1
-
-    # Kitty remote control waits ~30ms. Title updates must not block prompt redraw.
-    if [[ -n $title ]]; then
-      command kitty @ set-window-title "$title" >/dev/null 2>&1 &!
-    else
-      command kitty @ set-window-title --temporary '' >/dev/null 2>&1 &!
-    fi
+    print -rn -- $'\e]2;'"$title"$'\a'
   }
 
-  add-zsh-hook chpwd _kitty_title_mark_dirty
+  add-zsh-hook chpwd _kitty_title_discover
   add-zsh-hook precmd _kitty_title_refresh
+  _kitty_title_discover
 fi
 
 setopt incappendhistory sharehistory
