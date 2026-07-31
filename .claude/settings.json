@@ -1,0 +1,108 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Read(~/.claude/plans)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/block-gh-pr-create.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "kitten @ set-user-vars in_claude=1",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "kitten @ set-user-vars in_claude=",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/kittyfork.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash -c '[ $((RANDOM % 4)) -eq 0 ] && echo \"keep your laconic output\"; true'"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "context-mode@claude-context-mode": false,
+    "clojure-lsp@claude-code-lsps": true,
+    "caveman@caveman": false,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-code-lsps": {
+      "source": {
+        "source": "github",
+        "repo": "boostvolt/claude-code-lsps"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Thinking"
+    ]
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
+}
