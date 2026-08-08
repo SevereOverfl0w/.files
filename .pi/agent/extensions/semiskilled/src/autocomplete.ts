@@ -1,7 +1,7 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { getSkillsByName } from "./skill-loader.js";
 
-const SKILL_MARKER_PATTERN = /(?:^|[\s([{])(\/[a-z0-9:-]*)$/;
+const SKILL_MARKER_PATTERN = /(?:[\s([{])(\/[a-z0-9:-]*)$/;
 
 export default function skillAutocomplete(pi: ExtensionAPI): void {
 	pi.on("session_start", (_event, ctx) => {
