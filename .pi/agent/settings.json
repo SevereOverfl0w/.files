@@ -32,5 +32,12 @@
   "enableInstallTelemetry": false,
   "quietStartup": true,
   "defaultProjectTrust": "ask",
-  "treeFilterMode": "default"
+  "treeFilterMode": "default",
+  "enabledModels": [
+    "openai-codex/gpt-5.6-luna",
+    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-5.6-terra",
+    "deepseek/deepseek-v4-flash",
+    "deepseek/deepseek-v4-pro"
+  ]
 }
