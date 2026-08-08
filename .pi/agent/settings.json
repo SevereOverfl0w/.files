@@ -6,7 +6,6 @@
   "theme": "light/dark",
   "hideThinkingBlock": true,
   "packages": [
-    "npm:@narumitw/pi-codex-usage",
     {
       "source": "npm:pi-amplike",
       "extensions": [
@@ -26,7 +25,8 @@
     "npm:pi-system-prompt",
     "npm:@carter-mcalister/pi-codex-image-gen",
     "npm:@carter-mcalister/pi-codex-tools",
-    "npm:pi-codex-search"
+    "npm:pi-codex-search",
+    "npm:@narumitw/pi-usage"
   ],
   "collapseChangelog": true,
   "enableInstallTelemetry": false,
