@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+brightness() {
+    xbacklight -fps 30 "$@"
+}
+
+if [ `xbacklight -get` -gt 90 ]; then
+    brightness -set 5
+else
+    brightness -inc 30
+fi
