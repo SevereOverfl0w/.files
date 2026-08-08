@@ -1,0 +1,187 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[directory]
+truncation_length = -1
+truncate_to_repo = false
+read_only = '[RO]'
+truncation_symbol = '…/'
+format = '[$read_only]($read_only_style)[$path]($style) '
+
+[git_branch]
+symbol = ''
+format = '[$symbol$branch(:$remote_branch)]($style)'
+
+[git_status]
+format = '(\[[$modified$conflicted$deleted$renamed$typechanged$staged$untracked$ahead_behind]($style)\][$stashed]($style) )'
+# modified = '*'
+modified = 'M($count)'
+conflicted = 'U'
+stashed = " stash@{$count}"
+deleted = "D"
+renamed = "R"
+typechanged = "T"
+staged = "X"
+untracked = "??"
+
+[cmd_duration]
+format = '[$duration]($style) '
+
+# all the lang detection is very annoying
+[bun]
+disabled = true
+
+[buf]
+disabled = true
+
+[c]
+disabled = true
+
+[cmake]
+disabled = true
+
+[cobol]
+disabled = true
+
+[cpp]
+disabled = true
+
+[crystal]
+disabled = true
+
+[daml]
+disabled = true
+
+[dart]
+disabled = true
+
+[deno]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[erlang]
+disabled = true
+
+[fennel]
+disabled = true
+
+[fortran]
+disabled = true
+
+[gleam]
+disabled = true
+
+[golang]
+disabled = true
+
+[gradle]
+disabled = true
+
+[haskell]
+disabled = true
+
+[haxe]
+disabled = true
+
+[helm]
+disabled = true
+
+[java]
+disabled = true
+
+[julia]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[lua]
+disabled = true
+
+[meson]
+disabled = true
+
+[mojo]
+disabled = true
+
+[nim]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[odin]
+disabled = true
+
+[opa]
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[pixi]
+disabled = true
+
+[pulumi]
+disabled = true
+
+[purescript]
+disabled = true
+
+[python]
+disabled = true
+
+[quarto]
+disabled = true
+
+[raku]
+disabled = true
+
+[red]
+disabled = true
+
+[rlang]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[scala]
+disabled = true
+
+[solidity]
+disabled = true
+
+[swift]
+disabled = true
+
+[typst]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[vlang]
+disabled = true
+
+[xmake]
+disabled = true
+
+[zig]
+disabled = true
