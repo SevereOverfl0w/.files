@@ -1,17 +1,22 @@
 {
   "mode": "normal",
   "scope": {
-    "allProviders": false,
+    "allProviders": "off",
     "additionalProviders": []
   },
   "tools": {
     "webRun": true,
     "imageGeneration": true,
-    "applyPatchOnly": false
+    "viewImageFallback": false,
+    "applyPatchOnly": false,
+    "viewImageOnly": false,
+    "webRunOnly": false,
+    "imageGenerationOnly": false
   },
   "ui": {
-    "statusLine": true,
-    "toolRendering": true,
+    "statusLine": false,
+    "toolRenaming": true,
+    "compactTools": false,
     "backgroundShellWidget": true,
     "backgroundShellToggleShortcut": "alt+w",
     "backgroundShellPrevShortcut": "alt+q",
