@@ -19,6 +19,26 @@
             "command": "$HOME/.claude/hooks/block-gh-pr-create.sh"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "clj-paren-repair-claude-hook --cljfmt"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "clj-paren-repair-claude-hook --cljfmt"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -43,6 +63,14 @@
             "command": "kitten @ set-user-vars in_claude=",
             "timeout": 5,
             "async": true
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "clj-paren-repair-claude-hook --cljfmt"
           }
         ]
       }
