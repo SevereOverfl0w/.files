@@ -151,11 +151,11 @@ function fzf-worktree() {
         worktree["HEAD"]="${line#HEAD }"
       elif [[ -z $line ]]; then
         if [[ -v worktree[branch] ]]; then
-          local branch="$(git rev-parse --abbrev-ref "${worktree[branch]}")"
+          local branch=${worktree[branch]#refs/heads/}
           worktrees[$branch]="${worktree["dir"]}"
         else
           local dir="${worktree["dir"]}"
-          local sha="$(git -C "$dir" rev-parse --short HEAD)"
+          local sha=${${worktree["HEAD"]}[1,7]}
           local key="$sha (${dir:t})"
           worktrees[$key]="$dir"
         fi
