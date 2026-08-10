@@ -164,7 +164,7 @@ function fzf-worktree() {
 
     done < <(git worktree list --porcelain)
 
-    IFS=$'\n' local fzfresult=("${(@f)$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --expect 'ctrl-d,alt-d' --delimiter=' ' --preview-window=down,8 --preview "git worktree list | grep -F '[{1}]'; printf '\n'; git -c color.ui=always lg '{1}'")}")
+    IFS=$'\n' local fzfresult=("${(@f)$(print -l "${(@k)worktrees}" | $(__fzfcmd) --query "$LBUFFER" --expect 'ctrl-d,alt-d' --delimiter=' ' --preview-window=down,8 --preview "git worktree list | grep -F '[{1}]'; printf '\n'; git -c color.ui=always lg -n 20 \$(git merge-base master '{1}')~3..'{1}'")}")
 
     local selected_branch="$fzfresult[2]"
     local binding="$fzfresult[1]"
