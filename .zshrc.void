@@ -1,0 +1,16 @@
+# package stuff
+alias pacupg='sudo xbps-install -Su'
+alias pacins='sudo xbps-install -S'
+alias pacrem='sudo xbps-remove -R'
+
+pacfind(){
+    xbps-query --regex -R -s "$@" | grep -Pv -- "-dbg-\d"
+}
+
+alias pacinfo='xbps-query -R'
+alias paclocate='xbps-query -Ro'
+alias paclist='xbps-query -Rf'
+
+pacbin(){
+  xlocate 'bin\/'$1'$'
+}

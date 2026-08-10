@@ -1,0 +1,7 @@
+# package stuff
+alias pacupg='brew update && brew upgrade'
+alias pacins='brew install'
+alias pacrem='brew uninstall'
+alias pacfind='brew search'
+alias pacinfo='brew info'
+alias paclist='brew list --verbose'
